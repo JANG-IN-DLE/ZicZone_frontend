@@ -1,0 +1,35 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Pretendard-Regular';
+}
+
+/* 헤더 */
+.header_nav {
+    width: 1440px;
+    height: 90px;
+    margin: 0 auto;
+    padding: 24px 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #B3B3B3;
+}
+
+.header_nav a {
+    text-decoration: none;
+    color: #000;
+}
+
+.header_nav_list {
+    display: flex;
+    list-style: none;
+    flex: 2;
+    align-items: center;
+}
+
+.header_nav_list div {
+    margin: 0 40px;
+    font-size: 18px;
+}

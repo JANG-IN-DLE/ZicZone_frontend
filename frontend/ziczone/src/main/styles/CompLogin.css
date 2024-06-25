@@ -1,0 +1,55 @@
+.comp_login_logo {
+    margin-right: 12px;
+}
+
+.comp_login {
+    display: flex;
+    align-items: center;
+}
+
+.comp_login_name {
+    font-size: 18px;
+    position: relative;
+}
+
+.dropdown {
+    margin-left: 12px;
+    cursor: pointer;
+}
+
+.dropdown_list {
+    display: none;
+    position: absolute;
+    padding-left: 0;
+}
+
+.dropdown_list.show {
+    margin-top: 12px;
+    display: block;
+    opacity: 1;
+}
+
+.dropdown_list div {
+    border: 1px solid #d9d9d9;
+    background-color: #fdfdfd;
+    padding: 14px;
+    width: 148px;
+}
+
+.dropdown_list div:hover {
+    font-weight: bold;
+}
+
+.dropdown_list li {
+    list-style: none;
+    padding: 0;
+    color: #b2b2b2;
+    font-size: 16px;
+    text-align: center;
+}
+
+.dropdown img {
+    width: 16px;
+    height: 16px;
+    margin-top: 4px;
+}
