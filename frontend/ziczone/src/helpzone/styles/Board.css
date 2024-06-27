@@ -1,0 +1,14 @@
+.b_section {
+    display: flex;
+    width: 1080px;
+}
+
+.b_profile_card {
+    margin-left: 180px;
+    margin-top: 50px;
+}
+
+.b_description {
+    margin-left: 56px;
+    margin-top: 50px;
+}
