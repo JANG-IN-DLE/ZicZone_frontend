@@ -2,7 +2,7 @@ import React from 'react';
 import './../../styles/loginform.css'
 
 
-const LoginForm = ({ explain1, explain2, inputs, warningmsg, btntext, links }) => {
+const LoginForm = ({ explain1, explain2, inputs, warningmsg, btn, links }) => {
     return (
         <div className="rightbox">
             {/* 로고 */}
@@ -18,18 +18,15 @@ const LoginForm = ({ explain1, explain2, inputs, warningmsg, btntext, links }) =
 
             {/* 비밀번호 찾기 | 회원가입 */}
             <div className="links">
-                {links.map((link, index) => (
-                    <React.Fragment key={index}>
-                        {index > 0 && <p>|</p>}
-                        <p className={link.className} onClick={link.onClick}>{link.text}</p>
-                    </React.Fragment>
-                ))}
+                <p className={links.className} onClick={links.onClick}>{links.text}</p>
+                <p>|</p>
+                <p className='joinbtn' onClick={()=>{}}>회원가입</p>
             </div>
             {/* 경고메세지 -> 필요시에만 나타나게 */}
             <p className="warningmsg">{warningmsg}</p>
 
             {/* 로그인버튼 */}
-            <button className="loginbtn"type="submit">{btntext}</button>
+            <button className="loginbtn"type="submit" onClick={btn.onClick}>{btn.text}</button>
         </div>
     );
 }
