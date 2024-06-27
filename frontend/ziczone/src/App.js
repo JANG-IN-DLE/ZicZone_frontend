@@ -1,10 +1,11 @@
 import React from "react";
 import Board from "./helpzone/components/Board";
+import Pickzone from "./pickzone/components/Pickzone";
 
 function App() {
   return (
     <div>
-      <Board></Board>
+      <Pickzone />
     </div>
   );
 }
