@@ -1,0 +1,100 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Giants-Bold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/Giants-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Pretendard-Regular';
+}
+
+.profile_card {
+    width: 292px;
+    height: 432px;
+    border: 1px solid #ccc;
+    border-radius: 32px;
+    text-align: center;
+    border-image-source: linear-gradient(123.89deg,
+  rgba(170, 170, 170, 0.3) 9.82%,
+  rgba(170, 170, 170, 0.05) 32.32%,
+  rgba(170, 170, 170, 0.2) 61.65%,
+  rgba(170, 170, 170, 0.05) 90.18%);
+    box-shadow: 5px 5px 20px 0px rgba(0, 0, 0, 0.15),
+    4px 4px 4px 0px rgba(255, 255, 255, 0.1) inset;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.pc_jobs {
+    font-size: 11px;
+    color: #0051BA;
+    margin-top: 28px;
+    font-weight: bold;
+}
+
+.pc_personal_image {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    margin-top: 16px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.pc_personal_image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.pc_name_career {
+    font-size: 24px;
+    margin-top: 8px;
+    color: #5D5D5D;
+    font-weight: bold;
+}
+
+.pc_point {
+    width: 116px;
+    height: 28px;
+    border: 1px solid #0051BA;
+    border-radius: 12px;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+.pc_point_berry {
+    font-family: 'Giants-Bold';
+    font-size: 14px;
+    color: #5D5D5D;
+    line-height: 28px;
+}
+
+.pc_intro {
+    width: 244px;
+    font-size: 13px;
+    margin: 0 auto;
+    margin-top: 20px;
+    color: #989898;
+}
+
+.pc_stacks {
+    width: 244px;
+    height: 105px;
+    margin: 0 auto;
+    margin-top: 15px;
+}
+
+.pc_stack {
+
+}
