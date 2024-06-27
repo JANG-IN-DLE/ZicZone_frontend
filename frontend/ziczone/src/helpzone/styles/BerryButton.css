@@ -1,0 +1,32 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Giants-Bold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/Giants-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+.berry_button {
+    width: 76px;
+    height: 32px;
+    border-radius: 12px;
+    background-color: #F4F4F4;
+    margin-right: 24px;
+    border: none;
+    font-size: 15px;
+    font-family: 'Giants-Bold';
+    cursor: pointer;
+}
+
+.berry_button.active {
+    width: 76px;
+    height: 32px;
+    border-radius: 12px;
+    background-color: #0051BA;
+    color: #FFF;
+}
