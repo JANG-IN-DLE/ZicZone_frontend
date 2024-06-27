@@ -1,0 +1,114 @@
+/* 로그인 오른쪽박스(입력폼) */
+.rightbox{
+    box-sizing: border-box;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    border: 1px solid #ffffff;
+    border-radius: 0px 32px 32px 0px;
+    border-left: none;
+    padding: 50px;
+
+      /* 그림자, 테두리 */
+    border-image-source: linear-gradient(123.89deg,
+  rgba(170, 170, 170, 0.3) 9.82%,
+  rgba(170, 170, 170, 0.05) 32.32%,
+  rgba(170, 170, 170, 0.2) 61.65%,
+  rgba(170, 170, 170, 0.05) 90.18%);
+    box-shadow: 5px 5px 20px 0px rgba(0, 0, 0, 0.15),
+    4px 4px 4px 0px rgba(255, 255, 255, 0.1) inset;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+/* 로고 */
+.rightbox>.zzlogo{
+    width: 120px;
+    margin-bottom: 4px;
+    margin-top: 12px;
+}
+
+.rightbox>.zzlogo:hover{
+    cursor: pointer;
+}
+
+.rightbox>.explain{
+    font-size: 12px;
+    text-align: center;
+    font-weight: 100;
+    color: #ababab;
+    height: 32px;
+    margin-bottom: 16px;
+}
+
+/* 이메일, 비밀번호 입력창 */
+.rightbox>input{
+    margin: 6px 0px;
+    box-sizing: border-box;
+    padding: 8px 8px;
+    width: 250px;
+    border-width: 0 0 0.8px;
+    border-color: #5d5d5d;
+    color: #5d5d5d;
+    outline: none;
+    font-weight: 100;
+    font-size: 16px;
+}
+
+.rightbox>input::placeholder{
+    font-size: 14px;
+    font-weight: 100;
+
+}
+
+/* 회원가입/비밀번호 찾기 버튼 */
+.rightbox>.links{
+    width: 100%;
+    display: flex;
+    flex-flow: row;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.rightbox>.links>p{
+    font-size: 11px;
+    font-weight: 100;
+    color: #ababab;
+    margin: 0px 2px;
+}
+
+.rightbox>.links>.joinbtn,
+.rightbox>.links>.find_password{
+    text-decoration: underline;
+}
+
+.rightbox>.links>.joinbtn,
+.rightbox>.links>.find_password:hover{
+    cursor: pointer;
+}
+
+/* 로그인버튼 */
+.rightbox>.loginbtn{
+    width: 100%;
+    padding: 10px 0px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #0051BA;
+    background-color: transparent;
+    border: 1.5px solid #0051BA;
+    border-radius: 4px;
+}
+.rightbox>.loginbtn:hover{
+    cursor: pointer;
+}
+
+/* 경고메세지 */
+.rightbox>.warningmsg{
+    /* visibility: hidden; */
+    color: red;
+    font-size: 12px;
+    margin-bottom: 8px;
+}
