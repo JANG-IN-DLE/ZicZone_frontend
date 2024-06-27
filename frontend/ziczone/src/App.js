@@ -1,10 +1,11 @@
-import React from "react";
-import Board from "./helpzone/components/Board";
+import logo from './logo.svg';
+// import './App.css';
+import MainComponent from './main/components/MainComponent';
 
 function App() {
   return (
     <div>
-      <Board></Board>
+      <MainComponent/>
     </div>
   );
 }

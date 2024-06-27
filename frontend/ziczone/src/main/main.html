@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../main/styles/Main.css">
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const slide = document.querySelector('.slide');
+            const slideItems = document.querySelectorAll('.slide_item');
+            const prevButton = document.getElementById('prev');
+            const nextButton = document.getElementById('next');
+            const totalSlides = slideItems.length;
+            let currentIndex = 0;
+            let slideInterval;
+
+            function updateSlidePosition() {
+                const slideWidth = slideItems[0].clientWidth;
+                const newTransformValue = -currentIndex * slideWidth;
+                slide.style.transform = `translateX(${newTransformValue}px)`;
+            }
+
+            function nextSlide() {
+                currentIndex = (currentIndex < totalSlides - 1) ? currentIndex + 1 : 0;
+                updateSlidePosition();
+            }
+
+            function startSlideInterval() {
+                slideInterval = setInterval(nextSlide, 2500);
+            }
+
+            function stopSlideInterval() {
+                clearInterval(slideInterval); // 자동 슬라이드 멈추는 함수
+            }
+
+            prevButton.addEventListener('click', function () {
+                currentIndex = (currentIndex > 0) ? currentIndex - 1 : totalSlides - 1;
+                updateSlidePosition();
+                stopSlideInterval(); // 버튼 클릭하면 자동 슬라이드 멈춤
+                startSlideInterval(); // 클릭하면 다시 실행
+            });
+
+            nextButton.addEventListener('click', function () {
+                currentIndex = (currentIndex < totalSlides - 1) ? currentIndex + 1 : 0;
+                updateSlidePosition();
+                stopSlideInterval(); // 버튼 클릭하면 자동 슬라이드 멈춤
+                startSlideInterval(); // 클릭하면 다시 실행
+            });
+
+            window.addEventListener('resize', updateSlidePosition);
+
+            startSlideInterval(); // 페이지 불러오면 자동 슬라이드 시작
+        });
+    </script>
+</head>
+
+<body>
+
+    <header></header>
+    <div class="main_container">
+        <div class="slide_container">
+            <div class="wrap">
+                <div class="arrow left" id="prev"></div>
+                <div class="arrow right" id="next"></div>
+                <ul class="slide">
+                    <li class="slide_item">
+                        <img src="slide_image1.png" alt="">
+                    </li>
+                    <li class="slide_item">
+                        <img src="slide_image2.png" alt="">
+                    </li>
+                    <li class="slide_item">
+                        <img src="slide_image3.png" alt="">
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+
+        <div class="pickzone">
+            <h1>PICK 존</h1>
+            <div class="user_card_container">
+                <div class="user_card">
+                    <div class="pick_user_image_container">
+                        <img class="pick_user_image" src="user_image.png">
+                    </div>
+                    <div class="pick_user_info">
+                        <div class="pick_user_job">
+                            #풀스택 #devops/시스템 #게임 클라이언트
+                        </div>
+                        <div class="pick_user_name">전*재
+                            <span class="pick_user_career">| 신입</span>
+                        </div>
+                        <div class="pick_user_intro">
+                            클라우드 환경에서 최적의 성능을 구현하는 DevOps 엔지니어입니다.
+                        </div>
+                        <div class="pick_user_tech">
+                            <div class="tech_icon"></div>
+                            <div class="tech_icon"></div>
+                            <div class="tech_icon"></div>
+                            <div class="tech_icon"></div>
+                            <div class="tech_icon"></div>
+                            <div class="tech_icon"></div>
+                            <div class="tech_icon"></div>
+                            <div class="tech_icon"></div>
+                            <div class="tech_icon"></div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="user_card">
+                    <div class="pick_user_image_container">
+                        <img class="pick_user_image" src="user_image.png">
+                    </div>
+                    <div class="pick_user_info">
+                        <div class="pick_user_job">
+                            #풀스택 #devops/시스템 #게임 클라이언트
+                        </div>
+                        <div class="pick_user_name">전*재
+                            <span class="pick_user_career">| 신입</span>
+                        </div>
+                        <div class="pick_user_intro">
+                            클라우드 환경에서 최적의 성능을 구현하는 DevOps 엔지니어입니다.
+                        </div>
+                        <div class="pick_user_tech">
+                            <div class="tech_icon">
+                                <img src="AWS.png" />
+                                <img src="JavaScript.png" />
+                            </div>
+                            <div class="tech_icon"></div>
+                            <div class="tech_icon"></div>
+                            <div class="tech_icon"></div>
+                            <div class="tech_icon"></div>
+                            <div class="tech_icon"></div>
+                            <div class="tech_icon"></div>
+                            <div class="tech_icon"></div>
+                            <div class="tech_icon"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="user_card">
+                    <div class="pick_user_image_container">
+                        <img class="pick_user_image" src="user_image.png">
+                    </div>
+                    <div class="pick_user_info">
+                        <div class="pick_user_job">
+                            #풀스택 #devops/시스템 #게임 클라이언트
+                        </div>
+                        <div class="pick_user_name">전*재
+                            <span class="pick_user_career">| 신입</span>
+                        </div>
+                        <div class="pick_user_intro">
+                            클라우드 환경에서 최적의 성능을 구현하는 DevOps 엔지니어입니다.
+                        </div>
+                        <div class="pick_user_tech">
+                            <div class="tech_icon"></div>
+                            <div class="tech_icon"></div>
+                            <div class="tech_icon"></div>
+                            <div class="tech_icon"></div>
+                            <div class="tech_icon"></div>
+                            <div class="tech_icon"></div>
+                            <div class="tech_icon"></div>
+                            <div class="tech_icon"></div>
+                            <div class="tech_icon"></div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="user_card">
+                    <div class="pick_user_image_container">
+                        <img class="pick_user_image" src="user_image.png">
+                    </div>
+                    <div class="pick_user_info">
+                        <div class="pick_user_job">
+                            #풀스택 #devops/시스템 #게임 클라이언트
+                        </div>
+                        <div class="pick_user_name">전*재
+                            <span class="pick_user_career">| 신입</span>
+                        </div>
+                        <div class="pick_user_intro">
+                            클라우드 환경에서 최적의 성능을 구현하는 DevOps 엔지니어입니다.
+                        </div>
+                        <div class="pick_user_tech">
+                            <div class="tech_icon"></div>
+                            <div class="tech_icon"></div>
+                            <div class="tech_icon"></div>
+                            <div class="tech_icon"></div>
+                            <div class="tech_icon"></div>
+                            <div class="tech_icon"></div>
+                            <div class="tech_icon"></div>
+                            <div class="tech_icon"></div>
+                            <div class="tech_icon"></div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="helpzone">
+            <h1>HELP 존</h1>
+            <div class="help_container">
+                <div class="help_list">
+                    <div class="help_list_berry">500</div>
+                    <div class="help_list_content">
+                        <div class="help_list_title">안녕하세요</div>
+                        <div class="help_list_user_name">이채림
+                            <span class="help_list_user_career">| 신입</span>
+                        </div>
+                    </div>
+                    <div class="help_list_date">
+                        <div class="help_list_create_date">2024 - 06 - 13</div>
+                        <div class="help_list_viewcnt">조회수
+                            <span class="help_list_viewcnt_num">456</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="help_list">
+                    <div class="help_list_berry">1000</div>
+                    <div class="help_list_content">
+                        <div class="help_list_title">안녕하세요</div>
+                        <div class="help_list_user_name">이채림
+                            <span class="help_list_user_career">| 신입</span>
+                        </div>
+                    </div>
+                    <div class="help_list_date">
+                        <div class="help_list_create_date">2024 - 06 - 13</div>
+                        <div class="help_list_viewcnt">조회수
+                            <span class="help_list_viewcnt_num">456</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="help_list">
+                    <div class="help_list_berry">1000</div>
+                    <div class="help_list_content">
+                        <div class="help_list_title">안녕하세요</div>
+                        <div class="help_list_user_name">이채림
+                            <span class="help_list_user_career">| 신입</span>
+                        </div>
+                    </div>
+                    <div class="help_list_date">
+                        <div class="help_list_create_date">2024 - 06 - 13</div>
+                        <div class="help_list_viewcnt">조회수
+                            <span class="help_list_viewcnt_num">456</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="help_list">
+                    <div class="help_list_berry">1000</div>
+                    <div class="help_list_content">
+                        <div class="help_list_title">안녕하세요</div>
+                        <div class="help_list_user_name">이채림
+                            <span class="help_list_user_career">| 신입</span>
+                        </div>
+                    </div>
+                    <div class="help_list_date">
+                        <div class="help_list_create_date">2024 - 06 - 13</div>
+                        <div class="help_list_viewcnt">조회수
+                            <span class="help_list_viewcnt_num">456</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="help_list">
+                    <div class="help_list_berry">1000</div>
+                    <div class="help_list_content">
+                        <div class="help_list_title">안녕하세요</div>
+                        <div class="help_list_user_name">이채림
+                            <span class="help_list_user_career">| 신입</span>
+                        </div>
+                    </div>
+                    <div class="help_list_date">
+                        <div class="help_list_create_date">2024 - 06 - 13</div>
+                        <div class="help_list_viewcnt">조회수
+                            <span class="help_list_viewcnt_num">456</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="company_slide_container">
+            <!--왼쪽으로 -100%까지 이동-->
+            <ul class="boxes">
+                <li>
+                    <img src="../main/company_logo/img_1.svg" alt="">
+                </li>
+                <li>
+                    <img src="../main/company_logo/img_2.svg" alt="">
+                </li>
+                <li>
+                    <img src="../main/company_logo/img_3.svg" alt="">
+                </li>
+                <li>
+                    <img src="../main/company_logo/img_4.svg" alt="">
+                </li>
+                <li>
+                    <img src="../main/company_logo/img_5.svg" alt="">
+                </li>
+                <li>
+                    <img src="../main/company_logo/img_6.svg" alt="">
+                </li>
+                <li>
+                    <img src="../main/company_logo/img_7.svg" alt="">
+                </li>
+                <li>
+                    <img src="../main/company_logo/img_8.svg" alt="">
+                </li>
+                <li>
+                    <img src="../main/company_logo/img_9.svg" alt="">
+                </li>
+                <li>
+                    <img src="../main/company_logo/img_10.svg" alt="">
+                </li>
+                <li>
+                    <img src="../main/company_logo/img_11.svg" alt="">
+                </li>
+                <li>
+                    <img src="../main/company_logo/img_12.svg" alt="">
+                </li>
+            </ul>
+            <!--왼쪽으로 100%에서 0%까지 이동-->
+            <ul class="boxes list2">
+                <li>
+                    <img src="../main/company_logo/img_1.svg" alt="">
+                </li>
+                <li>
+                    <img src="../main/company_logo/img_2.svg" alt="">
+                </li>
+                <li>
+                    <img src="../main/company_logo/img_3.svg" alt="">
+                </li>
+                <li>
+                    <img src="../main/company_logo/img_4.svg" alt="">
+                </li>
+                <li>
+                    <img src="../main/company_logo/img_5.svg" alt="">
+                </li>
+                <li>
+                    <img src="../main/company_logo/img_6.svg" alt="">
+                </li>
+                <li>
+                    <img src="../main/company_logo/img_7.svg" alt="">
+                </li>
+                <li>
+                    <img src="../main/company_logo/img_8.svg" alt="">
+                </li>
+                <li>
+                    <img src="../main/company_logo/img_9.svg" alt="">
+                </li>
+                <li>
+                    <img src="../main/company_logo/img_10.svg" alt="">
+                </li>
+                <li>
+                    <img src="../main/company_logo/img_11.svg" alt="">
+                </li>
+                <li>
+                    <img src="../main/company_logo/img_12.svg" alt="">
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="putter"></div>
+</body>
+
+</html>
