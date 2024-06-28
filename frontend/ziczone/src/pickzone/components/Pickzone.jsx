@@ -1,5 +1,9 @@
 import React, {useEffect, useState} from "react";
 import axios from 'axios';
+import Job from "./Job";
+import PickCard from "../../common/card/components/PickCard";
+import personalMImage from '../../common/card/assets/personal_m_image.png';
+import personalFImage from '../../common/card/assets/personal_f_image.png';
 
 function Pickzone() {
     const [pickCards, setPickCards] = useState([]);
@@ -23,27 +27,31 @@ function Pickzone() {
                 });
     }, []);
 
-    return(
+    return (
         <div>
-            <h2>Pick Cards</h2>
-            <div>
-                {pickCards.map(card => (
-                    <div key={card.personalId} className="pick-card">
-                        <p>이름: {card.userName}</p>    
-                        <p>직무: {card.jobName}</p>    
-                        <p>자기소개: {card.userIntro}</p>    
-                        <p>기술 스택: {card.techName}</p>    
-                        <p>경력: {card.personalCareer}</p>    
-                    </div>
-                ))}
-            </div>
             <h2>Jobs</h2>
             <div>
                 {jobs.map(job => (
-                    <div key={job.jobId} className="job-card">
-                        <p>{job.jobName}</p>
-                    </div>
+                    <Job key={job.jobId} job={job} />
                 ))}
+            </div>
+            <h2>Pick Cards</h2>
+            <div className="user_card_container">
+                {pickCards.map(card => {
+                    const userImage = card.gender === 'MALE' ? personalMImage : personalFImage;
+
+                    return (
+                        <PickCard
+                            key={card.personalId}
+                            userImage={userImage}
+                            jobNames={card.jobNames ? card.jobNames.split('#') : []}
+                            userName={card.userName}
+                            userCareer={card.personalCareer}
+                            userIntro={card.userIntro}
+                            techNames={card.techNames ? card.techNames.split('#') : []}
+                        />
+                    );
+                })}
             </div>
         </div>
     );

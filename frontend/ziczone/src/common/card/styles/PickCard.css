@@ -1,0 +1,48 @@
+.user_card_container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 60px;
+    row-gap: 35px;
+    max-width: 1080px;
+    line-height: 25px;
+}
+.user_card {
+    width: 510px;
+    height: 210px;
+    border-radius: 32px;
+    box-shadow: 8px 8px 16px #BEBEBE,
+        -8px -8px 16px #FFFFFF;
+    display: flex;
+}
+.pick_user_image_container {
+    width: 65px;
+    height: 65px;
+    background-color: #0051BA;
+    margin-top: 40px;
+    margin-left: 30px;
+}
+.pick_user_image{
+    width: 100%;
+    height: auto;
+}
+.pick_user_info{
+    margin-top: 20px;
+    margin-left: 25px;
+}
+.pick_user_job{
+    font-size: 13px;
+    color: #0051BA;
+}
+.pick_user_name,
+.pick_user_career{
+    font-size: 18px;
+}
+.pick_user_intro{
+    font-size: 13px;
+    color: #B3B3B3;
+}
+.pick_user_tech{
+    width: 340px;
+    height: 75px;
+    margin-top: 10px;
+}
