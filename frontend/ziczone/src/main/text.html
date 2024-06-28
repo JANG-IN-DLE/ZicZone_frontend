@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- <link rel="stylesheet" href="../main/styles/Main.css"> -->
+
+  <style>
+    .wrap {
+      position: relative;
+      width: 1080px;
+      height: 320px;
+      text-align: left;
+      overflow: hidden;
+    }
+
+    ul {
+      padding: 0;
+      margin: 0;
+      display: flex;
+      transition: 0.4s ease-in-out;
+    }
+
+    li {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .slide_item {
+      flex-shrink: 0;
+      width: 1080px;
+      height: 320px;
+      box-sizing: border-box;
+      background-size: cover;
+
+    }
+
+    .slide_text {
+      height: 250px;
+      width: 900px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding-left: 70px;
+      padding-top: 30px;
+    }
+
+    .slide_text p {
+      left: 120px;
+      color: white;
+      font-size: 30px;
+      font-weight: 900;
+      margin: 0;
+    }
+
+    .slide_text p.text {
+      font-size: 42px;
+    }
+
+
+    .arrow {
+      display: inline-block;
+      width: 25px;
+      height: 25px;
+      border-left: 3px solid #b3b3b3;
+      border-bottom: 3px solid #b3b3b3;
+      position: absolute;
+      top: 45%;
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    .arrow.left {
+      left: 30px;
+      transform: rotate(45deg)
+    }
+
+    .arrow.right {
+      right: 30px;
+      transform: rotate(-135deg)
+    }
+  </style>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const slide = document.querySelector('.slide');
+      const slideItems = document.querySelectorAll('.slide_item');
+      const prevButton = document.getElementById('prev');
+      const nextButton = document.getElementById('next');
+      const totalSlides = slideItems.length;
+      let currentIndex = 0;
+      let slideInterval;
+
+      function updateSlidePosition() {
+        const slideWidth = slideItems[0].clientWidth;
+        const newTransformValue = -currentIndex * slideWidth;
+        slide.style.transform = `translateX(${newTransformValue}px)`;
+      }
+
+      function nextSlide() {
+        currentIndex = (currentIndex < totalSlides - 1) ? currentIndex + 1 : 0;
+        updateSlidePosition();
+      }
+
+      function startSlideInterval() {
+        slideInterval = setInterval(nextSlide, 2500);
+      }
+
+      function stopSlideInterval() {
+        clearInterval(slideInterval); // 자동 슬라이드 멈추는 함수
+      }
+
+      prevButton.addEventListener('click', function () {
+        currentIndex = (currentIndex > 0) ? currentIndex - 1 : totalSlides - 1;
+        updateSlidePosition();
+        stopSlideInterval(); // 버튼 클릭하면 자동 슬라이드 멈춤
+        startSlideInterval(); // 클릭하면 다시 실행
+      });
+
+      nextButton.addEventListener('click', function () {
+        currentIndex = (currentIndex < totalSlides - 1) ? currentIndex + 1 : 0;
+        updateSlidePosition();
+        stopSlideInterval(); // 버튼 클릭하면 자동 슬라이드 멈춤
+        startSlideInterval(); // 클릭하면 다시 실행
+      });
+
+      window.addEventListener('resize', updateSlidePosition);
+
+      startSlideInterval(); // 페이지 불러오면 자동 슬라이드 시작
+    });
+  </script>
+
+</head>
+
+<body>
+
+  <header></header>
+  <div class="main_container">
+    <div class="slide_container">
+      <div class="wrap">
+        <div class="arrow left" id="prev"></div>
+        <div class="arrow right" id="next"></div>
+        <ul class="slide">
+          <li class="slide_item" style="background-image: url(../main/bannerimg/slide_image1.png);">
+            <div class="slide_text">
+              <p class="text">직존</p>
+              <p>기업이 인재를 채용하는 서비스</p>
+            </div>
+          </li>
+          <li class="slide_item" style="background-image: url(../main/bannerimg/slide_image2.png);">
+            <div class="slide_text">
+              <p class="text">다큐프라임 보러가기</p>
+              <p>인공지능 AI 발전으로 우리는 생존을 위해 무엇을 준비해야하나</p>
+            </div>
+          </li>
+          <li class="slide_item" style="background-image: url(../main/bannerimg/slide_image3.png);">
+            <div class="slide_text">
+              <p class="text">네이버 클라우드 바로가기</p>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+
+</body>
+
+</html>
