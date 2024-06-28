@@ -1,0 +1,22 @@
+.file-upload {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.fu_display {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    background-color: #FFF;
+    border: 1px solid #0051BA;
+    border-radius: 4px;
+    font-size: 15px;
+}
+
+.fu_remove {
+    margin-left: 10px;
+    color: red;
+    cursor: pointer;
+}

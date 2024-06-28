@@ -1,0 +1,26 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-style: normal;
+}
+
+.berry_select {
+    width: 490px;
+    display: flex;
+}
+
+.berry_select p {
+    font-family: 'Pretendard-Regular';
+    font-size: 22px;
+    font-weight: bold;
+    margin-right: 4px;
+}
+
+.berry_select img {
+    width: 22px;
+    height: 22px;
+}
+
+.bs_berry_buttons {
+    margin-top: 12px;
+}

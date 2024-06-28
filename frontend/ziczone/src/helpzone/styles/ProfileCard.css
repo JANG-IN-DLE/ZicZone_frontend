@@ -71,6 +71,16 @@
     border-radius: 12px;
     margin: 0 auto;
     margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.pc_point img {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
 }
 
 .pc_point_berry {
