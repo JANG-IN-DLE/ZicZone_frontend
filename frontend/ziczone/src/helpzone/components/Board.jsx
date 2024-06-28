@@ -2,6 +2,9 @@ import React from "react";
 import "../styles/Board.css";
 import ProfileCard from "./ProfileCard";
 import Description from "./Description";
+import BerrySelect from "./BerrySelect";
+import PostFrom from "./PostForm";
+import Button from "./Button";
 
 const Board = () => {
   const userProfile = {
@@ -30,8 +33,22 @@ const Board = () => {
       <div className="b_right">
         <div className="b_description">
           <Description />
-        </div>
-      </div>
+          <div className="b_berry_select">
+            <BerrySelect />
+          </div>
+          <div className="b_title_form">
+            <PostFrom />
+          </div>
+          <div className="b_button">
+                <Button type="cancel">
+                    취소
+                </Button>
+                <Button type="submit">
+                    등록
+                </Button>
+            </div>
+       </div>
+     </div>
     </div>
   );
 }
