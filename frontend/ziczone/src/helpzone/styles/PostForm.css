@@ -1,0 +1,50 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-style: normal;
+}
+
+.post_form {
+    font-family: 'Pretendard-Regular';
+    font-size: 22px;
+    font-weight: bold;
+    margin-right: 4px;
+    margin-top: 21px;
+}
+
+.pf_input {
+    width: 734px;
+    height: 40px;
+    border: none;
+    border-bottom: 1px solid #0051BA;
+    margin-top: 12px;
+    font-size: 18px;
+    font-family: 'Pretendard-Regular';
+    padding: 12px;
+}
+
+textarea {
+    width: 734px;
+    height: 300px;
+    margin-top: 21px;
+    border-radius: 4px;
+    border: 1px solid #D9D9D9;
+    font-size: 18px;
+    font-family: 'Pretendard-Regular';
+    padding: 12px;
+}
+
+.pf_pdf {
+    margin-top: 21px;
+}
+
+.pf_pdf span {
+    color: #FF0000;
+    font-size: 15px;
+    font-family: 'Pretendard-Regular';
+    margin-left: 8px;
+}
+
+.pf_file_upload {
+    margin-top: 12px;
+}
