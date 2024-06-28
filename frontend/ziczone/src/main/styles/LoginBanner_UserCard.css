@@ -1,0 +1,110 @@
+
+    .slide_container{
+      display: flex;
+    }
+
+    .login_wrap {
+      position: relative;
+      width: 794px;
+      height: 320px;
+      text-align: left;
+      overflow: hidden;
+    }
+
+    ul {
+      padding: 0;
+      margin: 0;
+      display: flex;
+      transition: 0.4s ease-in-out;
+    }
+
+    li {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .slide_item {
+      flex-shrink: 0;
+      width: 1080px;
+      height: 320px;
+      box-sizing: border-box;
+      background-size: cover;
+
+    }
+
+    .slide_text {
+      height: 250px;
+      width: 900px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding-left: 70px;
+      margin-top: 30px;
+    }
+
+    .slide_text p {
+      left: 120px;
+      color: white;
+      font-size: 30px;
+      font-weight: 900;
+      margin: 0;
+    }
+
+    .slide_text p.text {
+      font-size: 42px;
+    }
+
+
+    .arrow {
+      display: inline-block;
+      width: 25px;
+      height: 25px;
+      border-left: 3px solid #b3b3b3;
+      border-bottom: 3px solid #b3b3b3;
+      position: absolute;
+      top: 45%;
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    .arrow.left {
+      left: 30px;
+      transform: rotate(45deg)
+    }
+
+    .arrow.right {
+      right: 30px;
+      transform: rotate(-135deg)
+    }
+
+    .login_user_card {
+    height: 320px;
+    width: 260px;
+    border: 0.5px solid #b3b3b3;
+    border-radius: 8px;
+    margin-left: 26px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+    .login_user_image {
+      height: 64px;
+      width: 64px;
+      border: 0.5px solid #0051BA;
+      border-radius: 40px;
+      margin-top: 50px;
+    }
+    .login_user_name{
+      margin-top: 25px;
+      font-size: 20px;
+    }
+    .login_user_email{
+      color: #B3B3B3;
+      font-size: 14px;
+    }
+    .mypage{
+    margin-top: 40px;
+    font-size: 20px;
+    }

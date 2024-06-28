@@ -12,3 +12,17 @@
     margin-left: 56px;
     margin-top: 50px;
 }
+
+.b_berry_select {
+    margin-top: 8px;
+}
+
+.b_title_form {
+    margin-top: 8px;
+}
+
+.b_button {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 44px;
+}

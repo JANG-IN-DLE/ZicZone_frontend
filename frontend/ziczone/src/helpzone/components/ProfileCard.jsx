@@ -2,6 +2,7 @@ import React from 'react';
 import '../styles/ProfileCard.css';
 import personal_m_image from '../assets/personal_m_image.png';
 import personal_f_image from '../assets/personal_f_image.png';
+import berry_image from '../assets/berry.png';
 
 
 const ProfileCard = ({ jobs, gender, userName, career, point, intro, stacks }) => {
@@ -20,8 +21,9 @@ const ProfileCard = ({ jobs, gender, userName, career, point, intro, stacks }) =
                 { userName} | { career }
             </p>
             <div className='pc_point'>
+                <img src={ berry_image } alt='포인트 베리 이미지'/> 
                 <p className='pc_point_berry'>
-                    🫐 { point }
+                    { point }
                 </p>
             </div>
             <p className='pc_intro'>

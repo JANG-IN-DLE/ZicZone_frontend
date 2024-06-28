@@ -3,13 +3,13 @@ import "../styles/Main.css";
 import PickCard from "./PickCard";
 import HelpZone from "./HelpZone";
 import CompanySilde from "./CompanySilde";
-import BannerSlide from "./BannerSlide";
+import LoginBanner_UserCard from "./LoginBanner_UserCard";
 
-const MainComponent = () => {
+const LoginMainComponent = () => {
   return (
     <div className="main_container">
       <div className="slide_container">
-        <BannerSlide />
+        <LoginBanner_UserCard />
       </div>
       <div className="pickzone">
         <h1>PICK 존</h1>
@@ -21,6 +21,7 @@ const MainComponent = () => {
         </div>
       </div>
       <div className="helpzone">
+        <h1>HELP 존</h1>
         <HelpZone />
         <HelpZone />
         <HelpZone />
@@ -36,4 +37,4 @@ const MainComponent = () => {
   );
 };
 
-export default MainComponent;
+export default LoginMainComponent;
