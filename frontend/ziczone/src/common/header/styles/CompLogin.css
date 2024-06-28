@@ -5,6 +5,7 @@
 .comp_login {
     display: flex;
     align-items: center;
+    flex: none;
 }
 
 .comp_login_name {
