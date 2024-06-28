@@ -1,0 +1,52 @@
+        .help_container {
+            width: 1080px;
+            height: 375px;
+        }
+
+        .help_list {
+            height: 75px;
+            /* overflow: hidden; */
+            display: flex;
+            align-items: flex-start;
+            border-bottom: 1px solid #B3B3B3;
+        }
+
+        .help_list_berry {
+            width: 65px;
+            height: 30px;
+            border: 1px solid #0051BA;
+            border-radius: 12px;
+            margin-top: 22px;
+            font-family: 'Giants-Bold';
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .help_list_content {
+            margin-left: 35px;
+            align-self: center;
+        }
+
+        .help_list_date {
+            margin-left: auto;
+            align-self: center;
+
+        }
+
+        .help_list_title {
+            font-size: 18px;
+            line-height: 25px;
+        }
+
+        .help_list_user_name,
+        .help_list_user_career {
+            font-size: 16px;
+            color: #B2B2B2;
+        }
+
+        .help_list_create_date,
+        .help_list_viewcnt {
+            font-size: 12px;
+            color: #B2B2B2;
+        }

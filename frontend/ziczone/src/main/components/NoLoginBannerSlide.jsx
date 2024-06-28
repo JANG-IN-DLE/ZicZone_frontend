@@ -3,7 +3,7 @@ import slidImage1 from "../../main/bannerimg/slide_image1.png";
 import slidImage2 from "../../main/bannerimg/slide_image2.png";
 import slidImage3 from "../../main/bannerimg/slide_image3.png";
 
-const BannerSlide = () => {
+const NoLoginBannerSlide = () => {
   const slideItems = [
     { id: 1, src: slidImage1, alt: "배너1" },
     { id: 2, src: slidImage2, alt: "배너2" },
@@ -62,18 +62,35 @@ const BannerSlide = () => {
         <div class="arrow left" id="prev"></div>
         <div class="arrow right" id="next"></div>
         <ul class="slide">
-          <li class="slide_item">
-            <img src={slidImage1} alt="배너1" />
+          <li
+            class="slide_item"
+            style={{ background: "url(" + slidImage1 + ")" }}
+          >
+            <div class="slide_text">
+              <p class="text">직존</p>
+              <p>기업이 인재를 채용하는 서비스</p>
+            </div>
           </li>
-          <li class="slide_item">
-            <img src={slidImage2} alt="배너2" />
+          <li
+            class="slide_item"
+            style={{ background: "url(" + slidImage2 + ")" }}
+          >
+            <div class="slide_text">
+              <p class="text">다큐프라임 보러가기</p>
+              <p>인공지능 AI 발전으로 우리는 생존을 위해 무엇을 준비해야하나</p>
+            </div>
           </li>
-          <li class="slide_item">
-            <img src={slidImage3} alt="배너3" />
+          <li
+            class="slide_item"
+            style={{ background: "url(" + slidImage3 + ")" }}
+          >
+            <div class="slide_text">
+              <p class="text">네이버 클라우드 바로가기</p>
+            </div>
           </li>
         </ul>
       </div>
     </>
   );
 };
-export default BannerSlide;
+export default NoLoginBannerSlide;

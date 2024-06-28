@@ -1,0 +1,55 @@
+        .company_slide{
+            margin: 150px auto;
+        }
+        .company_slide_container {
+        position: relative;
+        display: flex;
+        align-items: center;
+        /* justify-content: center; */
+        /* margin: 80px auto; */
+        width: 1080px;
+        height: 100px;
+        overflow: hidden;
+
+        ul {
+            position: absolute;
+            display: flex;
+            gap: 0 40px;
+            width: max-content;
+            animation: aniScroll 15s linear infinite;
+
+            /* 2번째 <ul> 태그에 애니메이션 넣기 */
+            &.list2 {
+            animation: aniScroll-2 15s linear infinite;
+            }
+
+            li {
+            list-style: none;
+            width: 180px;
+            height: 90px;
+            
+            }
+        }
+        }
+
+        /* 0%에서 -100%으로 이동하는 애니메이션 */
+        @keyframes aniScroll {
+        0% {
+            transform: translateX(0%)
+        }
+
+        100% {
+            transform: translateX(-100%)
+        }
+        }
+
+        /* 100%에서 0%으로 이동하는 애니메이션 */
+        @keyframes aniScroll-2 {
+        0% {
+            transform: translateX(100%)
+        }
+
+        100% {
+            transform: translateX(0%)
+        }
+        }
