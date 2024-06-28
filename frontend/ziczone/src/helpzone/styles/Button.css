@@ -1,0 +1,30 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-style: normal;
+}
+
+.button {
+    width: 72px;
+    height: 36px;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: 'Pretendard-Regular';
+}
+
+.button.cancel {
+    background-color: #FFF;
+    color: #0051BA;
+    border: 1px solid #0051BA;
+    color: #000;
+}
+
+.button.submit {
+    background-color: #0051BA;
+    color: #FFF;
+    border: none;
+    margin-left: 12px;
+}
