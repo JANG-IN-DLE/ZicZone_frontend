@@ -5,7 +5,7 @@ import BerryButton from "./BerryButton";
 import useBerrySelect from "../hooks/useBerrySelect.js";
 
 const BerrySelect = () => {
-    const berryButtonValues = [100, 200, 500, 1000, 1500];
+    const berryButtonValues = [ 100, 200, 500, 1000, 1500 ];
     const { berry, handleSelect} = useBerrySelect(100);
     return (
         <div>
