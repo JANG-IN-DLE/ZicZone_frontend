@@ -1,4 +1,4 @@
-import "../../styles/JoinSelectbtn.css";
+import "../../styles/JoinCom/JoinSelectbtn.css";
 
 import companyimg from "../../assets/company.png"
 import personalimg from "../../assets/personal.png"
