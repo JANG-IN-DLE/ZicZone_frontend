@@ -42,7 +42,7 @@
     font-size: 18px;
 }
 
-.non_login_div{
+.login_component_div{
     display: flex;
     align-items: center;
     margin-left: auto;
