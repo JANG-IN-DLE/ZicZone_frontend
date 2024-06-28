@@ -33,7 +33,7 @@ const Header = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="non_login_div">
+                    <div className="login_component_div">
                         <NonLogin />
                         {/* <UserLogin /> */}
                         {/* <CompLogin /> */}
