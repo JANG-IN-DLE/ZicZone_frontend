@@ -1,0 +1,24 @@
+.jobs{
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    margin: 8px;
+}
+
+.jobs>.jobcom{
+    background-color: #E6EEF9;
+    font-size: 14px;
+    font-weight: 900;
+    color: #5d5d5d;
+    padding: 8px 16px;
+    border-radius: 52px;
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
+
+.jobs>.jobcom:hover{
+    cursor: pointer;
+    background-color: #0051BA;
+    color: #ffffff;
+}
