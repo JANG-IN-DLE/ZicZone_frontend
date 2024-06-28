@@ -1,11 +1,11 @@
-import React from "react";
-import Board from "./helpzone/components/Board";
-import Pickzone from "./pickzone/components/Pickzone";
+import logo from './logo.svg';
+// import './App.css';
+import MainComponent from './main/components/MainComponent';
 
 function App() {
   return (
     <div>
-      <Pickzone />
+      <MainComponent/>
     </div>
   );
 }
