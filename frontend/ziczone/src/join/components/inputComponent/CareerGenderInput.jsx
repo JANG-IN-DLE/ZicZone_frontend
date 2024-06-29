@@ -13,7 +13,7 @@ const CareerGenderInput = () => {
     ];
 
     return (
-        <div className="personal careergender">
+        <div className="inputform careergender">
             <div className="career">
                 <p>경력</p>
                 <Selectbtn options={options}/>

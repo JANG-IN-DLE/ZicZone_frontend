@@ -1,10 +1,10 @@
 import React from 'react';
 import '../../styles/Join_Per.css';
 
-const NameInput = () => {
+const NameInput = ({label}) => {
     return (
-        <div className="personal name">
-            <p>이름</p>
+        <div className="inputform name">
+            <p>{label}</p>
             <input type="text" />
         </div>
     );

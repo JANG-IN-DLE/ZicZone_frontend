@@ -1,11 +1,11 @@
 import React from 'react';
 import '../../styles/Join_Per.css';
-import Jobs from '../../../common/\bstackjob/components/Jobs';
+import Jobs from '../../../common/stackjob/components/Jobs';
 
 
 const JobInput = () => {
     return (
-        <div class="personal job">
+        <div class="inputform job">
                 <p>희망 분야<span>*최대 3개</span></p>
                 <Jobs/>
             </div>

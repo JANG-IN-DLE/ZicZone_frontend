@@ -3,7 +3,7 @@ import '../../styles/Join_Per.css';
 
 const EmailInput = () => {
     return (
-        <div className="personal email">
+        <div className="inputform email">
             <p>이메일</p>
             <div className="email_box">
                 <div className="email_input_box">

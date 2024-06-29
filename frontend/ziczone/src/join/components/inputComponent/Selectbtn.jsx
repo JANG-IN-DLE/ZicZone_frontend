@@ -49,13 +49,14 @@ const CustomSelect = styled(Select)`
   }
 `;
 
-const Selectbtn = ({ options }) => {
+const Selectbtn = ({ options, handleSelect }) => {
   return (
     <CustomSelect
       options={options}
       placeholder="선택해주세요"
       isClearable
       classNamePrefix="custom-react-select"
+      onChange={handleSelect}
     />
   );
 };
