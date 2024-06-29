@@ -52,7 +52,7 @@
 .pick_user_tech{
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 6px;
 }
 .tech_icon{
     height: 21px;

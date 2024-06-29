@@ -1,12 +1,17 @@
 import React from "react";
+import {useNavigate} from "react-router-dom";
 import '../styles/PickCard.css';
 
 
-const PickCard = ({userImage, jobNames=[], userName, userCareer, userIntro, techNames=[]}) => {
+const PickCard = ({personalId, userImage, jobNames=[], userName, userCareer, userIntro, techNames=[]}) => {
+    const navigate = useNavigate();
+    const handleClick = () => {
+        navigate(`/pickzone/${personalId}`);
+    };
     
     return (
         
-                <div className="user_card">
+                <div className="user_card" onClick={handleClick}>
                     <div className="pick_user_image_container">
                         <img className="pick_user_image" src={userImage} alt="User" />
                     </div>
