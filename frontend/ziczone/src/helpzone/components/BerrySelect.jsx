@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles/BerrySelect.css";
-import berry_image from '../assets/berry.png';
+import berry_image from '../../common/card/assets/berry.png';
 import BerryButton from "./BerryButton";
 import useBerrySelect from "../hooks/useBerrySelect.js";
 

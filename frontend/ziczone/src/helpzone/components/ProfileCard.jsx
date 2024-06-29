@@ -1,8 +1,8 @@
 import React from 'react';
 import '../styles/ProfileCard.css';
-import personal_m_image from '../assets/personal_m_image.png';
-import personal_f_image from '../assets/personal_f_image.png';
-import berry_image from '../assets/berry.png';
+import personal_m_image from '../../common/card/assets/personal_m_image.png';
+import personal_f_image from '../../common/card/assets/personal_f_image.png';
+import berry_image from '../../common/card/assets/berry.png';
 
 
 const ProfileCard = ({ jobs, gender, userName, career, point, intro, stacks }) => {
