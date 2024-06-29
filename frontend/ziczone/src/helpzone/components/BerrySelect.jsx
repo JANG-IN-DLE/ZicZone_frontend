@@ -2,11 +2,10 @@ import React from "react";
 import "../styles/BerrySelect.css";
 import berry_image from '../../common/card/assets/berry.png';
 import BerryButton from "./BerryButton";
-import useBerrySelect from "../hooks/useBerrySelect.js";
 
-const BerrySelect = () => {
+const BerrySelect = ({ selectedBerry, onSelect }) => {
     const berryButtonValues = [ 100, 200, 500, 1000, 1500 ];
-    const { berry, handleSelect} = useBerrySelect(100);
+
     return (
         <div>
             <div className="berry_select">
@@ -18,8 +17,8 @@ const BerrySelect = () => {
                         <BerryButton
                             key={ value }
                             value={ value }
-                            isActive={ value === berry }
-                            onClick={() => handleSelect(value)}
+                            isActive={ value === selectedBerry }
+                            onClick={() => onSelect(value)}
                         />
                     ))}
                 </div>
