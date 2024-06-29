@@ -41,12 +41,13 @@ function Pickzone() {
                 
                 {pickCards.map(card => {
                     const userImage = card.gender === 'MALE' ? personalMImage : personalFImage;
-                    const jobNames = card.jobName ? card.jobName.split(' ') : [];
-                    const techNames = card.techName ? card.techName.split(' ') : [];
+                    const jobNames = card.jobName ? card.jobName.split(',') : [];
+                    const techNames = card.techName ? card.techName.split(',') : [];
                     
                     return (
                         <PickCard
                             key={card.personalId}
+                            personalId={card.personalId}
                             userImage={userImage}
                             jobNames={jobNames}
                             userName={card.userName}
