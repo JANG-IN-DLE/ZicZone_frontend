@@ -3,7 +3,9 @@ import '../styles/PickCard.css';
 
 
 const PickCard = ({userImage, jobNames=[], userName, userCareer, userIntro, techNames=[]}) => {
+    
     return (
+        
                 <div className="user_card">
                     <div className="pick_user_image_container">
                         <img className="pick_user_image" src={userImage} alt="User" />
@@ -23,7 +25,7 @@ const PickCard = ({userImage, jobNames=[], userName, userCareer, userIntro, tech
                         </div>
                         <div className="pick_user_tech">
                             {techNames.map((tech, index) => (
-                                <div key={index} className="tech_icon">{tech}</div>
+                                <img key={index} className="tech_icon" src={tech} alt={`Tech${index}`} />
                             ))}
                         </div>
                     </div>
