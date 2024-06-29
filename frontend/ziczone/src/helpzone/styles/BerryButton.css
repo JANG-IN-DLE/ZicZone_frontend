@@ -25,9 +25,6 @@
 }
 
 .berry_button.active {
-    width: 76px;
-    height: 32px;
-    border-radius: 12px;
     background-color: #0051BA;
     color: #FFF;
 }

@@ -11,10 +11,13 @@
     border: 1px solid #0051BA;
     border-radius: 4px;
     font-size: 15px;
+    position: relative;
 }
 
 .fu_remove {
-    margin-left: 10px;
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
     color: red;
     cursor: pointer;
 }
