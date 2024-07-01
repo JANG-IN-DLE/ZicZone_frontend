@@ -7,8 +7,6 @@ const useFileUpload = () => {
         const selectedFile = event.target.files[0];
         if(selectedFile && selectedFile.type === "application/pdf") {
             setFile(selectedFile);
-        } else {
-            alert("PDF 파일만 첨부할 수 있습니다.");
         }
     };
 
@@ -17,6 +15,7 @@ const useFileUpload = () => {
     };
 
     return {
+        file,
         handleFileChange,
         handleFileRemove
     };
