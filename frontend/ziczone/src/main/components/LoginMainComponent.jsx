@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
-import "../styles/Main.css";
+import "../styles/MainMain.css";
 import PickCard from "./PickCard";
 import HelpZone from "./HelpZone";
 import CompanySilde from "./CompanySilde";
-import LoginBanner_UserCard from "./LoginBanner_UserCard";
+import LoginBannerUserCard from "./LoginBannerUserCard";
 
 const LoginMainComponent = () => {
   return (
     <div className="main_container">
       <div className="slide_container">
-        <LoginBanner_UserCard />
+        <LoginBannerUserCard />
       </div>
       <div className="pickzone">
         <h1>PICK 존</h1>
