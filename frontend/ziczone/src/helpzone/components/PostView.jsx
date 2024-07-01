@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/PostForm.css";
+import "../styles/PostView.css";
 
 const PostView = ({ title, content, fileUrl }) => {
     return (
@@ -8,7 +8,7 @@ const PostView = ({ title, content, fileUrl }) => {
             <p className="pv_content">{ content }</p>
             { fileUrl && (
                 <div className="pdf_viewer">
-                    <iframe src={fileUrl} width="100%" height="600px"></iframe>
+                    <iframe src={fileUrl} width="100%" height="600px" title="pdfViewer"></iframe>
                 </div>
             )}
         </div>

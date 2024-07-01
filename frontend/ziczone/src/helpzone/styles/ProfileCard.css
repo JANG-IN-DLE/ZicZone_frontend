@@ -18,6 +18,24 @@
     font-family: 'Pretendard-Regular';
 }
 
+.pc_info {
+    text-align: center;
+    font-weight: bold;
+    font-size: 28px;
+}
+
+.pc_info span {
+    color: #0051BA;
+}
+
+.pc_post_berry {
+    width: 100px;
+    height: 35px;
+    border-radius: 16px;
+    background-color: #0051BA;
+    margin: 15px auto;
+}
+
 .profile_card {
     width: 292px;
     height: 432px;
