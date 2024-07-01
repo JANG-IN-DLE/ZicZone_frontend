@@ -41,7 +41,7 @@
     z-index: 1;
 }
 
-.post_form .pf_input {
+.post_form .pf_input, .pv_title {
     width: 734px;
     height: 40px;
     border: none;
