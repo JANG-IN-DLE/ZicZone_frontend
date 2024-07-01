@@ -22,3 +22,8 @@
     background-color: #0051BA;
     color: #ffffff;
 }
+
+.jobs>.jobcom.active {
+    background-color: #0051BA;
+    color: #ffffff;
+}

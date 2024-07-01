@@ -16,3 +16,9 @@
 .techs>img:hover{
     cursor: pointer;
 }
+
+/* 읽기전용일때 */
+.techs img.readonly {
+    cursor: default;
+    pointer-events: none;
+}

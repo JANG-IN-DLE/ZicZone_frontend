@@ -1,0 +1,70 @@
+/* 이메일 input, button */
+.inputform>.email_box>.email_input_box>input{
+    box-sizing: border-box;
+    padding: 6px;
+    width: 488px;
+    border-width: 0 0 0.8px;
+    border-color: #5d5d5d;
+    outline: none;
+    font-weight: 100;
+    font-size: 16px;
+}
+
+.inputform>.email_box>.email_input_box>button{
+    width: 104px;
+    height: 28px;
+    border-radius: 8px;
+    border: 1px solid #0051BA;
+    background-color: transparent;
+    color: #5d5d5d;
+    margin-left: 8px;
+}
+
+.inputform>.email_box>.email_input_box>.seccess{
+    background-color: #0051BA;
+    color: #FFFFFF;
+}
+
+/* 인증번호 받기 -> 번호치는 박스나옴 */
+.email_auth_box{
+    box-sizing: border-box;
+    margin-right: 116px;
+    margin-top: 12px;
+    background-color: #f4f4f4;
+    border-radius: 4px;
+    display: none;
+    /* display: flex; */
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 12px;
+}
+
+.email_auth_box>p{
+    color: #5d5d5d;
+    font-weight: 100;
+    font-size: 14px;
+    padding: 4px;
+}
+
+.email_auth_box>input{
+    margin: 0px 4px;
+    border: 0.5px solid #5d5d5d;
+    outline: none;
+}
+
+.email_auth_box>button{
+    font-weight: 100;
+    font-size: 11px;
+    padding: 2px 12px 2px 12px;
+    border-radius: 4px;
+    border: 1px solid #727272;
+    color: #727272;
+    margin-right: 4px;
+}
+
+.email_auth_box>.wrongtext{
+    color: red;
+    font-size: 12px;
+    visibility: hidden;
+}
