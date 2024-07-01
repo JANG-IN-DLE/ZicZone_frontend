@@ -27,7 +27,7 @@ const RDBoard = () => {
       <Header />
       <div className="b_section">
         <div className="b_profile_card">
-          <ProfileCard { ...userProfile }/>
+          <ProfileCard { ...userProfile } isViewMode={true} />
         </div>
         <div className="b_right">
           <div className="b_description">
