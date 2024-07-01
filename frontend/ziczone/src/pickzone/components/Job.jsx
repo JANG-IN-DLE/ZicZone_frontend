@@ -3,8 +3,8 @@ import React from "react";
 
 const Job = ({ job }) => {
     return (
-        <div className="job-card">
-            <p>{job.jobName}</p>
+        <div className="jobcom">
+            <p>#{job.jobName}</p>
         </div>
     );
 };

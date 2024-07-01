@@ -1,0 +1,27 @@
+/* 기술스택 */
+.tech{
+    display: flex;
+    flex-flow: column !important;
+    align-items: flex-start;
+}
+
+.tech>.tech_top{
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.tech>.tech_top>p{
+    font-weight: 900;
+    font-size: 16px;
+    margin: 6px 30px 6px 6px;
+}
+
+.tech>.tech_top>span{
+    position: relative;
+    bottom: 8px;
+    margin-left: 8px;
+    font-size: 12px;
+    color: red;
+}
