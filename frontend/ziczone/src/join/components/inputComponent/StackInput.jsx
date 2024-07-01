@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../styles/Join_Per.css';
+import "../../styles/JoinCom/StackInput.css"
 import Stacks from '../../../common/stackjob/components/Stacks';
 import Selectbtn from './Selectbtn';
 import useSelectedStacks from '../../hooks/useSelectedStacks';

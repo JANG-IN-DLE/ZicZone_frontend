@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../styles/Join_Per.css';
+import "../../styles/JoinCom/CareerGenderInput.css"
 import Selectbtn from './Selectbtn';
 
 const CareerGenderInput = () => {
@@ -13,7 +13,7 @@ const CareerGenderInput = () => {
     ];
 
     return (
-        <div className="inputform careergender">
+        <div className="inputform career_gender">
             <div className="career">
                 <p>경력</p>
                 <Selectbtn options={options}/>

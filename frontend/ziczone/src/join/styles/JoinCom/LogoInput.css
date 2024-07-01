@@ -1,0 +1,34 @@
+.company.comlogo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.logo-container {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.comlogoimg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.camera {
+    position: absolute;
+    bottom: 3px;
+    right: 1px;
+    width: 28px;
+}
+
+.camera:hover {
+    cursor: pointer;
+}

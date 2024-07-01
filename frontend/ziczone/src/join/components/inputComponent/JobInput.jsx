@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../styles/Join_Per.css';
+import "../../styles/JoinCom/JobInput.css"
 import Jobs from '../../../common/stackjob/components/Jobs';
 
 

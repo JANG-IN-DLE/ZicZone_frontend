@@ -1,5 +1,5 @@
 import React, { useEffect, useState }from 'react';
-import '../../styles/Join_Per.css';
+import "../../styles/JoinCom/PasswordInput.css"
 import check from '../../assets/check.png'
 import usePasswordValidation from '../../hooks/usePasswordValidation';
 

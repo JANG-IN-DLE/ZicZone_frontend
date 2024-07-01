@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../styles/Join_Per.css';
+import "../../styles/JoinCom/EmailInput.css"
 
 const EmailInput = () => {
     return (
@@ -8,6 +8,7 @@ const EmailInput = () => {
             <div className="email_box">
                 <div className="email_input_box">
                     <input type="email" />
+                    {/*  className="seccess" */}
                     <button>인증번호 받기</button>
                 </div>
                 <div className="email_auth_box">
