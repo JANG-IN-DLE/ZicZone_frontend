@@ -1,0 +1,64 @@
+.resume-container {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.resume-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.resume-content {
+    display: flex;
+}
+
+.resume-photo {
+    margin-right: 20px;
+}
+
+.resume-photo img {
+    width: 150px;
+    height: 200px;
+    border-radius: 8px;
+}
+
+.resume-details {
+    flex: 1;
+}
+
+.resume-details h3 {
+    margin-top: 0;
+}
+
+.techs, .education, .curriculum, .certifications, .etc, .archive {
+    margin-bottom: 20px;
+}
+
+.techs img {
+    width: 30px;
+    height: 30px;
+    margin: 4px;
+}
+
+.techs-badge {
+    display: inline-block;
+    margin: 4px;
+    padding: 6px 12px;
+    background-color: #f0f0f0;
+    border-radius: 16px;
+}
+
+h4 {
+    margin-bottom: 10px;
+}
+
+.archive a {
+    color: #0000ee;
+    text-decoration: none;
+}
+
+.archive a:hover {
+    text-decoration: underline;
+}
