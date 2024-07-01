@@ -1,35 +1,36 @@
 import React, { useState } from 'react';
-import "../styles/form_base.css";
-import CareerGenderInput from "./inputComponent/CareerGenderInput";
+import "../styles/form_base.css"
 import EmailInput from "./inputComponent/EmailInput";
 import IntroInput from "./inputComponent/IntroInput";
-import JobInput from "./inputComponent/JobInput";
+import TextInput from "./inputComponent/TextInput";
 import PasswordInput from "./inputComponent/PasswordInput";
-import StackInput from "./inputComponent/StackInput";
 import JoinButton from "./inputComponent/joinbutton";
-import TextInput from './inputComponent/TextInput';
+import ComNumInput from './inputComponent/ComNumInput';
+import LogoInput from './inputComponent/LogoInput';
+import AddressInput from './inputComponent/AddressInput';
 
-const JoinPersonal = () => {
+const JoinCompany = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
   return (
     <div className="container">
         <img className="logo" src={`${process.env.PUBLIC_URL}/logo.png`} alt="직존 로고" />
-        <div className="logo_text">개인 회원가입 페이지입니다.</div>
+        <div className="logo_text">기업 회원가입 페이지입니다.</div>
             <div className="personal_form">
-              <TextInput label="이름" type="text"/>
-              <EmailInput />
+              <LogoInput />
+              <TextInput label="기업 이름" type="text" />
+              <TextInput label="설립 연도" type="date" />
+              <AddressInput />
+              <IntroInput label="기업 소개" placeholder="우리 기업을 소개하는 글을 작성해보세요(90자)" limit={90} height={80}/>
+              <ComNumInput/>
+              <EmailInput/>
               <PasswordInput label="비밀번호" password={password} setPassword={setPassword} />
               <PasswordInput label="비밀번호 확인" password={password} confirmPassword={confirmPassword} setPassword={setConfirmPassword} />
-              <IntroInput label="한 줄 소개" placeholder="자신을 어필할 수 있는 간단한 자기소개를 작성해주세요(60자)" limit={60}/>
-              <CareerGenderInput/>
-              <JobInput/>
-              <StackInput/>
             </div>
-            <JoinButton category=""/>
+        <JoinButton category="com"/>
     </div>
   );
 }
 
-export default JoinPersonal;
+export default JoinCompany;

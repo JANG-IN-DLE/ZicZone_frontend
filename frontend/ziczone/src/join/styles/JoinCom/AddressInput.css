@@ -1,0 +1,61 @@
+*{
+    outline: none;
+}
+
+.addresscontainer{
+    width: 100%;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.address-label {
+    font-weight: 900;
+    font-size: 16px;
+    margin: 6px;
+  }
+
+.address-input {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 600px;
+  }
+  
+  .address-input-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .address-input input[type="text"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    flex: 1;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .address-input input[type="button"] {
+    padding: 8px 16px;
+    background-color: #0051BA;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  
+  .address-input input[placeholder="상세주소"] {
+    border-bottom: 1px solid #ccc;
+    border-radius: 0;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    padding: 8px;
+    width: 100%;
+    box-sizing: border-box;
+  }

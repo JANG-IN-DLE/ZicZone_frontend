@@ -1,0 +1,25 @@
+/* 한줄 소개 */
+.intro{
+    position: relative;
+}
+
+.intro>textarea{
+    box-sizing: border-box;
+    margin-top: 4px;
+    width: 600px;
+    height: 56px;
+    resize: none;
+    outline: none;
+    padding: 8px;
+    border-width: 0.3px;
+    border-color: #B3B3B3;
+    font-weight: 100;
+    font-size: 16px;
+}
+.intro>.limit{
+    font-size: 12px !important;
+    color: #ababab;
+    position: absolute;
+    right: 4px;
+    bottom: 0px;
+}

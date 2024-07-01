@@ -1,10 +1,17 @@
 import React from "react";
+import {useNavigate} from "react-router-dom";
 import '../styles/PickCard.css';
 
 
-const PickCard = ({userImage, jobNames=[], userName, userCareer, userIntro, techNames=[]}) => {
+const PickCard = ({personalId, userImage, jobNames=[], userName, userCareer, userIntro, techNames=[]}) => {
+    const navigate = useNavigate();
+    const handleClick = () => {
+        navigate(`/pickzone/${personalId}`);
+    };
+    
     return (
-                <div className="user_card">
+        
+                <div className="user_card" onClick={handleClick}>
                     <div className="pick_user_image_container">
                         <img className="pick_user_image" src={userImage} alt="User" />
                     </div>
@@ -23,7 +30,7 @@ const PickCard = ({userImage, jobNames=[], userName, userCareer, userIntro, tech
                         </div>
                         <div className="pick_user_tech">
                             {techNames.map((tech, index) => (
-                                <div key={index} className="tech_icon">{tech}</div>
+                                <img key={index} className="tech_icon" src={tech} alt={`Tech${index}`} />
                             ))}
                         </div>
                     </div>

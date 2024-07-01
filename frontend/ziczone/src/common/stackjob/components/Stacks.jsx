@@ -1,16 +1,20 @@
 import React from 'react';
 import '../styles/Stack.css';
 
-const Stacks = () => {
+// 회원가입에서는 handleSelect 전달해야함.
+// 카드에서 읽기전용으로 불러올 때는 SelectedStacks에 해당 스택배열만 전달해주면 됨.
+const Stacks = ({ selectedStacks, handleSelect }) => {
     return (
         <div className="techs">
-            <img src="https://kr.object.ncloudstorage.com/ziczone-bucket/ASP.NET.svg" alt="" />
-            <img src="https://kr.object.ncloudstorage.com/ziczone-bucket/Docker.svg" alt="" />
-            <img src="https://kr.object.ncloudstorage.com/ziczone-bucket/React.svg" alt="" />
-            <img src="https://kr.object.ncloudstorage.com/ziczone-bucket/Vue.js.svg" alt="" />
-            <img src="https://kr.object.ncloudstorage.com/ziczone-bucket/python.svg" alt="" />
-            <img src="https://kr.object.ncloudstorage.com/ziczone-bucket/MariaDB.svg" alt="" />
-            <img src="https://kr.object.ncloudstorage.com/ziczone-bucket/Go.svg" alt="" />
+            {selectedStacks.map((stack, index) => (
+                <img 
+                key={index} 
+                src={stack.imageUrl} 
+                alt={stack.label} 
+                onClick={handleSelect ? () => handleSelect(stack) : undefined} 
+                    className={!handleSelect ? 'readonly' : ''}
+                />
+            ))}
         </div>
     );
 };

@@ -1,11 +1,20 @@
 import React from 'react';
-import '../../styles/Join_Per.css';
+import "../../styles/JoinCom/IntroInput.css"
+import useCharacterLimit from '../../hooks/useCharacterLimit';
 
-const IntroInput = () => {
+const IntroInput = ({label, placeholder, limit, height}) => {
+    const [value, handleChange] = useCharacterLimit('', limit);
+
     return (
-        <div className="personal intro">
-            <p>한줄 소개</p>
-            <textarea placeholder="자신을 어필할 수 있는 간단한 자기소개를 작성해주세요(60자)" />
+        <div className="inputform intro">
+            <p>{label}</p>
+            <textarea 
+                placeholder={placeholder}
+                value={value}
+                onChange={handleChange}
+                style={height={height}}
+            />
+            <p className='limit'>{value.length}/{limit}</p>
         </div>
     );
 };

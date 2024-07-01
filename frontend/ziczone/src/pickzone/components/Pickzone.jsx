@@ -4,6 +4,7 @@ import Job from "./Job";
 import PickCard from "../../common/card/components/PickCard";
 import personalMImage from '../../common/card/assets/personal_m_image.png';
 import personalFImage from '../../common/card/assets/personal_f_image.png';
+import '../../common/stackjob/styles/Job.css';
 
 function Pickzone() {
     const [pickCards, setPickCards] = useState([]);
@@ -30,25 +31,29 @@ function Pickzone() {
     return (
         <div>
             <h2>Jobs</h2>
-            <div>
+            <div className="jobs">
                 {jobs.map(job => (
                     <Job key={job.jobId} job={job} />
                 ))}
             </div>
             <h2>Pick Cards</h2>
             <div className="user_card_container">
+                
                 {pickCards.map(card => {
                     const userImage = card.gender === 'MALE' ? personalMImage : personalFImage;
-
+                    const jobNames = card.jobName ? card.jobName.split(',') : [];
+                    const techNames = card.techName ? card.techName.split(',') : [];
+                    
                     return (
                         <PickCard
                             key={card.personalId}
+                            personalId={card.personalId}
                             userImage={userImage}
-                            jobNames={card.jobNames ? card.jobNames.split('#') : []}
+                            jobNames={jobNames}
                             userName={card.userName}
                             userCareer={card.personalCareer}
                             userIntro={card.userIntro}
-                            techNames={card.techNames ? card.techNames.split('#') : []}
+                            techNames={techNames}
                         />
                     );
                 })}

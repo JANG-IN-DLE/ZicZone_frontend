@@ -3,7 +3,7 @@
     flex-flow: row;
     flex-wrap: wrap;
     align-items: flex-start;
-    margin: 8px;
+    justify-content: center;
 }
 
 .jobs>.jobcom{
@@ -19,6 +19,11 @@
 
 .jobs>.jobcom:hover{
     cursor: pointer;
+    background-color: #0051BA;
+    color: #ffffff;
+}
+
+.jobs>.jobcom.active {
     background-color: #0051BA;
     color: #ffffff;
 }
