@@ -1,3 +1,7 @@
+.num_input{
+    position: relative;
+}
+
 .num_input>input{
     box-sizing: border-box;
     padding: 6px;
@@ -17,4 +21,18 @@
     background-color: transparent;
     color: #5d5d5d;
     margin-left: 8px;
+}
+
+.num_input>.valid{
+    background-color: #0051BA;
+    color: #FFFFFF;
+    cursor: default;
+}
+
+.verification-result{
+    position: absolute;
+    font-size: 12px;
+    left: 4px;
+    top: 36px;
+    color: red;
 }
