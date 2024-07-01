@@ -1,0 +1,51 @@
+.company_container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            column-gap: 60px;
+            row-gap: 35px;
+            max-width: 1080px;
+            line-height: 25px;
+            margin-top: 60px;
+}
+
+.company_card {
+      width: 510px;
+      height: 160px;
+      border-radius: 32px;
+      box-shadow: 4px 4px 16px #d4d4d4,
+      -8px -8px 16px #ffffff;
+      display: flex;
+      cursor: pointer;
+      
+}
+
+.company_img {
+      margin-top: 15px;
+      margin-left: 30px;
+}
+
+.company_info{
+      margin-left: 25px;
+}
+.company_name{
+      width: 340px;
+      height: 50px;
+      font-size: 32px;
+      font-weight: 800;
+      margin-top: 30px;
+
+}
+
+.company_intro{
+      width: 330px;
+      height: 60px;
+      font-size: 13px;
+      color: #b3b3b3;
+      line-height: 1.5;
+      margin-top: -15px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+}

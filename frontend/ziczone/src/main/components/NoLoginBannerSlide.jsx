@@ -58,34 +58,34 @@ const NoLoginBannerSlide = () => {
 
   return (
     <>
-      <div class="wrap">
-        <div class="arrow left" id="prev"></div>
-        <div class="arrow right" id="next"></div>
-        <ul class="slide">
+      <div className="wrap">
+        <div className="arrow left" id="prev"></div>
+        <div className="arrow right" id="next"></div>
+        <ul className="slide">
           <li
-            class="slide_item"
+            className="slide_item"
             style={{ background: "url(" + slidImage1 + ")" }}
           >
-            <div class="slide_text">
-              <p class="text">직존</p>
+            <div className="slide_text">
+              <p className="text">직존</p>
               <p>기업이 인재를 채용하는 서비스</p>
             </div>
           </li>
           <li
-            class="slide_item"
+            className="slide_item"
             style={{ background: "url(" + slidImage2 + ")" }}
           >
-            <div class="slide_text">
-              <p class="text">다큐프라임 보러가기</p>
+            <div className="slide_text">
+              <p className="text">다큐프라임 보러가기</p>
               <p>인공지능 AI 발전으로 우리는 생존을 위해 무엇을 준비해야하나</p>
             </div>
           </li>
           <li
-            class="slide_item"
+            className="slide_item"
             style={{ background: "url(" + slidImage3 + ")" }}
           >
-            <div class="slide_text">
-              <p class="text">네이버 클라우드 바로가기</p>
+            <div className="slide_text">
+              <p className="text">네이버 클라우드 바로가기</p>
             </div>
           </li>
         </ul>

@@ -53,7 +53,7 @@ const CompanySilde = () => {
             <img src={com_logo12} alt="로고12" />
           </li>
         </ul>
-        <ul class="boxes list2">
+        <ul className="boxes list2">
           <li>
             <img src={com_logo1} alt="로고1" />
           </li>
