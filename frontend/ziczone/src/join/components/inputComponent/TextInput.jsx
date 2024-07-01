@@ -1,13 +1,13 @@
 import React from 'react';
-import '../../styles/Join_Per.css';
+import '../../styles/form_base.css';
 
-const NameInput = ({label}) => {
+const TextInput = ({label, type}) => {
     return (
         <div className="inputform name">
             <p>{label}</p>
-            <input type="text" />
+            <input type={type} />
         </div>
     );
 };
 
-export default NameInput;
+export default TextInput;

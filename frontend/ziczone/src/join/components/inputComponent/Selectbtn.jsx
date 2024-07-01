@@ -6,11 +6,12 @@ const CustomSelect = styled(Select)`
   & .custom-react-select__control {
     width: 180px;
     height: 30px
-    padding: 4px 8px;
+    padding: 4px 4px;
     background-color: #ffffff;
     border: 1px solid #0051BA;
     border-radius: 8px;
     color: #0051BA;
+    font-size: 14px;
   }
   
   & .custom-react-select__placeholder {
@@ -26,7 +27,7 @@ const CustomSelect = styled(Select)`
   }
 
   & .custom-react-select__clear-indicator {
-  display: none;
+    display: none;
   }
 
   & .custom-react-select__option {
