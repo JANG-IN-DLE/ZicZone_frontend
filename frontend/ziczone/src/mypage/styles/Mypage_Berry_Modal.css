@@ -1,0 +1,82 @@
+.mypage_berry_modal {
+    width: 520px;
+    height: 510px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    background-color: #fff;
+}
+
+.berry_status_bar {
+    width: 520px;
+    height: 28px;
+    /* background-color: antiquewhite; */
+    border-bottom: 0.5px solid #949494;
+}
+
+.berry_modal_container {
+    margin: 0 auto;
+    width: 250px;
+    height: 350px;
+    text-align: center;
+    overflow-y: scroll;
+}
+
+
+.my_berry_record p {
+    font-size: 24px;
+    text-align: center;
+    margin-top: 24px;
+    padding-bottom: 12px;
+    border-bottom: 0.7px solid #989898;
+}
+
+.mypage_history_bar {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 250px;
+    margin: 23px auto;
+}
+
+.history_bar_item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* padding: 12px 0;
+    border-bottom: 1px solid #ccc; */
+    font-size: 18px;
+}
+
+.history_bar_date,
+.history_bar_record,
+.history_bar_bucket {
+    text-align: left;
+}
+
+.history_bar_date {
+    text-align: left;
+}
+
+.history_bar_bucket {
+    text-align: right;
+}
+
+.berry_history_close {
+    display: flex;
+    width: 250px;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.close_btn {
+    width: 175px;
+    height: 40px;
+    border: 1px solid #5d5d5d;
+    border-radius: 12px;
+    color: #5d5d5d;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #fff;
+    margin-top: 36px;
+}

@@ -1,0 +1,56 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Pretendard-Regular';
+}
+
+.mypage_user_title {
+    margin-bottom: 12px;
+    font-size: 30px;
+    margin-left: 47px;
+}
+
+.mypage_user_title span {
+    font-size: 30px;
+}
+
+.mypage_user_left {
+    margin-left: 47px;
+}
+
+.mypage_user_intro {
+    width: 612px;
+    height: 50px;
+    font-size: 20px;
+    margin-bottom: 24px;
+}
+
+.mypage_user_info {
+    display: flex;
+    font-size: 20px;
+    width: 612px;
+}
+
+.mypage_user_content {
+    margin-right: 96px;
+}
+
+.mypage_user_content div,
+.mypage_user_detail div {
+    margin-bottom: 15px;
+}
+
+.mypage_user_tech {
+    width: 440px;
+}
+
+.mypage_user_tech ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+}
+
+.mypage_user_tech li {
+    margin: 0 6px 6px 0;
+}

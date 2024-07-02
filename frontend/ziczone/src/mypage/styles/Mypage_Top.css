@@ -1,0 +1,57 @@
+.mypage_top {
+    padding-top: 148px;
+}
+
+.mypage {
+    font-size: 32px;
+}
+
+.mypage_top_bar {
+    position: relative;
+    width: 1080px;
+    height: 120px;
+    background-color: rgba(0, 81, 186, 0.2);
+    margin-top: 15px;
+    z-index: 1;
+}
+
+.mypage_top_circle {
+    position: absolute;
+    top: 52px;
+    left: 48px;
+    width: 130px;
+    height: 130px;
+    background-color: fff;
+    border-radius: 50%;
+    border: 1px solid #0051BA;
+    background-color: #fff;
+}
+
+.mypage_top_edit {
+    margin-top: 12px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.mypage_top_edit button {
+    width: 140px;
+    height: 40px;
+    color: #0051BA;
+    font-size: 16px;
+    background-color: #fff;
+    border-radius: 16px;
+    border: 3px solid rgba(0, 81, 186, 0.3);
+    margin-bottom: 44px;
+    cursor: pointer;
+}
+
+.mypage_user_modal {
+    /* position: fixed; */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 50;
+}
