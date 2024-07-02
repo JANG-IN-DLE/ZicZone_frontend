@@ -18,7 +18,7 @@ const JoinPersonal = () => {
         <img className="logo" src={`${process.env.PUBLIC_URL}/logo.png`} alt="직존 로고" />
         <div className="logo_text">개인 회원가입 페이지입니다.</div>
             <div className="personal_form">
-              <TextInput label="이름" type="text"/>
+              <TextInput label="이름" type="text" placeholder="실명으로 작성해주세요."/>
               <EmailInput />
               <PasswordInput label="비밀번호" password={password} setPassword={setPassword} />
               <PasswordInput label="비밀번호 확인" password={password} confirmPassword={confirmPassword} setPassword={setConfirmPassword} />

@@ -41,6 +41,7 @@
 
 /* 인증번호 박스 */
 .email_auth_box{
+    position: relative;
     box-sizing: border-box;
     margin-right: 116px;
     margin-top: 12px;
@@ -98,4 +99,11 @@
 .auth_msg.auth_fail_msg {
     color: red;
     visibility: visible;
+}
+
+.email_auth_box>.timer_active{
+    width: 50px;
+    font-size: 16px;
+    position: absolute;
+    right: 16px;
 }
