@@ -7,11 +7,12 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Pickzone from './pickzone/components/Pickzone';
 import PickZoneDetail from './pickzone/components/PickzoneDetail';
 // import LoginMainComponent from './main/components/LoginMainComponent';
-import ChargeMain from './payment/components/ChargeMain';
+// import ChargeMain from './payment/components/ChargeMain';
+import CompanyzoneMain from './companyzone/components/CompanyzoneMain';
 
 function App() {
   return (
-    <ChargeMain/>
+    <CompanyzoneMain/>
   );
 }
 
