@@ -1,20 +1,20 @@
 import React from "react";
 import {useNavigate} from "react-router-dom";
 import '../styles/PickCard.css';
+import vector from "../assets/Vector.png";
 
 
-const PickCard = ({onClick, userImage, jobNames=[], userName, userCareer, userIntro, techNames=[]}) => {
-    // 일단 주석
-    // const navigate = useNavigate();
-    // const handleClick = () => {
-    //     navigate(`/pickzone/${personalId}`);
-    // };
-    console.log(onClick);
+const PickCard = ({onClick, userImage, jobNames=[], userName, userCareer, userIntro, techNames=[], onScrap}) => {
+    const isCompanyUser = false;
     
     return (
-        
                 <div className="user_card" onClick={onClick}>
-                    
+                    {isCompanyUser && (
+                        // 클릭되면 색 채워지게 설정 필요
+                        <button className="scrap_button" onClick={(e)=> {e.stopPropagation(); onScrap();}}>
+                            <img src={vector} alt="Scrap"/>
+                        </button>
+                    )}
                     <div className="pick_user_image_container">
                         <img className="pick_user_image" src={userImage} alt="User" />
                     </div>

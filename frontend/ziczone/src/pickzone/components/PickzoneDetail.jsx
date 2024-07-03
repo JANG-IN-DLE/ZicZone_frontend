@@ -8,6 +8,7 @@ import Portfolio from "./Portfolio";
 import personalMImage from "../../common/card/assets/personal_m_image.png";
 import personalFImage from '../../common/card/assets/personal_f_image.png';
 
+// 나중에 이 component 지워도 될듯.
 export default function PickZoneDetail() {
     const { personalId} = useParams();
     // 회원 정보 담는 hook
