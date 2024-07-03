@@ -13,6 +13,10 @@ import Pickzone from './pickzone/components/Pickzone';
 
 // import LoginMainComponent from './main/components/LoginMainComponent';
 import ChargeMain from './payment/components/ChargeMain';
+import PickZoneDetail from './pickzone/components/PickzoneDetail';
+
+import NoLoginMainComponent from './main/components/NoLoginMainComponent';
+import Header from './common/header/components/Header';
 
 function App() {
   const [userType, setUserType] = useState(null);
@@ -33,18 +37,27 @@ function App() {
   // }
 
   return (
-    <div>
+//     <div>
+//     <Router>
+//     <Routes>
+//       {/* <Route path='/pickzone/:personalId' element={<PickzoneCompanyDetail />} /> */}
+//       <Route path='/pickzone/:personalId' element={<PickZoneUserDetail />} />
+//       {/* <Route path='/pickzone/:personalId' element={userType === 'COMPANY' ? <PickzoneCompanyDetail /> : <PickzoneUserDtail />} /> */}
+//       {/* <Route path='/pickzone' element={<CompanyPickzone />} /> */}
+//       <Route path='/pickzone' element={<UserPickzone />} />
+//       {/* <Route path='/pickzone' element={userType === 'COMPANY' ? <CompanyPickzone /> : <UserPickzone />} /> */}
+//     </Routes>
+//   </Router>
+//     </div>
+    <>
+    <Header/>
     <Router>
-    <Routes>
-      {/* <Route path='/pickzone/:personalId' element={<PickzoneCompanyDetail />} /> */}
-      <Route path='/pickzone/:personalId' element={<PickZoneUserDetail />} />
-      {/* <Route path='/pickzone/:personalId' element={userType === 'COMPANY' ? <PickzoneCompanyDetail /> : <PickzoneUserDtail />} /> */}
-      {/* <Route path='/pickzone' element={<CompanyPickzone />} /> */}
-      <Route path='/pickzone' element={<UserPickzone />} />
-      {/* <Route path='/pickzone' element={userType === 'COMPANY' ? <CompanyPickzone /> : <UserPickzone />} /> */}
-    </Routes>
-  </Router>
-    </div>
+      <Routes>
+        <Route path="/" element={<NoLoginMainComponent />} />
+        <Route path="/pickzone" element={<Pickzone />} />
+      </Routes>
+    </Router>
+    </
   );
 }
 
