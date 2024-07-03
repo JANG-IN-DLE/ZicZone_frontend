@@ -6,13 +6,21 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Pickzone from './pickzone/components/Pickzone';
 import PickZoneDetail from './pickzone/components/PickzoneDetail';
-// import LoginMainComponent from './main/components/LoginMainComponent';
-// import ChargeMain from './payment/components/ChargeMain';
-import CompanyzoneMain from './companyzone/components/CompanyzoneMain';
+
+import NoLoginMainComponent from './main/components/NoLoginMainComponent';
+import Header from './common/header/components/Header';
 
 function App() {
   return (
-    <CompanyzoneMain/>
+    <>
+    <Header/>
+    <Router>
+      <Routes>
+        <Route path="/" element={<NoLoginMainComponent />} />
+        <Route path="/pickzone" element={<Pickzone />} />
+      </Routes>
+    </Router>
+    </
   );
 }
 
