@@ -3,15 +3,18 @@ import {useNavigate} from "react-router-dom";
 import '../styles/PickCard.css';
 
 
-const PickCard = ({personalId, userImage, jobNames=[], userName, userCareer, userIntro, techNames=[]}) => {
-    const navigate = useNavigate();
-    const handleClick = () => {
-        navigate(`/pickzone/${personalId}`);
-    };
+const PickCard = ({onClick, userImage, jobNames=[], userName, userCareer, userIntro, techNames=[]}) => {
+    // 일단 주석
+    // const navigate = useNavigate();
+    // const handleClick = () => {
+    //     navigate(`/pickzone/${personalId}`);
+    // };
+    console.log(onClick);
     
     return (
         
-                <div className="user_card" onClick={handleClick}>
+                <div className="user_card" onClick={onClick}>
+                    
                     <div className="pick_user_image_container">
                         <img className="pick_user_image" src={userImage} alt="User" />
                     </div>

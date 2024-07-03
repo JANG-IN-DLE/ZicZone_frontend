@@ -1,0 +1,82 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Pretendard-Regular';
+}
+
+.mypage_user_right {
+    text-align: center;
+    justify-items: center;
+    font-size: 16px;
+    color: #5D5D5D;
+}
+
+.mypage_user_resume {
+    width: 150px;
+    height: 150px;
+    background-color: rgba(0, 81, 186, 0.02);
+    border-radius: 16px;
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.15);
+    font-size: 16px;
+    padding-top: 25px;
+    margin-right: 28px;
+}
+
+.mypage_user_resume div {
+    margin-bottom: 14px ;
+}
+
+.mypage_user_resume img {
+    margin-left: 15px;
+}
+
+.mypage_user_berry {
+    font-size: 14px;
+    background-color: rgba(0, 81, 186, 0.02);
+    width: 148px;
+    height: 100px;
+    border-radius: 16px;
+    box-shadow: 4px 2px 10px rgba(0, 0, 0, 0.15);
+    padding-top: 25px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.mypage_user_point {
+    font-size: 24px;
+    color: #0051ba;
+    font-weight: bold;
+    margin-top: 6px;
+}
+
+.mypage_user_charge {
+    width: 148px;
+    height: 40px;
+    background-color: rgba(0, 81, 186, 0.1);
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.15);
+    font-size: 14px;
+    color: #0051ba;
+    font-weight: bold;
+    border-radius: 16px;
+    padding-top: 10px;
+}
+
+.mypage_right_flex{
+    display: flex;
+}
+
+.mypage_right_flex2 {
+    display: flex;
+    flex-flow: column;
+}
+
+.mypage_berry_modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 50;
+}

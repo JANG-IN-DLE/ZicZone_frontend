@@ -1,0 +1,283 @@
+.edit_status_bar {
+    width: 650px;
+    height: 28px;
+    border-bottom: 0.5px solid #949494;
+}
+
+.mypage_user_modal {
+    width: 650px;
+    height: 460px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.25);
+    background-color: #fff;
+}
+
+.user_edit_container {
+    width: 520px;
+    height: 325px;
+    margin: 28px auto;
+}
+
+.user_edit_container p {
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 14px 0 0 15px
+}
+
+.user_edit_intro,
+.user_edit_career,
+.user_edit_password,
+.user_edit_toggle {
+    display: flex;
+    margin-bottom: 12px;
+}
+
+.edit_intro_left,
+.edit_career_left,
+.edit_password_left,
+.edit_toggle_left {
+    width: 200px;
+    background-color: #0051ba;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.edit_intro_left {
+    height: 66px;
+}
+
+.edit_career_left {
+    height: 60px;
+}
+
+.edit_password_left {
+    height: 106px;
+}
+
+.edit_toggle_left {
+    height: 54px;
+}
+
+.edit_intro_right,
+.edit_career_right,
+.edit_password_right,
+.edit_toggle_right {
+    width: 320px;
+    background-color: #fff;
+    border: 0.5px solid #b3b3b3;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.edit_intro_right {
+    height: 66px;
+}
+
+.edit_intro_input {
+    width: 280px;
+    margin: 12px auto;
+}
+
+.edit_intro_right textarea {
+    width: 280px;
+    height: 42px;
+    border: none;
+    color: #b3b3b3;
+    font-size: 12px;
+    resize: none;
+    padding: 6px 6px;
+}
+
+.edit_intro_right textarea::placeholder {
+    color: #b3b3b3;
+}
+
+.edit_career_right {
+    height: 60px;
+    display: flex;
+    align-items: center;
+}
+
+.edit_career_radio {
+    width: 280px;
+    margin: 12px auto;
+}
+
+.edit_career_radio input {
+    width: 8px;
+    height: 8px;
+}
+
+.edit_career_right input {
+    margin-right: 6px;
+}
+
+.edit_career_right label {
+    margin-right: 20px;
+    font-size: 12px;
+    color: #b3b3b3;
+}
+
+.edit_password_input {
+    width: 280px;
+    margin: 12px auto;
+}
+
+.edit_password_input input {
+    margin-bottom: 12px;
+}
+
+.edit_password_right {
+    height: 106px;
+}
+
+.edit_password_right input {
+    width: 280px;
+    border: none;
+    border-bottom: 1px solid #b3b3b3;
+    color: #b3b3b3;
+}
+
+.edit_password_right input::placeholder {
+    color: #b3b3b3;
+    font-size: 12px;
+}
+
+.edit_password_input input:focus {
+    outline: none
+}
+
+.edit_toggle_right {
+    height: 54px;
+    display: flex;
+    /* align-items: center; */
+    flex-direction: column;
+    justify-content: center;
+}
+
+.edit_toggle_btn {
+    width: 280px;
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    padding-top: 4px;
+}
+
+.edit_toggle_btn span {
+    font-size: 14px;
+    color: #5d5d5d;
+}
+
+.edit_toggle_btn div {
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+}
+
+.edit_toggle_warning{
+    width: 280px;
+    margin: 0 auto;
+}
+
+.edit_toggle_warning span {
+    font-size: 8px;
+    color: #ababab;
+}
+
+.user_edit_btn {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 17px;
+}
+
+.user_edit_btn span {
+    margin-right: 20px;
+}
+
+.edit_toggle_btn label {
+    margin-left: 8px;
+}
+
+.user_edit_btn button {
+    width: 60px;
+    height: 30px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.edit_save_btn {
+    background-color: #0051ba;
+    color: #fff;
+    border: none;
+    margin-right: 8px;
+}
+
+.edit_cancel_btn {
+    background-color: #fff;
+    border: 0.5px solid #0051ba;
+}
+
+
+/* 토글 */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 23px;
+    height: 14px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 8px;
+    width: 8px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked+.slider {
+    background-color: #2196F3;
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked+.slider:before {
+    -webkit-transform: translateX(8px);
+    -ms-transform: translateX(8px);
+    transform: translateX(8px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
