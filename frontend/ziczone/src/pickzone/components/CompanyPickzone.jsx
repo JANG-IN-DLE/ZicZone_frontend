@@ -6,10 +6,8 @@ import PickCard from "../../common/card/components/PickCard";
 import personalMImage from '../../common/card/assets/personal_m_image.png';
 import personalFImage from '../../common/card/assets/personal_f_image.png';
 import '../../common/stackjob/styles/Job.css';
-import Modal from "./Modal";
 
-// 이제 Pickzone은 UserPickzone과 CompanyPickzone으로 나눠서 없어도 될듯.나중에 지울 것
-function Pickzone() {
+function CompanyPickzone() {
     const [pickCards, setPickCards] = useState([]);
     const [jobs, setJobs] = useState([]);
     // 모달의 열림/닫힘 상태
@@ -38,20 +36,18 @@ function Pickzone() {
     }, []);
 
     const handleCardClick = (card) => {
-        console.log(card);
-        setSelectedCard(card);
-        setIsOpen(true);
+        navigate(`/pickzone/${card.personalId}`)
     };
-    const handleCloseModal = () => {
-        setIsOpen(false);
-        setSelectedCard(null);
+    const handleScrap = (personalId) => {
+        axios.post('/api/scrap', {personalId})
+            .then(response => {
+                alert('Scrap successful');
+            })
+            .catch(error => {
+                console.error("Error scrapping card:", error);
+                alert('Error scrapping card');
+            });
     };
-    const handleOpenCard = () => {
-        if(selectedCard){
-            console.log("Open selectedCard:", selectedCard);
-            navigate(`/pickzone/${selectedCard.personalId}`);
-        }
-    }
 
     return (
         <div>
@@ -63,23 +59,12 @@ function Pickzone() {
             </div>
             <h2>Pick Cards</h2>
             <div className="user_card_container">
-            {selectedCard && (
-                <Modal 
-                    isOpen={isOpen}
-                    onClose={handleCloseModal}
-                    userName={selectedCard.userName}
-                    onOpen={handleOpenCard}
-                />
-            )}
-
-                
                 {pickCards.map(card => {
                     const userImage = card.gender === 'MALE' ? personalMImage : personalFImage;
                     const jobNames = card.jobName ? card.jobName.split(',') : [];
                     const techNames = card.techName ? card.techName.split(',') : [];
                     
                     return (
-                        <div>
                             <PickCard
                                 key={card.personalId}
                                 personalId={card.personalId}
@@ -89,9 +74,11 @@ function Pickzone() {
                                 userCareer={card.personalCareer}
                                 userIntro={card.userIntro}
                                 techNames={techNames}
+                                // 밑에 수정 필요
+                                isCompanyUser={true}
                                 onClick={() => handleCardClick(card)}
+                                onScrap={()=> handleScrap(card.personalId)}
                             />
-                        </div>
                     );
                     
                 })}
@@ -99,4 +86,4 @@ function Pickzone() {
         </div>
     );
 }
-export default Pickzone;
+export default CompanyPickzone;

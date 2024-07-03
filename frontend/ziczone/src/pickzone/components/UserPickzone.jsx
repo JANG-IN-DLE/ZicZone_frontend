@@ -8,8 +8,7 @@ import personalFImage from '../../common/card/assets/personal_f_image.png';
 import '../../common/stackjob/styles/Job.css';
 import Modal from "./Modal";
 
-// 이제 Pickzone은 UserPickzone과 CompanyPickzone으로 나눠서 없어도 될듯.나중에 지울 것
-function Pickzone() {
+function UserPickzone() {
     const [pickCards, setPickCards] = useState([]);
     const [jobs, setJobs] = useState([]);
     // 모달의 열림/닫힘 상태
@@ -38,7 +37,6 @@ function Pickzone() {
     }, []);
 
     const handleCardClick = (card) => {
-        console.log(card);
         setSelectedCard(card);
         setIsOpen(true);
     };
@@ -48,7 +46,6 @@ function Pickzone() {
     };
     const handleOpenCard = () => {
         if(selectedCard){
-            console.log("Open selectedCard:", selectedCard);
             navigate(`/pickzone/${selectedCard.personalId}`);
         }
     }
@@ -79,7 +76,6 @@ function Pickzone() {
                     const techNames = card.techName ? card.techName.split(',') : [];
                     
                     return (
-                        <div>
                             <PickCard
                                 key={card.personalId}
                                 personalId={card.personalId}
@@ -91,7 +87,6 @@ function Pickzone() {
                                 techNames={techNames}
                                 onClick={() => handleCardClick(card)}
                             />
-                        </div>
                     );
                     
                 })}
@@ -99,4 +94,4 @@ function Pickzone() {
         </div>
     );
 }
-export default Pickzone;
+export default UserPickzone;
