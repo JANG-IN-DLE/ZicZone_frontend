@@ -4,16 +4,9 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import axios from 'axios';
 import UserPickzone from './pickzone/components/UserPickzone';
 import CompanyPickzone from './pickzone/components/CompanyPickzone';
-import PickZoneDetail from './pickzone/components/PickzoneDetail';
 import PickzoneCompanyDetail from './pickzone/components/PickzoneCompanyDetail';
 import PickZoneUserDetail from './pickzone/components/PickzoneUserDetail';
-
-
-import Pickzone from './pickzone/components/Pickzone';
-
-// import LoginMainComponent from './main/components/LoginMainComponent';
 import ChargeMain from './payment/components/ChargeMain';
-import PickZoneDetail from './pickzone/components/PickzoneDetail';
 
 import NoLoginMainComponent from './main/components/NoLoginMainComponent';
 import Header from './common/header/components/Header';
@@ -37,27 +30,27 @@ function App() {
   // }
 
   return (
-//     <div>
-//     <Router>
-//     <Routes>
-//       {/* <Route path='/pickzone/:personalId' element={<PickzoneCompanyDetail />} /> */}
-//       <Route path='/pickzone/:personalId' element={<PickZoneUserDetail />} />
-//       {/* <Route path='/pickzone/:personalId' element={userType === 'COMPANY' ? <PickzoneCompanyDetail /> : <PickzoneUserDtail />} /> */}
-//       {/* <Route path='/pickzone' element={<CompanyPickzone />} /> */}
-//       <Route path='/pickzone' element={<UserPickzone />} />
-//       {/* <Route path='/pickzone' element={userType === 'COMPANY' ? <CompanyPickzone /> : <UserPickzone />} /> */}
-//     </Routes>
-//   </Router>
-//     </div>
-    <>
-    <Header/>
+    <div>
     <Router>
-      <Routes>
-        <Route path="/" element={<NoLoginMainComponent />} />
-        <Route path="/pickzone" element={<Pickzone />} />
-      </Routes>
-    </Router>
-    </
+    <Routes>
+      {/* <Route path='/pickzone/:personalId' element={<PickzoneCompanyDetail />} /> */}
+      <Route path='/pickzone/:personalId' element={<PickZoneUserDetail />} />
+      {/* <Route path='/pickzone/:personalId' element={userType === 'COMPANY' ? <PickzoneCompanyDetail /> : <PickzoneUserDtail />} /> */}
+      {/* <Route path='/pickzone' element={<CompanyPickzone />} /> */}
+      <Route path='/pickzone' element={<UserPickzone />} />
+      {/* <Route path='/pickzone' element={userType === 'COMPANY' ? <CompanyPickzone /> : <UserPickzone />} /> */}
+    </Routes>
+  </Router>
+    </div>
+    // <>
+    // <Header/>
+    // <Router>
+    //   <Routes>
+    //     <Route path="/" element={<NoLoginMainComponent />} />
+    //     <Route path="/pickzone" element={<Pickzone />} />
+    //   </Routes>
+    // </Router>
+    // </>
   );
 }
 

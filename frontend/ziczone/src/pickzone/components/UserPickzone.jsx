@@ -15,6 +15,10 @@ function UserPickzone() {
     const[isOpen, setIsOpen] = useState(false);
     // 선택된 카드를 저장하는 상태
     const [ selectedCard, setSelectedCard ] = useState(null);
+    // 선택된 Job을 저장하는 상태
+    const [selectedJob, setSelectedJob] = useState(null);
+    // 로그인된 회원 정보 userId (나중에 로그인 기능 되면 수정필요, 임시로 1)
+    const [userId, setUserId] = useState("1");
     // pickzoneDetail로 가는 hook
     const navigate = useNavigate();
 
@@ -48,14 +52,23 @@ function UserPickzone() {
         if(selectedCard){
             navigate(`/pickzone/${selectedCard.personalId}`);
         }
-    }
+    };
+    // Job을 선택해서 hook에 담는다.
+    const handleJobClick = (job) => {
+        setSelectedJob(job.jobName);
+    };
+
+    // 선택된 job이 있으면 pickcard의 job과 일치하는 것 걸러서 보여줄거야
+    const filteredPickCards = selectedJob
+    ? pickCards.filter(card => card.jobName && card.jobName.split(',').includes(selectedJob))
+    : pickCards;
 
     return (
         <div>
             <h2>Jobs</h2>
             <div className="jobs">
                 {jobs.map(job => (
-                    <Job key={job.jobId} job={job} />
+                    <Job key={job.jobId} job={job} onClick={()=> handleJobClick(job)} />
                 ))}
             </div>
             <h2>Pick Cards</h2>
@@ -66,11 +79,13 @@ function UserPickzone() {
                     onClose={handleCloseModal}
                     userName={selectedCard.userName}
                     onOpen={handleOpenCard}
+                    selectedCard={selectedCard}
+                    userId={userId}
                 />
             )}
 
                 
-                {pickCards.map(card => {
+                {filteredPickCards.map(card => {
                     const userImage = card.gender === 'MALE' ? personalMImage : personalFImage;
                     const jobNames = card.jobName ? card.jobName.split(',') : [];
                     const techNames = card.techName ? card.techName.split(',') : [];
