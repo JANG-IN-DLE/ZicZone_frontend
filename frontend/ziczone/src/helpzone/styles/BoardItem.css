@@ -1,0 +1,54 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Giants-Bold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/Giants-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+.bi_container {
+    display: flex;
+    justify-self: start;
+    border-bottom: 1px solid #000;
+    margin-bottom: 20px;
+}
+
+.item_point {
+    width: 64px;
+    height: 30px;
+    border: 1px solid #000;
+    border-radius: 12px;
+    line-height: 30px;
+    text-align: center;
+    font-family: 'Giants-Bold';
+    font-size: 13px;
+    color: #5D5D5D;
+}
+
+.bi_container_center {
+    width: 840px;
+    height: 46px;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Pretendard-Regular';
+    margin-left: 45px;
+    margin-right: 45px;
+}
+
+.item_title {
+    font-size: 18px;
+}
+
+.item_userInfo {
+    font-size: 16px;
+    color: #5D5D5D;
+}
+
+.bi_container_end {
+    color: #B2B2B2;
+}
