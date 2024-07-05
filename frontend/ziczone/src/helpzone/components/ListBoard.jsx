@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router";
 import axios from 'axios';
@@ -8,7 +9,7 @@ import "../styles/ListBoard.css";
 
 const ListBoard = () => {
   const [boards, setBoards] = useState([]);
-  const [filterType, setFilterType] = useState('latest');
+  const [filterType, setFilterType] = useState("latest");
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(8);
 
@@ -17,18 +18,19 @@ const ListBoard = () => {
   받은 응답 데이터를 상태에 저장하는 기능
   */
   useEffect(() => {
-    axios.get('/api/board/filter', {
-      params: {
-        filterType,
-        page,
-        size
-      }
-    })
-      .then(response => {
+    axios
+      .get("/api/board/filter", {
+        params: {
+          filterType,
+          page,
+          size,
+        },
+      })
+      .then((response) => {
         setBoards(response.data.dtoList);
       })
-      .catch(error => {
-        console.error('오류 메시지: ', error);
+      .catch((error) => {
+        console.error("오류 메시지: ", error);
       });
   }, [filterType, page, size]);
 

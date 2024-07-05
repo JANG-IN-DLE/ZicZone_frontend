@@ -11,7 +11,7 @@ const LoginBannerSlide = () => {
   ];
   useEffect(() => {
     const slide = document.querySelector(".slide");
-    const slideItems = document.querySelectorAll(".slide_item");
+    const slideItems = document.querySelectorAll(".login_slide_item");
     const prevButton = document.getElementById("prev");
     const nextButton = document.getElementById("next");
     const totalSlides = slideItems.length;
@@ -30,7 +30,7 @@ const LoginBannerSlide = () => {
     }
 
     function startSlideInterval() {
-      slideInterval = setInterval(nextSlide, 2500);
+      slideInterval = setInterval(nextSlide, 3000);
     }
 
     function stopSlideInterval() {
@@ -64,7 +64,7 @@ const LoginBannerSlide = () => {
           <div className="arrow right" id="next"></div>
           <ul className="slide">
             <li
-              className="slide_item"
+              className="login_slide_item"
               style={{ background: "url(" + slidImage1 + ")" }}
             >
               <div className="slide_text">
@@ -73,17 +73,18 @@ const LoginBannerSlide = () => {
               </div>
             </li>
             <li
-              className="slide_item"
+              className="login_slide_item"
               style={{ background: "url(" + slidImage2 + ")" }}
             >
               <div className="slide_text">
                 <p className="text">다큐프라임 보러가기</p>
-                <p>인공지능 AI 발전으로 </p>
-                <p>우리는 생존을 위해 무엇을 준비해야하나</p>
+                <p>
+                  인공지능 AI 발전으로 우리는 생존을 위해 무엇을 준비해야하나
+                </p>
               </div>
             </li>
             <li
-              className="slide_item"
+              className="login_slide_item"
               style={{ background: "url(" + slidImage3 + ")" }}
             >
               <div className="slide_text">
