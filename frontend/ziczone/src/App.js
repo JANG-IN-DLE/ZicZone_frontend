@@ -1,23 +1,21 @@
 import logo from './logo.svg';
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, BrowserRouter } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import axios from 'axios';
 import UserPickzone from './pickzone/components/UserPickzone';
 import CompanyPickzone from './pickzone/components/CompanyPickzone';
+// import PickZoneDetail from './pickzone/components/PickzoneDetail';
 import PickzoneCompanyDetail from './pickzone/components/PickzoneCompanyDetail';
 import PickZoneUserDetail from './pickzone/components/PickzoneUserDetail';
-import Pickzone from './pickzone/components/Pickzone';
-// import Login from './login/components/LoginPage'
+import Footer from './common/footer/components/Footer'
+// import Pickzone from './pickzone/components/Pickzone';
 // import LoginMainComponent from './main/components/LoginMainComponent';
 import ChargeMain from './payment/components/ChargeMain';
-
 import NoLoginMainComponent from './main/components/NoLoginMainComponent';
 import Header from './common/header/components/Header';
-import Footer from './common/footer/components/Footer'
-
 
 function App() {
-  // const [userType, setUserType] = useState(null);
+  const [userType, setUserType] = useState(null);
 
   // 나중에 로그인 할때 session에서 회원 정보 비교하기 위해서
   // useEffect(() => {
@@ -35,39 +33,30 @@ function App() {
   // }
 
   return (
+//     <div>
+//     <Router>
+//     <Routes>
+//       {/* <Route path='/pickzone/:personalId' element={<PickzoneCompanyDetail />} /> */}
+//       <Route path='/pickzone/:personalId' element={<PickZoneUserDetail />} />
+//       {/* <Route path='/pickzone/:personalId' element={userType === 'COMPANY' ? <PickzoneCompanyDetail /> : <PickzoneUserDtail />} /> */}
+//       {/* <Route path='/pickzone' element={<CompanyPickzone />} /> */}
+//       <Route path='/pickzone' element={<UserPickzone />} />
+//       {/* <Route path='/pickzone' element={userType === 'COMPANY' ? <CompanyPickzone /> : <UserPickzone />} /> */}
+//     </Routes>
+//   </Router>
+//     </div>
     <div>
-    <Router>
-    <Routes>
-      {/* <Route path='/pickzone/:personalId' element={<PickzoneCompanyDetail />} /> */}
-      <Route path='/pickzone/:personalId' element={<PickZoneUserDetail />} />
-      {/* <Route path='/pickzone/:personalId' element={userType === 'COMPANY' ? <PickzoneCompanyDetail /> : <PickzoneUserDtail />} /> */}
-      {/* <Route path='/pickzone' element={<CompanyPickzone />} /> */}
-      <Route path='/pickzone' element={<UserPickzone />} />
-      {/* <Route path='/pickzone' element={userType === 'COMPANY' ? <CompanyPickzone /> : <UserPickzone />} /> */}
-    </Routes>
-  </Router>
+      <Router>
+        <Header/>
+            <Routes>
+              <Route path='/' element={<NoLoginMainComponent/>}/>
+              <Route path='/pickzone/:personalId' element={<PickZoneUserDetail />} />
+              <Route path='/pickzone' element={<UserPickzone />} />
+            </Routes>
+            <Footer/>
+        </Router>
     </div>
-    // <>
-    // <Header/>
-    // <Router>
-    //   <Routes>
-    //     <Route path="/" element={<NoLoginMainComponent />} />
-    //     <Route path="/pickzone" element={<Pickzone />} />
-    //   </Routes>
-    // </Router>
-    // </>
-
-//       <Router>
-//         <Header/>
-//             <Routes>
-//               <Route path='/' element={<NoLoginMainComponent/>}/>
-//               <Route path='/pickzone/:personalId' element={<PickZoneUserDetail />} />
-//               <Route path='/pickzone' element={<UserPickzone />} />
-//             </Routes>
-//             <Footer/>
-//         </Router>
 
   );
 }
-
 export default App;
