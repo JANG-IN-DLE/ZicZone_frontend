@@ -13,6 +13,7 @@ import Footer from './common/footer/components/Footer'
 import ChargeMain from './payment/components/ChargeMain';
 import NoLoginMainComponent from './main/components/NoLoginMainComponent';
 import Header from './common/header/components/Header';
+import ListBoard from './helpzone/components/ListBoard';
 
 function App() {
   const [userType, setUserType] = useState(null);
@@ -52,6 +53,7 @@ function App() {
               <Route path='/' element={<NoLoginMainComponent/>}/>
               <Route path='/pickzone/:personalId' element={<PickZoneUserDetail />} />
               <Route path='/pickzone' element={<UserPickzone />} />
+              <Route path='/helpzone' element={<ListBoard />} />
             </Routes>
             <Footer/>
         </Router>
