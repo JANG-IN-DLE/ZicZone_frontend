@@ -23,7 +23,7 @@ const Header = () => {
           </div>
           <div className="header_help_zone">
             <div>
-              <Link to="/">HELP존</Link>
+              <Link to="/helpzone">HELP존</Link>
             </div>
           </div>
           <div className="header_company_zone">

@@ -1,0 +1,80 @@
+.resume_edu {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.resume_edu_title {
+    width: 680px;
+    margin: 60px 0 5px 80px;
+    display: flex;
+    align-items: center;
+    /* justify-content: flex-start; */
+}
+
+.edu_title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-right: 15px;
+    width: 35px;
+}
+
+.edu_warning {
+    font-size: 14px;
+    color: #FF0000;
+    margin-right: 380px;
+    width: 170px;
+}
+
+.resume_bar {
+    margin-left: 10px;
+    width: 640px;
+    border: 0.75px solid #0051ba;
+}
+
+.resume_edu_input {
+    width: 600px;
+    height: 94px;
+    display: flex;
+    align-items: center;
+    margin: 10px 0 0 80px;
+}
+
+.resume_edu_input input {
+    border: none;
+    font-size: 17px;
+}
+
+.resume_edu_input input:focus {
+    border: none;
+    outline: none;
+}
+
+.resume_circle {
+    width: 10px;
+    height: 10px;
+    background-color: #0051ba;
+    border-radius: 50px;
+    margin-right: 32px;
+}
+
+.edu_date {
+    width: 190px;
+    margin-right: 60px;
+}
+
+.edu_score {
+    display: flex;
+}
+
+.edu_score p{
+    margin: 0 10px;
+}
+
+.edu_score_point {
+    width: 30px;
+}
+
+.edu_score_standard {
+    width: 60px;
+}
