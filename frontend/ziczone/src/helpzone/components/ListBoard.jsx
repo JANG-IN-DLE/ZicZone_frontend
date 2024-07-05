@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from "react-router";
 import axios from 'axios';
 import HelpZoneIntro from './HelpZoneIntro';
 import FilterButtons from './FilterButtons';
 import BoardList from './BoardList';
 import "../styles/ListBoard.css";
-import Header from "../../common/header/components/Header";
 
 const ListBoard = () => {
   const [boards, setBoards] = useState([]);
@@ -34,7 +34,6 @@ const ListBoard = () => {
 
   return (
     <div>
-      <Header />
       <div className='lb_section'>
         <HelpZoneIntro />
         <FilterButtons setFilterType={setFilterType} />
