@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import '../../styles/JoinCom/ComNumInput.css';
 import "../../styles/form_base.css";
 import useCompanyAuth from '../../hooks/useCompanyAuth';

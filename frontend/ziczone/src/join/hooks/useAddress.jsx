@@ -1,20 +1,42 @@
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
-const useAddress = () => {
-  const [postcode, setPostcode] = useState('');
-  const [address, setAddress] = useState('');
-  const [detailAddress, setDetailAddress] = useState('');
-  const [extraAddress, setExtraAddress] = useState('');
+const useAddress = (initialAddress, updateAddress) => {
+  const [postcode, setPostcode] = useState('');//우편번호
+  const [address, setAddress] = useState('');//주요주소
+  const [detailAddress, setDetailAddress] = useState('');//상세주소
 
+  // 초기주소값이 변경될 때 주소설정
+  useEffect(() => {
+    if (initialAddress) {
+      const [mainAddress, detail] = initialAddress.split('||');
+      setAddress(mainAddress);
+      setDetailAddress(detail);
+    }
+  }, [initialAddress]);
+
+  // 전체 주소 업데이트
+  const updateFullAddress = useCallback(() => {
+    const fullAddress = `${address}||${detailAddress}`.trim();
+    if (fullAddress !== initialAddress) { 
+      updateAddress(fullAddress);//초기주소 값과 다르면 form의 address값 업데이트
+    }
+  }, [address, detailAddress, initialAddress, updateAddress]);
+
+  //주소가 변경될때마다 호출
+  useEffect(() => {
+    updateFullAddress();
+  }, [updateFullAddress]);
+
+  //주소검색
   const openAddressSearch = () => {
     new window.daum.Postcode({
       oncomplete: function (data) {
-        let addr = ''; // 주소 변수
-        let extraAddr = ''; // 참고항목 변수
+        let addr = '';
+        let extraAddr = '';
 
-        if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+        if (data.userSelectedType === 'R') {
           addr = data.roadAddress;
-        } else { // 사용자가 지번 주소를 선택했을 경우(J)
+        } else {
           addr = data.jibunAddress;
         }
 
@@ -32,7 +54,7 @@ const useAddress = () => {
 
         setPostcode(data.zonecode);
         setAddress(addr);
-        setExtraAddress(extraAddr);
+        setDetailAddress('');
         document.getElementById("sample6_detailAddress").focus();
       }
     }).open();
@@ -42,7 +64,6 @@ const useAddress = () => {
     postcode,
     address,
     detailAddress,
-    extraAddress,
     setDetailAddress,
     openAddressSearch,
   };
