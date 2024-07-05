@@ -11,14 +11,14 @@
       overflow: hidden;
     }
 
-    ul {
+    .boxes ul {
       padding: 0;
       margin: 0;
       display: flex;
       transition: 0.4s ease-in-out;
     }
 
-    li {
+    .boxes li {
       list-style: none;
       padding: 0;
       margin: 0;

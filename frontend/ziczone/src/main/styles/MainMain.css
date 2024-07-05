@@ -2,7 +2,7 @@
 @import url('./PickCard.css');
 @import url('./HelpZone.css');
 @import url('./Companyslide.css');
-@import url('./LoginBanner_UserCard.css');
+@import url('./LoginBannerUserCard.css');
 
 
         @font-face {
@@ -26,24 +26,14 @@
             font-family: 'Pretendard-Regular';
         }
 
-        header {
-            height: 90px;
-            background-color: #555555;
-        }
-
-        .putter {
-            height: 320px;
-            background-color: #555555;
-        }
-
         .main_container {
             margin: auto;
             padding-top: 145px;
             width: 1080px;
-            height: 1875px;
+            height: 100%
         }
 
-        h1 {
+        .main_container h1 {
             font-size: 36px;
             margin-bottom: 30px;
         }
