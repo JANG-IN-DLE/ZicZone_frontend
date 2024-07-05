@@ -1,0 +1,73 @@
+.resume_etc {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.resume_etc_title {
+    width: 680px;
+    margin: 60px 0 5px 80px;
+    display: flex;
+    align-items: center;
+    /* justify-content: flex-start; */
+}
+
+.etc_title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-right: 15px;
+    width: 70px;
+}
+
+.etc_warning {
+    font-size: 14px;
+    color: #FF0000;
+    margin-right: 165px;
+    width: 350px;
+}
+
+.resume_bar {
+    margin-left: 10px;
+    width: 640px;
+    border: 0.75px solid #0051ba;
+}
+
+.resume_etc_input {
+    width: 600px;
+    height: 94px;
+    display: flex;
+    align-items: center;
+    margin: 10px 0 0 80px;
+}
+
+.resume_etc_input input {
+    border: none;
+    font-size: 17px;
+}
+
+.resume_etc_input input:focus {
+    border: none;
+    outline: none;
+}
+
+.resume_circle {
+    width: 10px;
+    height: 10px;
+    background-color: #0051ba;
+    border-radius: 50px;
+    margin-right: 32px;
+}
+
+.etc_date {
+    display: flex;
+    width: 190px;
+    margin-right: 60px;
+}
+
+.etc_date input{
+    width: 80px;
+}
+
+.etc_date p {
+    margin: 0 10px;
+}

@@ -1,0 +1,89 @@
+.resume_cert {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.resume_cert_title {
+    width: 680px;
+    margin: 60px 0 5px 80px;
+    display: flex;
+    align-items: center;
+    /* justify-content: flex-start; */
+}
+
+.cert_title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-right: 530px;
+    width: 70px;
+}
+
+/* .edu_warning {
+    font-size: 14px;
+    color: #FF0000;
+    margin-right: 380px;
+    width: 170px;
+} */
+
+.resume_bar {
+    margin-left: 10px;
+    width: 640px;
+    border: 0.75px solid #0051ba;
+}
+
+.resume_cert_input {
+    width: 600px;
+    height: 94px;
+    display: flex;
+    align-items: center;
+    margin: 10px 0 0 80px;
+}
+
+.resume_cert_input input {
+    border: none;
+    font-size: 17px;
+}
+
+.resume_cert_input input:focus {
+    border: none;
+    outline: none;
+}
+
+.resume_circle {
+    width: 10px;
+    height: 10px;
+    background-color: #0051ba;
+    border-radius: 50px;
+    margin-right: 32px;
+}
+
+.cert_date {
+    display: flex;
+    width: 190px;
+    margin-right: 60px;
+}
+
+.cert_date input{
+    width: 80px;
+}
+
+.cert_date p {
+    margin: 0 10px;
+}
+
+.cert_name {
+    display: flex;
+}
+
+.cert_name p{
+    margin: 0 10px;
+}
+
+.curri_company_position {
+    width: 30px;
+}
+
+.curri_company_job {
+    width: 60px;
+}
