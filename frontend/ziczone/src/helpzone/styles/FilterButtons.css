@@ -1,0 +1,22 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-style: normal;
+}
+
+/* 기본 버튼 스타일 제거 코드 */
+.filter_buttons button {
+    color: #000;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 22px;
+    font-family: 'Pretendard-Regular';
+    margin-right: 48px;
+}
+
+.filter_buttons button.active {
+    color: #0051BA;
+    font-weight: bold;
+}
+

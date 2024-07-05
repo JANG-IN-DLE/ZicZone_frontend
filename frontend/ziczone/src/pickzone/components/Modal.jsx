@@ -1,14 +1,48 @@
 import React from "react";
 import "../styles/Modal.css";
 import berry from "../../common/card/assets/berry.png"
+import axios from "axios";
 
-const Modal = ({ isOpen, onClose, userName, onOpen }) => {
+const Modal = ({ isOpen, onClose, userName, onOpen, selectedCard}) => {
     if(!isOpen) return null;
+    // 일단 임시로 로그인한 사람 3
+    const currentUser = 3;
+
+    // handleOpen을 실행하면 openCardData를 보낸다.
+    const handleOpen = () => {
+        const openCardData = {
+            sellerId: selectedCard.personalId,
+            buyerId: currentUser,
+            payHistoryContent: "이력서 조회",
+            payHistoryDate : new Date().toISOString()
+        };
+
+        axios.post('/api/open-card', openCardData)
+            .then(response => {
+                if(response.status === 200){
+                    onOpen();
+                }
+                // pay_history에 buyerId와 sellerId가 존재하면 리다이렉트
+                else if(response.status === 303) {
+                    alert("이미 결제한 이력서입니다.")
+                    setTimeout(() => {
+                        window.location.href = response.headers.location;
+                    }, 3000);
+                    
+                }
+            })
+            .catch(error => {
+                console.error("Error opening card:", error);
+                if(error.response && error.response.data){
+                    alert(error.response.data);
+                }
+            });
+    };
 
     return(
         <div className="modal">
             <div className="company_modal_body" onClick={(e)=>e.stopPropagation()}>
-                <div className="header">
+                <div className="modal_header">
                     <div className="circles">
                         <div className="header_circle red"></div>
                         <div className="header_circle yellow"></div>
@@ -30,7 +64,7 @@ const Modal = ({ isOpen, onClose, userName, onOpen }) => {
                             취소
                         </button>
                         {/* 열람을 클릭하면 pickzone/1로 넘어갈 수 있게 수정 필요 */}
-                        <button className="open_btn" onClick={onOpen}>
+                        <button className="open_btn" onClick={handleOpen}>
                             열람
                         </button>
                     </div>

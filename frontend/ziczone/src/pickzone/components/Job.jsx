@@ -1,10 +1,10 @@
 import React from "react";
 
 
-const Job = ({ job }) => {
+const Job = ({ job, onClick }) => {
     return (
-        <div className="jobcom">
-            <p>#{job.jobName}</p>
+        <div className="jobcom" onClick={onClick}>
+            <p>{job.jobName}</p>
         </div>
     );
 };
