@@ -1,9 +1,9 @@
 import React from "react";
-import './../styles/Mypage.css'
-import MypageTop from "./Mypage_Top/MypageTop";
-import MypageLeft from "./Mypage_Middle_Left/MypageLeftContent";
-import MypageRight from "./Mypage_Middle_Right/MypageRightContent";
-import MypageBottom from "./MyPage_Bottom/MypageBottom";
+import './../styles/MypageUser.css'
+import MypageTop from "./MypageTop/MypageTop";
+import MypageLeft from "./MypageMiddleLeft/MypageLeftContent";
+import MypageRight from "./MypageMiddleRight/MypageRightContent";
+import MypageBottom from "./MyPageBottom/MypageBottom";
 import Header from "../../common/header/components/Header";
 
 const Mypage = () => {

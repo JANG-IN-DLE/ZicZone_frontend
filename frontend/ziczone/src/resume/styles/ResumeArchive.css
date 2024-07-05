@@ -1,0 +1,71 @@
+.resume_archive {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.resume_archive_title {
+    width: 680px;
+    margin: 60px 0 5px 80px;
+    display: flex;
+    align-items: center;
+    /* justify-content: flex-start; */
+}
+
+.archive_title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-right: 530px;
+    width: 70px;
+}
+
+.resume_bar {
+    margin-left: 10px;
+    width: 640px;
+    border: 0.75px solid #0051ba;
+}
+
+.resume_archive_container {
+    width: 430px;
+    margin: 28px auto;
+}
+
+.archive_input {
+    width: 430px;
+}
+
+.archive_input div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 36px;
+}
+
+.archive_github img,
+.archive_notion img,
+.archive_blog img {
+    margin-right: 15px;
+    width: 30px;
+}
+
+.archive_github p,
+.archive_notion p, 
+.archive_blog p {
+    width: 70px;
+    margin-right: 150px;
+}
+
+.archive_github input,
+.archive_notion input,
+.archive_blog input {
+    border: none;
+    width: 250px;
+    height: 20px;
+    font-size: 17px;
+}
+
+.archive_github input,
+.archive_notion input,
+.archive_blog input :focus{
+    border: none;
+    outline: none;
+}

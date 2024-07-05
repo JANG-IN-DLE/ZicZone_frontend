@@ -1,0 +1,64 @@
+.resume_tech_title {
+    margin: 60px 0 0 80px;
+}
+
+.resume_tech_title p {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.resume_tech_select {
+    margin-left: 80px;
+}
+
+.tech_select {
+    width: 623px;
+    height: 35px;
+    border: 1px solid #0051ba;
+    border-radius: 8px;
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.tech_select input {
+    width: 575px;
+    font-size: 15px;
+    border: none;
+}
+
+.tech_select input::placeholder{
+    color: #9b9b9b;
+}
+
+.tech_select input:focus {
+    border: none;
+    outline: none;
+}
+
+.resume_tech_select {
+    cursor: pointer;
+}
+
+.selected_tech_container {
+    width: 623px;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.selected_tech{
+    width: auto;
+    height: 35px;
+    background-color: #0051ba;
+    color: #fff;
+    margin: 0 8px 12px 0;
+    border-radius: 52px;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+}

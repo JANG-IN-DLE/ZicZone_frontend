@@ -1,0 +1,86 @@
+.resume_privacy {
+    display: flex;
+}
+
+.resume_privacy_left {
+    margin-right: 224px;
+}
+
+.resume_name {
+    margin: 45px 32px 0 80px;
+}
+
+.resume_name input {
+    width: 234px;
+    height: 40px;
+    border: none;
+    font-size: 33px;
+    font-weight: bold;
+}
+
+.resume_email {
+    margin: 32px 0 20px 80px;
+    display: flex;
+    align-items: center;
+}
+
+.resume_phone,
+.resume_birthdate {
+    margin: 0 0 20px 80px;
+    display: flex;
+    align-items: center;
+}
+
+.resume_email img,
+.resume_phone img,
+.resume_birthdate img {
+    width: 20px;
+    height: 20px;
+}
+
+.resume_email input,
+.resume_phone input,
+.resume_birthdate input {
+    width: 234px;
+    height: 20px;
+    border: none;
+    font-size: 17px;
+    margin-left: 14px;
+}
+
+.resume_name input,
+.resume_email input,
+.resume_phone input,
+.resume_birthdate input:focus {
+    border: none;
+    outline: none;
+}
+
+.resume_image {
+    width: 124px;
+    height: 158px;
+    border: 1px solid #686868;
+    margin-top: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.resume_image .uploaded_image {
+    width: 120px;
+    height: 158px;
+    object-fit: fill;
+}
+
+.privacy_delete_btn {
+    display: flex;
+}
+
+.privacy_delete_btn button {
+    border: none;
+    background-color: #fff;
+    margin: 12px auto 0;
+    cursor: pointer;
+}
