@@ -62,7 +62,11 @@ const useEmailVerification = () => {
         }
         try {
             const response = await axios.post('/api/auth/email-verification', { email });
-            if (response.status === 200) {
+            if (response.status === 200 && response.data === "Email Duplication") {
+                console.log(response.data);
+                setIsSend("duplication_email");
+            } else if (response.status === 200 && response.data !== "Email Duplication") {
+                console.log(response.data);
                 setIsSend("send_success");
                 setIsAuth(""); //다시 인증번호 보낼때 인증상태 초기화
                 setTimeLeft(60); //타이머 초기화

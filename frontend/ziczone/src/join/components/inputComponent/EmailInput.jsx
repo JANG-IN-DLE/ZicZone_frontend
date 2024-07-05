@@ -50,6 +50,7 @@ const EmailInput = () => {
                         {isSend === "send_fail" ? "이메일 전송에 실패하였습니다" 
                         : isSend === "send_error" ? "오류가 발생했습니다" 
                         : isSend === "invalid_email" ? "유효하지 않은 이메일 형식입니다" 
+                        : isSend === "duplication_email" ? "이미 가입된 메일입니다."
                         : "" }
                     </p>
                 </div>
