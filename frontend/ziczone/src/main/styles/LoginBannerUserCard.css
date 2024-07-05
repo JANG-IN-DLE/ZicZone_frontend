@@ -11,31 +11,32 @@
       overflow: hidden;
     }
 
-    .boxes ul {
+    .slide_container ul {
       padding: 0;
       margin: 0;
       display: flex;
       transition: 0.4s ease-in-out;
     }
 
-    .boxes li {
+    .slide_container li {
       list-style: none;
       padding: 0;
       margin: 0;
     }
 
-    .slide_item {
+    .login_slide_item {
       flex-shrink: 0;
-      width: 1080px;
+      width: 794px;
       height: 320px;
       box-sizing: border-box;
-      background-size: cover;
-
+      /* !important;를 주면 우선 순위로 해결 */
+      background-size: cover !important;
+      background-position: center !important;
     }
 
     .slide_text {
       height: 250px;
-      width: 900px;
+      width: 794px;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
@@ -46,7 +47,7 @@
     .slide_text p {
       left: 120px;
       color: white;
-      font-size: 30px;
+      font-size: 26px;
       font-weight: 900;
       margin: 0;
     }

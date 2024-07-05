@@ -30,7 +30,7 @@ const NoLoginBannerSlide = () => {
     }
 
     function startSlideInterval() {
-      slideInterval = setInterval(nextSlide, 2500);
+      slideInterval = setInterval(nextSlide, 3000);
     }
 
     function stopSlideInterval() {
