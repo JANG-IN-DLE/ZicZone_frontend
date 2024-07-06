@@ -1,50 +1,49 @@
 import React, { useEffect, useState } from "react";
-import axios from 'axios'
+import axios from 'axios';
 import MypageLeft from "./MypageLeft";
-import python from './../../assets/Python.png';
-import microsoft from './../../assets/Microsoft.png';
-import mysql from './../../assets/MySQL.png';
-import nativescript from './../../assets/NativeScript.png';
-import spring_boot from './../../assets/Spring Boot.png';
-import sql_server from './../../assets/SQL Server.png';
-import microsoft_sql_server from './../../assets/Microsoft SQL Server.png';
 
-const MypageLeftContent = () => {
-    const [mypageData, setmypageData] = useState({
-        user_name: "",
-        career: "",
-        user_intro: "",
+function MypageLeftContent() {
+    const userId = 3;
+    const [leftData, setLeftData] = useState({
+        userName: "",
+        personalCareer: "",
+        userIntro: "",
         email: "",
-        job_name: "",
-        tech_name: []
-    })
+        jobPositions: "",
+        techStacks: [],
+    });
 
     useEffect(() => {
-        axios.get('/api/user/{user_id}')
+        axios.get(`/api/user/${userId}`)
             .then(response => {
-                setmypageData({
-                    user_name: response.data.user_name,
-                    career: response.data.career,
-                    user_intro: response.data.user_intro,
-                    email: response.data.email,
-                    job_name: response.data.job_name,
-                    tech_name: response.data.tech_name
+                const jobPositions = response.data.jobPositions.map(position => position.job.jobName).join(", ");
+                const techStacks = response.data.techStacks.map(stack => ({
+                    techName: stack.tech.techName,
+                    techUrl: stack.tech.techUrl
+                }));
+                setLeftData({
+                    userName: response.data.user.userName,
+                    personalCareer: response.data.personalCareer,
+                    userIntro: response.data.user.userIntro,
+                    email: response.data.user.email,
+                    jobPositions: jobPositions,
+                    techStacks: techStacks
                 });
             })
             .catch(error => {
-                console.error("mypageData 호출 실패")
+                console.error("leftData 호출 실패", error);
             });
     }, []);
 
     return (
         <div>
             <MypageLeft
-                user_name={mypageData.user_name}
-                career={mypageData.user_name}
-                user_intro={mypageData.user_name}
-                email={mypageData.user_name}
-                job_name={mypageData.user_name}
-                tech_name={mypageData.user_name}
+                userName={leftData.userName}
+                personalCareer={leftData.personalCareer}
+                userIntro={leftData.userIntro}
+                email={leftData.email}
+                jobPositions={leftData.jobPositions}
+                techStacks={leftData.techStacks}
             />
         </div>
     );

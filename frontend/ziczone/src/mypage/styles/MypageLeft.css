@@ -47,3 +47,7 @@
 .mypage_user_tech li {
     margin: 0 6px 6px 0;
 }
+
+.mypage_user_tech img{
+    height: 30px;
+}
