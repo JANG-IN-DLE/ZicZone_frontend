@@ -1,3 +1,12 @@
 .board_list {
     margin-top: 57px;
 }
+
+.lb_menu {
+    display: flex;
+    justify-content: space-between;
+}
+
+.lb_write {
+    width: 95px;
+}

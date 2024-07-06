@@ -17,7 +17,7 @@ import Header from './common/header/components/Header';
 import LoginMainComponent from './main/components/LoginMainComponent'
 
 import ListBoard from './helpzone/components/ListBoard';
-
+import CUBoard from  './helpzone/components/CUBoard';
 
 function App() {
   const [userType, setUserType] = useState(null);
@@ -38,29 +38,30 @@ function App() {
   // }
 
   return (
-//     <div>
-//     <Router>
-//     <Routes>
-//       {/* <Route path='/pickzone/:personalId' element={<PickzoneCompanyDetail />} /> */}
-//       <Route path='/pickzone/:personalId' element={<PickZoneUserDetail />} />
-//       {/* <Route path='/pickzone/:personalId' element={userType === 'COMPANY' ? <PickzoneCompanyDetail /> : <PickzoneUserDtail />} /> */}
-//       {/* <Route path='/pickzone' element={<CompanyPickzone />} /> */}
-//       <Route path='/pickzone' element={<UserPickzone />} />
-//       {/* <Route path='/pickzone' element={userType === 'COMPANY' ? <CompanyPickzone /> : <UserPickzone />} /> */}
-//     </Routes>
-//   </Router>
-//     </div>
+    //     <div>
+    //     <Router>
+    //     <Routes>
+    //       {/* <Route path='/pickzone/:personalId' element={<PickzoneCompanyDetail />} /> */}
+    //       <Route path='/pickzone/:personalId' element={<PickZoneUserDetail />} />
+    //       {/* <Route path='/pickzone/:personalId' element={userType === 'COMPANY' ? <PickzoneCompanyDetail /> : <PickzoneUserDtail />} /> */}
+    //       {/* <Route path='/pickzone' element={<CompanyPickzone />} /> */}
+    //       <Route path='/pickzone' element={<UserPickzone />} />
+    //       {/* <Route path='/pickzone' element={userType === 'COMPANY' ? <CompanyPickzone /> : <UserPickzone />} /> */}
+    //     </Routes>
+    //   </Router>
+    //     </div>
     <div>
       <Router>
-        <Header/>
-            <Routes>
-              <Route path='/' element={<NoLoginMainComponent/>}/>
-              <Route path='/pickzone/:personalId' element={<PickZoneUserDetail />} />
-              <Route path='/pickzone' element={<UserPickzone />} />
-              <Route path='/helpzone' element={<ListBoard />} />
-            </Routes>
-            <Footer/>
-        </Router>
+        <Header />
+        <Routes>
+          <Route path='/' element={<NoLoginMainComponent />} />
+          <Route path='/pickzone/:personalId' element={<PickZoneUserDetail />} />
+          <Route path='/pickzone' element={<UserPickzone />} />
+          <Route path="/helpzone" element={<ListBoard />} />
+          <Route path="/cuboard" element={<CUBoard />} />
+        </Routes>
+        <Footer />
+      </Router>
     </div>
 
   );
