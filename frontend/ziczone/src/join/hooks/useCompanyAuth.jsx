@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import axios from 'axios';
+import { useFormContext } from '../components/FormContext';
 
 // 커스텀 훅을 정의합니다.
 const useCompanyAuth = () => {
+    const {updateFormData} = useFormContext();
     const [comNum, setComNum] = useState(''); // comNum : 사용자가 입력한 사업자등록번호를 저장
     const [isValid, setIsValid] = useState(null); // isValid : 사업자등록번호 유효성 저장
     const [isVerified, setIsVerified] = useState(false); // isCerified : 인증완료상태를 저장
@@ -35,6 +37,7 @@ const useCompanyAuth = () => {
             if (result.status_code === "OK" && result.match_cnt > 0 && result.data[0].b_stt_cd === '01') {
                 setIsValid(true);
                 setIsVerified(true);
+                updateFormData('companyNum', comNum); //인증완료시에 formdata에 업데이트
             } else {
                 setIsValid(false);
                 setIsVerified(false);

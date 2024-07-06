@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Select from 'react-select';
+import { useFormContext } from '../FormContext';
 
 const CustomSelect = styled(Select)`
   & .custom-react-select__control {
@@ -50,14 +51,29 @@ const CustomSelect = styled(Select)`
   }
 `;
 
-const Selectbtn = ({ options, handleSelect }) => {
+/*
+options : 선택할 값
+field : FormContext의 필드
+handleSelect : */
+const Selectbtn = ({ options = [], field, handleSelect }) => {
+  const { updateFormData} = useFormContext();
+
+  const handleChange = (selectedOption) => {
+    if(field==="techIds"){
+      handleSelect(selectedOption);
+    }else if(field==="personalCareer"){
+      updateFormData(field, selectedOption ? selectedOption.value : null);
+    }
+    
+  }
+
   return (
     <CustomSelect
       options={options}
       placeholder="선택해주세요"
       isClearable
       classNamePrefix="custom-react-select"
-      onChange={handleSelect}
+      onChange={handleChange}
     />
   );
 };

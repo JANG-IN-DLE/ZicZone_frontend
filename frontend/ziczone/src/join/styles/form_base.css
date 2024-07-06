@@ -56,7 +56,7 @@ body{
 }
 
 /* 각각 입력부분그룹 */
-.personal_form>.inputform{
+.inputform{
     display: flex;
     flex-flow: row;
     justify-content: space-between;
@@ -65,14 +65,14 @@ body{
 }
 
 /* 각각 입력창의 이름 */
-.container>.personal_form>.inputform>p{
+.inputform>p{
     font-weight: 900;
     font-size: 16px;
     margin: 6px;
 }
 
 /* 이름 */
-.container>.personal_form>.inputform>input{
+.inputform>input{
     box-sizing: border-box;
     padding: 6px;
     width: 600px;
