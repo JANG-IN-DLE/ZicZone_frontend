@@ -17,10 +17,6 @@ const MypagePurchaseHistory = () => {
             });
     }, [userId]);
 
-//     if (personalUsers.length === 0) {
-//         return <div>Loading...</div>;
-//     }
-
     return (
         <div className='pick_purchase_history'>
             {personalUsers.map((user, index) => (
