@@ -1,6 +1,6 @@
 .mypage_user_purchase {
     width: 470px;
-    height: 165px;
+    height: 210px;
     background-color: #fff;
     border-image-source: linear-gradient(123.89deg,
             rgba(170, 170, 170, 0.3) 9.82%,
@@ -15,7 +15,7 @@
     cursor: pointer;
 }
 
-.mypage_user_purchase img {
+.mypage_purchase_img {
     width: 64px;
     height: 64px;
     margin-right: 20px;
@@ -23,19 +23,19 @@
 
 .mypage_user_purchase_content {
     display: flex;
-    margin: 23px 38px 42px 38px
+    padding: 23px 38px 20px 38px;
+}
+
+.purchase_content{
+    width: 300px;
+    height: 150px;
 }
 
 .mypage_purchase_job {
-    margin-bottom: 5px;
-}
-
-.mypage_purchase_job p {
     font-size: 13px;
     color: #ababab;
-    font-weight: bold;
+    margin-bottom: 5px;
 }
-
 
 .mypage_purchase_name {
     display: flex;
@@ -43,18 +43,37 @@
     margin-bottom: 5px;
 }
 
-.mypage_purchase_intro p {
+.mypage_purchase_name p{
+    margin-right: 4px;
+}
+
+.mypage_purchase_intro{
     font-size: 13px;
+    color: #989898;
+    margin-bottom: 10px;
 }
 
-.mypage_purchase_intro {
-    width: 300px;
-    height: 35px;
-    margin-bottom: 5px;
-}
-
-/* .mypage_purchase_tech {
-    width: 320px;
-    height: 80px;
+.mypage_purchase_tech {
     display: flex;
-} */
+    flex-wrap: wrap;
+}
+
+.mypage_purchase_tech ul{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.mypage_purchase_tech li {
+    list-style: none;
+    margin-right: 4px;
+}
+
+.mypage_purchase_tech img{
+    height: 22px;
+}
+
+.scrap_img {
+    width: 22px;
+    height: 22px;
+    background-color: blue;
+}

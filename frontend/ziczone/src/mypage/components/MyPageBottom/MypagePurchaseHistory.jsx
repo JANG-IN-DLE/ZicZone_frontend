@@ -1,23 +1,44 @@
-import React from 'react'
-import company_logo from './../../../common/header/assets/Comp_Logo.png'
-import MypageUserPurchase from './MypageUserPurchase'
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import MypageUserPurchase from './MypageUserPurchase';
 
 const MypagePurchaseHistory = () => {
+    const userId = 3;
+    const [personalUsers, setPersonalUsers] = useState([]);
 
-    const Purchase_History = {
-            user_id : '토스',
-            company_logo : company_logo,
-            company_intro : '공인인증서를 스마트폰에 넣는 것조차 매우 번거로웠으며, 보안카드 번호를 착각해 3회 이상 잘못 입력하였을 경우 은행에 방문해 보안카드 재발급 절차를 밟아야 했다. 한마디로 사용자 '
-    }
-    
+    useEffect(() => {
+        axios.get(`/api/purchased/${userId}`)
+            .then(response => {
+                console.log("API response:", response.data.personalUsers);
+                setPersonalUsers(response.data.personalUsers);
+            })
+            .catch(error => {
+                console.log("purchaseData 호출 실패: ", error);
+            });
+    }, [userId]);
+
+//     if (personalUsers.length === 0) {
+//         return <div>Loading...</div>;
+//     }
+
     return (
-            <MypageUserPurchase 
-            user_id={Purchase_History.user_id}
-            company_logo={Purchase_History.company_logo}
-            company_intro={Purchase_History.company_intro}
-            />
-    )
-    
+        <div className='pick_purchase_history'>
+            {personalUsers.map((user, index) => (
+                <MypageUserPurchase
+                    key={index}
+                    userName={user.user.userName}
+                    personalCareer={user.personalCareer}
+                    userIntro={user.user.userIntro}
+                    jobPositions={user.jobPositions ? user.jobPositions.map(position => position.job.jobName).join(", ") : ''}
+                    techStacks={user.techStacks ? user.techStacks.map(stack => ({
+                        techName: stack.tech.techName,
+                        techUrl: stack.tech.techUrl
+                    })) : []}
+                    gender={user.gender}
+                />
+            ))}
+        </div>
+    );
 }
 
-export default MypagePurchaseHistory
+export default MypagePurchaseHistory;
