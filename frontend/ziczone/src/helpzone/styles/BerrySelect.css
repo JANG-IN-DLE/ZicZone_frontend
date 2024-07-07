@@ -22,5 +22,8 @@
 }
 
 .bs_berry_buttons {
+    display: flex;
+    justify-content: start;
     margin-top: 12px;
+    text-align: center;
 }
