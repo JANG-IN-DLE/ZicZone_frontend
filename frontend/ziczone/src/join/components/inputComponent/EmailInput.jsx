@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import useEmailVerification from '../../hooks/useEmailAuth';
 import "../../styles/JoinCom/EmailInput.css";
 
@@ -13,13 +13,8 @@ const EmailInput = () => {
         handleCodeChange,
         sendVerificationEmail,
         verifyAuthCode,
-        formatTime,
-        formData
+        formatTime
     } = useEmailVerification();
-
-    useEffect(() => {
-        console.log('Current formData in EamilInput:', formData)
-    }, [formData]);
 
     return (
         <div className="inputform email">
@@ -76,7 +71,7 @@ const EmailInput = () => {
                                                  : isAuth === "auth_success" ? 'auth_success_msg'
                                                  : 'auth_fail_msg'}`}>
                             {isAuth === "auth_success" ? "인증 성공" 
-                            : isAuth === "auth_fail" ? "인증 실패" 
+                            : isAuth === "auth_wrong" ? "인증 실패" 
                             : isAuth === "auth_expired" ? "시간 만료" 
                             : ""}
                         </p>

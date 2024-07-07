@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import { useFormContext } from '../components/FormContext';
+import axios from 'axios';
 
-const usePasswordValidation = () => {
+const usePasswordValidation = (type, email) => {
     const [password, setPassword] = useState(''); //비밀번호
     const [confirmPassword, setConfirmPassword] = useState(''); //비밀번호 확인
     const [isPasswordValid, setIsPasswordValid] = useState(false); //비밀번호 검증
     const [isConfirmValid, setIsConfirmValid] = useState(false); //비밀번호 확인 검증
-    const { updateFormData } = useFormContext(); //from업데이트
+    const [isChangePassword, setIsChangePassword] = useState(""); //비밀번호 변경 검증
+    const formContext = useFormContext();
 
     //비밀번호 유효성 검증
     const validatePassword = (pwd) => {
@@ -35,19 +37,35 @@ const usePasswordValidation = () => {
         // 비밀번호 확인 로직
         if (isPasswordValid && password === newConfirmPassword) {
             setIsConfirmValid(true);
-            updateFormData('password', password); // 모든 조건이 충족되면 폼 데이터 업데이트
+            if(type!=="login"){
+                formContext.updateFormData('password', password); // 모든 조건이 충족되면 폼 데이터 업데이트
+            }
         } else {
             setIsConfirmValid(false);
         }
     };
+
+    //비밀번호 변경
+    const changePassword = async() => {
+        const response = await axios.post("/api/login/emailAuth/change-password", { email, password });
+            if (response.status === 200 && response.data === "change Password Success") {
+                console.log(response.data);
+                setIsChangePassword("changeSuccess");
+            }else{
+                console.log(response.data);
+                setIsChangePassword("changeFail");
+            }
+    }
 
     return {
         password,
         confirmPassword,
         isPasswordValid,
         isConfirmValid,
+        isChangePassword,
         handlePasswordChange,
-        handleConfirmChange
+        handleConfirmChange,
+        changePassword
     };
 };
 
