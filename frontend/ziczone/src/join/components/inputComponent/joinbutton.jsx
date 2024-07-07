@@ -12,7 +12,8 @@ const JoinButton = ({category}) => {
         e.preventDefault();
         const endpoint = category === "per" ? '/api/signup/personal' : '/api/signup/company';
         // 모든 필드가 채워져 있는지 확인
-        const isFormComplete = Object.values(formData).every(value => value.trim() !== '');
+        const isFormComplete = Object.values(formData).every(value => 
+            typeof value === 'string' ? value.trim() !== '' : value !== null && value !== undefined);
 
         if (!isFormComplete) {
             alert("모든 항목을 입력해주세요.");
