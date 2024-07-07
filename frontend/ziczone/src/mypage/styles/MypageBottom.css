@@ -1,0 +1,33 @@
+.mypage_user_nav {
+    padding-bottom: 48px;
+}
+
+.mypage_user_nav_bar {
+    list-style: none;
+    display: flex;
+    margin-left: 47px;
+}
+
+.mypage_user_nav_bar div {
+    font-size: 22px;
+    margin-right: 72px;
+    padding: 12px;
+    color: #ABABAB;
+    border-bottom: 3px solid #ababab;
+    cursor: pointer;
+}
+
+.mypage_user_nav.active {
+    color: #0051BA;
+    border-bottom: 3px solid #0051BA;
+}
+
+.pick_purchase_history {
+    width: 1080px;
+    height: 400px;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 60px;
+    row-gap: 30px;
+    margin-left: 47px;
+}

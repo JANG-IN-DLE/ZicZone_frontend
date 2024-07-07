@@ -1,0 +1,73 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Pretendard-Regular';
+}
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Giants-Bold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/Giants-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+.resume {
+    width: 100%;
+    height: 100%;
+    background-color: #E6EEF8;
+    padding: 150px 0;
+}
+
+.resume_container {
+    width: 760px;
+    height: auto;
+    background-color: #fff;
+    margin: 90px auto; /* 위쪽 마진 90px, 양옆 마진 auto */
+    border-radius: 12px;
+    border-image-source: linear-gradient(123.89deg,
+            rgba(170, 170, 170, 0.3) 9.82%,
+            rgba(170, 170, 170, 0.05) 32.32%,
+            rgba(170, 170, 170, 0.2) 61.65%,
+            rgba(170, 170, 170, 0.05) 90.18%);
+    box-shadow: 5px 5px 20px 0px rgba(0, 0, 0, 0.15),
+        4px 4px 4px 0px rgba(255, 255, 255, 0.1) inset;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.resume_title {
+    margin: 0 0 36px 60px;
+    padding-top: 50px;
+    font-size: 20px;
+}
+
+.container_bar {
+    width: 760px;
+    border: 1.5px solid #0051BA;
+    margin: 0 auto;
+}
+
+.resume_save {
+    margin-top: 75px;
+    display: flex;
+    justify-content: flex-end;
+    margin: 75px 64px 0 0;
+    padding-bottom: 50px;
+}
+
+.resume_save_btn {
+    width: 100px;
+    height: 32px;
+    border: none;
+    border-radius: 8px;
+    background-color: #0051BA;
+    font-size: 12px;
+    color: #fff;
+}

@@ -19,3 +19,7 @@
     background-color: #0051BA;
     color: #fff;
 }
+
+.non_login_btn:active {
+    transform: scale(0.97);
+}
