@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/Modal.css";
+import "../styles/PickModal.css";
 import berry from "../../common/card/assets/berry.png"
 
 const PickModal = ({ isOpen, onClose, userName, onPick }) => {
@@ -8,7 +8,7 @@ const PickModal = ({ isOpen, onClose, userName, onPick }) => {
     return(
         <div className="modal">
             <div className="company_modal_body" onClick={(e)=>e.stopPropagation()}>
-                <div className="header">
+                <div className="pick_modal_header">
                     <div className="circles">
                         <div className="header_circle red"></div>
                         <div className="header_circle yellow"></div>

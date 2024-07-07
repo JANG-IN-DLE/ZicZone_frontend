@@ -1,18 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from 'axios';
 import {useNavigate} from "react-router-dom";
 import '../styles/PickCard.css';
-import vector from "../assets/Vector.png";
+import scrapImg from "../assets/scrap.svg";
+import unscrapImg from "../assets/unscrap.svg";
 
 
-const PickCard = ({onClick, userImage, jobNames=[], userName, userCareer, userIntro, techNames=[], onScrap}) => {
-    const isCompanyUser = false;
+const PickCard = ({onClick, userImage, jobNames=[], userName, userCareer, userIntro, techUrls=[], personalId, isScrap}) => {
+    // const isCompanyUser = false; // 개인
+    const isCompanyUser = true; // 기업
+
+    // scrap 여부를 확인하는 hook
+    const [scrap, setScrap] = useState(isScrap);
+
+    const handleScrapClick = async (e) => {
+        e.stopPropagation();
+        try{
+            // 보낼 때 userName뿐만 아니라 지금 로그인한 회원 Id까지 보내야할 것 같아. companyId는 임시로 1
+            const response = await axios.post('/api/scrap', { personalId, companyId:1 });
+            if(response.status === 200) {
+                setScrap(!scrap);
+            }
+        }catch(error){
+            console.error("스크랩 중 오류 발생: ", error);
+        }
+    };
     
     return (
                 <div className="user_card" onClick={onClick}>
                     {isCompanyUser && (
-                        // 클릭되면 색 채워지게 설정 필요
-                        <button className="scrap_button" onClick={(e)=> {e.stopPropagation(); onScrap();}}>
-                            <img src={vector} alt="Scrap"/>
+                        <button className="scrap_button" onClick={handleScrapClick}>
+                            <img src={scrap ? unscrapImg : scrapImg} alt="Scrap"/>
                         </button>
                     )}
                     <div className="pick_user_image_container">
@@ -32,7 +50,7 @@ const PickCard = ({onClick, userImage, jobNames=[], userName, userCareer, userIn
                             {userIntro}
                         </div>
                         <div className="pick_user_tech">
-                            {techNames.map((tech, index) => (
+                            {techUrls.map((tech, index) => (
                                 <img key={index} className="tech_icon" src={tech} alt={`Tech${index}`} />
                             ))}
                         </div>

@@ -1,8 +1,9 @@
 import React from "react";
 import '../styles/Resume.css';
+import resumePhotoNull from '../assets/resumePhotoNull.svg';
 
 // resume conponent
-const Resume = ({ resumePhoto, resumeName, resumeDate, phoneNum, personalState, jobName=[], techName=[], educations=[], careers=[], curriculums=[],certificates=[],etcs=[],archives=[] }) => {
+const Resume = ({ resumePhoto, resumeName, resumeDate, phoneNum, resumeEmail, personalState, jobName=[], techUrls=[], educations=[], careers=[], curriculums=[],certificates=[],etcs=[],archives=[], isPicked }) => {
     return (
         <div className="resume-container">
             <div className="resume-header">
@@ -10,21 +11,21 @@ const Resume = ({ resumePhoto, resumeName, resumeDate, phoneNum, personalState, 
             </div>
             <div className="resume-content">
                 <div className="resume-photo">
-                    {/* <img src={resumePhoto} alt="profile" /> */}
+                    <img src={isPicked ? resumePhoto : resumePhotoNull} alt="profile" />
                 </div>
                 <div className="resume-details">
                     <h3>{resumeName}</h3>
-                    {/* <p>이메일: {userResume.email}</p> email 받는게 좋을 것 같다. */}
-                    <p>전화번호: {phoneNum}</p>
-                    <p>생년월일: {resumeDate}</p>
+                    <p>이메일: {isPicked ? resumeEmail : ' '}</p>
+                    <p>전화번호: {isPicked ? phoneNum : ' '}</p>
+                    <p>생년월일: {isPicked ? resumeDate : ' '}</p>
                     <p>개발 직무: 
                         {jobName.map((job, index)=> (
-                            <span key={index}>#{job}</span>
+                            <span key={index} className="jobs-badge">#{job}</span>
                         ))}
                     </p>
                     <div className="techs">
                         <h4>기술 스택:</h4>
-                        {techName.map((tech, index) => (
+                        {techUrls.map((tech, index) => (
                             <img key={index} className="tech_icon" src={tech} alt={`Tech${index}`} />
                         ))}
                     </div>
