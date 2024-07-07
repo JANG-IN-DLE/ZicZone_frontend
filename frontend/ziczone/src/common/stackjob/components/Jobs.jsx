@@ -8,7 +8,7 @@ const Jobs = ({type}) => {
 
     return (
         <div className="jobs">
-            {jobs.slice(1).map((job, index) => (
+            {jobs.map((job, index) => (
                 <div 
                     key={index}
                     className={`jobcom ${activeJobs.includes(job.jobId) ? 'active' : ''}`}
