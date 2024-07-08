@@ -1,0 +1,93 @@
+.modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1080px;
+    height: 980px;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.company_modal_body {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.pick_modal_header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e5e5e5;
+    margin-bottom: 20px;
+}
+
+.circles {
+    display: flex;
+    gap: 5px;
+}
+
+.header_circle {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.red {
+    background-color: #ff5f56;
+}
+
+.yellow {
+    background-color: #ffbd2e;
+}
+
+.green {
+    background-color: #27c93f;
+}
+
+.modal_content {
+    text-align: center;
+}
+
+.modal_title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.modal_subtitle {
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.modal_buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.cancel_btn,
+.open_btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100px;
+}
+
+.cancel_btn {
+    background-color: #ccc;
+}
+
+.open_btn {
+    background-color: #007bff;
+    color: white;
+}

@@ -15,12 +15,15 @@ function CompanyPickzone() {
     // 선택된 카드를 저장하는 상태
     const [ selectedCard, setSelectedCard ] = useState(null);
     // 선택된 Job을 저장하는 상태
-    const [selectedJob, setSelectedJob] = useState(null);
+    const [selectedJobs, setSelectedJobs] = useState([]);
     // pickzoneDetail로 가는 hook
     const navigate = useNavigate();
+    // 현재 로그인된 companyId를 임시로 1이라고 가정
+    const loggedInCompanyId = 1;
+    const companyId = 1;
 
     useEffect(() => {
-        axios.get('/api/pickcards')
+        axios.get(`/api/pickcards?loggedInPersonalId=${loggedInCompanyId}`)
             .then(response => {
                 setPickCards(response.data)
             })
@@ -30,7 +33,8 @@ function CompanyPickzone() {
 
             axios.get('/api/jobs')
                 .then(response => {
-                    setJobs(response.data);
+                    // 맨앞에 전체 항목
+                    setJobs([{ jobId: 'all', jobName: '전체' }, ...response.data]);
                 })
                 .catch(error => {
                     console.error('Error fetching jobs: ', error)
@@ -38,26 +42,34 @@ function CompanyPickzone() {
     }, []);
 
     const handleCardClick = (card) => {
-        navigate(`/pickzone/${card.personalId}`)
-    };
-    const handleScrap = (personalId) => {
-        axios.post('/api/scrap', {personalId})
-            .then(response => {
-                alert('Scrap successful');
-            })
-            .catch(error => {
-                console.error("Error scrapping card:", error);
-                alert('Error scrapping card');
-            });
+        navigate(`/pickzone/${companyId}/${card.personalId}`)
     };
     // Job을 선택해서 hook에 담는다.
     const handleJobClick = (job) => {
-        setSelectedJob(job.jobName);
+        if(job.jobName === '전체'){
+            setSelectedJobs([]);
+        }else{
+            setSelectedJobs(prevSelectedJobs => {
+                if(prevSelectedJobs.includes(job.jobName)){
+                    return prevSelectedJobs.filter(j => j !== job.jobName);
+                }else{
+                    return [...prevSelectedJobs, job.jobName];
+                }
+            })
+        }
     };
     
     // 선택된 job이 있으면 pickcard의 job과 일치하는 것 걸러서 보여줄거야
-    const filteredPickCards = selectedJob
-    ? pickCards.filter(card => card.jobName && card.jobName.split(',').includes(selectedJob))
+    const filteredPickCards = selectedJobs.length > 0
+    ? pickCards.filter(card => {
+        return card.jobName && selectedJobs.some(job => card.jobName.split(',').includes(job));
+    })
+    // 각 카드가 선택된 직업과 얼마나 많이 겹치는지를 계산하여 점수화하고, 점수가 높은 순서대로 정렬합니다.
+    .sort((a,b) => {
+        const aMatches = a.jobName.split(',').filter(job => selectedJobs.includes(job)).length;
+        const bMatches = b.jobName.split(',').filter(job => selectedJobs.includes(job)).length;
+        return bMatches - aMatches;
+    })
     : pickCards;
 
     return (
@@ -65,7 +77,7 @@ function CompanyPickzone() {
             <h2>Jobs</h2>
             <div className="jobs">
                 {jobs.map(job => (
-                    <Job key={job.jobId} job={job} onClick={()=> handleJobClick(job)} />
+                    <Job key={job.jobId} job={job} onClick={()=> handleJobClick(job)} isSelected={selectedJobs.includes(job.jobName)} />
                 ))}
             </div>
             <h2>Pick Cards</h2>
@@ -73,8 +85,14 @@ function CompanyPickzone() {
             {filteredPickCards.map(card => {
                     const userImage = card.gender === 'MALE' ? personalMImage : personalFImage;
                     const jobNames = card.jobName ? card.jobName.split(',') : [];
-                    const techNames = card.techName ? card.techName.split(',') : [];
+                    // techName이 아니라 techUrl로 수정 필요
+                    const techUrls = card.techUrl ? card.techUrl.split(',') : [];
                     
+                    
+                    // 현재 card의 companyId 배열에서 로그인된 회사 사용자의 Id의 index를 찾느다.
+                    const companyIdIndex = card.companyId.indexOf(loggedInCompanyId);
+                    // 만약 companyId 배열에 로그인된 회사 사용자의 ID가 포함되어 있다면, 해당 인덱스의 scrap값을 가져온다.
+                    const isScrap = companyIdIndex !== -1 ? card.scrap[companyIdIndex] : false;
                     return (
                             <PickCard
                                 key={card.personalId}
@@ -84,11 +102,12 @@ function CompanyPickzone() {
                                 userName={card.userName}
                                 userCareer={card.personalCareer}
                                 userIntro={card.userIntro}
-                                techNames={techNames}
-                                // 밑에 수정 필요
+                                techUrls={techUrls}
+                                // 스크랩 상태를 전달한다
+                                isScrap={isScrap}
+                                // 로그인 구현되면 수정 필요
                                 isCompanyUser={true}
                                 onClick={() => handleCardClick(card)}
-                                onScrap={()=> handleScrap(card.personalId)}
                             />
                     );
                     

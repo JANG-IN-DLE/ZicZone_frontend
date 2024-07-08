@@ -51,6 +51,18 @@ function App() {
 //   </Router>
 //     </div>
     <div>
+
+//     <Router>
+//     <Routes>
+//       <Route path='/pickzone/:companyId/:personalId' element={<PickzoneCompanyDetail />} />
+//       {/* <Route path='/pickzone/:loggedInPersonalId/:personalId' element={<PickZoneUserDetail />} /> */}
+//       {/* <Route path='/pickzone/:personalId' element={userType === 'COMPANY' ? <PickzoneCompanyDetail /> : <PickzoneUserDtail />} /> */}
+//       <Route path='/pickzone' element={<CompanyPickzone />} />
+//       {/* <Route path='/pickzone' element={<UserPickzone />} /> */}
+//       {/* <Route path='/pickzone' element={userType === 'COMPANY' ? <CompanyPickzone /> : <UserPickzone />} /> */}
+//     </Routes>
+//   </Router>
+
       <Router>
         <Header/>
             <Routes>
@@ -61,6 +73,7 @@ function App() {
             </Routes>
             <Footer/>
         </Router>
+
     </div>
 
   );
