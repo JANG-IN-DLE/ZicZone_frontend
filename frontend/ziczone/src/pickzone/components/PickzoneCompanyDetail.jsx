@@ -5,7 +5,7 @@ import UserProfile from "./UserProfile";
 import PickModal from "./PickModal";
 
 export default function PickzoneCompanyDetail(){
-    const {personalId} = useParams();
+    const {companyId, personalId} = useParams();
     // 회원 정보 담는 hook
     const [ userCard, setUserCard ] = useState(null);
     // resume 정보 담는 hook
@@ -14,11 +14,14 @@ export default function PickzoneCompanyDetail(){
     const [ selectedSection, setSelectedSection] = useState("resume");
     // modal open hook
     const [isModalOpen, setIsModalOpen] = useState(false);
+    // Pick 상테 추적 hook
+    const [isPicked, setIsPicked] = useState(false);
 
     useEffect(() => {
-        axios.get(`/api/pickcards/${personalId}`)
+        axios.get(`/api/pickcards/${companyId}/${personalId}`)
             .then(response => {
                 setUserCard(response.data);
+                setIsPicked(response.data.pick);// pick 상태 저장
             })
             .catch(error => {
                 console.log('Error fetching user details: ' ,error);
@@ -31,12 +34,12 @@ export default function PickzoneCompanyDetail(){
                 console.log('Error fetching user resume details: ' , error);
             });
 
-    }, [personalId]);
+    }, [companyId, personalId]);
     if(!userCard || !userResume){
         return <div>Loading...</div>;
     }
     const jobNames = userCard.jobName ? userCard.jobName.split(',') : [];
-    const techNames = userCard.techName ? userCard.techName.split(',') : [];
+    const techUrls = userCard.techUrl ? userCard.techUrl.split(',') : [];
 
     // "pick {userName}" 클릭 시
     const handlePickClick = () => {
@@ -48,8 +51,18 @@ export default function PickzoneCompanyDetail(){
     }
     // "Pick" 클릭시
     const handlePickConfirm = () => {
-        // 나중에 axios로 데이터 보내는 처리 해야함
-        setIsModalOpen(false);
+        axios.post('/api/pick', {
+            companyId: companyId,
+            personalId: personalId
+        })
+        .then(response => {
+            console.log('Pick성공:', response.data);
+            setIsPicked(response.data.pick);// pick 저장
+            setIsModalOpen(false);
+        })
+        .catch(error => {
+            console.log('Error picking user: ' , error);
+        });
     };
 
     return(
@@ -57,12 +70,14 @@ export default function PickzoneCompanyDetail(){
         <UserProfile 
             userCard={userCard}
             jobNames={jobNames}
-            techNames={techNames}
+            techUrls={techUrls}
             selectedSection={selectedSection}
             setSelectedSection={setSelectedSection}
             userResume={userResume}
             isCompany={true}
             onPickClick={handlePickClick}
+            isScrap={userCard.scrap}
+            isPicked={isPicked}// pick 상태 전달
         />  
         <PickModal 
             isOpen={isModalOpen}

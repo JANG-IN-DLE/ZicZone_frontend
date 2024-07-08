@@ -7,11 +7,13 @@ import CoverLetter from "./CoverLetter";
 import Portfolio from "./Portfolio";
 import personalMImage from "../../common/card/assets/personal_m_image.png";
 import personalFImage from '../../common/card/assets/personal_f_image.png';
+import "../styles/UserProfile.css";
 
 
-const UserProfile = ({ userCard, jobNames, techNames, selectedSection, setSelectedSection, userResume, onPickClick}) => {
+const UserProfile = ({ userCard, jobNames, techUrls, selectedSection, setSelectedSection, userResume, onPickClick, isScrap, isPicked}) => {
     const userImage = userCard.gender === 'MALE' ? personalMImage : personalFImage;
-    const isCompany = false;
+    // const isCompany = false; // 개인
+    const isCompany = true; // 기업
 
     const renderSection = () => {
         switch(selectedSection){
@@ -20,15 +22,18 @@ const UserProfile = ({ userCard, jobNames, techNames, selectedSection, setSelect
                     // pickDetail에서 resume 정보
                     <Resume 
                     resumeName={userResume.resumeName}
+                    resumePhoto={userResume.resumePhoto}
+                    resumeEmail={userResume.resumeEmail}
                     phoneNum={userResume.phoneNum}
                     resumeDate={userResume.resumeDate}
                     jobName={jobNames}
-                    techName={techNames}
+                    techUrls={techUrls}
                     educations={userResume.educations}
                     careers={userResume.careers}
                     curriculums={userResume.curriculums}
                     etcs={userResume.etcs}
                     archives={userResume.archives}
+                    isPicked={isPicked}
                 /> 
                 );
             case 'coverLetter':
@@ -52,11 +57,9 @@ const UserProfile = ({ userCard, jobNames, techNames, selectedSection, setSelect
                     userName={userCard.userName}
                     userCareer={userCard.personalCareer}
                     userIntro={userCard.userIntro}
-                    techNames={techNames}
+                    techUrls={techUrls}
+                    isScrap={isScrap}
                     />
-                {isCompany && (
-                    <button style={{position: 'absolute', top: 10, right: 10}}>스크랩</button>
-                )}
                 <ul>
                     <li onClick={() => setSelectedSection('resume')}>이력서</li>
                     <li onClick={() => setSelectedSection('coverLetter')}>자기소개서</li>
@@ -66,8 +69,8 @@ const UserProfile = ({ userCard, jobNames, techNames, selectedSection, setSelect
                         </li>
                     ))}
                 </ul>
-                {isCompany && (
-                    <button style={{marginTop: '20px'}} onClick={onPickClick}>Pick {userCard.userName}</button>
+                {isCompany && !isPicked && (
+                    <button className="pick-button" onClick={onPickClick}>Pick {userCard.userName}</button>
                 )}
             </div>
             <div>

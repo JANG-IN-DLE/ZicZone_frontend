@@ -1,26 +1,20 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import '../styles/Job.css';
 import useActiveJobs from '../hooks/useActiveJobs';
 
 
-const Jobs = () => {
-    const jobList = [
-        "서버/백엔드", "프론트엔드", "웹 풀스택", "안드로이드",
-        "QA", "게임 서버", "빅데이터", "IOS",
-        "서"
-    ];
-
-    const { activeJobs, handleJobClick } = useActiveJobs(3);
+const Jobs = ({type}) => {
+    const { jobs, activeJobs, handleJobClick } = useActiveJobs(3, type);
 
     return (
-        <div class="jobs">
-            {jobList.map((job, index) => (
+        <div className="jobs">
+            {jobs.map((job, index) => (
                 <div 
                     key={index}
-                    className={`jobcom ${activeJobs.includes(job) ? 'active' : ''}`}
-                    onClick={() => handleJobClick(job)}
+                    className={`jobcom ${activeJobs.includes(job.jobId) ? 'active' : ''}`}
+                    onClick={() => handleJobClick(job.jobId)}
                 >
-                    {job}
+                    {job.jobName}
                 </div>
             ))}
         </div>

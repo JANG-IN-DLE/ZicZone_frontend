@@ -3,6 +3,8 @@ import "./../../styles/MypageBottom.css";
 import MypagePickHistory from "./MypagePickHistory";
 import PickCard from "../../../common/card/components/PickCard";
 import useNav from "../../hooks/useNavBar";
+import MypageUserPurchase from "./MypageUserPurchase";
+import MypagePurchaseHistory from "./MypagePurchaseHistory";
 
 const MypageBottom = () => {
     const { activeItem, handleClick } = useNav("pick");
@@ -37,10 +39,9 @@ const MypageBottom = () => {
                     </div>
                 </div>
             </div>
-            <div className="mypage_user_history">
+            <div>
                 {activeItem === "pick" && <MypagePickHistory />}
-                {activeItem === "pick" && <MypagePickHistory />}
-                {activeItem === "purchase" && <PickCard />}
+                {activeItem === "purchase" && <MypagePurchaseHistory />}
             </div>
         </div>
     );

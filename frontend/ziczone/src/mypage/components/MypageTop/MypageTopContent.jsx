@@ -1,15 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import MypageTop from "./MypageTop";
+import axios from "axios";
 
 const MypageTopContent = () => {
-    const top_detail = {
-        gender: 'male'
-    }
+    const userId = 3;
+    const [topData, setTopData] = useState({
+        gender: ""
+    })
+
+    useEffect(() => {
+        axios.get(`/api/user/${userId}`)
+            .then(response => {
+                setTopData({
+                    gender: response.data.gender
+                });
+            })
+            .catch(error => {
+                console.log("topData 데이터 호출 실패", error);
+            });
+    }, []);
 
     return (
         <div>
             <MypageTop
-                gender={top_detail.gender}
+                gender={topData.gender}
             />
         </div>
     )

@@ -45,6 +45,7 @@ const EmailInput = () => {
                         {isSend === "send_fail" ? "이메일 전송에 실패하였습니다" 
                         : isSend === "send_error" ? "오류가 발생했습니다" 
                         : isSend === "invalid_email" ? "유효하지 않은 이메일 형식입니다" 
+                        : isSend === "duplication_email" ? "이미 가입된 메일입니다."
                         : "" }
                     </p>
                 </div>
@@ -66,8 +67,13 @@ const EmailInput = () => {
                             disabled={isAuth === "auth_success" ? true : false}
                             style={isAuth === "auth_success" ? { cursor : 'default' } : null}
                         >인증</button>
-                        <p className={`auth_msg ${isAuth === "" ? '': isAuth === "auth_success" ? 'auth_success_msg': 'auth_fail_msg'}`}>
-                            {isAuth === "auth_success" ? "인증 성공" : isAuth === "auth_fail" ? "인증 실패" : isAuth === "auth_expired" ? "시간 만료" : ""}
+                        <p className={`auth_msg ${isAuth === "" ? ''
+                                                 : isAuth === "auth_success" ? 'auth_success_msg'
+                                                 : 'auth_fail_msg'}`}>
+                            {isAuth === "auth_success" ? "인증 성공" 
+                            : isAuth === "auth_wrong" ? "인증 실패" 
+                            : isAuth === "auth_expired" ? "시간 만료" 
+                            : ""}
                         </p>
                         {/* 전송완료 && 인증완료안됨 시에 나타나게함 타이머 */}
                         {isSend === "send_success" && isAuth !== "auth_success" && (

@@ -1,5 +1,6 @@
 /* 로그인 오른쪽박스(입력폼) */
 .rightbox{
+    height: 435px;
     box-sizing: border-box;
     display: flex;
     flex-flow: column;
@@ -44,7 +45,7 @@
 }
 
 /* 이메일, 비밀번호 입력창 */
-.rightbox>input{
+.rightbox>.input{
     margin: 6px 0px;
     box-sizing: border-box;
     padding: 8px 8px;
@@ -57,10 +58,20 @@
     font-size: 16px;
 }
 
-.rightbox>input::placeholder{
+.rightbox>.input::placeholder{
     font-size: 14px;
     font-weight: 100;
+}
 
+.rightbox>.timer{
+    padding: 4px;
+    position: absolute;
+    right: 52px;
+    bottom: 160px;
+    color: #5d5d5d;
+    background-color: #ffffff;
+    font-size: 12px;
+    width: 50px;
 }
 
 /* 회원가입/비밀번호 찾기 버튼 */
@@ -107,8 +118,33 @@
 
 /* 경고메세지 */
 .rightbox>.warningmsg{
-    /* visibility: hidden; */
     color: red;
+    margin: 0px;
+    height: 12px;
     font-size: 12px;
+    font-weight: 100;
     margin-bottom: 8px;
+}
+
+.rightbox>.successmsg{
+    color: green;
+    margin: 0px;
+    height: 12px;
+    font-size: 12px;
+    font-weight: 100;
+    margin-bottom: 8px;
+}
+
+.check1{
+    position: absolute;
+    right: 52px;
+    width: 20px;
+    margin: 0px;
+}
+.check2{
+    position: absolute;
+    right: 52px;
+    bottom: 160px;
+    width: 20px;
+    margin: 0px;
 }

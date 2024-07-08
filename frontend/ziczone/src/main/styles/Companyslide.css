@@ -16,11 +16,11 @@
             display: flex;
             gap: 0 40px;
             width: max-content;
-            animation: aniScroll 15s linear infinite;
+            animation: aniScroll 25s linear infinite;
 
             /* 2번째 <ul> 태그에 애니메이션 넣기 */
             &.list2 {
-            animation: aniScroll-2 15s linear infinite;
+            animation: aniScroll-2 25s linear infinite;
             }
 
             li {

@@ -1,15 +1,18 @@
 import React from 'react';
 import '../../styles/JoinCom/AddressInput.css';
 import useAddress from '../../hooks/useAddress';
+import { useFormContext } from '../FormContext';
 
 const AddressInput = () => {
+  const { formData, updateFormData } = useFormContext();
   const {
     postcode,
     address,
     detailAddress,
     setDetailAddress,
     openAddressSearch
-  } = useAddress();
+  } = useAddress(formData.address, (newAddress) => updateFormData('companyAddr', newAddress));
+  //useAddress에 주소값을 전달하고, 새로운 주소값을 form에 업데이트하는 함수를 전달
 
   return (
     <div className='addresscontainer'>
@@ -41,7 +44,7 @@ const AddressInput = () => {
             id="sample6_detailAddress"
             placeholder="상세주소"
             value={detailAddress}
-            onChange={(e) => setDetailAddress(e.target.value)}
+            onChange={(e) => setDetailAddress(e.target.value)} //상세주소 입력시마다 렌더링
           />
         </div>
     </div>
