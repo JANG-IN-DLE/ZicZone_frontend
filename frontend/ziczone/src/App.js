@@ -17,6 +17,9 @@ import LoginMainComponent from './main/components/LoginMainComponent'
 import ListBoard from './helpzone/components/ListBoard';
 import CUBoard from "./helpzone/components/CUBoard";
 import RDBoard from "./helpzone/components/RDBoard";
+import CompanyzoneMain from './companyzone/components/CompanyzoneMain';
+// import Loginpage from './login/components/LoginPage';
+
 
 import IntroMain from './intro/components/IntroMain';
 
@@ -63,9 +66,12 @@ function App() {
           <Route path="/helpzone" element={<ListBoard />} />
           <Route path="/cuboard" element={<CUBoard />} />
           <Route path="/rdboard/:corrId" element={<RDBoard />} />
-        </Routes>
-        {/* <Footer /> */}
+          <Route path='/companyZone' element={<CompanyzoneMain/>} /> 
+          {/* <Route path='/login' element={<Loginpage/>} /> */}
+        </Routes> 
+         <Footer />
       </Router>
+{/* <ChargeMain/> */}
     </div>
 
   );

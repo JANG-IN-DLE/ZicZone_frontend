@@ -3,6 +3,7 @@ import "../styles/MainMain.css";
 import HelpZone from "./HelpZone";
 import CompanySilde from "./CompanySilde";
 import NoLoginBannerSlide from "./NoLoginBannerSlide";
+// import PickCard from "../../common/card/components/PickCard";
 import PickCard from "../../common/card/components/PickCard";
 import axios from "axios";
 import personalMImage from "../../common/card/assets/personal_m_image.png";
@@ -105,6 +106,7 @@ const NoLoginMainComponent = () => {
         })}
       </div>
       <div className="company_slide">
+        <h1>직존과 함께하는 기업</h1>
         <CompanySilde />
         <CompanySilde />
         <CompanySilde />
