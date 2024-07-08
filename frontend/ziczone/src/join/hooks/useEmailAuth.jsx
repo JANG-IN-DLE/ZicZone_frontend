@@ -66,7 +66,8 @@ const useEmailVerification = ( type ) => {
             if (response.status === 200 && response.data === "Email Duplication") {
                 console.log(response.data);
                 setIsSend("duplication_email");
-            } if (response.status === 200 && response.data === "email empty") {
+                console.log("issend: ",isSend);
+            } else if (response.status === 200 && response.data === "email empty") {
                 console.log(response.data);
                 setIsSend("empty_email");
             } else if (response.status === 200 && response.data === "email sent") {

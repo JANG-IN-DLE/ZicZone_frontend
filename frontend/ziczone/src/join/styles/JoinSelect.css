@@ -11,33 +11,33 @@
     font-family: Pretendard-Regular;
 }
 
-.container{
-    padding: 48px;
+.container_signup_select{
+    padding: 160px;
     display: flex;
     flex-flow: column;
     justify-content: space-between;
     align-items: center;
 }
 
-.logo{
+.logo_signup{
     width: 140px;
     height: 85px;
     margin-bottom: 20px;
 }
 
-.logo_t{
+.logo_t_signup{
     font-family: Giants-Inline;
     font-size: 28px;
     margin-bottom: 60px;
 }
 
-.logo_t>span{
+.logo_t_signup>span{
     color: #0051BA;
     font-family: Giants-Inline;
 }
 
 /* 카드부분 */
-.card{
+.card_signup{
     display: flex;
     flex-flow: row;
 }
