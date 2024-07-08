@@ -5,7 +5,7 @@ import BerrySelect from "./BerrySelect";
 import Button from "./Button";
 import usePostForm from "../hooks/usePostForm";
 
-const PostForm = ({ isEditMode = false, initialData = {} }) => {
+const PostForm = ({ isEditMode = false, initialData = {}, onSubmit }) => {
     const {
         selectedBerry,
         title,
@@ -15,27 +15,28 @@ const PostForm = ({ isEditMode = false, initialData = {} }) => {
         handleContentChange,
         handleFileChange,
         handleSubmit
-    } = usePostForm(100, initialData);
+    } = usePostForm(initialData.berry || 100, initialData, onSubmit);
 
     return (
         <form className="post_form" onSubmit={(e) => {
             e.preventDefault();
             handleSubmit();
         }}>
-            { !isEditMode && (
+            {!isEditMode && (
                 <BerrySelect className="pf_berry_select" selectedBerry={ selectedBerry } onSelect={ handleBerrySelect } />
             )}
-            <p className="pf_title">{isEditMode ? "제목" : "제목"}</p>
+            <p className="pf_title">제목</p>
             <div className="pf_title_wrapper">
                 <div className="pf_berry_display">{ selectedBerry }</div>
-                <input 
+                <input
                     className="pf_input"
                     value={ title }
                     onChange={ handleTitleChange }
+                    readOnly={ isEditMode }
                 />
             </div>
             <textarea
-                value={ content } 
+                value={ content }
                 onChange={ handleContentChange }
             />
             <p className="pf_pdf">첨부파일 <span>*하나의 PDF 파일로 첨부해주세요</span></p>
@@ -43,7 +44,7 @@ const PostForm = ({ isEditMode = false, initialData = {} }) => {
                 <FileUpload onFileChange={ handleFileChange } />
             </div>
             <div className="pf_button">
-                <Button type="submit" onClick={ handleSubmit }>
+                <Button type="submit">
                     { isEditMode ? "수정" : "등록" }
                 </Button>
             </div>

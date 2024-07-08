@@ -27,4 +27,5 @@
 .berry_button.active {
     background-color: #0051BA;
     color: #FFF;
+    transform: scale(1.1);
 }

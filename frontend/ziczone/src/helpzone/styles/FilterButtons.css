@@ -18,5 +18,5 @@
 .filter_buttons button.active {
     color: #0051BA;
     font-weight: bold;
+    transform: scale(1.01);
 }
-

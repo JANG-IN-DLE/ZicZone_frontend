@@ -1,30 +1,58 @@
 import React from "react";
-import Header from "../../common/header/components/Header";
 import "../styles/RDBoard.css";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 import ProfileCard from "./ProfileCard";
 import RDescription from "./RDescription";
 import PostView from "./PostView";
 
 const RDBoard = () => {
-  const userProfile = {
-    jobs: ['게임 클라이언트', 'devops/시스템', '게임클라이언트'],
-    gender: 'female',
-    userName: '이채림',
-    career: '신입',
-    point: '2000',
-    intro: '뽑아주시면 후회안할겁니다뽑아주시면 후회안할겁니다뽑아주시면 후회안할겁니다열심히 하겠습',
-    stacks: ['Python', 'NativeScript', 'Spring Boot', 'Microsoft SQL Server', 'MySQL', 'MySQL', 'MyhSQL']
-  };
+  const { corrId } = useParams();
 
-  const postData = {
-    title: '자소서 첨삭 요청',
-    content: '경력사항에 아르바이트 적어도 되나요?',
-    fileUrl: '이채림.pdf'
-   };
+  const [userProfile, setUserProfile] = useState({
+    jobs: [],
+    gender: '',
+    userName: '',
+    career: '',
+    point: '',
+    intro: '',
+    stacks: []
+  });
+
+  const [postData, setPostData] = useState({
+    title: '',
+    content: '',
+    fileUrl: ''
+  });
+
+  useEffect(() => {
+    axios
+      .get(`/api/board/${corrId}`)
+      .then((response) => {
+        const data = response.data;
+        // setUserProfile({
+        //   jobs: data.jobs,
+        //   gender: data.gender,
+        //   userName: data.userName,
+        //   career: data.personalCareer,
+        //   point: data.berryPoint,
+        //   intro: data.userIntro,
+        //   stacks: data.techName ? data.techName.split(',') : []
+        // });
+        setPostData({
+          title: data.corrTitle,
+          content: data.corrContent,
+          fileUrl: data.corrPdf
+        });
+      })
+      .catch((error) => {
+        console.error("오류 메시지: ", error);
+      });
+  }, [corrId]);
     
   return (
     <div>
-      <Header />
       <div className="b_section">
         <div className="b_profile_card">
           <ProfileCard { ...userProfile } isViewMode={true} />

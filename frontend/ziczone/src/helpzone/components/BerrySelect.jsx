@@ -16,6 +16,7 @@ const BerrySelect = ({ selectedBerry, onSelect }) => {
                     { berryButtonValues.map(value => (
                         <BerryButton
                             key={ value }
+                            type="button"
                             value={ value }
                             isActive={ value === selectedBerry }
                             onClick={() => onSelect(value)}

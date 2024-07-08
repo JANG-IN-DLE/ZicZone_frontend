@@ -1,6 +1,6 @@
 import React from 'react';
-import BoardItem from "./BoardItem";
 import "../styles/BoardList.css";
+import BoardItem from "./BoardItem";
 
 const BoardList = ({ boards }) => {
   return (
