@@ -1,6 +1,7 @@
 /* 로그인 오른쪽박스(입력폼) */
-.rightbox{
+.rightbox_login{
     height: 435px;
+    width: 350px;
     box-sizing: border-box;
     display: flex;
     flex-flow: column;
@@ -21,21 +22,20 @@
     box-shadow: 5px 5px 20px 0px rgba(0, 0, 0, 0.15),
     4px 4px 4px 0px rgba(255, 255, 255, 0.1) inset;
     backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
 }
 
 /* 로고 */
-.rightbox>.zzlogo{
+.rightbox_login>.zzlogo_login{
     width: 120px;
     margin-bottom: 4px;
     margin-top: 12px;
 }
 
-.rightbox>.zzlogo:hover{
+.rightbox_login>.zzlogo_login:hover{
     cursor: pointer;
 }
 
-.rightbox>.explain{
+.rightbox_login>.explain_login{
     font-size: 12px;
     text-align: center;
     font-weight: 100;
@@ -45,7 +45,7 @@
 }
 
 /* 이메일, 비밀번호 입력창 */
-.rightbox>.input{
+.rightbox_login>.input_login{
     margin: 6px 0px;
     box-sizing: border-box;
     padding: 8px 8px;
@@ -58,12 +58,12 @@
     font-size: 16px;
 }
 
-.rightbox>.input::placeholder{
+.rightbox_login>.input_login::placeholder{
     font-size: 14px;
     font-weight: 100;
 }
 
-.rightbox>.timer{
+.rightbox_login>.timer_login{
     padding: 4px;
     position: absolute;
     right: 52px;
@@ -75,7 +75,7 @@
 }
 
 /* 회원가입/비밀번호 찾기 버튼 */
-.rightbox>.links{
+.rightbox_login>.links_login{
     width: 100%;
     display: flex;
     flex-flow: row;
@@ -84,25 +84,25 @@
     margin-bottom: 20px;
 }
 
-.rightbox>.links>p{
+.rightbox_login>.links_login>p{
     font-size: 11px;
     font-weight: 100;
     color: #ababab;
     margin: 0px 2px;
 }
 
-.rightbox>.links>.joinbtn,
-.rightbox>.links>.find_password{
+.rightbox_login>.links_login>.joinbtn_login,
+.rightbox_login>.links_login>.find_password_login{
     text-decoration: underline;
 }
 
-.rightbox>.links>.joinbtn,
-.rightbox>.links>.find_password:hover{
+.rightbox_login>.links_login>.joinbtn_login,
+.rightbox_login>.links_login>.find_password_login:hover{
     cursor: pointer;
 }
 
 /* 로그인버튼 */
-.rightbox>.loginbtn{
+.rightbox_login>.loginbtn_login{
     width: 100%;
     padding: 10px 0px;
     font-size: 16px;
@@ -112,12 +112,12 @@
     border: 1.5px solid #0051BA;
     border-radius: 4px;
 }
-.rightbox>.loginbtn:hover{
+.rightbox_login>.loginbtn_login:hover{
     cursor: pointer;
 }
 
 /* 경고메세지 */
-.rightbox>.warningmsg{
+.rightbox_login>.warningmsg_login{
     color: red;
     margin: 0px;
     height: 12px;
@@ -126,7 +126,7 @@
     margin-bottom: 8px;
 }
 
-.rightbox>.successmsg{
+.rightbox_login>.successmsg_login{
     color: green;
     margin: 0px;
     height: 12px;
@@ -135,13 +135,13 @@
     margin-bottom: 8px;
 }
 
-.check1{
+.check1_login{
     position: absolute;
     right: 52px;
     width: 20px;
     margin: 0px;
 }
-.check2{
+.check2_login{
     position: absolute;
     right: 52px;
     bottom: 160px;
