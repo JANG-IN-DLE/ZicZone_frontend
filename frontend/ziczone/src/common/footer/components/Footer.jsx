@@ -29,23 +29,23 @@ const Footer = () => {
           </div>
           <div className="footer_link">
             <li>
-              <Link to="/"></Link>
+              {/* <Link to="/"></Link> */}
               <img src={github} alt="Github" />
             </li>
             <li>
-              <Link to="/"></Link>
+              {/* <Link to="/"></Link> */}
               <img src={github} alt="Github" />
             </li>
             <li>
-              <Link to="/"></Link>
+              {/* <Link to="/"></Link> */}
               <img src={github} alt="Github" />
             </li>
             <li>
-              <Link to="/"></Link>
+              {/* <Link to="/"></Link> */}
               <img src={github} alt="Github" />
             </li>
             <li>
-              <Link to="/"></Link>
+              {/* <Link to="/"></Link> */}
               <img src={github} alt="Github" />
             </li>
           </div>
@@ -57,23 +57,25 @@ const Footer = () => {
         </div>
         <div className="footer_center">
           <li>
-            <Link to="/">서비스 소개</Link>
+            {/* <Link to="/"></Link> */}
+            서비스 소개
           </li>
           <li>
-            <Link to="/">장인들Team</Link>
+            {/* <Link to="/"></Link> */}
+            장인들Team
           </li>
           <li>
-            <Link to="/">서비스 정책</Link>
+            {/* <Link to="/"></Link> */}
+            서비스 정책
           </li>
         </div>
         <div className="footer_right">
           <li>
-            <Link to="/">
+            {/* <Link to="/"></Link> */}
               <b>개인정보처리방침</b>
-            </Link>
           </li>
           <li>
-            <Link to="/">자주받는 질문 FAQ</Link>
+            {/* <Link to="/">자주받는 질문 FAQ</Link> */}
           </li>
         </div>
       </ul>
