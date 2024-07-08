@@ -13,10 +13,9 @@ import Footer from './common/footer/components/Footer'
 import ChargeMain from './payment/components/ChargeMain';
 import NoLoginMainComponent from './main/components/NoLoginMainComponent';
 import Header from './common/header/components/Header';
-
 import LoginMainComponent from './main/components/LoginMainComponent'
-
 import ListBoard from './helpzone/components/ListBoard';
+import IntroMain from './intro/components/IntroMain';
 
 
 function App() {
@@ -54,7 +53,7 @@ function App() {
       <Router>
         <Header/>
             <Routes>
-              <Route path='/' element={<NoLoginMainComponent/>}/>
+              <Route path='/' element={<IntroMain/>}/>
               <Route path='/pickzone/:personalId' element={<PickZoneUserDetail />} />
               <Route path='/pickzone' element={<UserPickzone />} />
               <Route path='/helpzone' element={<ListBoard />} />
