@@ -18,6 +18,7 @@ import LoginMainComponent from './main/components/LoginMainComponent'
 
 import ListBoard from './helpzone/components/ListBoard';
 import CUBoard from  './helpzone/components/CUBoard';
+import RDBoard from './helpzone/components/RDBoard';
 
 function App() {
   const [userType, setUserType] = useState(null);
@@ -59,8 +60,9 @@ function App() {
           <Route path='/pickzone' element={<UserPickzone />} />
           <Route path="/helpzone" element={<ListBoard />} />
           <Route path="/cuboard" element={<CUBoard />} />
+          <Route path="/rdboard/:corrId" element={<RDBoard />} />
         </Routes>
-        <Footer />
+        {/* <Footer /> */}
       </Router>
     </div>
 

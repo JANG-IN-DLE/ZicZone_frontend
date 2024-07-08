@@ -1,13 +1,12 @@
 
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useParams } from "react-router";
+import "../styles/ListBoard.css";
 import axios from 'axios';
 import HelpZoneIntro from './HelpZoneIntro';
 import FilterButtons from './FilterButtons';
 import Button from './Button';
 import BoardList from './BoardList';
-import "../styles/ListBoard.css";
 
 const ListBoard = () => {
   const [boards, setBoards] = useState([]);
@@ -51,7 +50,7 @@ const ListBoard = () => {
             { '글쓰기' }
           </Button>
         </div>
-        <BoardList boards={boards} />
+        <BoardList boards={ boards } />
       </div>
     </div>
   );

@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import Header from "../../common/header/components/Header";
+import { useNavigate } from "react-router-dom";
 import "../styles/CUBoard.css";
 import ProfileCard from "./ProfileCard";
 import Description from "./Description";
 import PostForm from "./PostForm";
 
 const CUBoard = () => {
-  const [isEditMode, setIsEditMode] = useState(true);
+  const navigate = useNavigate();
+  const [isEditMode, setIsEditMode] = useState(false);
 
   const userProfile = {
     jobs: ['게임 클라이언트', 'devops/시스템', '게임클라이언트'],
@@ -19,15 +20,18 @@ const CUBoard = () => {
   };
 
   const initialData = {
-    berry: 300,
-    title: '자소서 첨삭 요청',
-    content: '경력사항에 아르바이트 적어도 되나요?',
+    berry: 100,
+    title: '',
+    content: '',
     file: null
   };
 
+  const handlePostSubmitSuccess = () => {
+    navigate('/rdboard');
+};
+
   return (
     <div>
-      <Header />
       <div className="b_section">
         <div className="b_profile_card">
           <ProfileCard
@@ -44,7 +48,7 @@ const CUBoard = () => {
           <div className="b_description">
             <Description isEditMode={ isEditMode } />
             <div className="b_title_form">
-              <PostForm isEditMode={ isEditMode } initialData={ initialData } />
+              <PostForm isEditMode={ isEditMode } initialData={ initialData } onSubmit={ handlePostSubmitSuccess }/>
             </div>
           </div>
         </div>
