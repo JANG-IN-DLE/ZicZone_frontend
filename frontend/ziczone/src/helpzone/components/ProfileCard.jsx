@@ -48,13 +48,11 @@ const ProfileCard = ({ jobs, gender, userName, career, point, intro, stacks, isV
             <p className='pc_intro'>
                 { intro }
             </p>
-            {/* 백엔드 진행 후 다시 */}
-            {/* <div className='pc_stacks'>
-                { stacks.map((tech, index) => (
-                                <img key={index} className="tech_icon" src={tech} alt={`Tech${index}`} />
-                            ))
-                }
-            </div> */}
+            <div className='pc_stacks'>
+                {stacks.map((tech, index) => (
+                    <span key={index} className="tech_icon">{tech}</span>
+                ))}
+            </div>
             </div>
         </div>
     );

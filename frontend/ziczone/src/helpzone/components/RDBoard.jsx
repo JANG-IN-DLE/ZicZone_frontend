@@ -27,30 +27,36 @@ const RDBoard = () => {
   });
 
   useEffect(() => {
-    axios
-      .get(`/api/board/${corrId}`)
-      .then((response) => {
-        const data = response.data;
-        // setUserProfile({
-        //   jobs: data.jobs,
-        //   gender: data.gender,
-        //   userName: data.userName,
-        //   career: data.personalCareer,
-        //   point: data.berryPoint,
-        //   intro: data.userIntro,
-        //   stacks: data.techName ? data.techName.split(',') : []
-        // });
-        setPostData({
-          title: data.corrTitle,
-          content: data.corrContent,
-          fileUrl: data.corrPdf
+    const fetchProfileAndPost = async () => {
+      try {
+        const profileResponse = await axios.get(`/api/board/profile/${corrId}`);
+        const postResponse = await axios.get(`/api/board/${corrId}`);
+
+        const profileData = profileResponse.data;
+        setUserProfile({
+          jobs: profileData.jobName.split(','),
+          gender: profileData.gender,
+          userName: profileData.userName,
+          career: profileData.personalCareer,
+          point: profileData.berryPoint,
+          intro: profileData.userIntro,
+          stacks: profileData.techName ? profileData.techName.split(',') : []
         });
-      })
-      .catch((error) => {
+
+        const postData = postResponse.data;
+        setPostData({
+          title: postData.corrTitle,
+          content: postData.corrContent,
+          fileUrl: postData.corrPdf
+        });
+      } catch (error) {
         console.error("오류 메시지: ", error);
-      });
+      }
+    };
+
+    fetchProfileAndPost();
   }, [corrId]);
-    
+
   return (
     <div>
       <div className="b_section">
