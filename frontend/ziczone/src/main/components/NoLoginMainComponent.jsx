@@ -14,18 +14,11 @@ const NoLoginMainComponent = () => {
   const [filterType, setFilterType] = useState("latest");
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(8);
+  const [banner, setBanner] = useState([]);
 
   useEffect(() => {
     axios
-      .get(
-        "/api/pickcards"
-        //   , {
-        //   params: {
-        //     sortBy: "resume_update", //를 기준으로 정렬하도록 요청함
-        //     sortOrder: "desc", // 내림차순 정렬
-        //   },
-        // }
-      )
+      .get("/api/pickcards")
       .then((response) => {
         setPickCards(response.data);
       })
@@ -40,20 +33,26 @@ const NoLoginMainComponent = () => {
           filterType,
           page,
           size,
-          sortBy: "corr_modify", //를 기준으로 정렬하도록 요청함
-          sortOrder: "desc", // 내림차순 정렬
         },
       })
       .then((res) => {
         // 응답 데이터는 res.data.dtoList에 있고ㅡ 이 데이터를 helpZones 상태에 저장함
         sethelpZones(res.data.dtoList);
-        console.log(res);
       })
       .catch((error) => {
         console.error("Error help", error);
       });
-    // 아래 세가지 상태가 변경될때마다 uesEffect를 다시 실행돼 새로운 데이터를 불러옴
-  }, [filterType, page, size]);
+
+    // axios
+    //   .get("/api/main")
+    //   .then((res) => {
+    //     setBanner(res.data);
+    //     console.log(res);
+    //   })
+    //   .catch((error) => {
+    //     console.error("error", error);
+    //   });
+  }, []);
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);

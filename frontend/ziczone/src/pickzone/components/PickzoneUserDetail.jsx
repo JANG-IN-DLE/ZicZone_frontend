@@ -4,7 +4,7 @@ import axios from "axios";
 import UserProfile from "./UserProfile";
 
 export default function PickZoneUserDetail() {
-    const { personalId} = useParams();
+    const { loggedInPersonalId , personalId} = useParams();
     // 회원 정보 담는 hook
     const [userCard, setuserCard] = useState(null);
     // resume 정보 담는 hook
@@ -15,7 +15,7 @@ export default function PickZoneUserDetail() {
 
     useEffect(() => {
         // pickDetail에서 왼쪽에 회원정보 가져오는 axios
-        axios.get(`/api/pickcards/${personalId}`)
+        axios.get(`/api/pickcards/personal/${loggedInPersonalId}/${personalId}`)
             .then(response => {
                 setuserCard(response.data);
             })
@@ -30,7 +30,7 @@ export default function PickZoneUserDetail() {
             .catch(error => {
                 console.log('Error fetching user resume details: ', error )
             });
-    }, [personalId]);
+    }, [loggedInPersonalId, personalId]);
     // 2개 api 같이 가져올 때 밑에 구문 작성해야 rendering 할때 같이 가져와진다.
     if(!userCard || !userResume) {
         return <div>Loading...</div>

@@ -1,57 +1,78 @@
 .resume-container {
-    margin: 20px;
+    margin: 20px auto;
     padding: 20px;
+    max-width: 800px;
     border: 1px solid #ddd;
     border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
 }
 
 .resume-header {
     text-align: center;
     margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
 }
 
 .resume-content {
     display: flex;
-}
-
-.resume-photo {
-    margin-right: 20px;
+    flex-direction: column;
+    align-items: center;
 }
 
 .resume-photo img {
     width: 150px;
     height: 200px;
     border-radius: 8px;
+    object-fit: cover;
+    margin-bottom: 20px;
 }
 
 .resume-details {
-    flex: 1;
+    width: 100%;
 }
 
 .resume-details h3 {
     margin-top: 0;
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+}
+
+.resume-details p {
+    margin: 4px 0;
+    font-size: 16px;
+    color: #555;
 }
 
 .techs, .education, .curriculum, .certifications, .etc, .archive {
     margin-bottom: 20px;
 }
 
-.techs img {
-    width: 30px;
-    height: 30px;
-    margin: 4px;
+.techs h4, .education h4, .curriculum h4, .certifications h4, .etc h4, .archive h4 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
 }
 
-.techs-badge {
+.jobs-badge {
     display: inline-block;
     margin: 4px;
     padding: 6px 12px;
     background-color: #f0f0f0;
     border-radius: 16px;
+    font-size: 14px;
+    color: #333;
 }
 
-h4 {
-    margin-bottom: 10px;
+.techs img {
+    width: 102px;
+    height: 38px;
+    margin: 10px 4px;
+    object-fit: cover;
 }
 
 .archive a {

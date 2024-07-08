@@ -2,8 +2,8 @@ import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { useFormContext } from '../components/FormContext';
 
-const useEmailVerification = () => {
-    const {formData, updateFormData} = useFormContext();
+const useEmailVerification = ( type ) => {
+    const formContext = useFormContext();
     const [email, setEmail] = useState(''); // 이메일
     const [inputCode, setInputCode] = useState(''); // 인증코드
     const [isSend, setIsSend] = useState(""); //전송성공여부
@@ -61,11 +61,15 @@ const useEmailVerification = () => {
             return;
         }
         try {
-            const response = await axios.post('/api/auth/email-verification', { email });
+            const api_send = type === "login" ? '/api/login/emailAuth' : '/api/auth/email-verification'
+            const response = await axios.post(api_send, { email });
             if (response.status === 200 && response.data === "Email Duplication") {
                 console.log(response.data);
                 setIsSend("duplication_email");
-            } else if (response.status === 200 && response.data !== "Email Duplication") {
+            } if (response.status === 200 && response.data === "email empty") {
+                console.log(response.data);
+                setIsSend("empty_email");
+            } else if (response.status === 200 && response.data === "email sent") {
                 console.log(response.data);
                 setIsSend("send_success");
                 setIsAuth(""); //다시 인증번호 보낼때 인증상태 초기화
@@ -86,16 +90,18 @@ const useEmailVerification = () => {
     if(isAuth==="auth_expired")
         return;
 
+        const api_code = type==="login" ? 'api/login/emailAuth/verify-email' : '/api/auth/email-verification/complete';
         try {
-            const response = await axios.post('/api/auth/email-verification/complete', { email, code: inputCode });
+            const response = await axios.post(api_code, { email, code: inputCode });
             // 인증성공
             if (response.status === 200 && response.data === "Auth Success") {
                 setIsAuth("auth_success");
                 clearInterval(timerRef.current); // 인증 성공 시 타이머 정지
-                updateFormData('email', email);
-                console.log('Email verification successful. Updated formData:', formData); //formData확인
-            }else {
-                setIsAuth("auth_fail")
+                if (type !== 'login' && formContext?.updateFormData) {
+                    formContext.updateFormData('email', email);
+                }
+            }else if (response.status === 200 && response.data === "Auth Fail") {
+                setIsAuth("auth_wrong");
             }
         } catch (error) {
             setIsAuth("auth_error")
@@ -112,8 +118,7 @@ const useEmailVerification = () => {
         handleCodeChange,
         sendVerificationEmail,
         verifyAuthCode,
-        formatTime,
-        formData
+        formatTime
     };
 };
 

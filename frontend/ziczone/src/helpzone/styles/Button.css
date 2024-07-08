@@ -12,6 +12,15 @@
     cursor: pointer;
     font-size: 16px;
     font-family: 'Pretendard-Regular';
+    /* 리액트에서는 { } 안에 넣은 텍스트도 자식 요소로 취급 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 버튼 클릭 효과 */
+.button:active {
+    transform: scale(0.97);
 }
 
 .button.cancel {
@@ -25,4 +34,14 @@
     background-color: #0051BA;
     color: #FFF;
     border: none;
+}
+
+.lb_write {
+    width: 95px;
+    height: 36px;
+    background-color: #0051BA;
+    color: #FFF;
+    font-size: 18px;
+    border: none;
+    border-radius: 12px;
 }

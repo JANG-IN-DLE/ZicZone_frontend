@@ -48,23 +48,23 @@ const getPointStyle = (point) => {
 const BoardItem = ({ board }) => {
   return (
     <div className='bi_container'>
-      <div className='item_point' style={getPointStyle(board.corrPoint)}>
-        {board.corrPoint}
+      <div className='item_point' style={ getPointStyle(board.corrPoint) }>
+        { board.corrPoint }
       </div>
       <div className='bi_container_center'>
         <div className='item_title'>
-          {board.corrTitle}
+          { board.corrTitle }
         </div>
         <div className='item_userInfo'>
-          {board.userName} | {board.personalCareer}
+          { board.userName } | { board.personalCareer }
         </div>
       </div>
       <div className='bi_container_end'>
         <div className='item_date'>
-          {getRelativeTime(board.corrModify)}
+          { getRelativeTime(board.corrModify) }
         </div>
         <div className='item_view'>
-          조회수 {board.corrView}
+          조회수 { board.corrView }
         </div>
       </div>
     </div>

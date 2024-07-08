@@ -35,7 +35,7 @@ const ProfileCard = ({ jobs, gender, userName, career, point, intro, stacks, isV
                 <img src={ personal_image } alt='개인회원 이미지'/>
             </div>
             <p className='pc_name_career'>
-                { isViewMode ? maskName(userName) : userName} | { career }
+                { isViewMode ? maskName(userName) : userName } | { career }
             </p>
             {!isViewMode && (
                 <div className='pc_point'>

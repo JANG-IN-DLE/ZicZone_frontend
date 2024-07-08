@@ -1,17 +1,19 @@
 
 import React, { useState, useEffect } from 'react';
-import { useParams } from "react-router";
+import { useNavigate } from 'react-router-dom';
+import "../styles/ListBoard.css";
 import axios from 'axios';
 import HelpZoneIntro from './HelpZoneIntro';
 import FilterButtons from './FilterButtons';
+import Button from './Button';
 import BoardList from './BoardList';
-import "../styles/ListBoard.css";
 
 const ListBoard = () => {
   const [boards, setBoards] = useState([]);
   const [filterType, setFilterType] = useState("latest");
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(8);
+  const navigate = useNavigate();
 
   /*
   상태가 변경될 때마다 특정 API 엔드 포인트(/api/board/filter)에 GET 요청 보내고
@@ -34,12 +36,21 @@ const ListBoard = () => {
       });
   }, [filterType, page, size]);
 
+  const handleWriteButton = () => {
+    navigate('/cuboard');  // CUBoard로 이동
+  };
+
   return (
     <div>
       <div className='lb_section'>
         <HelpZoneIntro />
-        <FilterButtons setFilterType={setFilterType} />
-        <BoardList boards={boards} />
+        <div className='lb_menu'>
+          <FilterButtons setFilterType={ setFilterType } />
+          <Button type="button" className="lb_write" onClick={ handleWriteButton }>
+            { '글쓰기' }
+          </Button>
+        </div>
+        <BoardList boards={ boards } />
       </div>
     </div>
   );

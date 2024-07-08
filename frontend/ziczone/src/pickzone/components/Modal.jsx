@@ -5,14 +5,14 @@ import axios from "axios";
 
 const Modal = ({ isOpen, onClose, userName, onOpen, selectedCard}) => {
     if(!isOpen) return null;
-    // 일단 임시로 로그인한 사람 3
-    const currentUser = 3;
+    // 일단 임시로 로그인한 사람 1
+    const loggedInPersonalId = 1;
 
     // handleOpen을 실행하면 openCardData를 보낸다.
     const handleOpen = () => {
         const openCardData = {
             sellerId: selectedCard.personalId,
-            buyerId: currentUser,
+            buyerId: loggedInPersonalId,
             payHistoryContent: "이력서 조회",
             payHistoryDate : new Date().toISOString()
         };
