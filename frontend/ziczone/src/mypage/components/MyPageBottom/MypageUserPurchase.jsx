@@ -11,9 +11,7 @@ const MypageUserPurchase = ({ gender, jobPositions, userName, personalCareer, us
                         <p>{jobPositions}</p>
                     </div>
                     <div className="mypage_purchase_name">
-                        <p>{userName}</p>
-                        <p> | </p>
-                        <p>{personalCareer}</p>
+                        <p>{userName} | {personalCareer}</p>
                     </div>
                     <div className="mypage_purchase_intro">
                         <p>{userIntro}</p>

@@ -5,9 +5,7 @@ const MypageLeft = ({ userName, personalCareer, userIntro, email, jobPositions, 
     return (
         <div>
             <div className="mypage_user_title">
-                <span className="name">{userName}</span>
-                <span> | </span>
-                <span className="career">{personalCareer}</span>
+                <p>{userName} | {personalCareer}</p>
             </div>
             <div className="mypage_user_left">
                 <div className="mypage_user_intro">

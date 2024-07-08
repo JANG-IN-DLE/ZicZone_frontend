@@ -3,14 +3,13 @@ import axios from 'axios';
 import MypageUserPurchase from './MypageUserPurchase';
 
 const MypagePurchaseHistory = () => {
-    const userId = 3;
-    const [personalUsers, setPersonalUsers] = useState([]);
+    const userId = 1;
+    const [purchaseData, setPurchaseData] = useState([]);
 
     useEffect(() => {
         axios.get(`/api/purchased/${userId}`)
             .then(response => {
-                console.log("API response:", response.data.personalUsers);
-                setPersonalUsers(response.data.personalUsers);
+                setPurchaseData(response.data.personalUsers);
             })
             .catch(error => {
                 console.log("purchaseData 호출 실패: ", error);
@@ -19,7 +18,7 @@ const MypagePurchaseHistory = () => {
 
     return (
         <div className='pick_purchase_history'>
-            {personalUsers.map((user, index) => (
+            {purchaseData.map((user, index) => (
                 <MypageUserPurchase
                     key={index}
                     userName={user.user.userName}

@@ -3,7 +3,7 @@ import axios from 'axios';
 import MypageLeft from "./MypageLeft";
 
 function MypageLeftContent() {
-    const userId = 3;
+    const userId = 1;
     const [leftData, setLeftData] = useState({
         userName: "",
         personalCareer: "",
