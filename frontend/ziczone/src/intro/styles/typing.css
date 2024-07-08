@@ -1,0 +1,114 @@
+
+/* jsx에서는 \n 혹은 <br>을 문자열로 인식해서
+이 속성을 주고 \n을 해야 줄바꿈을 할 수 있음 */
+div {white-space: pre-wrap;
+}
+
+.banner{
+  margin: 0 auto;
+  padding-top: 220px;
+  width: 640px;
+  height: 600px;
+  flex-direction: column;
+  background-color: white;
+}
+
+.banner div p {
+  font-size: 70px;
+  display: inline;
+  font-weight: 700;
+
+}
+
+.banner div .cursor {
+  font-size: 70px;
+  opacity: 1;
+}
+
+.blink_animate {
+  animation: blink 0.8s infinite; /* 0.8초 간격으로 무한 반복 */
+}
+
+.introimg{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+@keyframes blink {
+  0% {
+    opacity: 0; /* 처음에는 보이지 않음 */
+  }
+  50% {
+    opacity: 1; /* 절반 시간 동안 보임 */
+  }
+  100% {
+    opacity: 0; /* 끝나기 전에 다시 보이지 않음 */
+  }
+}
+
+.ziczone_introduce{
+  width: 1440px;
+  height: 2000px;
+  background-color: black;
+  margin: auto;
+  margin-top: -5px;
+}
+
+.ziczone_introduce_text{
+  margin: auto;
+  width: 1080px;
+  color: white;
+  font-size: 48px;
+  font-weight: 800;
+  text-align: center;
+  padding-top: 200px;
+}        
+
+.company_slide{
+  display: flex;
+  margin: auto;
+  flex-direction: column;
+  align-items: center;
+}
+
+.company_slide_container {
+  width: 1440px !important;
+}
+
+.company_slide{
+  font-size: 70px;
+  font-weight: 700;
+}
+
+.ziczone_sign_company,
+.ziczone_signup {
+  margin-top: 130px;
+  height: 240px;
+}
+
+.ziczone_join{
+  display: flex;
+  margin: auto;
+  flex-direction: column;
+  align-items: center;
+}
+.ziczone_signup {
+    font-size: 70px;
+  font-weight: 700;
+}
+
+.user_signup{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 60px;
+}
+
+.personal_signup,
+.company_signup{
+  width: 500px;
+  height: 600px;
+  background-color: skyblue;
+  margin-bottom: 200px;
+  
+}
