@@ -17,7 +17,7 @@ const EmailInput = () => {
     } = useEmailVerification();
 
     return (
-        <div className="inputform email">
+        <div className="inputform signup_email">
             <p>이메일</p>
             <div className="email_box">
                 <div className="email_input_box">
