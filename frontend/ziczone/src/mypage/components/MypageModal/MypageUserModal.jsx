@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import './../../styles/MypageEdit.css'
 
 const MypageUserModal = ({ setIsModalOpen }) => {
     const handleCloseClick = () => {
         setIsModalOpen(false);
     };
+
+    const [currentPassword, setCurrentPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState(false);
+
 
     return (
         <div className="mypage_user_modal">

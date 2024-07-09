@@ -1,5 +1,8 @@
 import logo from './logo.svg';
 import React, { useEffect, useState } from 'react';
+import Resume from './resume/components/Resume';
+import ResumeView from "./resume/components/ResumeView"
+
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import axios from 'axios';
 import UserPickzone from './pickzone/components/UserPickzone';
@@ -24,8 +27,9 @@ import CompanyzoneMain from './companyzone/components/CompanyzoneMain';
 import IntroMain from './intro/components/IntroMain';
 
 
+
 function App() {
-  const [userType, setUserType] = useState(null);
+  // const [userType, setUserType] = useState(null);
 
   // 나중에 로그인 할때 session에서 회원 정보 비교하기 위해서
   // useEffect(() => {
@@ -43,6 +47,7 @@ function App() {
   // }
 
   return (
+
 //   <div>
   //   <Router>
   //   <Routes>

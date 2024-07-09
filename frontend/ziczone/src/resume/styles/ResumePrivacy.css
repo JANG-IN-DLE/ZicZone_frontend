@@ -10,7 +10,7 @@
     margin: 45px 32px 0 80px;
 }
 
-.resume_name input {
+.resume_name p {
     width: 234px;
     height: 40px;
     border: none;
@@ -41,6 +41,16 @@
 .resume_email input,
 .resume_phone input,
 .resume_birthdate input {
+    width: 234px;
+    height: 20px;
+    border: none;
+    font-size: 17px;
+    margin-left: 14px;
+}
+
+.resume_email p,
+.resume_phone p,
+.resume_birthdate p {
     width: 234px;
     height: 20px;
     border: none;
