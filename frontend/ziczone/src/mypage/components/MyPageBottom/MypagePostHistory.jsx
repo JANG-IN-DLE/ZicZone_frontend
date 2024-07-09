@@ -3,7 +3,7 @@ import axios from 'axios';
 import BoardItem from './../../../helpzone/components/BoardItem';
 
 const MypagePostHistory = () => {
-    const userId = 1;
+    const userId = 7;
     const [postData, setPostData] = useState([]);
 
     useEffect(() => {

@@ -3,7 +3,7 @@ import axios from 'axios';
 import MypageUserPurchase from './MypageUserPurchase';
 
 const MypagePurchaseHistory = () => {
-    const userId = 1;
+    const userId = 7;
     const [purchaseData, setPurchaseData] = useState([]);
 
     useEffect(() => {

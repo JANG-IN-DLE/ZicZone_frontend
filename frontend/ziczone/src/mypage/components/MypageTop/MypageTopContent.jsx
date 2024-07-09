@@ -3,7 +3,7 @@ import MypageTop from "./MypageTop";
 import axios from "axios";
 
 const MypageTopContent = () => {
-    const userId = 3;
+    const userId = 7;
     const [topData, setTopData] = useState({
         gender: ""
     })
