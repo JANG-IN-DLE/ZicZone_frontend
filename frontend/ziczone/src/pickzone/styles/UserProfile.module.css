@@ -1,4 +1,4 @@
-.pick-button {
+.pick_button {
     background-color: #007bff;
     color: white;
     border: none;
@@ -13,6 +13,6 @@
     bottom: 0;
 }
 
-.pick-button:hover {
+.pick_button:hover {
     background-color: #0056b3;
 }

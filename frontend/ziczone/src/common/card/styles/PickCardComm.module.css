@@ -5,7 +5,7 @@
     row-gap: 35px;
     max-width: 1080px;
     line-height: 25px;
-    margin: 0 auto;
+    margin: 40px auto;
 }
 .user_card {
     width: 510px;
@@ -40,7 +40,6 @@
 .pick_user_image_container {
     width: 65px;
     height: 65px;
-    background-color: #0051BA;
     margin-top: 40px;
     margin-left: 30px;
 }

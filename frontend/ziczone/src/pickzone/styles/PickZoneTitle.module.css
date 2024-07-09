@@ -1,0 +1,44 @@
+@font-face {
+    font-family: 'Giants-Bold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/Giants-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-style: normal;
+}
+
+.pick_zone_intro {
+    margin-bottom: 10px;
+    padding-top: 120px;
+}
+
+.pzi_title {
+   display: flex;
+   justify-content: center;
+}
+
+.pzi_title > p {
+    font-family: 'Giants-Bold';
+    font-size: 40px;
+    color: #000;
+    margin-bottom: 0px;
+}
+
+.pzi_title > img {
+    width: 40px;
+    height: 40px;
+    margin-top: 12px;
+    margin-left: 10px;
+}
+
+.pzi_sub {
+    font-family: 'Pretendard-Regular';
+    font-size: 16px;
+    color: #5D5D5D;
+    text-align: center;
+    margin-top: 5px;
+}

@@ -40,15 +40,15 @@
     border-radius: 50%;
 }
 
-.red {
+.header_circle_red {
     background-color: #ff5f56;
 }
 
-.yellow {
+.header_circle_yellow {
     background-color: #ffbd2e;
 }
 
-.green {
+.header_circle_green {
     background-color: #27c93f;
 }
 

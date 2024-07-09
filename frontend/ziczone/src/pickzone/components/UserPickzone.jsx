@@ -5,8 +5,9 @@ import Job from "./Job";
 import PickCard from "../../common/card/components/PickCard";
 import personalMImage from '../../common/card/assets/personal_m_image.png';
 import personalFImage from '../../common/card/assets/personal_f_image.png';
-import '../../common/stackjob/styles/Job.css';
+import PickZoneJobstyle from '../styles/PickZoneJob.module.css';
 import Modal from "./Modal";
+import PickCardCommstyle from '../../common/card/styles/PickCardComm.module.css';
 
 function UserPickzone() {
     const [pickCards, setPickCards] = useState([]);
@@ -92,13 +93,13 @@ function UserPickzone() {
     return (
         <div>
             <h2>Jobs</h2>
-            <div className="jobs">
+            <div className={PickZoneJobstyle.jobs}>
                 {jobs.map(job => (
                     <Job key={job.jobId} job={job} onClick={()=> handleJobClick(job)} isSelected={selectedJobs.includes(job.jobName)}/>
                 ))}
             </div>
             <h2>Pick Cards</h2>
-            <div className="user_card_container">
+            <div className={PickCardCommstyle.user_card_container}>
             {selectedCard && (
                 <Modal 
                     isOpen={isOpen}
