@@ -65,14 +65,14 @@ div {white-space: pre-wrap;
   padding-top: 200px;
 }        
 
-.company_slide{
+.ziczone_intro_container .company_slide{
   display: flex;
   margin: auto;
   flex-direction: column;
   align-items: center;
 }
 
-.company_slide_container {
+.ziczone_intro_container .company_slide_container {
   width: 1440px !important;
 }
 

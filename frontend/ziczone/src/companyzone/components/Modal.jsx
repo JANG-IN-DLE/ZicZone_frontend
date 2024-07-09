@@ -12,9 +12,9 @@ const Modal = ({ isOpen, onClose, children }) => {
 
   return (
     <div className="background" onClick={backClick}>
-      <div className="modal">
+      <div className="company_modal">
         <div className="company_modal_body">
-          <div className="header">
+          <div className="company_modal_header">
             <div className="circles">
               <div className="header_circle red"></div>
               <div className="header_circle yellow"></div>
