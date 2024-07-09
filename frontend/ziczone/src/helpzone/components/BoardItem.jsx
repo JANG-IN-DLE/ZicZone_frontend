@@ -46,6 +46,18 @@ const getPointStyle = (point) => {
   }
 };
 
+ // 이름 * 부분 처리 
+ const maskName = (name) => {
+  if (name.length < 2) return name;
+  if (name.length === 2) {
+      return `${name[0]}*`;
+  }
+  const maskedLength = name.length - 2;
+  const start = name[0];
+  const end = name[name.length - 1];
+  return `${start}${'*'.repeat(maskedLength)}${end}`;
+};
+
 const BoardItem = ({ board }) => {
   const navigate = useNavigate();
 
@@ -63,7 +75,7 @@ const BoardItem = ({ board }) => {
           { board.corrTitle }
         </div>
         <div className='item_userInfo'>
-          { board.userName } | { board.personalCareer }
+          { maskName(board.userName) } | { board.personalCareer }
         </div>
       </div>
       <div className='bi_container_end'>
