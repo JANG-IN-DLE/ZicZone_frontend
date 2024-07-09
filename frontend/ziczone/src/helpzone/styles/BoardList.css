@@ -1,5 +1,21 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-style: normal;
+}
+
 .board_list {
     margin-top: 57px;
+}
+
+.bl_none {
+    height: 580px;
+    line-height: 580px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 18px;
+    font-family: 'Pretendard-Regular';
+    color: #5D5D5D;
 }
 
 .lb_menu {
