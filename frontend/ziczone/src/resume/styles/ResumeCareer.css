@@ -45,6 +45,11 @@
     font-size: 17px;
 }
 
+.resume_career_input p {
+    border: none;
+    font-size: 17px;
+}
+
 .resume_career_input input:focus {
     border: none;
     outline: none;
@@ -76,9 +81,9 @@
     display: flex;
 }
 
-.career_company p{
+/* .career_company p{
     margin: 0 10px;
-}
+} */
 
 .career_company_position {
     width: 30px;

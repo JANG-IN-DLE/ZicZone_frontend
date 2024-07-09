@@ -45,6 +45,11 @@
     font-size: 17px;
 }
 
+.resume_curri_input p {
+    border: none;
+    font-size: 17px;
+}
+
 .resume_curri_input input:focus {
     border: none;
     outline: none;
@@ -76,9 +81,9 @@
     display: flex;
 }
 
-.curri_company p{
+/* .curri_company p{
     margin: 0 10px;
-}
+} */
 
 .curri_company_position {
     width: 30px;

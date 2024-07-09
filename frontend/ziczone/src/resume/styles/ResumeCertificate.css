@@ -45,6 +45,11 @@
     font-size: 17px;
 }
 
+.resume_cert_input p {
+    border: none;
+    font-size: 17px;
+}
+
 .resume_cert_input input:focus {
     border: none;
     outline: none;

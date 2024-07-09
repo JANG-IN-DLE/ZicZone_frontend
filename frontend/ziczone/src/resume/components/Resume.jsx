@@ -22,7 +22,7 @@ const Resume = () => {
 
     return (
         <div>
-            <Header />
+            {/* <Header /> */}
             <div className="resume">
                 <div className="resume_container">
                     <p className="resume_title">직존 지원서</p>
@@ -39,9 +39,6 @@ const Resume = () => {
                         <ResumeArchive />
                         <ResumeIntroduction />
                         <ResumePortfolio />
-                    </div>
-                    <div className="resume_save">
-                        <button className="resume_save_btn" onClick={handleSave}>저장하기</button>
                     </div>
                 </div>
             </div>
