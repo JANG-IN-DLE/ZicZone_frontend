@@ -1,4 +1,4 @@
-.resume-container {
+.resume_container {
     margin: 20px auto;
     padding: 20px;
     max-width: 800px;
@@ -8,7 +8,7 @@
     background-color: #fff;
 }
 
-.resume-header {
+.resume_header {
     text-align: center;
     margin-bottom: 20px;
     font-size: 24px;
@@ -16,13 +16,13 @@
     color: #333;
 }
 
-.resume-content {
+.resume_content {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.resume-photo img {
+.resume_photo img {
     width: 150px;
     height: 200px;
     border-radius: 8px;
@@ -30,18 +30,18 @@
     margin-bottom: 20px;
 }
 
-.resume-details {
+.resume_details {
     width: 100%;
 }
 
-.resume-details h3 {
+.resume_details h3 {
     margin-top: 0;
     font-size: 20px;
     font-weight: bold;
     color: #333;
 }
 
-.resume-details p {
+.resume_details p {
     margin: 4px 0;
     font-size: 16px;
     color: #555;
@@ -58,7 +58,7 @@
     color: #333;
 }
 
-.jobs-badge {
+.jobs_badge {
     display: inline-block;
     margin: 4px;
     padding: 6px 12px;

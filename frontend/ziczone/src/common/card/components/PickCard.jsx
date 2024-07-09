@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from 'axios';
 import {useNavigate} from "react-router-dom";
-import '../styles/PickCard.css';
+import PickCardCommstyle from '../styles/PickCardComm.module.css';
 import scrapImg from "../assets/scrap.svg";
 import unscrapImg from "../assets/unscrap.svg";
 
@@ -27,31 +27,31 @@ const PickCard = ({onClick, userImage, jobNames=[], userName, userCareer, userIn
     };
     
     return (
-                <div className="user_card" onClick={onClick}>
+                <div className={PickCardCommstyle.user_card} onClick={onClick}>
                     {isCompanyUser && (
-                        <button className="scrap_button" onClick={handleScrapClick}>
+                        <button className={PickCardCommstyle.scrap_button} onClick={handleScrapClick}>
                             <img src={scrap ? unscrapImg : scrapImg} alt="Scrap"/>
                         </button>
                     )}
-                    <div className="pick_user_image_container">
-                        <img className="pick_user_image" src={userImage} alt="User" />
+                    <div className={PickCardCommstyle.pick_user_image_container}>
+                        <img className={PickCardCommstyle.pick_user_image} src={userImage} alt="User" />
                     </div>
-                    <div className="pick_user_info">
-                        <div className="pick_user_job">
+                    <div className={PickCardCommstyle.pick_user_info}>
+                        <div className={PickCardCommstyle.pick_user_job}>
                             {jobNames.map((job, index)=> (
                                 <span key={index}>#{job}</span>
                             ))}
                         </div>
-                        <div className="pick_user_name">
+                        <div className={PickCardCommstyle.pick_user_name}>
                             {userName}
-                            <span className="pick_user_career"> | {userCareer}</span>
+                            <span className={PickCardCommstyle.pick_user_career}> | {userCareer}</span>
                         </div>
-                        <div className="pick_user_intro">
+                        <div className={PickCardCommstyle.pick_user_intro}>
                             {userIntro}
                         </div>
-                        <div className="pick_user_tech">
+                        <div className={PickCardCommstyle.pick_user_tech}>
                             {techUrls.map((tech, index) => (
-                                <img key={index} className="tech_icon" src={tech} alt={`Tech${index}`} />
+                                <img key={index} className={PickCardCommstyle.tech_icon} src={tech} alt={`Tech${index}`} />
                             ))}
                         </div>
                     </div>
