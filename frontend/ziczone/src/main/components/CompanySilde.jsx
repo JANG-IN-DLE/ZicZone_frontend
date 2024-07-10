@@ -15,7 +15,7 @@ const CompanySilde = () => {
   return (
     <>
       <div className="company_slide_container">
-        <ul class="boxes">
+        <ul className="boxes">
           <li>
             <img src={com_logo1} alt="로고1" />
           </li>
