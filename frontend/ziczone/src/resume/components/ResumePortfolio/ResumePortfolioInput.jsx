@@ -1,8 +1,9 @@
 import React from 'react';
 import useFileUpload from './../../hooks/useFileUpload';
-import erase from "./../../assets/Delete.png";
+import file_delete from "./../../assets/Delete.png";
+import resume_delete from "./../../assets/Minus.png"
 
-const ResumePortfolioInput = () => {
+const ResumePortfolioInput = ({ id, removeInput }) => {
     const {
         fileInputRef,
         fileName,
@@ -15,9 +16,9 @@ const ResumePortfolioInput = () => {
         <div className="resume_portfolio_upload">
             <div className='portfolio_file_upload'>
                 {fileName && <span className="portfolio_file_name">{fileName}</span>}
-                {fileName && <img src={erase} alt="삭제" onClick={handleClearFile} style={{ cursor: 'pointer' }} />}
+                {fileName && <img src={file_delete} alt="삭제" onClick={handleClearFile} style={{ cursor: 'pointer' }} />}
             </div>
-            <button onClick={handleButtonClick} className="file_upload_button">
+            <button onClick={handleButtonClick} className="port_upload_button">
                 파일첨부
             </button>
             <input
@@ -28,6 +29,9 @@ const ResumePortfolioInput = () => {
                 style={{ display: "none" }}
                 onChange={handleFileChange}
             />
+            <div className="port_delete" onClick={removeInput}>
+                <img src={resume_delete} alt="delete" />
+            </div>
         </div>
     );
 };

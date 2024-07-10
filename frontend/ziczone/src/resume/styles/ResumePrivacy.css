@@ -10,6 +10,14 @@
     margin: 45px 32px 0 80px;
 }
 
+.resume_name input {
+    width: 234px;
+    height: 40px;
+    border: none;
+    font-size: 33px;
+    font-weight: bold;
+}
+
 .resume_name p {
     width: 234px;
     height: 40px;

@@ -1,13 +1,17 @@
 import { useState } from "react";
 
-const useAddInput = (initialComponent) => {
-    const [inputs, setInputs] = useState([initialComponent]);
+const useAddInput = () => {
+    const [inputs, setInputs] = useState([0]);
 
-    const addInput = (Component) => {
-        setInputs([...inputs, <Component key={inputs.length} />]);
+    const addInput = () => {
+        setInputs(prevInputs => [...prevInputs, prevInputs.length]);
     };
 
-    return [inputs, addInput];
+    const removeInput = (id) => {
+        setInputs(prevInputs => prevInputs.filter(inputId => inputId !== id));
+    };
+
+    return [inputs, addInput, removeInput];
 };
 
 export default useAddInput;

@@ -63,13 +63,17 @@
     margin-right: 32px;
 }
 
+.career_history {
+    margin-right: 20px;
+}
+
 .career_date {
     display: flex;
     width: 190px;
     margin-right: 60px;
 }
 
-.career_date input{
+.career_date input {
     width: 80px;
 }
 

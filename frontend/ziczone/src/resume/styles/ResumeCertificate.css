@@ -63,6 +63,10 @@
     margin-right: 32px;
 }
 
+.cert_history {
+    margin-right: 20px;
+}
+
 .cert_date {
     display: flex;
     width: 190px;

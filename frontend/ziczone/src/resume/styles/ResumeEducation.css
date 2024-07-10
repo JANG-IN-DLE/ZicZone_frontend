@@ -72,6 +72,10 @@
     margin: 0 10px;
 }
 
+.edu_history {
+    margin-right: 20px;
+}
+
 .edu_score {
     display: flex;
 }

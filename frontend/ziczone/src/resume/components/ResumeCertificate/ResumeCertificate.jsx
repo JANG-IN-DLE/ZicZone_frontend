@@ -5,18 +5,20 @@ import ResumeCertificateInput from "./../ResumeCertificate/ResumeCertificateInpu
 import useAddInput from "./../../hooks/useAddInput"
 
 const ResumeCertificate = () => {
-    const [inputs, addInput] = useAddInput(<ResumeCertificateInput key={0} />);
+    const [inputs, addInput, removeInput] = useAddInput();
 
     return (
         <div className="resume_cert">
             <div className="resume_cert_title">
                 <p className="cert_title">자격증</p>
-                <div className="plus_button" onClick={() => addInput(ResumeCertificateInput)}>
+                <div className="plus_button" onClick={addInput}>
                     <img src={plus_btn} alt="Plus_btn" />
                 </div>
             </div>
             <div className="resume_bar"></div>
-            {inputs}
+            {inputs.map((id) => (
+                <ResumeCertificateInput key={id} id={id} removeInput={() => removeInput(id)} />
+            ))}
         </div>
     );
 }

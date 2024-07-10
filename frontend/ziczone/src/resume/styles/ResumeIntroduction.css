@@ -35,26 +35,27 @@
     display: flex;
     align-items: center;
     margin-top: 30px;
+    width: 600px;
+    margin-left: 80px;
 }
 
 .introduction_file_upload {
-    width: 470px;
+    width: 450px;
     height: 35px;
     border: 1px solid #ABABAB;
     border-radius: 8px;
     margin-right: 12px;
-    margin-left: 80px;
     display: flex;
     align-items: center;
 }
 
 .introduction_file_name {
-    width: 415px;
+    width: 388px;
     font-size: 17px;
     margin-left: 20px;
 }
 
-.file_upload_button {
+.intro_upload_button {
     background-color: #fff;
     border: 1px solid #0051BA;
     border-radius: 8px;
@@ -64,6 +65,6 @@
     font-size: 15px;
 }
 
-.file_upload_button:hover {
+.intro_upload_button:hover {
     background-color: #f0f0f0;
 }

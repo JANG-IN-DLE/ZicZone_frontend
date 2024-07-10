@@ -40,6 +40,9 @@ const Resume = () => {
                         <ResumeIntroduction />
                         <ResumePortfolio />
                     </div>
+                    <div className="resume_save">
+                        <button className="resume_save_btn" onClick={handleSave}>저장하기</button>
+                    </div>
                 </div>
             </div>
         </div>

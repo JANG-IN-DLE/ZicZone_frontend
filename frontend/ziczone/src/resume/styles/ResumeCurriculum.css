@@ -63,6 +63,10 @@
     margin-right: 32px;
 }
 
+.curri_history {
+    margin-right: 20px;
+}
+
 .curri_date {
     display: flex;
     width: 190px;
