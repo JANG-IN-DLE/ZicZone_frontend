@@ -1,6 +1,7 @@
 import React from "react";
+import resume_delete from "./../../assets/Minus.png"
 
-const ResumeEtcInput = () => {
+const ResumeEtcInput = ({ id, removeInput }) => {
 
     return (
         <div className="resume_etc_input">
@@ -12,6 +13,9 @@ const ResumeEtcInput = () => {
             </div>
             <div className="etc_history">
                 <input type="text" placeholder="기타" />
+            </div>
+            <div className="cert_delete" onClick={removeInput}>
+                <img src={resume_delete} alt="" />
             </div>
         </div>
     )

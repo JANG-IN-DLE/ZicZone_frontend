@@ -63,6 +63,10 @@
     margin-right: 32px;
 }
 
+.etc_history {
+    margin-right: 20px;
+}
+
 .etc_date {
     display: flex;
     width: 190px;

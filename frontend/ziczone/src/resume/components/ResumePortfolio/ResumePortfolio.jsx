@@ -5,7 +5,7 @@ import ResumePortfolioInput from "./../ResumePortfolio/ResumePortfolioInput";
 import useAddInput from "./../../hooks/useAddInput"
 
 const ResumePortfolio = () => {
-    const [inputs, addInput] = useAddInput(<ResumePortfolioInput key={0} />);
+    const [inputs, addInput, removeInput] = useAddInput();
 
     return (
         <div className="resume_portfolio">
@@ -16,7 +16,9 @@ const ResumePortfolio = () => {
                 </div>
             </div>
             <div className="resume_bar"></div>
-            {inputs}
+            {inputs.map((id) => (
+                <ResumePortfolioInput key={id} id={id} removeInput={() => removeInput(id)} />
+            ))}
         </div>
     );
 }

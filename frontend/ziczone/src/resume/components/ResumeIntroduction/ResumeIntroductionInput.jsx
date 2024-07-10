@@ -17,7 +17,7 @@ const ResumeIntroductionInput = () => {
                 {fileName && <span className="introduction_file_name">{fileName}</span>}
                 {fileName && <img src={erase} alt="삭제" onClick={handleClearFile} style={{ cursor: 'pointer' }} />}
             </div>
-            <button onClick={handleButtonClick} className="file_upload_button">
+            <button onClick={handleButtonClick} className="intro_upload_button">
                 파일첨부
             </button>
             <input

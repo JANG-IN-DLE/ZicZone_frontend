@@ -1,6 +1,7 @@
 import React from "react";
+import resume_delete from "./../../assets/Minus.png"
 
-const ResumeCareerInput = () => {
+const ResumeCareerInput = ({ removeInput }) => {
     return (
         <div className="resume_career_input">
             <div className="resume_circle"></div>
@@ -13,9 +14,12 @@ const ResumeCareerInput = () => {
                 <input type="text" placeholder="기업명" />
                 <div className="career_company">
                     <input className="career_company_position" type="text" placeholder="직책" />
-                    <p>/</p>
+                    <p> / </p>
                     <input className="career_company_job" type="text" placeholder="직무" />
                 </div>
+            </div>
+            <div className="career_delete" onClick={removeInput}>
+                <img src={resume_delete} alt="delete" />
             </div>
         </div>
     );

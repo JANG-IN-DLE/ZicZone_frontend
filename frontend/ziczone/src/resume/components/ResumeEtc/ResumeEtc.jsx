@@ -5,19 +5,21 @@ import ResumeEtcInput from "./../ResumeEtc/ResumeEtcInput";
 import useAddInput from "./../../hooks/useAddInput"
 
 const ResumeEtc = () => {
-    const [inputs, addInput] = useAddInput(<ResumeEtcInput key={0} />);
+    const [inputs, addInput, removeInput] = useAddInput();
 
     return (
         <div className="resume_etc">
             <div className="resume_etc_title">
                 <p className="etc_title">기타사항</p>
                 <p className="etc_warning">* 대외활동, 수상경력 등 자신의 능력을 마음껏 보여주세요!</p>
-                <div className="plus_button" onClick={() => addInput(ResumeEtcInput)}>
+                <div className="plus_button" onClick={addInput}>
                     <img src={plus_btn} alt="Plus_btn" />
                 </div>
             </div>
             <div className="resume_bar"></div>
-            {inputs}
+            {inputs.map((id) => (
+                <ResumeEtcInput key={id} id={id} removeInput={() => removeInput(id)} />
+            ))}
         </div>
     );
 }
