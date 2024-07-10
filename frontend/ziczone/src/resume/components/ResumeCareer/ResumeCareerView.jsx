@@ -4,8 +4,7 @@ import plus_btn from "./../../assets/Plus_btn.png";
 import ResumeCareerInputView from "./../ResumeCareer/ResumeCareerInputView";
 import useAddInput from "./../../hooks/useAddInput";
 
-const ResumeCareerView = () => {
-    const [inputs, addInput] = useAddInput(<ResumeCareerInputView key={0} />);
+const ResumeCareerView = ({ careers }) => {
 
     return (
         <div className="resume_career">
@@ -13,7 +12,18 @@ const ResumeCareerView = () => {
                 <p className="career_title">경력사항</p>
             </div>
             <div className="resume_bar"></div>
-            {inputs}
+            {careers.map((career, index) => {
+                const [ company, job, position, date ] = career.split(',');
+                return(
+                    <ResumeCareerInputView 
+                        key={index}
+                        company={company}
+                        job={job}
+                        position={position}
+                        date={date}
+                    />
+                );
+            })}
         </div>
     );
 };

@@ -1,5 +1,19 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Giants-Bold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/Giants-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
 .pick_button {
-    background-color: #007bff;
+    background-color: #0051BA;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -9,10 +23,51 @@
     font-weight: bold;
     width: 250px;
     height: 60px;
-    position: absolute;
-    bottom: 0;
+    position: relative;
+    margin: 32px auto;
+    margin-left: 20px;
+    border-radius: 22px;
 }
 
 .pick_button:hover {
-    background-color: #0056b3;
+    background-color: #0069F2;
+}
+
+.up_container{
+    display: flex;
+    justify-content: center;
+}
+.up_left{
+    margin-right: 60px;
+    position: relative;
+}
+.up_ul_container{
+    display: flex;
+    flex-flow: column;
+    list-style: none;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    margin-top: 20px;
+}
+.up_ul_container {
+    font-family: 'Pretendard-Regular';
+}
+.up_ul_container > li{
+    color: #5D5D5D;
+}
+
+.up_ul_container > li:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    text-shadow: 0px 4px 4px rgba(170, 170, 170, 0.3);
+    font-weight: bold;
+    color: black;
+}
+
+.up_ul_container > li.active{
+    transform: scale(1.1);
+    text-shadow: 0px 4px 4px rgba(170, 170, 170, 0.3);
+    font-weight: bold;
+    color: black;
 }

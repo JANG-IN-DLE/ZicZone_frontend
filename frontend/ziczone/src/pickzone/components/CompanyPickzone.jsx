@@ -10,6 +10,19 @@ import PickZoneTitlestyle from '../styles/PickZoneTitle.module.css';
 import PickZoneJobstyle from '../styles/PickZoneJob.module.css';
 import PickCardCommstyle from '../../common/card/styles/PickCardComm.module.css';
 
+// 이름 마스킹 함수
+const maskName = (name) => {
+    if(name.length === 2) {
+        return `${name[0]}*`    // 이름이 2글자면 마지막 *
+    }else if(name.length > 2){
+        const first = name[0];
+        const last = name[name.length - 1];
+        const masked = name.slice(1, -1).replace(/./g, '*');
+        return `${first}${masked}${last}`;
+    }
+    return name;
+}
+
 function CompanyPickzone() {
     const [pickCards, setPickCards] = useState([]);
     const [jobs, setJobs] = useState([]);
@@ -28,7 +41,11 @@ function CompanyPickzone() {
     useEffect(() => {
         axios.get(`/api/pickcards?loggedInPersonalId=${loggedInCompanyId}`)
             .then(response => {
-                setPickCards(response.data)
+                const maskedData = response.data.map(card => ({
+                    ...card,
+                    userName: maskName(card.userName)
+                }));
+                setPickCards(maskedData)
             })
             .catch(error => {
                 console.error('Error fetching pick cards: ' , error)

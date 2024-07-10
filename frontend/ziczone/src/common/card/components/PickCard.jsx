@@ -7,8 +7,8 @@ import unscrapImg from "../assets/unscrap.svg";
 
 
 const PickCard = ({onClick, userImage, jobNames=[], userName, userCareer, userIntro, techUrls=[], personalId, isScrap}) => {
-    // const isCompanyUser = false; // 개인
-    const isCompanyUser = true; // 기업
+    const isCompanyUser = false; // 개인
+    // const isCompanyUser = true; // 기업
 
     // scrap 여부를 확인하는 hook
     const [scrap, setScrap] = useState(isScrap);

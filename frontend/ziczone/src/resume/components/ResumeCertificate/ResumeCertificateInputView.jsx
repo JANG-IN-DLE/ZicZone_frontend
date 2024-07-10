@@ -1,15 +1,15 @@
 import React from "react";
 
-const ResumeCertificateInputView = () => {
+const ResumeCertificateInputView = ({ cert, date }) => {
 
     return (
         <div className="resume_cert_input">
             <div className="resume_circle"></div>
             <div className="cert_date">
-                <p>2024.06</p>
+                <p>{date}</p>
             </div>
             <div className="cert_history">
-                <p>비트캠프</p>
+                <p>{cert}</p>
             </div>
         </div>
     )

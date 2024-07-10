@@ -1,15 +1,15 @@
 import React from "react";
 
-const ResumeEtcInputView = () => {
+const ResumeEtcInputView = ( { content, date }) => {
 
     return (
         <div className="resume_etc_input">
             <div className="resume_circle"></div>
             <div className="etc_date">
-                <p>2024.06 ~ 20204.06</p>
+                <p>{date}</p>
             </div>
             <div className="etc_history">
-                <p>OO대학교 OO학과 졸업</p>
+                <p>{content}</p>
             </div>
         </div>
     )

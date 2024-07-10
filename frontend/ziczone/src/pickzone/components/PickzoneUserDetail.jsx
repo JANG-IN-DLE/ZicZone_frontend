@@ -3,6 +3,19 @@ import { useParams } from "react-router";
 import axios from "axios";
 import UserProfile from "./UserProfile";
 
+// 이름 마스킹 함수
+const maskName = (name) => {
+    if(name.length === 2) {
+        return `${name[0]}*`    // 이름이 2글자면 마지막 *
+    }else if(name.length > 2){
+        const first = name[0];
+        const last = name[name.length - 1];
+        const masked = name.slice(1, -1).replace(/./g, '*');
+        return `${first}${masked}${last}`;
+    }
+    return name;
+}
+
 export default function PickZoneUserDetail() {
     const { loggedInPersonalId , personalId} = useParams();
     // 회원 정보 담는 hook
@@ -17,7 +30,11 @@ export default function PickZoneUserDetail() {
         // pickDetail에서 왼쪽에 회원정보 가져오는 axios
         axios.get(`/api/pickcards/personal/${loggedInPersonalId}/${personalId}`)
             .then(response => {
-                setuserCard(response.data);
+                const maskedUserCard = {
+                    ...response.data,
+                    userName: maskName(response.data.userName)
+                };
+                setuserCard(maskedUserCard);
             })
             .catch(error => {
                 console.log('Error fetching user details: ', error);
@@ -25,7 +42,11 @@ export default function PickZoneUserDetail() {
             // pickDetail에서 resume 데이터 가져오는 axios
         axios.get(`/api/pickresume/${personalId}`)
             .then(response => {
-                setUserResume(response.data);
+                const maskedUserResume = {
+                    ...response.data,
+                    resumeName: maskName(response.data.resumeName)
+                };
+                setUserResume(maskedUserResume);
             })
             .catch(error => {
                 console.log('Error fetching user resume details: ', error )
@@ -38,13 +59,13 @@ export default function PickZoneUserDetail() {
     // 직무 가져오기
     const jobNames = userCard.jobName ? userCard.jobName.split(',') : [];
     // 기술 가져오기
-    const techNames = userCard.techName ? userCard.techName.split(',') : [];
+    const techUrls = userCard.techUrl ? userCard.techUrl.split(',') : [];
     
     return(
         <UserProfile 
             userCard={userCard}
             jobNames={jobNames}
-            techNames={techNames}
+            techUrls={techUrls}
             selectedSection={selectedSection}
             setSelectedSection={setSelectedSection}
             userResume={userResume}
