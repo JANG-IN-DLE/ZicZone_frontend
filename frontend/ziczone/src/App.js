@@ -20,7 +20,6 @@ import RDBoard from "./helpzone/components/RDBoard";
 import CompanyzoneMain from './companyzone/components/CompanyzoneMain';
 // import Loginpage from './login/components/LoginPage';
 
-
 import IntroMain from './intro/components/IntroMain';
 
 
@@ -68,6 +67,7 @@ function App() {
           <Route path="/rdboard/:corrId" element={<RDBoard />} />
           <Route path='/companyZone' element={<CompanyzoneMain/>} /> 
           {/* <Route path='/login' element={<Loginpage/>} /> */}
+          <Route path='/ziczoneIntro' element={<IntroMain/>}/>
         </Routes> 
          <Footer />
       </Router>
