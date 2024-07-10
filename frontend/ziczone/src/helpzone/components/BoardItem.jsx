@@ -1,6 +1,7 @@
 import React from 'react';
 import "../styles/BoardItem.css";
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 // 특정 날짜와 현재 시간의 차이 계산 -> 상대적인 시간 반환
 export const getRelativeTime = (dateString) => {
@@ -58,15 +59,21 @@ const getPointStyle = (point) => {
   return `${start}${'*'.repeat(maskedLength)}${end}`;
 };
 
-const BoardItem = ({ board }) => {
+const BoardItem = ({ board, userId }) => {
   const navigate = useNavigate();
 
-  const handleItemClick = () => {
-    navigate(`/rdboard/${board.corrId}`);
+  const handleItemClick = async() => {
+    try {
+      const userId = 7; // 임의로 설정
+      await axios.put(`/api/board/viewCnt/${userId}/${board.corrId}`);
+      navigate(`/rdboard/${board.corrId}`);
+    } catch (error) {
+      console.error('오류 메시지: ', error);
+    }
   };
 
   return (
-    <div className='bi_container' onClick={handleItemClick}>
+    <div className='bi_container' onClick={ handleItemClick }>
       <div className='item_point' style={ getPointStyle(board.corrPoint) }>
         { board.corrPoint }
       </div>
