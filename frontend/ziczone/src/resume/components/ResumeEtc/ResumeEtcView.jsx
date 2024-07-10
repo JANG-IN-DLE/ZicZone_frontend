@@ -4,9 +4,7 @@ import plus_btn from "./../../assets/Plus_btn.png";
 import ResumeEtcInputView from "./../ResumeEtc/ResumeEtcInputView";
 import useAddInput from "./../../hooks/useAddInput"
 
-const ResumeEtcView = () => {
-    const [inputs, addInput] = useAddInput(<ResumeEtcInputView key={0} />);
-
+const ResumeEtcView = ({ etcs }) => {
     return (
         <div className="resume_etc">
             <div className="resume_etc_title">
@@ -14,9 +12,18 @@ const ResumeEtcView = () => {
                 <p className="etc_warning">* 대외활동, 수상경력 등 자신의 능력을 마음껏 보여주세요!</p>
             </div>
             <div className="resume_bar"></div>
-            {inputs}
+            {etcs.map((etc, index) => {
+                const [ content, date ] = etc.split(',');
+                return (
+                    <ResumeEtcInputView
+                        key={index}
+                        content={content}
+                        date={date}
+                    />
+                );
+            })}
         </div>
     );
-}
+};
 
 export default ResumeEtcView;

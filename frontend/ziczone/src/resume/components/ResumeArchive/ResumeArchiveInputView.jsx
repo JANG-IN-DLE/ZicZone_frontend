@@ -3,7 +3,7 @@ import github from "./../../assets/GitHub.png"
 import notion from "./../../assets/Notion.png"
 import blog from "./../../assets/Blog.png"
 
-const ResumeArchiveInputView = () => {
+const ResumeArchiveInputView = ( { blogSrc, gitSrc, notionSrc }) => {
     return (
         <div className="resume_archive_input">
             <div className="resume_archive_container">
@@ -11,17 +11,17 @@ const ResumeArchiveInputView = () => {
                     <div className="archive_github">
                         <img src={github} alt="Github" />
                         <p>GitHub</p>
-                        <p>https:kscu7310@naver.com</p>
+                        <p>{gitSrc}</p>
                     </div>
                     <div className="archive_notion">
                         <img src={notion} alt="Notion" />
                         <p>Notion</p>
-                        <p>https:kscu7310@naver.com</p>
+                        <p>{notionSrc}</p>
                     </div>
                     <div className="archive_blog">
                         <img src={blog} alt="Blog" />
                         <p>Blog</p>
-                        <p>https:kscu7310@naver.com</p>
+                        <p>{blogSrc}</p>
                     </div>
                 </div>
             </div>

@@ -1,54 +1,71 @@
 .modal {
-    position: absolute;
-    top: 0;
+    position: fixed;
+    top: -140px;
     left: 0;
-    width: 1080px;
-    height: 980px;
-    background-color: rgba(0, 0, 0, 0.5);
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 1080px;
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 1000;
+    z-index: 20;
+    background: rgba(0,0,0,0.4);
+    overflow: hidden;
 }
+
 
 .company_modal_body {
     background-color: white;
-    padding: 20px;
+    padding: 5px;
     border-radius: 10px;
-    width: 400px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    width: 520px;
+    height: 300px;
     position: relative;
+    border-image-source: linear-gradient(123.89deg,
+    rgba(170, 170, 170, 0.3) 9.82%,
+    rgba(170, 170, 170, 0.05) 32.32%,
+    rgba(170, 170, 170, 0.2) 61.65%,
+    rgba(170, 170, 170, 0.05) 90.18%);
+    box-shadow: 5px 5px 20px 0px rgba(0, 0, 0, 0.15),
+      4px 4px 4px 0px rgba(255, 255, 255, 0.1) inset;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
 }
 
 .pick_modal_header {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #e5e5e5;
-    margin-bottom: 20px;
+    width: 100%;
+    height: 20px;
+    border-bottom: 0.5px solid #b3b3b3;
 }
 
 .circles {
     display: flex;
-    gap: 5px;
+    align-items: center;
 }
 
-.header_circle {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-}
 
 .header_circle_red {
+    width: 12px;
+    height: 12px;
+    border-radius: 32px;
+    margin-left: 12px;
     background-color: #ff5f56;
 }
 
 .header_circle_yellow {
+    width: 12px;
+    height: 12px;
+    border-radius: 32px;
+    margin-left: 12px;
     background-color: #ffbd2e;
 }
 
 .header_circle_green {
+    width: 12px;
+    height: 12px;
+    border-radius: 32px;
+    margin-left: 12px;
     background-color: #27c93f;
 }
 
@@ -60,15 +77,22 @@
     font-size: 20px;
     font-weight: bold;
     margin-bottom: 10px;
+    margin-top: 40px;
+    color: #5D5D5D;
 }
 
 .modal_subtitle {
     font-size: 14px;
-    margin-bottom: 20px;
+    width: 329px;
+    margin: 20px auto 40px;
+    text-align: center;
+    color: #ABABAB;
 }
 
 .modal_buttons {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
     gap: 10px;
 }
@@ -77,17 +101,24 @@
 .open_btn {
     padding: 10px 20px;
     border: none;
-    border-radius: 5px;
+    border-radius: 12px;
     cursor: pointer;
     font-size: 16px;
-    width: 100px;
+    width: 335px;
 }
 
 .cancel_btn {
-    background-color: #ccc;
+    background-color: #FFFFFF;
+    border: 1px solid #5D5D5D;
 }
 
 .open_btn {
-    background-color: #007bff;
+    background-color: #0051BA;
     color: white;
+}
+.open_btn:hover{
+    background-color: #0069F2;
+}
+.cancel_btn:hover{
+    background-color: rgba(0, 0, 0, 0.07);
 }

@@ -62,3 +62,22 @@
     align-items: center;
     padding: 0 20px;
 }
+
+.pk_resume_tech_container{
+    width: 623px;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.pk_resume_tech{
+    width: auto;
+    height: 35px;
+    color: #fff;
+    border-radius: 52px;
+    font-size: 16px;
+    display: flex;
+    padding-right: 8px;
+}

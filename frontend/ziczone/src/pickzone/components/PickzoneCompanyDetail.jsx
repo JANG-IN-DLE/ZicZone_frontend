@@ -4,6 +4,19 @@ import axios from "axios";
 import UserProfile from "./UserProfile";
 import PickModal from "./PickModal";
 
+// 이름 마스킹 함수
+const maskName = (name) => {
+    if(name.length === 2) {
+        return `${name[0]}*`    // 이름이 2글자면 마지막 *
+    }else if(name.length > 2){
+        const first = name[0];
+        const last = name[name.length - 1];
+        const masked = name.slice(1, -1).replace(/./g, '*');
+        return `${first}${masked}${last}`;
+    }
+    return name;
+}
+
 export default function PickzoneCompanyDetail(){
     const {companyId, personalId} = useParams();
     // 회원 정보 담는 hook
@@ -20,21 +33,39 @@ export default function PickzoneCompanyDetail(){
     useEffect(() => {
         axios.get(`/api/pickcards/${companyId}/${personalId}`)
             .then(response => {
-                setUserCard(response.data);
-                setIsPicked(response.data.pick);// pick 상태 저장
+                    const maskedUserCard = {
+                        ...response.data,
+                        userName: maskName(response.data.userName),
+                    };
+                    setUserCard(maskedUserCard);
+                    setIsPicked(response.data.pick);// pick 상태 저장
             })
             .catch(error => {
                 console.log('Error fetching user details: ' ,error);
             });
         axios.get(`/api/pickresume/${personalId}`)
             .then(response => {
-                setUserResume(response.data);
+                const maskedUserResume = {
+                    ...response.data,
+                    resumeName: maskName(response.data.resumeName),
+                };
+                setUserResume(maskedUserResume);
             })
             .catch(error => {
                 console.log('Error fetching user resume details: ' , error);
             });
 
     }, [companyId, personalId]);
+    // pick이 되어있으면 userName을 정확하게 표시
+    useEffect(() => {
+        if(userCard && isPicked) {
+            setUserCard(prevUserCard => ({
+                ...prevUserCard,
+                userName: userCard.userName
+            }));
+        }
+    }, [ isPicked, userCard ]);
+
     if(!userCard || !userResume){
         return <div>Loading...</div>;
     }
