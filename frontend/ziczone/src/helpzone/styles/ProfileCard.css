@@ -29,11 +29,15 @@
 }
 
 .pc_post_berry {
-    width: 100px;
+    width: 120px;
     height: 35px;
     border-radius: 16px;
     background-color: #0051BA;
     margin: 15px auto;
+    color: #FFF;
+    font-family: 'Giants-Bold';
+    line-height: 35px;
+    text-align: center;
 }
 
 .profile_card {
@@ -121,8 +125,4 @@
     height: 105px;
     margin: 0 auto;
     margin-top: 15px;
-}
-
-.pc_stack {
-
 }

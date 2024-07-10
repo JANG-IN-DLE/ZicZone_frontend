@@ -1,5 +1,7 @@
 import React from 'react';
 import "../styles/BoardItem.css";
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 // 특정 날짜와 현재 시간의 차이 계산 -> 상대적인 시간 반환
 export const getRelativeTime = (dateString) => {
@@ -45,9 +47,33 @@ const getPointStyle = (point) => {
   }
 };
 
-const BoardItem = ({ board }) => {
+ // 이름 * 부분 처리 
+ const maskName = (name) => {
+  if (name.length < 2) return name;
+  if (name.length === 2) {
+      return `${name[0]}*`;
+  }
+  const maskedLength = name.length - 2;
+  const start = name[0];
+  const end = name[name.length - 1];
+  return `${start}${'*'.repeat(maskedLength)}${end}`;
+};
+
+const BoardItem = ({ board, userId }) => {
+  const navigate = useNavigate();
+
+  const handleItemClick = async() => {
+    try {
+      const userId = 7; // 임의로 설정
+      await axios.put(`/api/board/viewCnt/${userId}/${board.corrId}`);
+      navigate(`/rdboard/${board.corrId}`);
+    } catch (error) {
+      console.error('오류 메시지: ', error);
+    }
+  };
+
   return (
-    <div className='bi_container'>
+    <div className='bi_container' onClick={ handleItemClick }>
       <div className='item_point' style={ getPointStyle(board.corrPoint) }>
         { board.corrPoint }
       </div>
@@ -56,7 +82,7 @@ const BoardItem = ({ board }) => {
           { board.corrTitle }
         </div>
         <div className='item_userInfo'>
-          { board.userName } | { board.personalCareer }
+          { maskName(board.userName) } | { board.personalCareer }
         </div>
       </div>
       <div className='bi_container_end'>

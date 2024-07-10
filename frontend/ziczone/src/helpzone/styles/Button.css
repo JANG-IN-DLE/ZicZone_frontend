@@ -45,3 +45,15 @@
     border: none;
     border-radius: 12px;
 }
+
+.b_edit {
+    background-color: #FFF;
+    color: #000;
+    height: 33px;
+}
+
+.b_delete {
+    background-color: #000;
+    color: #FFF;
+    height: 33px;
+}

@@ -7,12 +7,14 @@ import HelpZoneIntro from './HelpZoneIntro';
 import FilterButtons from './FilterButtons';
 import Button from './Button';
 import BoardList from './BoardList';
+import PageButton from './PageButton';
 
 const ListBoard = () => {
   const [boards, setBoards] = useState([]);
   const [filterType, setFilterType] = useState("latest");
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(8);
+  const [totalPages, setTotalPages] = useState(1);
   const navigate = useNavigate();
 
   /*
@@ -30,6 +32,7 @@ const ListBoard = () => {
       })
       .then((response) => {
         setBoards(response.data.dtoList);
+        setTotalPages(Math.ceil(response.data.total / size));
       })
       .catch((error) => {
         console.error("오류 메시지: ", error);
@@ -38,6 +41,10 @@ const ListBoard = () => {
 
   const handleWriteButton = () => {
     navigate('/cuboard');  // CUBoard로 이동
+  };
+
+  const handlePageChange = (newPage) => {
+    setPage(newPage);
   };
 
   return (
@@ -51,6 +58,7 @@ const ListBoard = () => {
           </Button>
         </div>
         <BoardList boards={ boards } />
+        <PageButton currentPage={ page } totalPages={ totalPages } onPageChange={ handlePageChange } />
       </div>
     </div>
   );
