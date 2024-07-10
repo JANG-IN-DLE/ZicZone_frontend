@@ -5,7 +5,10 @@ import Job from "./Job";
 import PickCard from "../../common/card/components/PickCard";
 import personalMImage from '../../common/card/assets/personal_m_image.png';
 import personalFImage from '../../common/card/assets/personal_f_image.png';
-import '../../common/stackjob/styles/Job.css';
+import PickMeTitle from '../assets/pickZoneTitle.png';
+import PickZoneTitlestyle from '../styles/PickZoneTitle.module.css';
+import PickZoneJobstyle from '../styles/PickZoneJob.module.css';
+import PickCardCommstyle from '../../common/card/styles/PickCardComm.module.css';
 
 function CompanyPickzone() {
     const [pickCards, setPickCards] = useState([]);
@@ -73,15 +76,21 @@ function CompanyPickzone() {
     : pickCards;
 
     return (
-        <div>
-            <h2>Jobs</h2>
-            <div className="jobs">
+        <div >
+            <div className={PickZoneTitlestyle.pick_zone_intro}>
+                <div className={PickZoneTitlestyle.pzi_title}>
+                    <p>PICK ME</p>
+                    <img src={ PickMeTitle } alt="Pick Me" />
+                </div>
+            <p className={PickZoneTitlestyle.pzi_sub}>당신의 기업에 어울리는 인재를 발견하세요!</p>
+        </div>
+            <div className={PickZoneJobstyle.jobs}>
                 {jobs.map(job => (
                     <Job key={job.jobId} job={job} onClick={()=> handleJobClick(job)} isSelected={selectedJobs.includes(job.jobName)} />
                 ))}
             </div>
-            <h2>Pick Cards</h2>
-            <div className="user_card_container">
+
+            <div className={PickCardCommstyle.user_card_container}>
             {filteredPickCards.map(card => {
                     const userImage = card.gender === 'MALE' ? personalMImage : personalFImage;
                     const jobNames = card.jobName ? card.jobName.split(',') : [];

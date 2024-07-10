@@ -3,10 +3,12 @@ import "../styles/MainMain.css";
 import HelpZone from "./HelpZone";
 import CompanySilde from "./CompanySilde";
 import NoLoginBannerSlide from "./NoLoginBannerSlide";
+// import PickCard from "../../common/card/components/PickCard";
 import PickCard from "../../common/card/components/PickCard";
 import axios from "axios";
 import personalMImage from "../../common/card/assets/personal_m_image.png";
 import personalFImage from "../../common/card/assets/personal_f_image.png";
+import { useNavigate } from "react-router-dom";
 
 const NoLoginMainComponent = () => {
   const [pickCards, setPickCards] = useState([]);
@@ -15,6 +17,7 @@ const NoLoginMainComponent = () => {
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(8);
   const [banner, setBanner] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -36,12 +39,16 @@ const NoLoginMainComponent = () => {
         },
       })
       .then((res) => {
-        // 응답 데이터는 res.data.dtoList에 있고ㅡ 이 데이터를 helpZones 상태에 저장함
+        // 응답 데이터는 res.data.dtoList에 있고 이 데이터를 helpZones 상태에 저장함
         sethelpZones(res.data.dtoList);
       })
       .catch((error) => {
         console.error("Error help", error);
       });
+
+    const handleWriteButton = () => {
+      navigate("/cuboard"); // CUBoard로 이동
+    };
 
     // axios
     //   .get("/api/main")
@@ -96,15 +103,18 @@ const NoLoginMainComponent = () => {
             <HelpZone
               key={list.userId}
               userId={list.userId}
+              userName={list.userName}
               corrModify={formatDate(list.corrModify)}
               corrPoint={list.corrPoint}
               corrTitle={list.corrTitle}
               corrView={list.corrView}
+              personalCareer={list.personalCareer}
             />
           );
         })}
       </div>
       <div className="company_slide">
+        <h1>직존과 함께하는 기업</h1>
         <CompanySilde />
         <CompanySilde />
         <CompanySilde />

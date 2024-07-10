@@ -1,5 +1,5 @@
 /* 로그인 왼쪽박스(소개) */
-.leftbox{
+.leftbox_login{
     width: 350px;
     height: 435px;
     border-radius: 32px 0px 0px 32px;
@@ -18,17 +18,16 @@
     box-shadow: 5px 5px 20px 0px rgba(0, 0, 0, 0.15),
     4px 4px 4px 0px rgba(255, 255, 255, 0.1) inset;
     backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
 }
 
-.leftbox>p{
+.leftbox_login>p{
     font-family: Giants-Inline;
     color: #ffffff;
     font-size: 52px;
     line-height: 72px;
 
 }
-.leftbox>p>span{
+.leftbox_login>p>span{
     font-family: Giants-Inline;
     color: #0051BA;
 

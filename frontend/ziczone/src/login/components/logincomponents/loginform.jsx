@@ -4,9 +4,11 @@ import check from '../../assets/check.png'
 
 import useEmailVerification from '../../../join/hooks/useEmailAuth';
 import usePasswordValidation from '../../../join/hooks/usePasswordValidation';
+import { useNavigate } from 'react-router-dom';
 
 
 const LoginForm = ({ title, explain1, explain2, input1, input2, links, setCurrentForm }) => {
+    const navigate = useNavigate();
     //로그인
     const [email, setUserEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -61,22 +63,22 @@ const LoginForm = ({ title, explain1, explain2, input1, input2, links, setCurren
     
 
     return (
-        <div className="rightbox">
+        <div className="rightbox_login">
             {/* 로고 */}
-            <img className="zzlogo" src={`${process.env.PUBLIC_URL}/logo.png`} alt="직존로고" />
+            <img className="zzlogo_login" src={`${process.env.PUBLIC_URL}/logo.png`} alt="직존로고" />
 
             {/* 간단소개 */}
-            <p className="explain">{explain1}<br />{explain2}</p>
+            <p className="explain_login">{explain1}<br />{explain2}</p>
 
             {/* Input(2개) */}
             <input 
-                className="input"
+                className="input_login"
                 type={input1.type} 
                 placeholder={input1.placeholder} 
                 value={title === "login" ? email : title ==="emailauth" ? authEmail : newPassword}
                 onChange={title === "login" ? handleInputChange(setUserEmail) : title ==="emailauth" ? handleEmailChange : handlePasswordChange}/>
             <input 
-                className="input"
+                className="input_login"
                 type={input2.type} 
                 placeholder={input2.placeholder} 
                 value={title === "login" ? password : title ==="emailauth" ? authCode : confirmPassword}
@@ -84,33 +86,33 @@ const LoginForm = ({ title, explain1, explain2, input1, input2, links, setCurren
             
             {/* 타이머 */}
             {isSend === "send_success" && isAuth !== "auth_success" && (
-                <p className="timer">
+                <p className="timer_login">
                     {formatTime(timeLeft)}
                 </p>
             )}
 
             {/* 비밀번호 체크 */}
             <img
-                className='check1'
+                className='check1_login'
                 src={check}
                 alt=""
                 style={{ visibility: isPasswordValid ? 'visible' : 'hidden' }}
             />
             <img
-                className='check2'
+                className='check2_login'
                 src={check}
                 alt=""
                 style={{ visibility: isConfirmValid ? 'visible' : 'hidden' }}
             />
 
             {/* 비밀번호 찾기 | 회원가입 */}
-            <div className="links">
+            <div className="links_login">
                 <p className={links.className} onClick={links.onClick}>{links.text}</p>
                 <p>|</p>
-                <p className='joinbtn' onClick={()=>{}}>회원가입</p>
+                <p className='joinbtn_login' onClick={() => navigate('/signup')}>회원가입</p>
             </div>
             {/* 경고메세지 -> 필요시에만 나타나게 */}
-            <p className="warningmsg">
+            <p className="warningmsg_login">
                 {
                     title === "emailauth" && isAuth === "auth_expired" ? "인증시간이 만료되었습니다" 
                     : title === "emailauth" && isAuth === "auth_wrong" ? "인증번호가 다릅니다" 
@@ -129,7 +131,7 @@ const LoginForm = ({ title, explain1, explain2, input1, input2, links, setCurren
 
             {/* 로그인버튼 */}
             <button 
-                className="loginbtn" 
+                className="loginbtn_login" 
                 type="submit" 
                 onClick={title === "login" 
                         ? "로그인 클릭" : title ==="emailauth" && isSend !== "send_success"

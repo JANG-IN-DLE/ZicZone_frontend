@@ -3,7 +3,7 @@ import axios from 'axios';
 import BoardItem from './MypageUserComment';
 
 const MypageCommentHistory = () => {
-    const userId = 1;
+    const userId = 7;
     const [commentData, setCommentData] = useState([]);
 
     useEffect(() => {

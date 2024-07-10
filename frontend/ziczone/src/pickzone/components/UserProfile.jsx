@@ -7,7 +7,7 @@ import CoverLetter from "./CoverLetter";
 import Portfolio from "./Portfolio";
 import personalMImage from "../../common/card/assets/personal_m_image.png";
 import personalFImage from '../../common/card/assets/personal_f_image.png';
-import "../styles/UserProfile.css";
+import UserProfilestyle from "../styles/UserProfile.module.css";
 
 
 const UserProfile = ({ userCard, jobNames, techUrls, selectedSection, setSelectedSection, userResume, onPickClick, isScrap, isPicked}) => {
@@ -70,7 +70,7 @@ const UserProfile = ({ userCard, jobNames, techUrls, selectedSection, setSelecte
                     ))}
                 </ul>
                 {isCompany && !isPicked && (
-                    <button className="pick-button" onClick={onPickClick}>Pick {userCard.userName}</button>
+                    <button className={UserProfilestyle.pick_button} onClick={onPickClick}>Pick {userCard.userName}</button>
                 )}
             </div>
             <div>

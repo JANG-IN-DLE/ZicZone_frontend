@@ -45,6 +45,11 @@
     font-size: 17px;
 }
 
+.resume_edu_input p {
+    border: none;
+    font-size: 17px;
+}
+
 .resume_edu_input input:focus {
     border: none;
     outline: none;
@@ -63,13 +68,17 @@
     margin-right: 60px;
 }
 
+.edu_date p {
+    margin: 0 10px;
+}
+
 .edu_score {
     display: flex;
 }
 
-.edu_score p{
+/* .edu_score p{
     margin: 0 10px;
-}
+} */
 
 .edu_score_point {
     width: 30px;

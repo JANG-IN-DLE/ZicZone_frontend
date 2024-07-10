@@ -6,14 +6,15 @@
 }
 
 .footer {
-    width: 1440px;
+    width: 100%;
     height: 320px;
-    margin: 0 auto;
     background-color: #eeeeee;
-    padding: 56px 224px 56px 180px;
 }
 
 .footer_list {
+    width: 1440px;
+    margin: 0 auto;
+    padding: 56px 224px;
     display: flex;
     list-style: none;
     font-size: 13px;

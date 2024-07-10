@@ -1,5 +1,8 @@
         .company_slide{
-            margin: 150px auto;
+        padding-top: 75px;
+        padding-bottom: 75px;
+        text-align: left;
+
         }
         .company_slide_container {
         position: relative;
