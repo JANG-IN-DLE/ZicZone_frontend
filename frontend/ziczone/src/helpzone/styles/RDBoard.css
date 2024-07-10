@@ -12,6 +12,7 @@
 
 .b_description {
     margin-left: 56px;
+    margin-bottom: 20px;
     /* margin-top: 140px; */
 }
 
@@ -19,3 +20,14 @@
 .b_title_form  {
     margin-top: 8px;
 }
+
+.b_edit_delete {
+    display: flex;
+    justify-content: end;
+    gap: 20px;
+}
+
+.b_display_btn {
+    display: flex;
+    justify-content: space-between;
+} 

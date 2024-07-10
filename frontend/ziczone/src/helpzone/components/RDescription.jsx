@@ -4,7 +4,6 @@ import "../styles/Description.css";
 const Description = () => {
     return (
         <div className="d_textarea">
-            <p className="d_title">게시물 조회</p>
             <p className="d_content">
                 안녕하세요! 지원서 첨삭 페이지에 오신 것을 환영합니다!<br />
                 이곳에서는 여러분이 댓글을 통해 첨삭 피드백을 제공하고,<br />

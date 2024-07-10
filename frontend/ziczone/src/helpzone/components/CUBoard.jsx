@@ -1,54 +1,74 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import axios from "axios";
 import "../styles/CUBoard.css";
 import ProfileCard from "./ProfileCard";
 import Description from "./Description";
 import PostForm from "./PostForm";
 
 const CUBoard = () => {
+  const location = useLocation();
+  const { postData: initialPostData, isEditMode: initialEditMode } = location.state || {};
   const navigate = useNavigate();
-  const [isEditMode, setIsEditMode] = useState(false);
+  const [isEditMode, setIsEditMode] = useState(initialEditMode || false);
 
-  const userProfile = {
-    jobs: ['게임 클라이언트', 'devops/시스템', '게임클라이언트'],
-    gender: 'female',
-    userName: '이채림',
-    career: '신입',
-    point: '2000',
-    intro: '뽑아주시면 후회안할겁니다뽑아주시면 후회안할겁니다뽑아주시면 후회안할겁니다열심히 하겠습',
-    stacks: ['Python', 'NativeScript', 'Spring Boot', 'Microsoft SQL Server', 'MySQL', 'MySQL', 'MyhSQL']
-  };
+  const [userProfile, setUserProfile] = useState({
+    berry: '',
+    jobs: [],
+    gender: '',
+    userName: '',
+    career: '',
+    point: '',
+    intro: '',
+    stacks: []
+  });
 
   const initialData = {
-    berry: 100,
-    title: '',
-    content: '',
-    file: null
+    berry: initialPostData?.berry || 100,
+    title: initialPostData?.title || '',
+    content: initialPostData?.content || '',
+    file: initialPostData?.fileUrl || null
   };
 
   const handlePostSubmitSuccess = () => {
     navigate('/rdboard');
-};
+  };
+
+  useEffect(() => {
+    const UserProfile = async () => {
+      try {
+        const profileResponse = await axios.get(`/api/board/myProfile`);
+        
+        const profileData = profileResponse.data;
+        setUserProfile({
+          jobs: profileData.jobName.split(','),
+          gender: profileData.gender,
+          userName: profileData.userName,
+          career: profileData.personalCareer,
+          point: profileData.berryPoint,
+          intro: profileData.userIntro,
+          stacks: profileData.techUrl ? profileData.techUrl.split(',') : []
+        });
+
+      } catch (error) {
+        console.error("오류 메시지: ", error);
+      }
+    };
+
+    UserProfile();
+  }, []);
 
   return (
     <div>
       <div className="b_section">
         <div className="b_profile_card">
-          <ProfileCard
-            jobs={ userProfile.jobs }
-            gender={ userProfile.gender }
-            userName={ userProfile.userName } 
-            career={ userProfile.career }
-            point={ userProfile.point }
-            intro={ userProfile.intro }
-            stacks={ userProfile.stacks }
-          />
+          <ProfileCard {...userProfile} />
         </div>
         <div className="b_right">
           <div className="b_description">
             <Description isEditMode={ isEditMode } />
             <div className="b_title_form">
-              <PostForm isEditMode={ isEditMode } initialData={ initialData } onSubmit={ handlePostSubmitSuccess }/>
+              <PostForm isEditMode={ isEditMode } initialData={ initialData } onSubmit={ handlePostSubmitSuccess } />
             </div>
           </div>
         </div>
