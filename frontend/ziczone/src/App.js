@@ -21,9 +21,11 @@ import ListBoard from './helpzone/components/ListBoard';
 import CUBoard from "./helpzone/components/CUBoard";
 import RDBoard from "./helpzone/components/RDBoard";
 import CompanyzoneMain from './companyzone/components/CompanyzoneMain';
-// import Loginpage from './login/components/LoginPage';
-
+import Loginpage from './login/components/LoginPage';
+import JoinSelect from './join/components/JoinSelect';
 import IntroMain from './intro/components/IntroMain';
+import JoinCom from './join/components/Join_Com'
+import JoinPer from './join/components/Join_Per'
 
 
 
@@ -73,6 +75,10 @@ function App() {
           <Route path='/companyZone' element={<CompanyzoneMain/>} /> 
           {/* <Route path='/login' element={<Loginpage/>} /> */}
           <Route path='/ziczoneIntro' element={<IntroMain/>}/>
+          <Route path='/login' element={<Loginpage/>}/>
+          <Route path='/signup' element={<JoinSelect/>}/>
+          <Route path='/signup-com' element={<JoinCom/>}/>
+          <Route path='/signup-per' element={<JoinPer/>}/>
         </Routes> 
          <Footer />
       </Router>

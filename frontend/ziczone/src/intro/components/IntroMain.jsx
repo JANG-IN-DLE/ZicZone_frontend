@@ -7,6 +7,7 @@ import introImg3 from "../../intro/introImg3.png";
 import introImg4 from "../../intro/introImg4.png";
 import introImg5 from "../../intro/introImg5.png";
 import CompanySilde from "../../main/components/CompanySilde";
+import { Link } from "react-router-dom";
 
 const IntroMain = () => {
   // uesRef써서 DOM에 접근할 수 있는 참조 변수 만듬
@@ -181,7 +182,14 @@ const IntroMain = () => {
             className="ziczone_signup"
             style={{ background: "url(" + introImg5 + ")" }}
           >
-            <div className="ziczone_signup_text">직존 회원가입 바로가기</div>
+            <div className="ziczone_signup_text">
+              <Link
+                to="/signup"
+                style={{ textDecoration: "none", color: "white" }}
+              >
+                직존 회원가입 바로가기
+              </Link>
+            </div>
           </div>
         </div>
       </div>

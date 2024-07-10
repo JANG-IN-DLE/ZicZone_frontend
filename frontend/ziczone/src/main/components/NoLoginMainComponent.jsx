@@ -8,6 +8,7 @@ import PickCard from "../../common/card/components/PickCard";
 import axios from "axios";
 import personalMImage from "../../common/card/assets/personal_m_image.png";
 import personalFImage from "../../common/card/assets/personal_f_image.png";
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 const NoLoginMainComponent = () => {
@@ -21,7 +22,7 @@ const NoLoginMainComponent = () => {
 
   useEffect(() => {
     axios
-      .get("/api/pickcards")
+      .get("/api/pickcards/{companyId}/{personalId}")
       .then((response) => {
         setPickCards(response.data);
       })
@@ -72,6 +73,7 @@ const NoLoginMainComponent = () => {
   return (
     <div className="main_container">
       <NoLoginBannerSlide />
+
       <div className="pickzone">
         <h1>PICK 존</h1>
         <div className="user_card_container">
