@@ -20,7 +20,7 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
 
 
 /* container */
-.container{
+.signup_container{
     padding: 150px 0px 100px 0px;
     display: flex;
     flex-flow: column;

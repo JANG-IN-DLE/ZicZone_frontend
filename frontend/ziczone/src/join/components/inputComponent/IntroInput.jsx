@@ -14,7 +14,7 @@ const IntroInput = ({label, placeholder, limit, height, field}) => {
     };
 
     return (
-        <div className="inputform intro">
+        <div className="inputform signup_intro">
             <p>{label}</p>
             <textarea 
                 placeholder={placeholder}

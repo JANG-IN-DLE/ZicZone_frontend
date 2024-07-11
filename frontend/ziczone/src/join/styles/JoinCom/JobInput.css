@@ -1,11 +1,11 @@
 /* 희망분야 */
-.job{
+.signup_job{
     display: flex;
     flex-flow: column !important;
     align-items: flex-start;
 }
 
-.job>p>span{
+.signup_job>p>span{
     margin-left: 4px;
     font-size: 10px;
     color: red;

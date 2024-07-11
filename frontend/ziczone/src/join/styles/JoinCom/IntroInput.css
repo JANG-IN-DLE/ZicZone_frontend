@@ -1,9 +1,9 @@
 /* 한줄 소개 */
-.intro{
+.signup_intro{
     position: relative;
 }
 
-.intro>textarea{
+.signup_intro>textarea{
     box-sizing: border-box;
     margin-top: 4px;
     width: 600px;
@@ -16,7 +16,7 @@
     font-weight: 100;
     font-size: 16px;
 }
-.intro>.limit{
+.signup_intro>.limit{
     font-size: 12px !important;
     color: #ababab;
     position: absolute;
