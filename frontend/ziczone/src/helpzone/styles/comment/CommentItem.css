@@ -1,0 +1,18 @@
+.comment_item {
+    display: flex;
+    justify-content: start;
+    font-family: 'Pretendard-Regular';
+    font-size: 16px;
+    margin-top: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #B3B3B3;
+}
+
+.ci_gender img {
+    width: 45px;
+    margin-right: 16px;
+}
+
+.ci_info {
+    margin-bottom: 4px;
+}
