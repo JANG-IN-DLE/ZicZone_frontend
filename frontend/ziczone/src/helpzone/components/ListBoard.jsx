@@ -1,13 +1,13 @@
 
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles/ListBoard.css";
-import axios from 'axios';
-import HelpZoneIntro from './HelpZoneIntro';
-import FilterButtons from './FilterButtons';
-import Button from './Button';
-import BoardList from './BoardList';
-import PageButton from './PageButton';
+import axios from "axios";
+import HelpZoneIntro from "./HelpZoneIntro";
+import FilterButtons from "./FilterButtons";
+import Button from "./Button";
+import BoardList from "./BoardList";
+import PageButton from "./PageButton";
 
 const ListBoard = () => {
   const [boards, setBoards] = useState([]);
@@ -52,13 +52,13 @@ const ListBoard = () => {
       <div className='lb_section'>
         <HelpZoneIntro />
         <div className='lb_menu'>
-          <FilterButtons setFilterType={ setFilterType } />
-          <Button type="button" className="lb_write" onClick={ handleWriteButton }>
-            { '글쓰기' }
+          <FilterButtons setFilterType={setFilterType} />
+          <Button type="button" className="lb_write" onClick={handleWriteButton}>
+            {'글쓰기'}
           </Button>
         </div>
-        <BoardList boards={ boards } />
-        <PageButton currentPage={ page } totalPages={ totalPages } onPageChange={ handlePageChange } />
+        <BoardList boards={boards} />
+        <PageButton currentPage={page} totalPages={totalPages} onPageChange={handlePageChange} />
       </div>
     </div>
   );

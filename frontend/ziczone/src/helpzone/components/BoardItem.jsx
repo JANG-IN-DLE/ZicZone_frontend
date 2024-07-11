@@ -5,14 +5,10 @@ import axios from 'axios';
 
 // 특정 날짜와 현재 시간의 차이 계산 -> 상대적인 시간 반환
 export const getRelativeTime = (dateString) => {
-  // 현재 시간과 과거 시간 생성 
   const now = new Date();
   const past = new Date(dateString);
-
-  // 시간 차이 계산 : 현재 시간 - 과거 시간
   const diff = now - past;
 
-  // 시간 단위 변환
   const seconds = Math.floor(diff / 1000);
   const minutes = Math.floor(seconds / 60);
   const hours = Math.floor(minutes / 60);
@@ -47,11 +43,11 @@ const getPointStyle = (point) => {
   }
 };
 
- // 이름 * 부분 처리 
- const maskName = (name) => {
+// 이름 * 부분 처리 
+const maskName = (name) => {
   if (name.length < 2) return name;
   if (name.length === 2) {
-      return `${name[0]}*`;
+    return `${name[0]}*`;
   }
   const maskedLength = name.length - 2;
   const start = name[0];
@@ -62,10 +58,10 @@ const getPointStyle = (point) => {
 const BoardItem = ({ board, userId }) => {
   const navigate = useNavigate();
 
-  const handleItemClick = async() => {
+  const handleItemClick = () => {
     try {
-      const userId = 7; // 임의로 설정
-      await axios.put(`/api/board/viewCnt/${userId}/${board.corrId}`);
+      const userId = 13; // 임의로 설정
+      axios.put(`/api/board/viewCnt/${userId}/${board.corrId}`);
       navigate(`/rdboard/${board.corrId}`);
     } catch (error) {
       console.error('오류 메시지: ', error);
@@ -73,24 +69,24 @@ const BoardItem = ({ board, userId }) => {
   };
 
   return (
-    <div className='bi_container' onClick={ handleItemClick }>
-      <div className='item_point' style={ getPointStyle(board.corrPoint) }>
-        { board.corrPoint }
+    <div className='bi_container' onClick={handleItemClick}>
+      <div className='item_point' style={getPointStyle(board.corrPoint)}>
+        {board.corrPoint}
       </div>
       <div className='bi_container_center'>
         <div className='item_title'>
-          { board.corrTitle }
+          {board.corrTitle}
         </div>
         <div className='item_userInfo'>
-          { maskName(board.userName) } | { board.personalCareer }
+          {maskName(board.userName)} | {board.personalCareer}
         </div>
       </div>
       <div className='bi_container_end'>
-        <div className='item_date'>
-          { getRelativeTime(board.corrModify) }
+        <div>
+          {getRelativeTime(board.corrModify)}
         </div>
-        <div className='item_view'>
-          조회수 { board.corrView }
+        <div>
+          조회수 {board.corrView}
         </div>
       </div>
     </div>

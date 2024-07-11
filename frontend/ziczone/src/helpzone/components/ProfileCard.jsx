@@ -6,6 +6,7 @@ import berry_image from '../../common/card/assets/berry.png';
 
 const ProfileCard = ({ berry, jobs, gender, userName, career, point, intro, stacks, isViewMode }) => {
 
+    // TODO :
     const personal_image = gender === 'male' ? personal_m_image : personal_f_image;
 
     // 이름 * 부분 처리 

@@ -54,7 +54,6 @@ const CUBoard = () => {
         console.error("오류 메시지: ", error);
       }
     };
-
     UserProfile();
   }, []);
 
