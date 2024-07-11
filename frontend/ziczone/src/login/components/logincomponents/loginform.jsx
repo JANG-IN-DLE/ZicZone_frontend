@@ -65,12 +65,14 @@ const LoginForm = ({ title, explain1, explain2, input1, input2, links, setCurren
     };
 
 
-    const decodeTokenAndSaveRole = (token) => {
+    const decodeTokenAndSaveRoleAndSaveId = (token) => {
         try {
             const decodedToken = jwtDecode(token);
             const role = decodedToken.role;
+            const userId = decodedToken.userId;
             localStorage.setItem('userRole', role);
-            return role;
+            localStorage.setItem('userId', userId);
+            return {role, userId};
         } catch (error) {
             console.error('토큰 디코딩 중 오류 발생:', error);
             return null;
@@ -90,8 +92,8 @@ const LoginForm = ({ title, explain1, explain2, input1, input2, links, setCurren
                 console.log("Token:", token);
     
                 localStorage.setItem('token', token);
-                const decodedRole = decodeTokenAndSaveRole(token);
-                console.log("Decoded role from JWT:", decodedRole);
+                const decodedRole = decodeTokenAndSaveRoleAndSaveId(token);
+                console.log("Decoded from JWT:", decodedRole);
                 setLoginFail("");
                 
                 // 로그인 성공 후 추가 작업 (예: 홈 페이지로 리다이렉트)
