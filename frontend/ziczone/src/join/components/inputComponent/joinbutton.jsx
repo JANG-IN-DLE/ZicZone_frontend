@@ -24,27 +24,33 @@ const JoinButton = ({category}) => {
             return;
         }
 
-        //Request를 담아서 보낼 곳
-        const submitFormData = new FormData();
-
-        //로고를 제외한 데이터 Request에 담음
-        const jsonData = {...formData};
-        if(jsonData.companyLogo) {
-            delete jsonData.companyLogo;
-        }
-        submitFormData.append('companyUserDTO', JSON.stringify(jsonData));
-
-        //로고(파일) Request에 담음
-        if (formData.companyLogo) {
-            submitFormData.append('companyLogo', formData.companyLogo);
-        }
-
-        try{
-            const response = await axios.post(endpoint, submitFormData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
+        try {
+            let response;
+    
+            if (category === "per") {
+                // JSON 데이터를 사용하여 요청을 보냄
+                response = await axios.post(endpoint, formData, {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+            } else {
+                // FormData를 사용하여 파일과 데이터를 함께 보냄
+                const submitFormData = new FormData();
+                for (const key in formData) {
+                    if (key === 'companyLogo') {
+                        submitFormData.append(key, formData[key], formData[key].name); // 파일 이름을 포함해서 추가
+                    } else {
+                        submitFormData.append(key, formData[key]);
+                    }
                 }
-            });
+    
+                response = await axios.post(endpoint, submitFormData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                });
+            }
             if(response.status === 200){
                 if(response.data === "Personal user signup successful" || response.data === "Company user signup successful"){
                     console.log("회원가입 성공 : ", response.data);

@@ -5,6 +5,8 @@ import check from '../../assets/check.png'
 import useEmailVerification from '../../../join/hooks/useEmailAuth';
 import usePasswordValidation from '../../../join/hooks/usePasswordValidation';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { jwtDecode } from 'jwt-decode';
 
 
 const LoginForm = ({ title, explain1, explain2, input1, input2, links, setCurrentForm }) => {
@@ -12,6 +14,7 @@ const LoginForm = ({ title, explain1, explain2, input1, input2, links, setCurren
     //로그인
     const [email, setUserEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [loginFail, setLoginFail] = useState('');
 
     //비밀번호 찾기(이메일인증)
     const {
@@ -59,6 +62,51 @@ const LoginForm = ({ title, explain1, explain2, input1, input2, links, setCurren
 
     const handleInputChange = (value) => (e) => {
         value(e.target.value);
+    };
+
+
+    const decodeTokenAndSaveRole = (token) => {
+        try {
+            const decodedToken = jwtDecode(token);
+            const role = decodedToken.role;
+            localStorage.setItem('userRole', role);
+            return role;
+        } catch (error) {
+            console.error('토큰 디코딩 중 오류 발생:', error);
+            return null;
+        }
+    };
+
+
+    const Login = async () => {
+        console.log("@@@");
+        try {
+            const response = await axios.post("http://localhost:3000/api/login", { email, password });
+    
+            console.log("Response:", response);
+    
+            if (response.data.message === "Auth Success") {
+                const token = response.headers['authorization'];
+                console.log("Token:", token);
+    
+                localStorage.setItem('token', token);
+                const decodedRole = decodeTokenAndSaveRole(token);
+                console.log("Decoded role from JWT:", decodedRole);
+                setLoginFail("");
+                
+                // 로그인 성공 후 추가 작업 (예: 홈 페이지로 리다이렉트)
+            } else {
+                console.log("로그인 실패:", response.data.message);
+            }
+        } catch (error) {
+            if (error.response && error.response.status === 401) {
+                console.log("로그인 실패: 이메일이나 비밀번호가 일치하지 않습니다.");
+                setLoginFail("loginworng");
+            } else {
+                console.error("로그인 오류:", error);
+                setLoginFail("loginerror");
+            }
+        }
     };
     
 
@@ -112,7 +160,7 @@ const LoginForm = ({ title, explain1, explain2, input1, input2, links, setCurren
                 <p className='joinbtn_login' onClick={() => navigate('/signup')}>회원가입</p>
             </div>
             {/* 경고메세지 -> 필요시에만 나타나게 */}
-            <p className="warningmsg_login">
+            <p className="warningmsg_login login_success">
                 {
                     title === "emailauth" && isAuth === "auth_expired" ? "인증시간이 만료되었습니다" 
                     : title === "emailauth" && isAuth === "auth_wrong" ? "인증번호가 다릅니다" 
@@ -125,6 +173,8 @@ const LoginForm = ({ title, explain1, explain2, input1, input2, links, setCurren
                     : title === "changepassword" && !isConfirmValid ? "비밀번호가 일치하지않습니다."
                     : title === "changepassword" && isChangePassword === "changeSuccess" ? "비밀번호가 변경되었습니다"
                     : title === "changepassword" && isChangePassword === "changeFail" ? "비밀번호 변경이 실패하였습니다"
+                    : title === "login" && loginFail === "loginworng" ? "다시 입력해주세요"
+                    : title === "login" && loginFail === "loginerror" ? "로그인 오류가 발생했습니다"
                     : ""
                 }
             </p>
@@ -134,7 +184,7 @@ const LoginForm = ({ title, explain1, explain2, input1, input2, links, setCurren
                 className="loginbtn_login" 
                 type="submit" 
                 onClick={title === "login" 
-                        ? "로그인 클릭" : title ==="emailauth" && isSend !== "send_success"
+                        ? Login : title ==="emailauth" && isSend !== "send_success"
                         ? sendVerificationEmail : title ==="emailauth" && isSend === "send_success" 
                         ? verifyAuthCode : changePassword}
             >
