@@ -1,17 +1,19 @@
-import React from "react";
-import "../styles/RDBoard.css";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import ProfileCard from "./ProfileCard";
 import RDescription from "./RDescription";
 import PostView from "./PostView";
 import Button from "./Button";
+import CommentList from "./comment/CommentList";
+import "../styles/RDBoard.css";
 
 const RDBoard = () => {
+  const userId = 13;
+
   const { corrId } = useParams();
-  const userId = 13; // 로그인 구현되면 실제 로그인된 사용자의 userId를 사용
   const navigate = useNavigate();
+
   const [isEditMode, setIsEditMode] = useState(false);
 
   const [userProfile, setUserProfile] = useState({
@@ -23,7 +25,7 @@ const RDBoard = () => {
     point: '',
     intro: '',
     stacks: [],
-    isOwner: false // 게시물 작성자인지 여부 확인
+    isOwner: false
   });
 
   const [postData, setPostData] = useState({
@@ -62,7 +64,7 @@ const RDBoard = () => {
           point: profileData.berryPoint,
           intro: profileData.userIntro,
           stacks: profileData.techUrl ? profileData.techUrl.split(',') : [],
-          isOwner: profileData.userId === userId // 현재 사용자가 게시물 작성자인지 여부 확인
+          isOwner: profileData.userId === userId
         });
 
         const postData = postResponse.data;
@@ -75,7 +77,6 @@ const RDBoard = () => {
         console.error("오류 메시지: ", error);
       }
     };
-
     ProfileAndPost();
   }, [corrId]);
 
@@ -101,12 +102,13 @@ const RDBoard = () => {
               )}
             </div>
             <RDescription />
-            <div className="b_title_form">
-              <PostView
-                title={postData.title}
-                content={postData.content}
-                fileUrl={postData.fileUrl}
-              />
+            <PostView
+              title={postData.title}
+              content={postData.content}
+              fileUrl={postData.fileUrl}
+            />
+            <div className="b_comment">
+              <CommentList corrId={corrId} userId={userId} />
             </div>
           </div>
         </div>

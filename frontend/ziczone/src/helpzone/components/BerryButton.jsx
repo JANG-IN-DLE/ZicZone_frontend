@@ -5,7 +5,7 @@ const BerryButton = ({ value, isActive, onClick }) => {
     return (
         <div>
             <div className={`berry_button ${isActive ? 'active' : ''}`} onClick={onClick}>
-                { value }
+                {value}
             </div>
         </div>
     );

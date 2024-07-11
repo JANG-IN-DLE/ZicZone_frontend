@@ -23,29 +23,29 @@ const PostForm = ({ isEditMode = false, initialData = {}, onSubmit }) => {
             handleSubmit();
         }}>
             {!isEditMode && (
-                <BerrySelect className="pf_berry_select" selectedBerry={ selectedBerry } onSelect={ handleBerrySelect } />
+                <BerrySelect className="pf_berry_select" selectedBerry={selectedBerry} onSelect={handleBerrySelect} />
             )}
             <p className="pf_title">제목</p>
             <div className="pf_title_wrapper">
-                <div className="pf_berry_display">{ selectedBerry }</div>
+                <div className="pf_berry_display">{selectedBerry}</div>
                 <input
                     className="pf_input"
-                    value={ title }
-                    onChange={ handleTitleChange }
-                    readOnly={ isEditMode }
+                    value={title}
+                    onChange={handleTitleChange}
+                    readOnly={isEditMode}
                 />
             </div>
             <textarea
-                value={ content }
-                onChange={ handleContentChange }
+                value={content}
+                onChange={handleContentChange}
             />
             <p className="pf_pdf">첨부파일 <span>*하나의 PDF 파일로 첨부해주세요</span></p>
             <div className="pf_file_upload">
-                <FileUpload onFileChange={ handleFileChange } />
+                <FileUpload onFileChange={handleFileChange} />
             </div>
             <div className="pf_button">
                 <Button type="submit">
-                    { isEditMode ? "수정" : "등록" }
+                    {isEditMode ? "수정" : "등록"}
                 </Button>
             </div>
         </form>

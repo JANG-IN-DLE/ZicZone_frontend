@@ -1,0 +1,13 @@
+.ci_wrapper {
+    width: 734px;
+    display: flex;
+}
+
+.ci_input {
+    flex: 1; /* 가능한 많은 공간을 차지하게함 */
+    margin-right: 5px; 
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ABABAB;
+    outline: none;
+}

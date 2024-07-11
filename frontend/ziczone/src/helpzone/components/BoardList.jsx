@@ -9,8 +9,8 @@ const BoardList = ({ boards }) => {
 
   return (
     <div className='board_list'>
-      { boards.map(board => (
-        <BoardItem key={ board.corrId } board={ board } />
+      {boards.map(board => (
+        <BoardItem key={board.corrId} board={board} />
       ))}
     </div>
   );

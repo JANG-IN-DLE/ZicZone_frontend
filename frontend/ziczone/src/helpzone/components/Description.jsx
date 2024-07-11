@@ -4,7 +4,7 @@ import "../styles/Description.css";
 const Description = ({ isEditMode }) => {
     return (
         <div className="d_textarea">
-            <p className="d_title">{ isEditMode ? "게시물 수정" : "게시물 등록" }</p>
+            <p className="d_title">{isEditMode ? "게시물 수정" : "게시물 등록"}</p>
             <p className="d_content">
                 안녕하세요! 이곳은 여러분이 자소서, 이력서, 포트폴리오를 제출하고 첨삭 요청을 할 수 있는 공간입니다.<br />
                 첨삭 요청 시 다른 이용자들의 피드백을 받을 수 있습니다. 다양한 의견을 반영하여 문서를 개선해보아요!<br />

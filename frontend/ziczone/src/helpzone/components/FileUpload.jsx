@@ -22,12 +22,12 @@ const FileUpload = ({ onFileChange }) => {
                     type="file"
                     id="pdf_input"
                     accept=".pdf"
-                    onChange={ onChange }
+                    onChange={onChange}
                     style={{ display: "none" }}
                 />
                 <div className="fu_display">
-                    { file ? file.name : "PDF 파일을 선택해주세요" }
-                    { file && <span className="fu_remove" onClick={ onRemove }>X</span> }
+                    {file ? file.name : "PDF 파일을 선택해주세요"}
+                    {file && <span className="fu_remove" onClick={onRemove}>X</span>}
                 </div>
             </label>
         </div>
