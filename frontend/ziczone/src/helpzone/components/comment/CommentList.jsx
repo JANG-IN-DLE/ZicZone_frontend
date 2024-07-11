@@ -28,7 +28,7 @@ const CommentList = ({ corrId, userId }) => {
             <CommentInput corrId={corrId} userId={userId} onCommentAdded={handleCommentAdded} />
             <div className="comment-list">
                 {comments.map((comment) => (
-                    <CommentItem key={comment.commId} comment={comment} />
+                    <CommentItem key={comment.commId || comment.id} comment={comment} />
                 ))}
             </div>
         </div>
