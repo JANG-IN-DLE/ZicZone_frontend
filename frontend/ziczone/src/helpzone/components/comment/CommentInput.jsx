@@ -36,14 +36,15 @@ const CommentInput = ({ corrId, userId, onCommentAdded }) => {
 
     return (
         <form className="comment_input" onSubmit={handleCommentSubmit}>
-            <div className="ci_wrapper">
+            <div className="cin_wrapper">
                 <input
-                    className="ci_input"
+                    className="cin_input"
                     value={commentContent}
                     onChange={handleCommentContentChange}
+                    placeholder="댓글을 입력하세요"
                 />
                 <div>
-                    <Button type="button" className="ci_btn">완료</Button>
+                    <Button type="button" className="cin_btn">완료</Button>
                 </div>
             </div>
         </form>

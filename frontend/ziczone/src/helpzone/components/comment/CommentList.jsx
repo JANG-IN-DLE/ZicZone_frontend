@@ -3,8 +3,9 @@ import axios from "axios";
 import CommentInput from "./CommentInput";
 import CommentItem from "./CommentItem";
 
-const CommentList = ({ corrId, userId }) => {
+const CommentList = ({ corrId }) => {
     const [comments, setComments] = useState([]);
+    const userId = 14; // 임의로 설정된 userId
 
     useEffect(() => {
         fetchComments();
@@ -23,16 +24,30 @@ const CommentList = ({ corrId, userId }) => {
         setComments([...comments, newComment]);
     };
 
+    const handleCommentUpdated = (updatedComment) => {
+        setComments(comments.map(comment => (comment.commId === updatedComment.commId ? updatedComment : comment)));
+    };
+
+    const handleCommentDeleted = (deletedCommentId) => {
+        setComments(comments.filter(comment => comment.commId !== deletedCommentId));
+    };
+
     return (
-        <div>
+        <div className="comment-section">
             <CommentInput corrId={corrId} userId={userId} onCommentAdded={handleCommentAdded} />
-            <div className="comment-list">
+            <ul className="comment-list">
                 {comments.map((comment) => (
-                    <CommentItem key={comment.commId || comment.id} comment={comment} />
+                    <CommentItem
+                        key={comment.commId}
+                        comment={comment}
+                        userId={userId}
+                        onCommentUpdated={handleCommentUpdated}
+                        onCommentDeleted={handleCommentDeleted}
+                    />
                 ))}
-            </div>
+            </ul>
         </div>
     );
-}
+};
 
 export default CommentList;
