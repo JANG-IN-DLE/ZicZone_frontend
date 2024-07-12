@@ -26,6 +26,18 @@ const HelpZone = ({
         return { backgroundColor: "#FFFFFF", color: "#000000" };
     }
   };
+
+  const maskName = (name) => {
+    if (name.length < 2) return name;
+    if (name.length === 2) {
+      return `${name[0]}*`;
+    }
+    const maskedLength = name.length - 2;
+    const start = name[0];
+    const end = name[name.length - 1];
+    return `${start}${"*".repeat(maskedLength)}${end}`;
+  };
+
   return (
     <>
       <div className="help_list">
@@ -35,7 +47,7 @@ const HelpZone = ({
         <div className="help_list_content">
           <div className="help_list_title">{corrTitle}</div>
           <div className="help_list_user_name">
-            {userName}
+            {maskName(userName)}
             <span className="help_list_user_career"> | {personalCareer}</span>
           </div>
         </div>
