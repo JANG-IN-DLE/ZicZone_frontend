@@ -1,0 +1,12 @@
+.berry_check label {
+    font-size: 18px;
+    font-family: 'Pretendard-Regular';
+    line-height: 21px;
+}
+
+.berry_check input {
+    width: 18px;
+    height: 18px;
+    margin-right: 5px;
+    margin-top: 5px;
+}
