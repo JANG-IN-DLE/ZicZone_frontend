@@ -1,4 +1,5 @@
 .comment_item {
+    width: 734px;
     display: flex;
     justify-content: start;
     font-family: 'Pretendard-Regular';
@@ -14,5 +15,51 @@
 }
 
 .ci_info {
+    width: 683px;
     margin-bottom: 4px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.ci_content,
+.ci_edit_textarea {
+    width: 672px;
+    /* height: 200px;
+    padding: 10px; */
+}
+
+.ci_edit_textarea {
+    height: 200px;
+    padding: 10px;
+}
+
+.ci_button {
+    margin-right: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.ci_edit_btn {
+    margin-right: 10px;
+    background-color: #FFF;
+    border: 2px solid #000;
+    padding: 2px 5px;
+    border-radius: 4px;
+    color: #000;
+}
+
+.ci_delete_btn {
+    background-color: #DE2E2E;
+    border: 2px solid #DE2E2E;
+    padding: 2px 5px;
+    border-radius: 4px;
+    color: #FFF;
+}
+
+.ci_save_btn {
+    background-color: #0051BA;
+    border: 2px solid #0051BA;
+    padding: 2px 5px;
+    border-radius: 4px;
+    color: #FFF;
 }
