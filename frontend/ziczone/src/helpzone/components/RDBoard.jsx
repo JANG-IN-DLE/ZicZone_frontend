@@ -9,7 +9,7 @@ import CommentList from "./comment/CommentList";
 import "../styles/RDBoard.css";
 
 const RDBoard = () => {
-  const userId = 13;
+  const userId = 7;
 
   const { corrId } = useParams();
   const navigate = useNavigate();

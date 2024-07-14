@@ -3,20 +3,42 @@ import axios from "axios";
 import CommentInput from "./CommentInput";
 import CommentItem from "./CommentItem";
 
-const CommentList = ({ corrId }) => {
+const CommentList = ({ corrId, userId }) => {
     const [comments, setComments] = useState([]);
-    const userId = 14; // 임의로 설정된 userId
+    const [selectedCommentId, setSelectedCommentId] = useState(null);
+    const [board, setBoard] = useState(null);
 
     useEffect(() => {
         fetchComments();
+        fetchBoard();
     }, [corrId]);
 
     const fetchComments = async () => {
         try {
             const response = await axios.get(`http://localhost:12000/api/comments?corrId=${corrId}`);
-            setComments(response.data);
+            if (response.status === 200) {
+                const commentsData = response.data;
+                setComments(commentsData);
+                const selectedComment = commentsData.find(comment => comment.commSelection);
+                if (selectedComment) {
+                    setSelectedCommentId(selectedComment.commId);
+                } else {
+                    setSelectedCommentId(null);
+                }
+            }
         } catch (error) {
             console.error("댓글 목록 조회 중 오류 발생:", error);
+        }
+    };
+
+    const fetchBoard = async () => {
+        try {
+            const response = await axios.get(`http://localhost:12000/api/board/${corrId}`);
+            if (response.status === 200) {
+                setBoard(response.data);
+            }
+        } catch (error) {
+            console.error("게시물 정보 조회 중 오류 발생:", error);
         }
     };
 
@@ -32,17 +54,29 @@ const CommentList = ({ corrId }) => {
         setComments(comments.filter(comment => comment.commId !== deletedCommentId));
     };
 
+    const handleCommentSelected = (selectedComment) => {
+        setSelectedCommentId(selectedComment.commId);
+        setComments(comments.map(comment =>
+            comment.commId === selectedComment.commId
+                ? { ...comment, commSelection: true }
+                : { ...comment, commSelection: false }
+        ));
+    };
+
     return (
         <div className="comment-section">
             <CommentInput corrId={corrId} userId={userId} onCommentAdded={handleCommentAdded} />
             <ul className="comment-list">
                 {comments.map((comment) => (
                     <CommentItem
-                        key={comment.commId}
+                        key={`${comment.commId}-${comment.commSelection}`}
                         comment={comment}
                         userId={userId}
+                        board={board}
+                        selectedCommentId={selectedCommentId}
                         onCommentUpdated={handleCommentUpdated}
                         onCommentDeleted={handleCommentDeleted}
+                        onCommentSelected={handleCommentSelected}
                     />
                 ))}
             </ul>
