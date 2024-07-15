@@ -92,7 +92,7 @@ const CommentItem = ({ comment, board, userId, selectedCommentId, onCommentUpdat
 
     return (
         <div>
-            <SelectModal isOpen={isModalOpen} onClose={closeModal} onConfirm={confirmSelection} userName={maskName(comment.userName)}corrPoint={board.corrPoint}/>
+            <SelectModal isOpen={isModalOpen} onClose={closeModal} onConfirm={confirmSelection} userName={maskName(comment.userName)}corrPoint={comment.corrPoint}/>
             {comment.commSelection && (
                 <div className="ci_select_show">
                     <img src={selectIcon} alt="채택완료핀" />
