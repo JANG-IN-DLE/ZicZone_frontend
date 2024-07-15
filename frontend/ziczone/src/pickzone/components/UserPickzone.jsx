@@ -41,26 +41,24 @@ function UserPickzone() {
     const loggedInPersonalId = 1;
 
     useEffect(() => {
-        axios.get(`/api/pickcards?loggedInPersonalId=${loggedInPersonalId}`)
-            .then(response => {
-                const maskedData = response.data.map(card => ({
+        const fetchData = async () => {
+            try {
+                // PickCards 데이터 가져옴
+                const pickCardsResponse = await axios.get(`/api/personal/pickcards?loggedInPersonalId=${loggedInPersonalId}`);
+                const maskedData = pickCardsResponse.data.map(card => ({
                     ...card,
                     userName: maskName(card.userName)
                 }));
-                setPickCards(maskedData)
-            })
-            .catch(error => {
-                console.error('Error fetching pick cards: ' , error)
-            });
+                setPickCards(maskedData);
 
-            axios.get('/api/jobs')
-                .then(response => {
-                    // 맨앞에 전체 항목
-                    setJobs([{ jobId: 'all', jobName: '전체' }, ...response.data]);
-                })
-                .catch(error => {
-                    console.error('Error fetching jobs: ', error)
-                });
+                // Jobs 데이터를 가져옴
+                const jobsResponse = await axios.get('/api/jobs');
+                setJobs([{ jobId: 'all', jobName: '전체'}, ...jobsResponse.data]);
+            } catch(error){
+                console.error('Error fetching data: ', error);
+            }
+        };
+        fetchData();
     }, []);
 
     const handleCardClick = (card) => {
@@ -77,7 +75,7 @@ function UserPickzone() {
     };
     const handleOpenCard = () => {
         if(selectedCard){
-            // 나중에 로그인된 personalId도 보내야한다.
+            // 로그인된 personalId도 보낸다
             navigate(`/pickzone/${loggedInPersonalId}/${selectedCard.personalId}`);
         }
     };

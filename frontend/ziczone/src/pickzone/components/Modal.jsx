@@ -17,7 +17,7 @@ const Modal = ({ isOpen, onClose, userName, onOpen, selectedCard}) => {
             payHistoryDate : new Date().toISOString()
         };
 
-        axios.post('/api/open-card', openCardData)
+        axios.post('/api/personal/open-card', openCardData)
             .then(response => {
                 if(response.status === 200){
                     onOpen();
