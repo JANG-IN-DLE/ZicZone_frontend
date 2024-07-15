@@ -110,7 +110,7 @@ const CommentItem = ({ comment, board, userId, selectedCommentId, onCommentUpdat
                     <div className='ci_info'>
                         {maskName(comment.userName)} | {comment.personalCareer}
                         <div className="ci_button">
-                            {comment.userId === userId && (
+                            {comment.userId === userId && selectedCommentId === null && (
                                 isEditing ? (
                                     <>
                                         <button

@@ -31,7 +31,8 @@ const RDBoard = () => {
   const [postData, setPostData] = useState({
     title: '',
     content: '',
-    fileUrl: ''
+    fileUrl: '',
+    commSelection: false
   });
 
   const handleEdit = () => {
@@ -55,6 +56,7 @@ const RDBoard = () => {
         const postResponse = await axios.get(`/api/board/${corrId}`);
 
         const profileData = profileResponse.data;
+        console.log("Profile Data:", profileData); // profileData 확인
         setUserProfile({
           berry: profileData.corrPoint,
           jobs: profileData.jobName.split(','),
@@ -68,10 +70,12 @@ const RDBoard = () => {
         });
 
         const postData = postResponse.data;
+        console.log("Post Data:", postData); // postData 확인
         setPostData({
           title: postData.corrTitle,
           content: postData.corrContent,
-          fileUrl: postData.corrPdf
+          fileUrl: postData.corrPdf,
+          commSelection: postData.commSelection
         });
       } catch (error) {
         console.error("오류 메시지: ", error);
@@ -90,7 +94,7 @@ const RDBoard = () => {
           <div className="b_description">
             <div className="b_display_btn">
               <p className="d_title">게시물 조회</p>
-              {userProfile.isOwner && (
+              {userProfile.isOwner && !postData.commSelection && (
                 <div className="b_edit_delete">
                   <Button type="button" className="b_edit" onClick={handleEdit}>
                     수정
