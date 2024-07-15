@@ -121,7 +121,7 @@ const LoginForm = ({ title, explain1, explain2, input1, input2, links, setCurren
 
         eventSource.addEventListener("alarm", function (e) {
             const alarm = JSON.parse(e.data);
-            alert(`New alarm: ${alarm.message}`);
+            alert(`New alarm: ${alarm.senderId} -> ${alarm.receiverId} (${alarm.type})`);
         });
 
         eventSource.onerror = function () {
