@@ -76,6 +76,13 @@
     cursor: pointer;
 }
 
+.ci_edit_btn:active,
+.ci_delete_btn:active,
+.ci_save_btn:active,
+.ci_select_btn:active {
+    transform: scale(0.97);
+}
+
 .ci_edit_btn {
     margin-right: 10px;
     background-color: #FFF;
