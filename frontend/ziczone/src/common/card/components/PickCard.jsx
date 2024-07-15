@@ -17,7 +17,7 @@ const PickCard = ({onClick, userImage, jobNames=[], userName, userCareer, userIn
         e.stopPropagation();
         try{
             // 보낼 때 userName뿐만 아니라 지금 로그인한 회원 Id까지 보내야할 것 같아. companyId는 임시로 1
-            const response = await axios.post('/api/scrap', { personalId, companyId:1 });
+            const response = await axios.post('/api/company/scrap', { personalId, companyId:1 });
             if(response.status === 200) {
                 setScrap(!scrap);
             }

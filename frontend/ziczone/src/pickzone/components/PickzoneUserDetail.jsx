@@ -28,7 +28,7 @@ export default function PickZoneUserDetail() {
 
     useEffect(() => {
         // pickDetail에서 왼쪽에 회원정보 가져오는 axios
-        axios.get(`/api/pickcards/personal/${loggedInPersonalId}/${personalId}`)
+        axios.get(`/api/personal/pickcards/${loggedInPersonalId}/${personalId}`)
             .then(response => {
                 const maskedUserCard = {
                     ...response.data,
@@ -40,7 +40,7 @@ export default function PickZoneUserDetail() {
                 console.log('Error fetching user details: ', error);
             });
             // pickDetail에서 resume 데이터 가져오는 axios
-        axios.get(`/api/pickresume/${personalId}`)
+        axios.get(`/api/personal/pickresume/${personalId}`)
             .then(response => {
                 const maskedUserResume = {
                     ...response.data,

@@ -24,7 +24,6 @@ const maskName = (name) => {
     return name;
 }
 
-
 // resume conponent
 const PickResume = ({resumeName, resumePhoto, resumeEmail, phoneNum, resumeDate, jobName, techUrls, educations, careers, curriculums, certificates, etcs, archives, isPicked }) => {
 
