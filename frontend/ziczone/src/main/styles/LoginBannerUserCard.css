@@ -91,21 +91,35 @@
   }
 
     .login_user_image {
-      height: 64px;
-      width: 64px;
+      height: 70px;
+      width: 70px;
       border: 0.5px solid #0051BA;
       border-radius: 40px;
       margin-top: 50px;
+      background-color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
+    .login_user_image img{
+      height: 60px;
+      width: 60px;
+      border-radius: 40px; 
+    }
+
     .login_user_name{
       margin-top: 25px;
-      font-size: 20px;
+      font-size: 18px;
     }
     .login_user_email{
       color: #B3B3B3;
       font-size: 14px;
     }
-    .mypage{
+    .main_mypage{
     margin-top: 40px;
-    font-size: 20px;
+    font-size: 18px;
+    }
+    
+    .main_mypage p {
+      color: black;
     }

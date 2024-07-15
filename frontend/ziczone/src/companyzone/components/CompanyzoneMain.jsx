@@ -1,26 +1,62 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CompanyHeader from "./CompanyHeader";
 import CompanyCard from "./CompanyCard";
 import Modal from "./Modal";
 import "../styles/CompanyMain.css";
+import axios from "axios";
 
 const CompanyzoneMain = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [openModalInfo, setOpenModalInfo] = useState(null);
+  const [companyData, setCompanyData] = useState([]);
 
-  const handleCardClick = () => {
-    setIsModalOpen(true);
+  // 클릭했을때 인덱스 변수 받아서 클릭된 카드 인덱스를 받음
+  const handleCardClick = (index) => {
+    setOpenModalInfo(companyData[index]);
   };
 
   const handleCloseModal = () => {
-    setIsModalOpen(false);
+    setOpenModalInfo(null);
   };
+
+  useEffect(() => {
+    axios
+      .get("/api/companyzone")
+      .then((res) => {
+        setCompanyData(res.data);
+      })
+      .catch((error) => {});
+  }, []);
 
   return (
     <div className="main_container">
       <CompanyHeader />
       <div className="company_container">
-        <CompanyCard onCardClick={handleCardClick} />
-        <Modal isOpen={isModalOpen} onClose={handleCloseModal}></Modal>
+        {companyData.map((company, index) => (
+          <CompanyCard
+            companyLogo={company.companyLogo}
+            userName={company.user.userName}
+            userIntro={company.user.userIntro}
+            // 온클릭 => 매핑중인 인덱스 요소
+            onCardClick={() => handleCardClick(index)}
+          />
+        ))}
+        {/* openModalInfo가 존재할때 렌더링  */}
+        {openModalInfo && (
+          <Modal
+            // 열린상태
+            isOpen={true}
+            // 모달 닫기 이벤트 핸들러 설정
+            onClose={handleCloseModal}
+            companyLogo={openModalInfo.companyLogo}
+            userName={openModalInfo.user.userName}
+            userIntro={openModalInfo.user.userIntro}
+            companyCeo={openModalInfo.companyCeo}
+            companyNum={openModalInfo.companyNum}
+            companyAddr={openModalInfo.companyAddr}
+            email={openModalInfo.user.email}
+            companyYear={openModalInfo.companyYear}
+          />
+        )}
       </div>
     </div>
   );
