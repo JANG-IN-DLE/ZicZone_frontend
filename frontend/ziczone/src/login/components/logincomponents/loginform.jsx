@@ -79,7 +79,7 @@ const LoginForm = ({ title, explain1, explain2, input1, input2, links, setCurren
         }
     };
 
-
+    //로그인 요청
     const Login = async () => {
         console.log("@@@");
         try {
@@ -95,6 +95,10 @@ const LoginForm = ({ title, explain1, explain2, input1, input2, links, setCurren
                 const decodedRole = decodeTokenAndSaveRoleAndSaveId(token);
                 console.log("Decoded from JWT:", decodedRole);
                 setLoginFail("");
+
+                if(decodedRole.role === "PERSONAL"){
+                    subscribeToSSE(decodedRole.userId, token);
+                }
                 
                 // 로그인 성공 후 추가 작업 (예: 홈 페이지로 리다이렉트)
             } else {
@@ -110,6 +114,21 @@ const LoginForm = ({ title, explain1, explain2, input1, input2, links, setCurren
             }
         }
     };
+
+    //알림구독요청
+    const subscribeToSSE = async (userId, token) => {
+        const eventSource = new EventSource(`http://localhost:12000/sse/subscribe/${userId}?token=${token}`);
+
+        eventSource.addEventListener("alarm", function (e) {
+            const alarm = JSON.parse(e.data);
+            alert(`New alarm: ${alarm.message}`);
+        });
+
+        eventSource.onerror = function () {
+            console.error("Error in SSE connection");
+            eventSource.close();
+        };
+    }
     
 
     return (
