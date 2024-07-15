@@ -4,14 +4,16 @@ import personal_f_image from "../../../common/card/assets/personal_f_image.png";
 import personal_m_image from "../../../common/card/assets/personal_m_image.png";
 import "../../styles/comment/CommentItem.css";
 import selectIcon from "../../assets/selectIcon.png";
+import SelectModal from "../SelectModal";
 
 const CommentItem = ({ comment, board, userId, selectedCommentId, onCommentUpdated, onCommentDeleted, onCommentSelected }) => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
-    // useEffect(() => {
-    //     console.log("Comment data:", comment);
-    //     console.log("Selected comment ID:", selectedCommentId);
-    //     console.log("Board data:", board);
-    // }, [comment, selectedCommentId, board]);
+    useEffect(() => {
+        console.log("Comment data:", comment);
+        console.log("Selected comment ID:", selectedCommentId);
+        console.log("Board data:", board);
+    }, [comment, selectedCommentId, board]);
 
     const personal_image = comment.gender === 'MALE' ? personal_m_image : personal_f_image;
 
@@ -57,8 +59,8 @@ const CommentItem = ({ comment, board, userId, selectedCommentId, onCommentUpdat
                 params: { userId: userId }
             });
             if (response.status === 200) {
-                console.log(response.data);
                 onCommentSelected(response.data);
+                closeModal();
             }
         } catch (error) {
             console.error("댓글 채택 실패:", error.response ? error.response.data : error.message);
@@ -76,8 +78,21 @@ const CommentItem = ({ comment, board, userId, selectedCommentId, onCommentUpdat
         return `${start}${'*'.repeat(maskedLength)}${end}`;
     };
 
+    const openModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
+
+    const confirmSelection = () => {
+        handleSelectClick();
+    };
+
     return (
         <div>
+            <SelectModal isOpen={isModalOpen} onClose={closeModal} onConfirm={confirmSelection} userName={maskName(comment.userName)}corrPoint={board.corrPoint}/>
             {comment.commSelection && (
                 <div className="ci_select_show">
                     <img src={selectIcon} alt="채택완료핀" />
@@ -135,7 +150,7 @@ const CommentItem = ({ comment, board, userId, selectedCommentId, onCommentUpdat
                             {board && board.userId === userId && !comment.commSelection && selectedCommentId === null && comment.userId !== userId && (
                                 <button
                                     type="button"
-                                    onClick={handleSelectClick}
+                                    onClick={openModal}
                                     className="ci_select_btn"
                                 >
                                     채택하기
