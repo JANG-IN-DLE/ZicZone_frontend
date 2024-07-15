@@ -4,6 +4,15 @@
         text-align: left;
 
         }
+
+        /* MainMain.css */
+.logo_img {
+  width: 70px;
+  height: 70px;
+  object-fit: contain; /* 이미지가 박스에 딱 맞게 들어갈 수 있도록 */
+}
+
+
         .company_slide_container {
         position: relative;
         display: flex;
@@ -14,6 +23,7 @@
         height: 100px;
         overflow: hidden;
 
+        
         ul {
             position: absolute;
             display: flex;

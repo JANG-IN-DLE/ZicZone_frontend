@@ -85,12 +85,24 @@
       margin: -35px;
     }
 
-    .modal_com_logo {
-      width: 64px;
-      height: 64px;
+    .com_logo_img {
       border: 0.5px solid #0051BA;
-      border-radius: 32px;
+      border-radius: 40px;
       background-color: white;
+      width: 70px;
+      height: 70px;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+    }
+    .com_logo_img img{
+      width: auto;
+      height: auto;
+      max-width: 60px;
+      max-height: 60px; 
+      object-fit: contain; 
     }
 
     .modal_com_name {
