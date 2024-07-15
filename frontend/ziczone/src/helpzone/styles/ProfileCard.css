@@ -33,12 +33,14 @@
     4px 4px 4px 0px rgba(255, 255, 255, 0.1) inset;
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
+    position: relative;
 }
 
 .pc_jobs {
     font-size: 11px;
     color: #0051BA;
     margin-top: 28px;
+    padding-top: 20px;
     font-weight: bold;
 }
 
@@ -92,15 +94,26 @@
 
 .pc_intro {
     width: 244px;
+    height: 32px;
     font-size: 13px;
-    margin: 0 auto;
-    margin-top: 20px;
+    text-align: center;
+    margin: 24px;
+    align-items: center;
     color: #989898;
+    position: absolute;
+    bottom: 120px;
 }
 
 .pc_stacks {
     width: 244px;
     height: 105px;
-    margin: 0 auto;
-    margin-top: 15px;
+    margin: 24px;
+    flex-wrap: wrap;
+    position: absolute;
+    bottom: 0px;
+}
+
+.tech_icon {
+    height: 21px;
+    margin-right: 3px;
 }

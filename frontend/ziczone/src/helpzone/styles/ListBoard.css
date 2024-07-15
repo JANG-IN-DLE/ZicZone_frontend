@@ -13,3 +13,7 @@
 .lb_write {
     width: 95px;
 }
+
+.lb_menu_left {
+    display: flex;
+}

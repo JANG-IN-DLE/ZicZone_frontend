@@ -26,6 +26,13 @@
 
 .item_title {
     font-size: 18px;
+    display: flex;
+}
+
+.bi_selected_comment {
+    color: #E02819;
+    font-weight: bold;
+    margin-right: 8px;
 }
 
 .item_userInfo {

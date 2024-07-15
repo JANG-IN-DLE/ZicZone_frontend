@@ -3,7 +3,7 @@ import axios from "axios";
 import Button from "../Button";
 import "../../styles/comment/CommentInput.css";
 
-const CommentInput = ({ corrId, userId, onCommentAdded }) => {
+const CommentInput = ({ corrId, userId, commId, onCommentAdded }) => {
     const [commentContent, setCommentContent] = useState('');
 
     const handleCommentContentChange = (e) => {
@@ -18,7 +18,8 @@ const CommentInput = ({ corrId, userId, onCommentAdded }) => {
             const response = await axios.post('http://localhost:12000/api/comments', {
                 commContent: commentContent,
                 corrId: corrId,
-                userId: userId
+                userId: userId,
+                commId: commId
             }, {
                 headers: {
                     'Content-Type': 'application/json'

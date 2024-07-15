@@ -75,6 +75,9 @@ const BoardItem = ({ board, userId }) => {
       </div>
       <div className='bi_container_center'>
         <div className='item_title'>
+          {board.commSelection && (
+            <p className="bi_selected_comment">[채택완료]</p>
+          )}
           {board.corrTitle}
         </div>
         <div className='item_userInfo'>
