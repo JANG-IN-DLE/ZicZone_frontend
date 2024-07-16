@@ -15,7 +15,6 @@ const CompanySilde = () => {
           (_, index) => index !== 0 && index !== 1
         ); // 인덱스 0과 1을 제외한 필터링
         setLogoImgs(filteredLogos);
-        console.log(filteredLogos);
       })
       .catch((error) => {
         console.error("companyErr", error);
