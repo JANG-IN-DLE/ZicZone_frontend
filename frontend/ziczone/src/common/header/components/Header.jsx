@@ -2,9 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom"; // 리액트 라우터의 Link 컴포넌트 import
 import header from "../assets/Header.png";
 import "./../styles/Header.css";
-import NonLogin from "./NonLogin";
-import UserLogin from "./UserLogin";
-import CompLogin from "./CompLogin";
+import NonLogin from "./HeaderNonLogin";
+import UserLogin from "./HeaderUserLogin";
+import CompLogin from "./HeaderCompLogin";
 import { useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";

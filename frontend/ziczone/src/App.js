@@ -16,7 +16,6 @@ import Footer from './common/footer/components/Footer'
 import ChargeMain from './payment/components/ChargeMain';
 import MainComponent from './main/components/MainComponent';
 import Header from './common/header/components/Header';
-import LoginMainComponent from './main/components/LoginMainComponent'
 import ListBoard from './helpzone/components/ListBoard';
 import CUBoard from "./helpzone/components/CUBoard";
 import RDBoard from "./helpzone/components/RDBoard";
@@ -27,6 +26,7 @@ import IntroMain from './intro/components/IntroMain';
 import JoinCom from './join/components/Join_Com'
 import JoinPer from './join/components/Join_Per'
 import Mypage from './mypage/components/MypageUser';
+import MainPickCard from './main/components/MainPickCard'
 
 
 
@@ -67,6 +67,8 @@ function App() {
       <Router>
         <Header />
         <Routes>
+          <Route path='/pickzone/:companyId/:personalId' element={<PickzoneCompanyDetail />} />
+          <Route path='/pickzone/:loggedInPersonalId/:personalId' element={<PickZoneUserDetail />} />
           <Route path='/' element={<MainComponent />} />
           <Route path='/pickzone/:personalId' element={<PickZoneUserDetail />} />
           <Route path='/pickzone' element={<UserPickzone />} />
@@ -80,10 +82,10 @@ function App() {
           <Route path='/signup-com' element={<JoinCom/>}/>
           <Route path='/signup-per' element={<JoinPer/>}/>
           <Route path='/mypage' element={<Mypage/>}/>
+          <Route path="/pickzone/:companyId/:personalId" component={<PickZoneUserDetail/>} />
         </Routes> 
          <Footer />
       </Router>
-{/* <ChargeMain/> */}
     </div>
 
   );

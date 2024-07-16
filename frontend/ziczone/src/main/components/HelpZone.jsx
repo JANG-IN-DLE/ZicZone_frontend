@@ -6,7 +6,6 @@ const HelpZone = ({
   corrPoint,
   corrTitle,
   corrView,
-  userId,
   personalCareer,
   userName,
 }) => {

@@ -20,10 +20,13 @@
         .pick_user_image_container {
             width: 65px;
             height: 65px;
-            background-color: #0051BA;
             margin-top: 40px;
             margin-left: 30px;
             
+        }
+        .pick_user_image_container img{
+            width: 65px;
+            height: 65px;
         }
         .pick_user_image{
             width: 100%;
@@ -51,10 +54,15 @@
             color: #b3b3b3;
         }
 
-        .pick_user_tech{
-            width: 340px;
+        .pick_user_tech {
+            width: 360px;
             height: 75px;
-            margin-top: 10px;
+            margin-top: 5px;
         }
 
+        .pick_user_tech img{
+            height: 27px;
+            display: inline;
+            margin-right: 15px;
+        }
         
