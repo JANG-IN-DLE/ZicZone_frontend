@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
+import Modal from "../../pickzone/components/Modal";
 
 const PickCard = ({
   userName,
@@ -10,13 +11,15 @@ const PickCard = ({
   jobName,
   personalCareer,
   companyId,
-  techUrl,
+  techUrl = [],
   userId,
   personalId,
 }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userType, setUserType] = useState(null);
   const navigate = useNavigate();
+  const [selectedCard, setSelectedCard] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // 이름 마스킹
   const maskName = (name) => {
@@ -31,7 +34,7 @@ const PickCard = ({
   };
 
   // 맵을 위한 문자열 변수 선언
-  const techUrlsArray = techUrl.split(" ");
+  const techUrlsArray = techUrl.split(",");
   const jobNameArray = jobName.split(",");
 
   useEffect(() => {
@@ -60,13 +63,61 @@ const PickCard = ({
       navigate("/login");
     } else {
       if (userType === "COMPANY") {
-        navigate(`/pickzone/${companyId}/${personalId}`);
+        // companyId가 배열이 아니도록 수정
+        const validCompanyId = Array.isArray(companyId)
+          ? companyId[0]
+          : companyId;
+        navigate(`/pickzone/${validCompanyId}/${personalId}`);
       } else if (userType === "PERSONAL") {
-        navigate(`/pickzone/${userId}/${personalId}`);
+        setSelectedCard({
+          userName,
+          userIntro,
+          gender,
+          jobName,
+          personalCareer,
+          companyId,
+          techUrl,
+          userId,
+          personalId,
+        });
+        setIsModalOpen(true);
       }
     }
   };
 
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleModalOpen = () => {
+    // 개인 유저의 경우 처리할 로직 추가
+    const loggedInPersonalId = personalId;
+    const openCardData = {
+      sellerId: selectedCard.personalId,
+      buyerId: loggedInPersonalId,
+      payHistoryContent: "이력서조회",
+      payHistoryDate: new Date().toISOString(),
+    };
+    axios
+      .post("/api/personal/open-card", openCardData)
+      .then((response) => {
+        if (response.status === 200) {
+          navigate(`/pickzone/${loggedInPersonalId}/${selectedCard.userId}`);
+          setIsModalOpen(false);
+        } else if (response.status === 303) {
+          alert("이미 결제한 이력서입니다.");
+          setTimeout(() => {
+            window.location.href = response.headers.location;
+          }, 3000);
+        }
+      })
+      .catch((error) => {
+        console.error("Error opening card:", error);
+        if (error.response && error.response.data) {
+          alert(error.response.data);
+        }
+      });
+  };
   return (
     <>
       <div className="user_card" onClick={cardClick}>
@@ -86,11 +137,20 @@ const PickCard = ({
           <div className="pick_user_intro">{userIntro}</div>
           <div className="pick_user_tech">
             {techUrlsArray.map((url, index) => (
-              <img key={index} src={url} alt={`Tech Icon ${index}`} />
+              <img key={index} src={url} alt={`Tech${index}`} />
             ))}
           </div>
         </div>
       </div>
+      {isModalOpen && (
+        <Modal
+          isOpen={isModalOpen}
+          onClose={handleModalClose}
+          userName={userName}
+          onOpen={handleModalOpen}
+          selectedCard={selectedCard}
+        />
+      )}
     </>
   );
 };

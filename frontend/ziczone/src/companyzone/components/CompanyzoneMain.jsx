@@ -24,20 +24,23 @@ const CompanyzoneMain = () => {
       .then((res) => {
         setCompanyData(res.data);
       })
-      .catch((error) => {});
+      .catch((error) => {
+        console.error("컴퍼니존 에러 : ", error);
+      });
   }, []);
 
   return (
     <div className="main_container">
       <CompanyHeader />
       <div className="company_container">
-        {companyData.map((company, index) => (
+        {companyData.slice(2).map((company, index) => (
           <CompanyCard
+            key={index}
             companyLogo={company.companyLogo}
             userName={company.user.userName}
             userIntro={company.user.userIntro}
             // 온클릭 => 매핑중인 인덱스 요소
-            onCardClick={() => handleCardClick(index)}
+            onCardClick={() => handleCardClick(index + 2)}
           />
         ))}
         {/* openModalInfo가 존재할때 렌더링  */}

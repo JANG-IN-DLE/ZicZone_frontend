@@ -6,7 +6,7 @@ import useDropdown from "../hooks/useDropdown";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-const UserLogin = ({ userName }) => {
+const UserLogin = ({ userName, onLogout }) => {
   const { open, Dropdown } = useDropdown();
 
   return (
@@ -22,7 +22,9 @@ const UserLogin = ({ userName }) => {
               <Link to="/mypage">마이페이지</Link>
             </div>
             <div className="list2">
-              <Link to="/">로그아웃</Link>
+              <Link to="/" onClick={onLogout}>
+                로그아웃
+              </Link>
             </div>
           </div>
         </div>
