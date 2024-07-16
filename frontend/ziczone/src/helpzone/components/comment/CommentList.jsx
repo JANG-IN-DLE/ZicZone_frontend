@@ -11,11 +11,11 @@ const CommentList = ({ corrId, userId }) => {
     useEffect(() => {
         fetchComments();
         fetchBoard();
-    }, [corrId]);
+    }, [corrId, userId]);
 
     const fetchComments = async () => {
         try {
-            const response = await axios.get(`http://localhost:12000/api/comments?corrId=${corrId}`);
+            const response = await axios.get(`/api/user/comments/${corrId}`);
             if (response.status === 200) {
                 const commentsData = response.data;
                 setComments(commentsData);
@@ -33,7 +33,7 @@ const CommentList = ({ corrId, userId }) => {
 
     const fetchBoard = async () => {
         try {
-            const response = await axios.get(`http://localhost:12000/api/board/${corrId}`);
+            const response = await axios.get(`/api/user/board/${corrId}`);
             if (response.status === 200) {
                 setBoard(response.data);
             }

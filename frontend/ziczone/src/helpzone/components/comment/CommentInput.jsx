@@ -15,7 +15,7 @@ const CommentInput = ({ corrId, userId, commId, onCommentAdded }) => {
         if (commentContent.trim() === "") return;
 
         try {
-            const response = await axios.post('http://localhost:12000/api/comments', {
+            const response = await axios.post('/api/personal/comments', {
                 commContent: commentContent,
                 corrId: corrId,
                 userId: userId,
