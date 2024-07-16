@@ -55,11 +55,11 @@ const usePostForm = (initialBerry = 100, initialData = {}, userId, corrId, isEdi
                         'Content-Type': 'multipart/form-data'
                     }
                 });
-
+    
             if (response.status === 200) {
-                const { corrId } = response.data;
+                const { corrId, fileName } = response.data;
                 if (corrId) {
-                    onSubmitSuccess();
+                    onSubmitSuccess(corrId, fileName);
                 } else {
                     console.error("등록/수정 후 corrId를 받아오지 못했습니다.");
                 }

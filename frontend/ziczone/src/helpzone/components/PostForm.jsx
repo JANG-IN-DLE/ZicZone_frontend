@@ -5,7 +5,7 @@ import Button from "./Button";
 import FileUpload from "./FileUpload";
 import usePostForm from "../hooks/usePostForm";
 
-const PostForm = ({ isEditMode = false, initialData = {}, userId, corrId, onSubmit }) => {
+const PostForm = ({ isEditMode = false, initialData = {}, userId, corrId, fileName, onSubmit }) => {
     const {
         selectedBerry,
         title,
@@ -23,7 +23,11 @@ const PostForm = ({ isEditMode = false, initialData = {}, userId, corrId, onSubm
             handleSubmit();
         }}>
             {!isEditMode && (
-                <BerrySelect className="pf_berry_select" selectedBerry={selectedBerry} onSelect={handleBerrySelect} />
+                <BerrySelect 
+                className="pf_berry_select" 
+                selectedBerry={selectedBerry} 
+                onSelect={handleBerrySelect} 
+                />
             )}
             <p className="pf_title">제목</p>
             <div className="pf_title_wrapper">
@@ -32,7 +36,6 @@ const PostForm = ({ isEditMode = false, initialData = {}, userId, corrId, onSubm
                     className="pf_input"
                     value={title}
                     onChange={handleTitleChange}
-                    readOnly={isEditMode}
                 />
             </div>
             <textarea
@@ -41,7 +44,10 @@ const PostForm = ({ isEditMode = false, initialData = {}, userId, corrId, onSubm
             />
             <p className="pf_pdf">첨부파일 <span>*하나의 PDF 파일로 첨부해주세요</span></p>
             <div className="pf_file_upload">
-                <FileUpload onFileChange={handleFileChange} />
+                <FileUpload
+                    onFileChange={handleFileChange}
+                    initialFile={fileName}
+                />
             </div>
             <div className="pf_button">
                 <Button type="submit">

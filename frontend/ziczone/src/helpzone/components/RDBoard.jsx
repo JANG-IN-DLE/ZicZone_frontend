@@ -12,6 +12,7 @@ const RDBoard = () => {
   const { corrId } = useParams();
   const location = useLocation();
   const userId = location.state?.userId || localStorage.getItem("userId");
+  const initialFileName = location.state?.fileName || ""; // 초기 파일 이름
   const navigate = useNavigate();
 
   const [isEditMode, setIsEditMode] = useState(false);
@@ -37,7 +38,7 @@ const RDBoard = () => {
   });
 
   const handleEdit = () => {
-    navigate('/cuboard', { state: { postData, isEditMode: true } });
+    navigate('/cuboard', { state: { postData, isEditMode: true, userId, fileName: initialFileName } });
     setIsEditMode(true);
   };
 
@@ -57,7 +58,7 @@ const RDBoard = () => {
         const postResponse = await axios.get(`/api/user/board/${corrId}`);
 
         const profileData = profileResponse.data;
-        const isOwner = profileData.userId == userId;
+        const isOwner = profileData.userId === Number(userId);
   
         setUserProfile({
           berry: profileData.corrPoint,
@@ -75,7 +76,7 @@ const RDBoard = () => {
         setPostData({
           title: postData.corrTitle,
           content: postData.corrContent,
-          fileUrl: postData.corrPdf,
+          fileUrl: postData.corrPdf || initialFileName,
           commSelection: postData.commSelection
         });
 
@@ -85,7 +86,7 @@ const RDBoard = () => {
       }
     };
     ProfileAndPost();
-  }, [corrId, userId]);
+  }, [corrId, userId, initialFileName]);
 
   if (isLoading) {
     return <div>Loading...</div>;
