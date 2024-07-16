@@ -17,28 +17,31 @@ const ListBoard = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [showSelect, setShowSelect] = useState(false);
   const navigate = useNavigate();
+  const userId = localStorage.getItem("userId");
 
   useEffect(() => {
-    axios
-      .get("/api/board/filter", {
-        params: {
-          filterType,
-          page,
-          size,
-          showSelect
-        },
-      })
-      .then((response) => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("/api/user/board/filter", {
+          params: {
+            filterType,
+            page,
+            size,
+            showSelect
+          },
+        });
         setBoards(response.data.dtoList);
         setTotalPages(Math.ceil(response.data.total / size));
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error("오류 메시지: ", error);
-      });
+      }
+    };
+
+    fetchData();
   }, [filterType, page, size, showSelect]);
 
   const handleWriteButton = () => {
-    navigate('/cuboard');  // CUBoard로 이동
+    navigate('/cuboard', { state: { userId } });
   };
 
   const handlePageChange = (newPage) => {

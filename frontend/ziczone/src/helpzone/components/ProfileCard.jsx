@@ -1,12 +1,13 @@
-import React from 'react';
-import '../styles/ProfileCard.css';
-import personal_m_image from '../../common/card/assets/personal_m_image.png';
-import personal_f_image from '../../common/card/assets/personal_f_image.png';
-import berry_image from '../../common/card/assets/berry.png';
+/* HELP존 게시물 작성 & 조회(isViewMode)할 때 왼쪽 상단에 있는 프로필 카드 */
+import React from "react";
+import "../styles/ProfileCard.css";
+import personal_m_image from "../../common/card/assets/personal_m_image.png";
+import personal_f_image from "../../common/card/assets/personal_f_image.png";
+import berry_image from "../../common/card/assets/berry.png";
 
 const ProfileCard = ({ berry, jobs, gender, userName, career, point, intro, stacks, isViewMode }) => {
-
-    const personal_image = gender === 'male' ? personal_m_image : personal_f_image;
+    // 프로필 이미지
+    const personal_image = gender === 'MALE' ? personal_m_image : personal_f_image;
 
     // 이름 * 부분 처리 
     const maskName = (name) => {
@@ -33,7 +34,7 @@ const ProfileCard = ({ berry, jobs, gender, userName, career, point, intro, stac
                     {jobs.map(job => <span key={job}># {job} </span>)}
                 </p>
                 <div className='pc_personal_image'>
-                    <img src={personal_image} alt='개인회원 이미지' />
+                    <img src={personal_image} alt='프로필 이미지' />
                 </div>
                 <p className='pc_name_career'>
                     {isViewMode ? maskName(userName) : userName} | {career}
@@ -42,7 +43,7 @@ const ProfileCard = ({ berry, jobs, gender, userName, career, point, intro, stac
                     <div className='pc_point'>
                         <img src={berry_image} alt='포인트 베리 이미지' />
                         <p className='pc_point_berry'>
-                            {point}
+                            {point} 베리
                         </p>
                     </div>
                 )}
@@ -52,8 +53,7 @@ const ProfileCard = ({ berry, jobs, gender, userName, career, point, intro, stac
                 <div className='pc_stacks'>
                     {stacks.map((tech, index) => (
                         <img key={index} className="tech_icon" src={tech} alt={`Tech${index}`} />
-                    ))
-                    }
+                    ))}
                 </div>
             </div>
         </div>
