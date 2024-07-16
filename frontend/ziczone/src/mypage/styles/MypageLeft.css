@@ -1,7 +1,7 @@
 .mypage_user_title {
     margin-bottom: 12px;
     font-size: 30px;
-    margin-left: 47px;
+    padding-left: 47px;
 }
 
 .mypage_user_title span {
@@ -29,6 +29,10 @@
     margin-right: 96px;
 }
 
+.mypage_user_content div {
+    width: 98px;
+}
+
 .mypage_user_content div,
 .mypage_user_detail div {
     margin-bottom: 15px;
@@ -50,4 +54,42 @@
 
 .mypage_user_tech img{
     height: 30px;
+}
+
+/* 기업 */
+.mypage_company_title {
+    margin-bottom: 60px;
+    font-size: 30px;
+    margin-left: 47px;
+}
+
+.mypage_company_left {
+    margin-left: 47px;
+    margin-bottom: 70px;
+}
+
+.mypage_company_intro {
+    width: 612px;
+    height: 50px;
+    font-size: 20px;
+    margin-bottom: 24px;
+}
+
+.mypage_company_info {
+    display: flex;
+    font-size: 20px;
+    width: 480px;
+}
+
+.mypage_company_content {
+    margin-right: 36px;
+}
+
+.mypage_company_content div{
+    width: 128px;
+}
+
+.mypage_company_content div,
+.mypage_company_detail div {
+    margin-bottom: 15px;
 }

@@ -1,0 +1,73 @@
+.mypage_comp_employment {
+    width: 470px;
+    height: 210px;
+    background-color: #fff;
+    border-image-source: linear-gradient(123.89deg,
+            rgba(170, 170, 170, 0.3) 9.82%,
+            rgba(170, 170, 170, 0.05) 32.32%,
+            rgba(170, 170, 170, 0.2) 61.65%,
+            rgba(170, 170, 170, 0.05) 90.18%);
+    box-shadow: 5px 5px 20px 0px rgba(0, 0, 0, 0.15),
+        4px 4px 4px 0px rgba(255, 255, 255, 0.1) inset;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border-radius: 32px;
+    cursor: pointer;
+}
+
+.mypage_employment_img {
+    width: 64px;
+    height: 64px;
+    margin-right: 20px;
+}
+
+.mypage_comp_employment_content {
+    display: flex;
+    padding: 23px 38px 20px 38px;
+}
+
+.employment_content{
+    width: 300px;
+    height: 150px;
+}
+
+.mypage_employment_job {
+    font-size: 13px;
+    color: #ababab;
+    margin-bottom: 5px;
+}
+
+.mypage_employment_name {
+    display: flex;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.mypage_employment_name p{
+    margin-right: 4px;
+}
+
+.mypage_employment_intro{
+    font-size: 13px;
+    color: #989898;
+    margin-bottom: 10px;
+}
+
+.mypage_employment_tech {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.mypage_employment_tech ul{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.mypage_employment_tech li {
+    list-style: none;
+    margin-right: 4px;
+}
+
+.mypage_employment_tech img{
+    height: 22px;
+}
