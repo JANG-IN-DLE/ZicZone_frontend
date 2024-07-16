@@ -20,24 +20,6 @@ const ResumeTechView = () => {
                     </div>
                 )}
             </div>
-            {/* <div className="resume_tech_select">
-                <div className="tech_select" onClick={toggleDropdown}>
-                    <input 
-                    type="text" 
-                    placeholder="기술 스택을 선택해주세요." 
-                    value={filter}
-                    onChange={(e) => setFilter(e.target.value)}
-                    />
-                    <img src={dropdown} alt="Dropdown" />
-                </div>
-                {dropdownVisible && (
-                    <TechDropdown
-                        selectedItems={selectedItems}
-                        updateSelectedItems={updateSelectedItems}
-                        filter={filter}
-                    />
-                )}
-            </div> */}
         </div>
     );
 }

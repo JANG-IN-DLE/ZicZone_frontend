@@ -1,21 +1,20 @@
 import React from "react";
 
-const ResumeCurriculumInputView = () => {
-
+const ResumeCurriculumInputView = ({ curriDate, curriContent, curriCompany }) => {
     return (
         <div className="resume_curri_input">
             <div className="resume_circle"></div>
             <div className="curri_date">
-                <p>2024.06 ~ 2024.07</p>
+                <p>{curriDate}</p>
             </div>
             <div className="curri_history">
-                <p>비트캠프</p>
+                <p>{curriContent}</p>
                 <div className="curri_company">
-                    <p>팀장 / 팀장</p>
+                    <p>{curriCompany}</p>
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
-export default ResumeCurriculumInputView
+export default ResumeCurriculumInputView;

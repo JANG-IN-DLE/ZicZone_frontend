@@ -1,39 +1,63 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./../../styles/ResumePrivacy.css";
 import email from "./../../assets/Email.png";
 import phone from "./../../assets/Phone.png";
 import birthdate from "./../../assets/Birthdate.png";
 import useUploadImage from "../../hooks/useUploadImage";
+import axios from "axios";
+// import Resume from "../Resume";
 
 const ResumePrivacyView = () => {
-    const { imageSrc, isImageUploaded, handleImageChange, handleDeleteImage } = useUploadImage();
+    const { imageSrc } = useUploadImage();
+    
+    const userId = 7;
+    const [privacyData, setPrivacyData] = useState({
+        resumeName: "",
+        resumeEmail: "",
+        resumePhone: "",
+        resumeDate: "",
+        resumePhoto: ""
+    });
 
-    const handleImageClick = () => {
-        document.getElementById('imageInput').click();
-    };
+    useEffect(() => {
+        axios.get(`/api/resumes/${userId}`)
+            .then(response => {
+                const data = response.data;
+                setPrivacyData({
+                    resumeName: data.resumeName,
+                    resumeDate: data.resumeDate,
+                    phoneNum: data.phoneNum,
+                    resumeEmail: data.resumeEmail,
+                    resumePhoto: data.resumePhoto
+                });
+            })
+            .catch(error => {
+                console.log("privacyData 호출 실패", error)
+            })
+    }, [userId])
 
     return (
         <div className="resume_privacy">
             <div className="resume_privacy_left">
                 <div className="resume_name">
-                    <p>강승규</p>
+                    <p>{privacyData.resumeName}</p>
                 </div>
                 <div className="resume_email">
                     <img src={email} alt="Email" />
-                    <p>kscu7310@naver.com</p>
+                    <p>{privacyData.resumeEmail}</p>
                 </div>
                 <div className="resume_phone">
                     <img src={phone} alt="Phone" />
-                    <p>010-0000-0000</p>
+                    <p>{privacyData.phoneNum}</p>
                 </div>
                 <div className="resume_birthdate">
                     <img src={birthdate} alt="Birthdate" />
-                    <p>0000년 00월 00일</p>
+                    <p>{privacyData.resumeDate}</p>
                 </div>
             </div>
             <div className="resume_privacy_right">
                 <div className="resume_image">
-                    <img src={imageSrc} alt="증명사진" />
+                    <img src={privacyData.resumePhoto || imageSrc} alt="증명사진" />
                 </div>
             </div>
         </div>
