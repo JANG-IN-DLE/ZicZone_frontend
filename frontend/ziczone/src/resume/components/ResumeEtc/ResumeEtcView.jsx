@@ -1,10 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./../../styles/ResumeEtc.css";
-import plus_btn from "./../../assets/Plus_btn.png";
 import ResumeEtcInputView from "./../ResumeEtc/ResumeEtcInputView";
-import useAddInput from "./../../hooks/useAddInput"
+import axios from "axios";
 
-const ResumeEtcView = ({ etcs }) => {
+
+const ResumeEtcView = () => {
+    const userId = 7; // 사용자 ID
+    const [etcData, setEtcData] = useState([]);
+
+    useEffect(() => {
+        axios.get(`/api/resumes/${userId}`)
+            .then(response => {
+                setEtcData(response.data.etcs);
+            })
+            .catch(error => {
+                console.log("etcData 호출 실패", error);
+            });
+    }, [userId]);
+
+
     return (
         <div className="resume_etc">
             <div className="resume_etc_title">
@@ -12,16 +26,13 @@ const ResumeEtcView = ({ etcs }) => {
                 <p className="etc_warning">* 대외활동, 수상경력 등 자신의 능력을 마음껏 보여주세요!</p>
             </div>
             <div className="resume_bar"></div>
-            {etcs.map((etc, index) => {
-                const [ content, date ] = etc.split(',');
-                return (
-                    <ResumeEtcInputView
-                        key={index}
-                        content={content}
-                        date={date}
-                    />
-                );
-            })}
+            {etcData.map((etc, index) => (
+                <ResumeEtcInputView
+                    key={index}
+                    etcDate={etc.etc_date}
+                    etcContent={etc.etc_content}
+                />
+            ))}
         </div>
     );
 };

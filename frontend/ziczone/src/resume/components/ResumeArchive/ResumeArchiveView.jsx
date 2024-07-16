@@ -1,28 +1,39 @@
-import React from "react";
-import "./../../styles/ResumeArchive.css"
-import plus_btn from "./../../assets/Plus_btn.png"
-import ResumeArchiveInputView from "./../ResumeArchive/ResumeArchiveInputView"
+import React, { useEffect, useState } from "react";
+import "./../../styles/ResumeArchive.css";
+import ResumeArchiveInputView from "./../ResumeArchive/ResumeArchiveInputView";
+import axios from "axios";
 
-const ResumeArchiveView = ({ archives }) => {
+const ResumeArchiveView = () => {
+    const userId = 7; // 사용자 ID
+    const [archiveData, setArchiveData] = useState({
+        arch_git: '',
+        arch_notion: '',
+        arch_blog: ''
+    });
+
+    useEffect(() => {
+        axios.get(`/api/resumes/${userId}`)
+            .then(response => {
+                setArchiveData(response.data.archive);
+            })
+            .catch(error => {
+                console.log("archiveData 호출 실패", error);
+            });
+    }, [userId]);
+
     return (
         <div className="resume_archive">
             <div className="resume_archive_title">
                 <p className="archive_title">아카이브</p>
             </div>
             <div className="resume_bar"></div>
-            {archives.map((archive, index) => {
-                const [ blogSrc, gitSrc, notionSrc ] = archive.split(',');
-                return (
-                    <ResumeArchiveInputView 
-                        key={index}
-                        blogSrc={blogSrc}
-                        gitSrc={gitSrc}
-                        notionSrc={notionSrc}
-                    />
-                );
-            })}
+            <ResumeArchiveInputView
+                archGit={archiveData.arch_git}
+                archNotion={archiveData.arch_notion}
+                archBlog={archiveData.arch_blog}
+            />
         </div>
     );
-};
+}
 
-export default ResumeArchiveView
+export default ResumeArchiveView;

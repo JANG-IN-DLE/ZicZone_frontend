@@ -1,10 +1,10 @@
 import React from "react";
 import "./../../styles/MypageBottom.css";
 import useNav from "../../hooks/useNavBar";
-import MypagePickHistory from "./MypagePickHistory";
-import MypagePurchaseHistory from "./MypagePurchaseHistory";
-import MypagePostHistory from "./MypagePostHistory";
-import MypageCommentHistory from "./MypageCommentHistory";
+import MypagePickHistory from "./Personal/MypagePickHistory";
+import MypagePurchaseHistory from "./Personal/MypagePurchaseHistory";
+import MypagePostHistory from "./Personal/MypagePostHistory";
+import MypageCommentHistory from "./Personal/MypageCommentHistory";
 
 
 const MypageBottom = () => {

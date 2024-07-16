@@ -1,23 +1,30 @@
-import { useRef, useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
-const useFileUpload = () => {
+const useFileUpload = (initialFileName = '') => {
+    const [fileName, setFileName] = useState(initialFileName);
     const fileInputRef = useRef(null);
-    const [fileName, setFileName] = useState('');
+
+    useEffect(() => {
+        setFileName(initialFileName);
+    }, [initialFileName]);
 
     const handleButtonClick = () => {
-        fileInputRef.current.click();
+        if (fileInputRef.current) {
+            fileInputRef.current.click();
+        }
     };
 
-    const handleFileChange = (event) => {
-        const file = event.target.files[0];
-        if (file) {
-            setFileName(file.name);
+    const handleFileChange = (e) => {
+        if (e.target.files.length > 0) {
+            setFileName(e.target.files[0].name);
         }
     };
 
     const handleClearFile = () => {
         setFileName('');
-        fileInputRef.current.value = null;
+        if (fileInputRef.current) {
+            fileInputRef.current.value = '';
+        }
     };
 
     return {

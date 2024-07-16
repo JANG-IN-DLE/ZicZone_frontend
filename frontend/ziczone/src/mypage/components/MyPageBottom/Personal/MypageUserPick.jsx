@@ -1,5 +1,5 @@
 import React from "react";
-import "./../../styles/MypageUserPick.css"
+import "./../../../styles/MypageUserPick.css"
 
 const MypageUserPick = ({ user_id, company_logo, company_intro }) => {
     return (

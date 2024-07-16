@@ -1,9 +1,11 @@
 import React from "react";
-import github from "./../../assets/GitHub.png"
-import notion from "./../../assets/Notion.png"
-import blog from "./../../assets/Blog.png"
+import github from "./../../assets/GitHub.png";
+import notion from "./../../assets/Notion.png";
+import blog from "./../../assets/Blog.png";
 
-const ResumeArchiveInputView = ( { blogSrc, gitSrc, notionSrc }) => {
+
+const ResumeArchiveInputView = ({ archGit, archNotion, archBlog }) => {
+
     return (
         <div className="resume_archive_input">
             <div className="resume_archive_container">
@@ -11,22 +13,23 @@ const ResumeArchiveInputView = ( { blogSrc, gitSrc, notionSrc }) => {
                     <div className="archive_github">
                         <img src={github} alt="Github" />
                         <p>GitHub</p>
-                        <p>{gitSrc}</p>
+                        <p>{archGit}</p>
+
                     </div>
                     <div className="archive_notion">
                         <img src={notion} alt="Notion" />
                         <p>Notion</p>
-                        <p>{notionSrc}</p>
+                        <p>{archNotion}</p>
                     </div>
                     <div className="archive_blog">
                         <img src={blog} alt="Blog" />
                         <p>Blog</p>
-                        <p>{blogSrc}</p>
+                        <p>{archBlog}</p>
                     </div>
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
-export default ResumeArchiveInputView
+export default ResumeArchiveInputView;

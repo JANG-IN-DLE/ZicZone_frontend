@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./../../styles/ResumeTech.css";
 import TechDropdown from "./../ResumeDropdown/TechStackDropdown";
 import useDropdown from './../../hooks/useDropdown'
 import useFilter from "../../hooks/useFilter";
 import dropdown from "./../../assets/Dropdown.png";
 
-const ResumeTech = () => {
+const ResumeTech = ({setTech}) => {
     const [dropdownVisible, toggleDropdown, selectedItems, updateSelectedItems] = useDropdown(false);
     const [filter, setFilter] = useFilter("");
 
+    useEffect(() => {
+        setTech(selectedItems);
+    }, [selectedItems, setTech])
 
     return (
         <div className="resume_tech">

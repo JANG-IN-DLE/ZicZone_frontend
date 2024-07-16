@@ -1,5 +1,5 @@
 import React from "react";
-import "./../../styles/MypageUserPurchase.css";
+import "./../../../styles/MypageUserPurchase.css";
 
 const MypageUserPurchase = ({ gender, jobPositions, userName, personalCareer, userIntro, techStacks }) => {
     return (

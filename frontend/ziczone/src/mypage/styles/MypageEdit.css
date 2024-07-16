@@ -176,7 +176,7 @@
     margin-right: 15px;
 }
 
-.edit_toggle_warning{
+.edit_toggle_warning {
     width: 280px;
     margin: 0 auto;
 }
@@ -280,4 +280,192 @@ input:checked+.slider:before {
 
 .slider.round:before {
     border-radius: 50%;
+}
+
+/* 기업 */
+.mypage_company_modal {
+    width: 650px;
+    height: 665px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.25);
+    background-color: #fff;
+}
+
+.company_edit_container {
+    width: 520px;
+    height: 530px;
+    margin: 28px auto;
+}
+
+.company_edit_container p {
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 14px 0 0 15px
+}
+
+.company_edit_logo {
+    width: 520px;
+    height: 140px;
+    margin-bottom: 32px;
+}
+
+.edit_logo_circle {
+    width: 140px;
+    height: 140px;
+    background-color: white;
+    border: 1px solid #0051ba;
+    border-radius: 50%;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.edit_logo_circle img {
+    width: 88px;
+    height: 88px;
+}
+
+.edit_logo_button {
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    border: 1px solid #0051ba;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 0px;
+    right: 10px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.edit_logo_button img {
+    width: 16px;
+    height: 16px;
+    margin: 2px 0 0 3px;
+}
+
+.company_edit_title,
+.company_edit_intro,
+.company_edit_addr,
+.company_edit_password {
+    display: flex;
+    margin-bottom: 12px;
+}
+
+.edit_title_left,
+.edit_intro_left,
+.edit_addr_left,
+.edit_password_left {
+    width: 200px;
+    background-color: #0051ba;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.edit_title_left {
+    height: 46px;
+}
+
+.edit_intro_left {
+    height: 60px;
+}
+
+.edit_addr_left {
+    height: 106px;
+}
+
+.edit_password_left {
+    height: 106px;
+}
+
+.edit_title_right,
+.edit_intro_right,
+.edit_addr_right,
+.edit_password_right {
+    width: 320px;
+    background-color: #fff;
+    border: 0.5px solid #b3b3b3;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.edit_title_right {
+    height: 46px;
+}
+
+.edit_title_input {
+    width: 280px;
+    margin: 12px auto;
+}
+
+.edit_title_right textarea {
+    width: 280px;
+    height: 28px;
+    border: none;
+    color: #b3b3b3;
+    font-size: 12px;
+    resize: none;
+    padding: 6px 6px;
+}
+
+.edit_title_right textarea::placeholder {
+    color: #b3b3b3;
+}
+
+.edit_intro_right {
+    height: 60px;
+    display: flex;
+    align-items: center;
+}
+
+.edit_intro_right input {
+    margin-right: 6px;
+}
+
+.edit_intro_right label {
+    margin-right: 20px;
+    font-size: 12px;
+    color: #b3b3b3;
+}
+
+.edit_addr_right {
+    height: 106px;
+}
+
+.edit_addr_input {
+    width: 280px;
+    margin: 12px auto;
+}
+
+.edit_addr_input input {
+    margin-bottom: 12px;
+}
+
+.edit_addr_input input[type="text"] {
+    width: 215px;
+    border: none;
+    border-bottom: 1px solid #989898;
+    font-size: 12px;
+    margin-right: 10px;
+}
+
+.edit_addr_input input:focus {
+    outline: none;
+}
+
+.edit_addr_input input[type="button"] {
+    width: 55px;
+    height: 20px;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 10px;
+    background-color: #989898;
 }

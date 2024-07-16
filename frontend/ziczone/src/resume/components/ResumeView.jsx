@@ -30,6 +30,11 @@ const ResumeView = () => {
                         <ResumeCertificateView />
                         <ResumeEtcView />
                         <ResumeArchiveView />
+                        <ResumeIntroductionView />
+                        <ResumePortfolioView />
+                    </div>
+                    <div className="resume_save">
+                        <button className="resume_save_btn">수정하기</button>
                     </div>
                 </div>
             </div>

@@ -1,34 +1,63 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./../../styles/ResumePrivacy.css";
 import email from "./../../assets/Email.png";
 import phone from "./../../assets/Phone.png";
 import birthdate from "./../../assets/Birthdate.png";
-import resumePhotoNull from "../../../pickzone/assets/resumePhotoNull.png";
+import useUploadImage from "../../hooks/useUploadImage";
+import axios from "axios";
+// import Resume from "../Resume";
 
-const ResumePrivacyView = ({resumeName, resumeEmail, phoneNum, resumeDate, resumePhoto, isPicked}) => {
+const ResumePrivacyView = () => {
+    const { imageSrc } = useUploadImage();
+    
+    const userId = 7;
+    const [privacyData, setPrivacyData] = useState({
+        resumeName: "",
+        resumeEmail: "",
+        resumePhone: "",
+        resumeDate: "",
+        resumePhoto: ""
+    });
+
+    useEffect(() => {
+        axios.get(`/api/resumes/${userId}`)
+            .then(response => {
+                const data = response.data;
+                setPrivacyData({
+                    resumeName: data.resumeName,
+                    resumeDate: data.resumeDate,
+                    phoneNum: data.phoneNum,
+                    resumeEmail: data.resumeEmail,
+                    resumePhoto: data.resumePhoto
+                });
+            })
+            .catch(error => {
+                console.log("privacyData 호출 실패", error)
+            })
+    }, [userId])
 
     return (
         <div className="resume_privacy">
             <div className="resume_privacy_left">
                 <div className="resume_name">
-                    <p>{resumeName}</p>
+                    <p>{privacyData.resumeName}</p>
                 </div>
                 <div className="resume_email">
                     <img src={email} alt="Email" />
-                    <p>{isPicked ? resumeEmail : ' '}</p>
+                    <p>{privacyData.resumeEmail}</p>
                 </div>
                 <div className="resume_phone">
                     <img src={phone} alt="Phone" />
-                    <p>{isPicked ? phoneNum : ' '}</p>
+                    <p>{privacyData.phoneNum}</p>
                 </div>
                 <div className="resume_birthdate">
                     <img src={birthdate} alt="Birthdate" />
-                    <p>{isPicked ? resumeDate : ' '}</p>
+                    <p>{privacyData.resumeDate}</p>
                 </div>
             </div>
             <div className="resume_privacy_right">
                 <div className="resume_image">
-                    <img src={isPicked ? resumePhoto : resumePhotoNull} alt="증명사진" />
+                    <img src={privacyData.resumePhoto || imageSrc} alt="증명사진" />
                 </div>
             </div>
         </div>

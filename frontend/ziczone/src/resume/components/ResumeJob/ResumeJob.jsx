@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./../../styles/ResumeJob.css";
 import JobDropdown from "../ResumeDropdown/JobDropdown";
 import useDropdown from './../../hooks/useDropdown';
 import dropdown from "./../../assets/Dropdown.png";
 
-const ResumeJob = () => {
+const ResumeJob = ({ setJob }) => {
     const [dropdownVisible, toggleDropdown, selectedItems, updateSelectedItems] = useDropdown(false);
+
+    useEffect(() => {
+        setJob(selectedItems);
+    }, [selectedItems, setJob]);
 
     return (
         <div className="resume_job">

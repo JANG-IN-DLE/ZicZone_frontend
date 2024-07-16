@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "./../../styles/ResumeEducation.css";
-import plus_btn from "./../../assets/Plus_btn.png";
 import ResumeEducationInputView from "./ResumeEducationInputView";
-import useAddInput from "./../../hooks/useAddInput";
 
-const ResumeEducationView = ({educations}) => {
+const ResumeEducationView = () => {
+    const userId = 7;
+    const [educationData, setEducationData] = useState([]);
+
+    useEffect(() => {
+        axios.get(`/api/resumes/${userId}`)
+            .then(response => {
+                setEducationData(response.data.educations);
+            })
+            .catch(error => {
+                console.log("교육 데이터 호출 실패", error);
+            });
+    }, [userId]);
+
     return (
         <div className="resume_edu">
             <div className="resume_edu_title">
@@ -12,17 +24,15 @@ const ResumeEducationView = ({educations}) => {
                 <p className="edu_warning">* 학교명은 노출될 수 있습니다.</p>
             </div>
             <div className="resume_bar"></div>
-            {educations.map((education, index) => {
-                const [school, score, date] = education.split(',');
-                return(
-                    <ResumeEducationInputView 
-                        key={index}
-                        school={school}
-                        score={score}
-                        date={date}
-                    />
-                );
-            })}
+            {educationData.map((edu, index) => (
+                <ResumeEducationInputView
+                    key={index}
+                    eduDate={edu.edu_date}
+                    eduSchool={edu.edu}
+                    eduScore={edu.credit.split('/')[0]}
+                    eduStandard={edu.credit.split('/')[1]}
+                />
+            ))}
         </div>
     );
 };

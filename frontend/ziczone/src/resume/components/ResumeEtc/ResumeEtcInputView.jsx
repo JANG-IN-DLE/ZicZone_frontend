@@ -1,18 +1,18 @@
 import React from "react";
 
-const ResumeEtcInputView = ( { content, date }) => {
+const ResumeEtcInputView = ({ etcDate, etcContent }) => {
 
     return (
         <div className="resume_etc_input">
             <div className="resume_circle"></div>
             <div className="etc_date">
-                <p>{date}</p>
+                <p>{etcDate}</p>
             </div>
             <div className="etc_history">
-                <p>{content}</p>
+                <p>{etcContent}</p>
             </div>
         </div>
-    )
+    );
 }
 
-export default ResumeEtcInputView
+export default ResumeEtcInputView;

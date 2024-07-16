@@ -5,6 +5,8 @@ import MypageLeft from "./MypageMiddleLeft/MypageLeftContent";
 import MypageRight from "./MypageMiddleRight/MypageRightContent";
 import MypageBottom from "./MyPageBottom/MypageBottom";
 import Header from "../../common/header/components/Header";
+import MypageLeftCo from "./MypageMiddleLeft/MypageLeftCo";
+import MypageRightCo from "./MypageMiddleRight/MypageRightCo";
 
 const Mypage = () => {
     return (

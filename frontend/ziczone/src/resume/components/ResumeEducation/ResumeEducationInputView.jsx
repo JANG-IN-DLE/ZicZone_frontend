@@ -1,21 +1,22 @@
 import React from "react";
 
-const ResumeEducationInputView = ({ school, score, date }) => {
+const ResumeEducationInputView = ({ eduDate, eduSchool, eduScore, eduStandard }) => {
 
     return (
         <div className="resume_edu_input">
             <div className="resume_circle"></div>
             <div className="edu_date">
-                <p>{date}</p>
+                <p>{eduDate}</p>
             </div>
             <div className="edu_history">
-                <p>{school}</p>
+                <p>{eduSchool}</p>
                 <div className="edu_score">
-                    <p>{score}</p>
+                    <p>{eduScore} / {eduStandard}</p>
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 export default ResumeEducationInputView;
+
