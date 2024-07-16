@@ -39,7 +39,6 @@
 .pc_jobs {
     font-size: 11px;
     color: #0051BA;
-    margin-top: 28px;
     padding-top: 20px;
     font-weight: bold;
 }
@@ -111,6 +110,7 @@
     flex-wrap: wrap;
     position: absolute;
     bottom: 0px;
+    margin-bottom: 10px;
 }
 
 .tech_icon {

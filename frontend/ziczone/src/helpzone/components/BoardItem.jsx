@@ -55,14 +55,14 @@ const maskName = (name) => {
   return `${start}${'*'.repeat(maskedLength)}${end}`;
 };
 
-const BoardItem = ({ board, userId }) => {
+const BoardItem = ({ board }) => {
   const navigate = useNavigate();
+  const userId = localStorage.getItem("userId");
 
   const handleItemClick = () => {
     try {
-      const userId = 13; // 임의로 설정
-      axios.put(`/api/board/viewCnt/${userId}/${board.corrId}`);
-      navigate(`/rdboard/${board.corrId}`);
+      axios.put(`/api/user/board/viewCnt/${userId}/${board.corrId}`);
+      navigate(`/rdboard/${board.corrId}`, { state: { userId } });
     } catch (error) {
       console.error('오류 메시지: ', error);
     }

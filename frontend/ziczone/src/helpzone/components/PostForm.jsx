@@ -1,11 +1,11 @@
 import React from "react";
 import "../styles/PostForm.css";
-import FileUpload from "./FileUpload";
 import BerrySelect from "./BerrySelect";
 import Button from "./Button";
+import FileUpload from "./FileUpload";
 import usePostForm from "../hooks/usePostForm";
 
-const PostForm = ({ isEditMode = false, initialData = {}, onSubmit }) => {
+const PostForm = ({ isEditMode = false, initialData = {}, userId, corrId, onSubmit }) => {
     const {
         selectedBerry,
         title,
@@ -15,7 +15,7 @@ const PostForm = ({ isEditMode = false, initialData = {}, onSubmit }) => {
         handleContentChange,
         handleFileChange,
         handleSubmit
-    } = usePostForm(initialData.berry || 100, initialData, onSubmit);
+    } = usePostForm(initialData.berry || 100, initialData, userId, corrId, isEditMode, onSubmit);
 
     return (
         <form className="post_form" onSubmit={(e) => {

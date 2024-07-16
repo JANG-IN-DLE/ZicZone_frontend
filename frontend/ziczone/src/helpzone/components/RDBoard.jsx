@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import axios from "axios";
 import ProfileCard from "./ProfileCard";
 import RDescription from "./RDescription";
@@ -9,12 +9,13 @@ import CommentList from "./comment/CommentList";
 import "../styles/RDBoard.css";
 
 const RDBoard = () => {
-  const userId = 7;
-
   const { corrId } = useParams();
+  const location = useLocation();
+  const userId = location.state?.userId || localStorage.getItem("userId");
   const navigate = useNavigate();
 
   const [isEditMode, setIsEditMode] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const [userProfile, setUserProfile] = useState({
     berry: '',
@@ -42,7 +43,7 @@ const RDBoard = () => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`/api/board/${userId}/${corrId}`);
+      await axios.delete(`/api/personal/board/${corrId}/${userId}`);
       navigate('/helpzone');
     } catch (error) {
       console.error("오류 메시지: ", error);
@@ -52,11 +53,12 @@ const RDBoard = () => {
   useEffect(() => {
     const ProfileAndPost = async () => {
       try {
-        const profileResponse = await axios.get(`/api/board/profile/${corrId}`);
-        const postResponse = await axios.get(`/api/board/${corrId}`);
+        const profileResponse = await axios.get(`/api/user/board/profile/${corrId}`);
+        const postResponse = await axios.get(`/api/user/board/${corrId}`);
 
         const profileData = profileResponse.data;
-        console.log("Profile Data:", profileData); // profileData 확인
+        const isOwner = profileData.userId == userId;
+  
         setUserProfile({
           berry: profileData.corrPoint,
           jobs: profileData.jobName.split(','),
@@ -66,23 +68,28 @@ const RDBoard = () => {
           point: profileData.berryPoint,
           intro: profileData.userIntro,
           stacks: profileData.techUrl ? profileData.techUrl.split(',') : [],
-          isOwner: profileData.userId === userId
+          isOwner: isOwner
         });
 
         const postData = postResponse.data;
-        console.log("Post Data:", postData); // postData 확인
         setPostData({
           title: postData.corrTitle,
           content: postData.corrContent,
           fileUrl: postData.corrPdf,
           commSelection: postData.commSelection
         });
+
+        setIsLoading(false);
       } catch (error) {
         console.error("오류 메시지: ", error);
       }
     };
     ProfileAndPost();
-  }, [corrId]);
+  }, [corrId, userId]);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div>
