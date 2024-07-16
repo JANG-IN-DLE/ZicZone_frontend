@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import slidImage1 from "../../main/bannerimg/slide_image1.png";
 import slidImage2 from "../../main/bannerimg/slide_image2.png";
 import slidImage3 from "../../main/bannerimg/slide_image3.png";
+import { Link } from "react-router-dom";
 
 const NoLoginBannerSlide = () => {
   const slideItems = [
@@ -30,7 +31,7 @@ const NoLoginBannerSlide = () => {
     }
 
     function startSlideInterval() {
-      slideInterval = setInterval(nextSlide, 3000);
+      slideInterval = setInterval(nextSlide, 2500);
     }
 
     function stopSlideInterval() {
@@ -66,14 +67,19 @@ const NoLoginBannerSlide = () => {
             className="slide_item"
             style={{ background: "url(" + slidImage1 + ")" }}
           >
-            <div className="slide_text">
-              <p className="text">직존</p>
-              <p>기업이 인재를 채용하는 서비스</p>
-            </div>
+            <Link to="/ziczoneintro" style={{ textDecoration: "none" }}>
+              <div className="slide_text">
+                <p className="text">직존</p>
+                <p>기업이 인재를 채용하는 서비스</p>
+              </div>
+            </Link>
           </li>
           <li
             className="slide_item"
             style={{ background: "url(" + slidImage2 + ")" }}
+            onClick={() =>
+              window.open("https://www.youtube.com/watch?v=sTF55z2i5zI&t=9s")
+            }
           >
             <div className="slide_text">
               <p className="text">다큐프라임 보러가기</p>
@@ -83,6 +89,7 @@ const NoLoginBannerSlide = () => {
           <li
             className="slide_item"
             style={{ background: "url(" + slidImage3 + ")" }}
+            onClick={() => window.open("https://www.ncloud.com/")}
           >
             <div className="slide_text">
               <p className="text">네이버 클라우드 바로가기</p>

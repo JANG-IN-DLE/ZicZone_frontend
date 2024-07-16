@@ -1,6 +1,7 @@
 import React from "react";
 
 const ResumeEducationInputView = ({ eduDate, eduSchool, eduScore, eduStandard }) => {
+
     return (
         <div className="resume_edu_input">
             <div className="resume_circle"></div>
@@ -18,3 +19,4 @@ const ResumeEducationInputView = ({ eduDate, eduSchool, eduScore, eduStandard })
 }
 
 export default ResumeEducationInputView;
+

@@ -29,7 +29,7 @@
     cursor: pointer;
 }
 
-.title{
+.join>.title{
     font-weight: 700;
     font-size:28px;
     margin-top: 60px;
@@ -40,7 +40,7 @@
     margin: 12px 100px;
 }
 
-.explain{
+.join>.explain{
     font-weight: 200;
     font-size:20px;
     color: #5d5d5d;

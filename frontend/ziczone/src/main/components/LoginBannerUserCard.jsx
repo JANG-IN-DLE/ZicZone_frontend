@@ -1,19 +1,49 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import slidImage1 from "../../main/bannerimg/slide_image1.png";
 import slidImage2 from "../../main/bannerimg/slide_image2.png";
 import slidImage3 from "../../main/bannerimg/slide_image3.png";
+import axios from "axios";
+import { jwtDecode } from "jwt-decode";
+import { Link } from "react-router-dom";
 
 const LoginBannerSlide = () => {
+  const [userData, setUserData] = useState([]);
+  const [userName, setUserName] = useState([]);
+  const [userEmail, setUserEmail] = useState([]);
+  const [userImg, setUserImg] = useState([]);
+  const [companyLogo, setCompanyLogo] = useState([]);
+  const [userRole, setUserRole] = useState();
+
   const slideItems = [
     { id: 1, src: slidImage1, alt: "배너1" },
     { id: 2, src: slidImage2, alt: "배너2" },
     { id: 3, src: slidImage3, alt: "배너3" },
   ];
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      try {
+        const decodedToken = jwtDecode(token);
+        fetchUserData(decodedToken);
+        // console.log(",,,,,,,,,,", decodedToken); // 토큰으로 받는 데이터 확인
+      } catch (error) {
+        console.error("Invalid token", error);
+      }
+    }
+  }, []);
+
   useEffect(() => {
     const slide = document.querySelector(".slide");
     const slideItems = document.querySelectorAll(".login_slide_item");
     const prevButton = document.getElementById("prev");
     const nextButton = document.getElementById("next");
+
+    // slide, slideItems, prevButton, nextButton 하나라도 없으면 함수실행 종료
+    // DOM 요소나 배열에 접근하기 전에 유효성을 검사
+    if (!slide || !slideItems.length || !prevButton || !nextButton) return;
+
     const totalSlides = slideItems.length;
     let currentIndex = 0;
     let slideInterval;
@@ -30,7 +60,7 @@ const LoginBannerSlide = () => {
     }
 
     function startSlideInterval() {
-      slideInterval = setInterval(nextSlide, 3000);
+      slideInterval = setInterval(nextSlide, 2500);
     }
 
     function stopSlideInterval() {
@@ -54,7 +84,38 @@ const LoginBannerSlide = () => {
     window.addEventListener("resize", updateSlidePosition);
 
     startSlideInterval(); // 페이지 불러오면 자동 슬라이드 시작
-  });
+  }, []);
+
+  const fetchUserData = (decodedToken) => {
+    const userId = decodedToken.userId;
+    const userType = decodedToken.role; // 'company' 또는 'personal'
+
+    if (userType === "COMPANY") {
+      axios
+        .get(`/api/main/companyUser/${userId}`)
+        .then((res) => {
+          setUserName(res.data.userName);
+          setUserEmail(res.data.email);
+          setCompanyLogo(res.data.companyLogo);
+          setUserRole(userType);
+        })
+        .catch((error) => {
+          console.error("Error fetching company user data: ", error);
+        });
+    } else if (userType === "PERSONAL") {
+      axios
+        .get(`/api/main/personalUser/${userId}`)
+        .then((res) => {
+          setUserName(res.data.userName);
+          setUserEmail(res.data.email);
+          setUserImg(res.data.gender);
+          setUserRole(userType);
+        })
+        .catch((error) => {
+          console.error("Error fetching personal user data: ", error);
+        });
+    }
+  };
 
   return (
     <>
@@ -67,14 +128,19 @@ const LoginBannerSlide = () => {
               className="login_slide_item"
               style={{ background: "url(" + slidImage1 + ")" }}
             >
-              <div className="slide_text">
-                <p className="text">직존</p>
-                <p>기업이 인재를 채용하는 서비스</p>
-              </div>
+              <Link to="/ziczoneintro" style={{ textDecoration: "none" }}>
+                <div className="slide_text">
+                  <p className="text">직존</p>
+                  <p>기업이 인재를 채용하는 서비스</p>
+                </div>
+              </Link>
             </li>
             <li
               className="login_slide_item"
               style={{ background: "url(" + slidImage2 + ")" }}
+              onClick={() =>
+                window.open("https://www.youtube.com/watch?v=sTF55z2i5zI&t=9s")
+              }
             >
               <div className="slide_text">
                 <p className="text">다큐프라임 보러가기</p>
@@ -86,6 +152,7 @@ const LoginBannerSlide = () => {
             <li
               className="login_slide_item"
               style={{ background: "url(" + slidImage3 + ")" }}
+              onClick={() => window.open("https://www.ncloud.com/")}
             >
               <div className="slide_text">
                 <p className="text">네이버 클라우드 바로가기</p>
@@ -94,12 +161,24 @@ const LoginBannerSlide = () => {
           </ul>
         </div>
         <div className="login_user_card">
-          <div className="login_user_image"></div>
-          <div className="login_user_name">
-            <p>토스페이먼츠</p>
+          <div className="login_user_image">
+            {userRole === "COMPANY" ? (
+              companyLogo ? (
+                <img src={companyLogo} alt="Company Logo" />
+              ) : null
+            ) : (
+              <img src={userImg} alt="유저 이미지" />
+            )}
           </div>
-          <div className="login_user_email">tosszzang@google.com</div>
-          <div className="mypage">마이페이지</div>
+          <div className="login_user_name">
+            <p>{userName}</p>
+          </div>
+          <div className="login_user_email">{userEmail}</div>
+          <div className="main_mypage">
+            <Link to="/mypage" style={{ textDecoration: "none" }}>
+              <p> 마이페이지</p>
+            </Link>
+          </div>
         </div>
       </div>
     </>

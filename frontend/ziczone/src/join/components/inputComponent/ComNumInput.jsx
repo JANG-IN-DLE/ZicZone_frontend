@@ -8,7 +8,7 @@ const ComNumInput = () => {
     const { comNum, isValid, isVerified, handleInputChange, handleVerification } = useCompanyAuth();
 
     return (
-        <div className="inputform num">
+        <div className="inputform signup_num">
             <p>사업자등록번호</p>
             <div className="num_input">
                 <input 

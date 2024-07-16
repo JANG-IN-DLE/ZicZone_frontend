@@ -1,6 +1,8 @@
 import React from "react";
 
+
 const ResumeCareerInputView = ({ careerDate, careerName, careerPosition, careerJob }) => {
+
     return (
         <div className="resume_career_input">
             <div className="resume_circle"></div>

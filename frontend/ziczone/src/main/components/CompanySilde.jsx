@@ -1,98 +1,48 @@
-import com_logo1 from "../../main/company_logo/img_1.svg";
-import com_logo2 from "../../main/company_logo/img_2.svg";
-import com_logo3 from "../../main/company_logo/img_3.svg";
-import com_logo4 from "../../main/company_logo/img_4.svg";
-import com_logo5 from "../../main/company_logo/img_5.svg";
-import com_logo6 from "../../main/company_logo/img_6.svg";
-import com_logo7 from "../../main/company_logo/img_7.svg";
-import com_logo8 from "../../main/company_logo/img_8.svg";
-import com_logo9 from "../../main/company_logo/img_9.svg";
-import com_logo10 from "../../main/company_logo/img_10.svg";
-import com_logo11 from "../../main/company_logo/img_11.svg";
-import com_logo12 from "../../main/company_logo/img_12.svg";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import "../styles/MainMain.css"; // CSS 파일 임포트
 
 const CompanySilde = () => {
+  const [logoImgs, setLogoImgs] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("/api/main/companylogolist")
+      .then((res) => {
+        // 필터 사용해서 0, 1 인덱스 제외
+        // 현재 요소가 인덱스 0이 아니고 1도 아닌경우 트루 반환
+        const filteredLogos = res.data.filter(
+          (_, index) => index !== 0 && index !== 1
+        ); // 인덱스 0과 1을 제외한 필터링
+        setLogoImgs(filteredLogos);
+      })
+      .catch((error) => {
+        console.error("companyErr", error);
+      });
+  }, []);
+
   return (
-    <>
-      <div className="company_slide_container">
-        <ul class="boxes">
-          <li>
-            <img src={com_logo1} alt="로고1" />
+    <div className="company_slide_container">
+      <ul className="boxes">
+        {/* 상태 변수 logoImgs의 처음 6개의 이미지를 반복 */}
+        {/* array.slice(startIndex, endIndex) <<로 사용됨 인덱스 필수로 기입
+            앞을 짜르고 뒤는 다 사용하고싶다면 그냥 slice(앞에 자를 인덱스 수)로 사용
+            ex) slice(2) => 인덱스 2부터 끝까지 */}
+        {logoImgs.slice(0, 6).map((logo, index) => (
+          <li key={index}>
+            <img className="logo_img" src={logo} alt={`로고${index + 1}`} />
           </li>
-          <li>
-            <img src={com_logo2} alt="로고2" />
+        ))}
+      </ul>
+      <ul className="boxes list2">
+        {logoImgs.map((logo, index) => (
+          <li key={index + logoImgs.length}>
+            <img className="logo_img" src={logo} alt={`로고${index + 7}`} />
           </li>
-          <li>
-            <img src={com_logo3} alt="로고3" />
-          </li>
-          <li>
-            <img src={com_logo4} alt="로고4" />
-          </li>
-          <li>
-            <img src={com_logo5} alt="로고5" />
-          </li>
-          <li>
-            <img src={com_logo6} alt="로고6" />
-          </li>
-          <li>
-            <img src={com_logo7} alt="로고7" />
-          </li>
-          <li>
-            <img src={com_logo8} alt="로고8" />
-          </li>
-          <li>
-            <img src={com_logo9} alt="로고9" />
-          </li>
-          <li>
-            <img src={com_logo10} alt="로고10" />
-          </li>
-          <li>
-            <img src={com_logo11} alt="로고11" />
-          </li>
-          <li>
-            <img src={com_logo12} alt="로고12" />
-          </li>
-        </ul>
-        <ul className="boxes list2">
-          <li>
-            <img src={com_logo1} alt="로고1" />
-          </li>
-          <li>
-            <img src={com_logo2} alt="로고2" />
-          </li>
-          <li>
-            <img src={com_logo3} alt="로고3" />
-          </li>
-          <li>
-            <img src={com_logo4} alt="로고4" />
-          </li>
-          <li>
-            <img src={com_logo5} alt="로고5" />
-          </li>
-          <li>
-            <img src={com_logo6} alt="로고6" />
-          </li>
-          <li>
-            <img src={com_logo7} alt="로고7" />
-          </li>
-          <li>
-            <img src={com_logo8} alt="로고8" />
-          </li>
-          <li>
-            <img src={com_logo9} alt="로고9" />
-          </li>
-          <li>
-            <img src={com_logo10} alt="로고10" />
-          </li>
-          <li>
-            <img src={com_logo11} alt="로고11" />
-          </li>
-          <li>
-            <img src={com_logo12} alt="로고12" />
-          </li>
-        </ul>
-      </div>
-    </>
+        ))}
+      </ul>
+    </div>
   );
 };
+
 export default CompanySilde;

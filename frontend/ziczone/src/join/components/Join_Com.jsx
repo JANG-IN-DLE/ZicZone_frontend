@@ -13,7 +13,7 @@ import { FormProvider } from './FormContext';
 const JoinCompany = () => {
   return (
     <FormProvider formType="company">
-      <div className="container">
+      <div className="signup_container">
         <img className="logo" src={`${process.env.PUBLIC_URL}/logo.png`} alt="직존 로고" />
         <div className="logo_text">기업 회원가입 페이지입니다.</div>
         <div className="personal_form">

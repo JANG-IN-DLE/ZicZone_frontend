@@ -1,13 +1,23 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import "../styles/IntroMain.css";
-import Image from "../../intro/introimg.png";
+import Image from "../../intro/introimg0.png";
+import introImg1 from "../../intro/introImg1.png";
+import introImg2 from "../../intro/introImg2.png";
+import introImg3 from "../../intro/introImg3.png";
+import introImg4 from "../../intro/introImg4.png";
+import introImg5 from "../../intro/introImg5.png";
 import CompanySilde from "../../main/components/CompanySilde";
+import { Link } from "react-router-dom";
 
 const IntroMain = () => {
   // uesRef써서 DOM에 접근할 수 있는 참조 변수 만듬
-  // h2랑 span 가리키는 참조
+  // 아래 h2랑 span 가리키는 참조
   const h2Ref = useRef(null);
   const cursorRef = useRef(null);
+  // 스크롤Y의 변수값 저장하기 위해 useState사용
+  const [scrollY, setScrollY] = useState(0);
+  // 지를 스크롤할 때마다 스크롤 위치를 scrollY에 저장
+  const thresholds = useRef([700, 1300, 1900, 2500, 2800]); // 각 요소의 스크롤 임계값
 
   useEffect(() => {
     let interval;
@@ -41,6 +51,19 @@ const IntroMain = () => {
     };
   }, []);
 
+  useEffect(() => {
+    // 현재 스크롤 위치를 setScrollY로 저장
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    // 윈도우.스크롤에 이벤트리스너, 스크롤할때마다 handleScroll 함수 실행
+    window.addEventListener("scroll", handleScroll);
+
+    // 컴포넌트 언마운트시 이벤트 리스너 제거
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <>
       <div className="ziczone_intro_container">
@@ -58,25 +81,93 @@ const IntroMain = () => {
 
         <div className="ziczone_introduce">
           <div className="ziczone_introduce_text">
-            개인의 역량을 돋보이게 하고, 기업들이 그 능력을 필요로 할 때 그들이
-            당신에게 직접 연락할 수 있는 서비스입니다. 당신의 잠재력을 최대한
-            발휘하세요
+            <div
+              // thresholds.current[0]를 참조해서 스크롤 위치에 따른
+              // 삼항연산자 사용. 배열에 등록된 값을 초과하냐?
+              // 참이면 textslide_left, 거짓이면 "slideback_left"
+              id="intro1"
+              className={`intro ${
+                scrollY > thresholds.current[0]
+                  ? "textslide_left"
+                  : "slideback_left"
+              } `}
+            >
+              <img className="intro_leftani" src={introImg1} alt="" />
+              <p className="intro_leftani_text">
+                역량을 보여주고, <br />
+                기업의 관심을 받는 서비스
+                <br />
+                잠재력을 발휘하세요
+              </p>
+            </div>
           </div>
           <div className="ziczone_introduce_text">
-            개인이 자신의 포트폴리오를 공유하고, 기업들이 직접 컨택을 요청하는
-            혁신적인 플랫폼입니다. 당신의 잠재력을 발휘할 기회가 여기 있습니다.
+            <div
+              id="intro2"
+              className={`intro ${
+                scrollY > thresholds.current[1]
+                  ? "textslide_right"
+                  : "slideback_right"
+              }`}
+            >
+              <img className="intro_rightani" src={introImg2} alt="" />
+              <p>
+                <br />
+                포트폴리오 관리와 <br />
+                기업의 직접 연락이
+                <br />
+                가능한 플랫폼
+                <br />
+              </p>
+            </div>
           </div>
           <div className="ziczone_introduce_text">
-            개인 포트폴리오를 효과적으로 관리하고, 기업들이 직접 연락을 취할 수
-            있는 혁신적인 플랫폼
+            <div
+              id="intro3"
+              className={`intro ${
+                scrollY > thresholds.current[2]
+                  ? "textslide_left"
+                  : "slideback_left"
+              }`}
+            >
+              <img className="intro_leftani" src={introImg3} alt="" />
+              <p className="intro_leftani_text">
+                <br />
+                기업의 관심을 받는 <br />
+                가장 쉬운 방법
+                <br />
+              </p>
+            </div>
           </div>
           <div className="ziczone_introduce_text">
-            기업들은 인재의 실제 역량을 확인하고 필요에 따라 직접적으로 연락할
-            수 있는 플랫폼을 제공합니다
+            <div
+              id="intro4"
+              className={`intro ${
+                scrollY > thresholds.current[3]
+                  ? "textslide_right"
+                  : "slideback_right"
+              }`}
+            >
+              <img className="intro_rightani" src={introImg4} alt="" />
+              <p>
+                <br />
+                <br />
+                당신의 기회를 잡으세요
+                <br />
+              </p>
+            </div>
           </div>
           <div className="ziczone_introduce_text">
-            개인 포트폴리오를 통해 당신의 독특한 경험과 역량을 기업들과
-            공유하세요
+            <div
+              id="intro5"
+              className={`intro1 ${
+                scrollY > thresholds.current[4]
+                  ? "textslide_right"
+                  : "slideback_right"
+              }`}
+            >
+              경험과 역량을 기업과 공유하세요
+            </div>
           </div>
         </div>
 
@@ -87,10 +178,18 @@ const IntroMain = () => {
           <CompanySilde />
         </div>
         <div className="ziczone_join">
-          <div className="ziczone_signup">직존과 함께하기</div>
-          <div className="user_signup">
-            <div className="personal_signup"></div>
-            <div className="company_signup"></div>
+          <div
+            className="ziczone_signup"
+            style={{ background: "url(" + introImg5 + ")" }}
+          >
+            <div className="ziczone_signup_text">
+              <Link
+                to="/signup"
+                style={{ textDecoration: "none", color: "white" }}
+              >
+                직존 회원가입 바로가기
+              </Link>
+            </div>
           </div>
         </div>
       </div>

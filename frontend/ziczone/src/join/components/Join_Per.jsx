@@ -13,7 +13,7 @@ import { FormProvider } from './FormContext';
 const JoinPersonal = () => {
   return (
     <FormProvider formType="personal">
-      <div className="container">
+      <div className="signup_container">
         <img className="logo" src={`${process.env.PUBLIC_URL}/logo.png`} alt="직존 로고" />
         <div className="logo_text">개인 회원가입 페이지입니다.</div>
         <div className="personal_form">

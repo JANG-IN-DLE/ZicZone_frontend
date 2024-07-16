@@ -1,0 +1,117 @@
+.ci_select_show {
+    display: flex;
+    justify-content: space-between;
+    width: 242px;
+    height: 33px;
+    background-color: rgba(0, 81, 186, 0.08);
+    border-radius: 4px;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.ci_select_show img {
+    width: 14px;
+    height: 14px;
+    margin: auto;
+    margin-left: 10px;
+}
+
+.ci_select_show p {
+    font-size: 15px;
+    font-family: 'Giants-Bold';
+    line-height: 33px;
+    position: absolute;
+    left: 40px;
+}
+
+.ci_select_show div {
+    margin: auto;
+    height: 21px;
+    font-size: 11px;
+    font-family: 'Giants-Bold';
+    line-height: 21px;
+    margin-right: 10px;
+    color: #FFF;
+    border-radius: 12px;
+    background-color: #0051BA;
+    padding: 1px 10px;
+}
+
+.comment_item {
+    width: 734px;
+    display: flex;
+    justify-content: start;
+    font-family: 'Pretendard-Regular';
+    font-size: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #B3B3B3;
+    margin-bottom: 10px;
+}
+
+.ci_gender img {
+    width: 45px;
+    margin-right: 16px;
+}
+
+.ci_info {
+    width: 683px;
+    margin-bottom: 4px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.ci_content,
+.ci_edit_textarea {
+    width: 672px;
+}
+
+.ci_edit_textarea {
+    height: 200px;
+    padding: 10px;
+}
+
+.ci_button {
+    margin-right: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.ci_edit_btn:active,
+.ci_delete_btn:active,
+.ci_save_btn:active,
+.ci_select_btn:active {
+    transform: scale(0.97);
+}
+
+.ci_edit_btn {
+    margin-right: 10px;
+    background-color: #FFF;
+    border: 2px solid #000;
+    padding: 2px 5px;
+    border-radius: 4px;
+    color: #000;
+}
+
+.ci_delete_btn {
+    background-color: #DE2E2E;
+    border: 2px solid #DE2E2E;
+    padding: 2px 5px;
+    border-radius: 4px;
+    color: #FFF;
+}
+
+.ci_save_btn {
+    background-color: #0051BA;
+    border: 2px solid #0051BA;
+    padding: 2px 5px;
+    border-radius: 4px;
+    color: #FFF;
+}
+
+.ci_select_btn {
+    background-color: #FFF;
+    border: 2px solid #0051BA;
+    padding: 2px 5px;
+    border-radius: 4px;
+    color: #0051BA;
+}

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 // import { useParams } from "react-router";
 // import axios from "axios";
 import ProfileCard from "../../common/card/components/ProfileCard";
-import Resume from "./Resume";
+import PickResume from "./PickResume";
 import CoverLetter from "./CoverLetter";
 import Portfolio from "./Portfolio";
 import personalMImage from "../../common/card/assets/personal_m_image.png";
@@ -12,15 +12,15 @@ import UserProfilestyle from "../styles/UserProfile.module.css";
 
 const UserProfile = ({ userCard, jobNames, techUrls, selectedSection, setSelectedSection, userResume, onPickClick, isScrap, isPicked}) => {
     const userImage = userCard.gender === 'MALE' ? personalMImage : personalFImage;
-    // const isCompany = false; // 개인
-    const isCompany = true; // 기업
+    const isCompany = false; // 개인
+    // const isCompany = true; // 기업
 
     const renderSection = () => {
         switch(selectedSection){
             case 'resume' : 
                 return (
                     // pickDetail에서 resume 정보
-                    <Resume 
+                    <PickResume 
                     resumeName={userResume.resumeName}
                     resumePhoto={userResume.resumePhoto}
                     resumeEmail={userResume.resumeEmail}
@@ -31,6 +31,7 @@ const UserProfile = ({ userCard, jobNames, techUrls, selectedSection, setSelecte
                     educations={userResume.educations}
                     careers={userResume.careers}
                     curriculums={userResume.curriculums}
+                    certificates={userResume.certificates}
                     etcs={userResume.etcs}
                     archives={userResume.archives}
                     isPicked={isPicked}
@@ -47,8 +48,8 @@ const UserProfile = ({ userCard, jobNames, techUrls, selectedSection, setSelecte
         }
     };
     return(
-        <div style={{display: 'flex'}}>
-            <div style={{ marginRight: '20px' ,position: 'relative'}}>
+        <div className={UserProfilestyle.up_container}>
+            <div className={UserProfilestyle.up_left}>
                 <ProfileCard
                     key={userCard.personalId}
                     personalId={userCard.personalId}
@@ -60,12 +61,12 @@ const UserProfile = ({ userCard, jobNames, techUrls, selectedSection, setSelecte
                     techUrls={techUrls}
                     isScrap={isScrap}
                     />
-                <ul>
-                    <li onClick={() => setSelectedSection('resume')}>이력서</li>
-                    <li onClick={() => setSelectedSection('coverLetter')}>자기소개서</li>
+                <ul className={UserProfilestyle.up_ul_container}>
+                    <li className={`${UserProfilestyle.up_li_resume} ${selectedSection === 'resume' ? UserProfilestyle.active : '' }`} onClick={() => setSelectedSection('resume')}>이력서</li>
+                    <li className={`${UserProfilestyle.up_li_coverLetter} ${selectedSection === 'coverLetter' ? UserProfilestyle.active : '' }`} onClick={() => setSelectedSection('coverLetter')}>자기소개서</li>
                     {userResume.portfolios && userResume.portfolios.map((portfolio, index) => (
-                        <li key={index} onClick={() => setSelectedSection(`portfolio${index + 1}`)}>
-                            포트폴리오{index + 1}
+                        <li className={`${UserProfilestyle[`up_li_port${index}`]} ${selectedSection === `portfolio${index + 1}` ? UserProfilestyle.active : ''}`} key={index} onClick={() => setSelectedSection(`portfolio${index + 1}`)}>
+                            포트폴리오 {index + 1}
                         </li>
                     ))}
                 </ul>

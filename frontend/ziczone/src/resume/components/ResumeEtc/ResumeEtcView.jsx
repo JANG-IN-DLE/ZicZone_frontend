@@ -3,6 +3,7 @@ import "./../../styles/ResumeEtc.css";
 import ResumeEtcInputView from "./../ResumeEtc/ResumeEtcInputView";
 import axios from "axios";
 
+
 const ResumeEtcView = () => {
     const userId = 7; // 사용자 ID
     const [etcData, setEtcData] = useState([]);
@@ -16,6 +17,7 @@ const ResumeEtcView = () => {
                 console.log("etcData 호출 실패", error);
             });
     }, [userId]);
+
 
     return (
         <div className="resume_etc">
@@ -33,6 +35,6 @@ const ResumeEtcView = () => {
             ))}
         </div>
     );
-}
+};
 
 export default ResumeEtcView;

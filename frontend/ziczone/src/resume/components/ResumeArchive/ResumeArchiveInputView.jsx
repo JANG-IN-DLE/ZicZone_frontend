@@ -3,7 +3,9 @@ import github from "./../../assets/GitHub.png";
 import notion from "./../../assets/Notion.png";
 import blog from "./../../assets/Blog.png";
 
+
 const ResumeArchiveInputView = ({ archGit, archNotion, archBlog }) => {
+
     return (
         <div className="resume_archive_input">
             <div className="resume_archive_container">
@@ -12,6 +14,7 @@ const ResumeArchiveInputView = ({ archGit, archNotion, archBlog }) => {
                         <img src={github} alt="Github" />
                         <p>GitHub</p>
                         <p>{archGit}</p>
+
                     </div>
                     <div className="archive_notion">
                         <img src={notion} alt="Notion" />

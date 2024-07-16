@@ -8,6 +8,21 @@ import personalFImage from '../../common/card/assets/personal_f_image.png';
 import PickZoneJobstyle from '../styles/PickZoneJob.module.css';
 import Modal from "./Modal";
 import PickCardCommstyle from '../../common/card/styles/PickCardComm.module.css';
+import PickMeTitle from '../assets/pickZoneTitle.png';
+import PickZoneTitlestyle from '../styles/PickZoneTitle.module.css';
+
+// 이름 마스킹 함수
+const maskName = (name) => {
+    if(name.length === 2) {
+        return `${name[0]}*`    // 이름이 2글자면 마지막 *
+    }else if(name.length > 2){
+        const first = name[0];
+        const last = name[name.length - 1];
+        const masked = name.slice(1, -1).replace(/./g, '*');
+        return `${first}${masked}${last}`;
+    }
+    return name;
+}
 
 function UserPickzone() {
     const [pickCards, setPickCards] = useState([]);
@@ -26,22 +41,24 @@ function UserPickzone() {
     const loggedInPersonalId = 1;
 
     useEffect(() => {
-        axios.get(`/api/pickcards?loggedInPersonalId=${loggedInPersonalId}`)
-            .then(response => {
-                setPickCards(response.data)
-            })
-            .catch(error => {
-                console.error('Error fetching pick cards: ' , error)
-            });
+        const fetchData = async () => {
+            try {
+                // PickCards 데이터 가져옴
+                const pickCardsResponse = await axios.get(`/api/personal/pickcards?loggedInPersonalId=${loggedInPersonalId}`);
+                const maskedData = pickCardsResponse.data.map(card => ({
+                    ...card,
+                    userName: maskName(card.userName)
+                }));
+                setPickCards(maskedData);
 
-            axios.get('/api/jobs')
-                .then(response => {
-                    // 맨앞에 전체 항목
-                    setJobs([{ jobId: 'all', jobName: '전체' }, ...response.data]);
-                })
-                .catch(error => {
-                    console.error('Error fetching jobs: ', error)
-                });
+                // Jobs 데이터를 가져옴
+                const jobsResponse = await axios.get('/api/jobs');
+                setJobs([{ jobId: 'all', jobName: '전체'}, ...jobsResponse.data]);
+            } catch(error){
+                console.error('Error fetching data: ', error);
+            }
+        };
+        fetchData();
     }, []);
 
     const handleCardClick = (card) => {
@@ -58,7 +75,7 @@ function UserPickzone() {
     };
     const handleOpenCard = () => {
         if(selectedCard){
-            // 나중에 로그인된 personalId도 보내야한다.
+            // 로그인된 personalId도 보낸다
             navigate(`/pickzone/${loggedInPersonalId}/${selectedCard.personalId}`);
         }
     };
@@ -92,13 +109,18 @@ function UserPickzone() {
 
     return (
         <div>
-            <h2>Jobs</h2>
+            <div className={PickZoneTitlestyle.pick_zone_intro}>
+                <div className={PickZoneTitlestyle.pzi_title}>
+                    <p>PICK ME</p>
+                    <img src={ PickMeTitle } alt="Pick Me" />
+                </div>
+            <p className={PickZoneTitlestyle.pzi_sub}>당신의 기업에 어울리는 인재를 발견하세요!</p>
+        </div>
             <div className={PickZoneJobstyle.jobs}>
                 {jobs.map(job => (
                     <Job key={job.jobId} job={job} onClick={()=> handleJobClick(job)} isSelected={selectedJobs.includes(job.jobName)}/>
                 ))}
             </div>
-            <h2>Pick Cards</h2>
             <div className={PickCardCommstyle.user_card_container}>
             {selectedCard && (
                 <Modal 

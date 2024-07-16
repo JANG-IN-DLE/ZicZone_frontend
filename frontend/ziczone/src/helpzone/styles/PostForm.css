@@ -1,17 +1,8 @@
-@font-face {
-    font-family: 'Pretendard-Regular';
-    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-    font-style: normal;
-}
-
 .post_form {
+    margin-top: 21px;
     font-family: 'Pretendard-Regular';
     font-size: 22px;
     font-weight: bold;
-    margin-right: 4px;
-    margin-top: 21px;
-    display: flex;
-    flex-direction: column;
 }
 
 .pf_title {
@@ -23,14 +14,11 @@
     position: relative;
     align-items: center;
     margin-bottom: 20px;
-    justify-content: left;
 }
 
 .pf_berry_display {
     position: absolute;
-    left: 0;
     width: 76px;
-    height: 32px;
     line-height: 32px;
     font-size: 15px;
     font-family: 'Giants-Bold';
@@ -38,7 +26,6 @@
     background-color: #0051BA;
     color: #FFF;
     text-align: center;
-    z-index: 1;
 }
 
 .post_form .pf_input {

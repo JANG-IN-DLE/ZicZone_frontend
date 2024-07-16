@@ -1,0 +1,158 @@
+.ziczone_introduce{
+  width: 1440px;
+  height: 3100px;
+  background-color: black;
+  margin: auto;
+  margin-top: -5px;
+
+}
+
+.ziczone_introduce_text{
+  margin: auto;
+  width: 800px;
+  color: white;
+  font-size: 40px;
+  font-weight: 800;
+  text-align: center;
+  padding-top: 160px;
+
+}        
+
+.ziczone_introduce_text p {
+  margin-top: -300px;
+  width: 550px;
+  height: 200px;
+}
+
+.intro_leftani{
+  margin-left: -500px;
+}
+
+.intro_leftani_text{
+  margin-left: 350px;
+}
+
+.intro_rightani{
+  margin-left: 500px;
+}
+
+.intro {
+  position: relative;
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+  padding-top: 100px;
+  
+}
+
+#intro5 {
+  margin-top: 200px;
+}
+.ziczone_intro_container .company_slide{
+  display: flex;
+  margin: auto;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ziczone_intro_container .company_slide_container {
+  width: 1440px !important;
+}
+
+.company_slide{
+  font-size: 60px;
+  font-weight: 700;
+}
+
+.ziczone_sign_company,
+.ziczone_signup {
+  margin-top: 100px;
+  height: 240px;
+}
+
+.ziczone_join{
+  display: flex;
+  margin: auto;
+  flex-direction: column;
+  align-items: center;
+}
+.ziczone_signup {
+width: 1440px;
+height: 500px;
+box-sizing: border-box;
+background-position: center !important;
+background-size: cover !important;
+margin-bottom: 175px;
+text-align: center;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.ziczone_signup_text {
+  width: 800px;
+  color: white;
+  font-size: 60px;
+  cursor: pointer;
+  text-decoration: none;
+
+}
+
+@keyframes textslide_left {
+  from{
+    left: -200px;
+    opacity: 0;
+  }
+  to{
+    left: 0px;
+    opacity: 1;
+  }
+}
+
+@keyframes slideback_left {
+  from{
+    left: 0px;
+    opacity: 1;
+  }
+  to{
+    left: -200px;
+    opacity: 0;
+  }
+}
+
+@keyframes textslide_right {
+  from{
+    left: 200px;
+    opacity: 0;
+  }
+  to{
+    left: 0px;
+    opacity: 1;
+  }
+}
+
+@keyframes slideback_right {
+  from{
+    left: 0px;
+    opacity: 1;
+  }
+  to{
+    left: 200px;
+    opacity: 0;
+  }
+}
+
+.textslide_left {
+  animation: textslide_left 1.5s ease-out forwards;
+}
+
+.slideback_left {
+  animation: slideback_left 1.5s ease-out forwards;
+}
+
+.textslide_right {
+  animation: textslide_right 1.5s ease-out forwards;
+}
+
+.slideback_right {
+  animation: slideback_right 1.5s ease-out forwards;
+}

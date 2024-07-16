@@ -3,14 +3,19 @@ import "../styles/MainMain.css";
 import HelpZone from "./HelpZone";
 import CompanySilde from "./CompanySilde";
 import NoLoginBannerSlide from "./NoLoginBannerSlide";
-// import PickCard from "../../common/card/components/PickCard";
-import PickCard from "../../common/card/components/PickCard";
+import LoginBannerUserCard from "./LoginBannerUserCard";
 import axios from "axios";
 import personalMImage from "../../common/card/assets/personal_m_image.png";
 import personalFImage from "../../common/card/assets/personal_f_image.png";
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
+import MainPickCard from "./MainPickCard";
+import PickCard from "../../common/card/components/PickCard";
 
 const NoLoginMainComponent = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userInfo, setUserInfo] = useState(null);
   const [pickCards, setPickCards] = useState([]);
   const [helpZones, sethelpZones] = useState([]);
   const [filterType, setFilterType] = useState("latest");
@@ -24,6 +29,7 @@ const NoLoginMainComponent = () => {
       .get("/api/pickcards")
       .then((response) => {
         setPickCards(response.data);
+        console.log("픽카드", response.data);
       })
       .catch((error) => {
         console.error("Error fetching pick cards: ", error);
@@ -50,16 +56,36 @@ const NoLoginMainComponent = () => {
       navigate("/cuboard"); // CUBoard로 이동
     };
 
-    // axios
-    //   .get("/api/main")
-    //   .then((res) => {
-    //     setBanner(res.data);
-    //     console.log(res);
-    //   })
-    //   .catch((error) => {
-    //     console.error("error", error);
-    //   });
+    //토큰으로 로그인 확인
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      try {
+        const decodedToken = jwtDecode(token);
+        const currentTime = Date.now() / 1000;
+
+        if (decodedToken.exp > currentTime) {
+          setIsLoggedIn(true);
+          setUserInfo(decodedToken); // 토큰에서 필요한 사용자 정보 설정
+        } else {
+          setIsLoggedIn(false);
+        }
+      } catch (error) {
+        console.error("Invalid token", error);
+        setIsLoggedIn(false);
+      }
+    }
   }, []);
+
+  // axios
+  //   .get("/api/main")
+  //   .then((res) => {
+  //     setBanner(res.data);
+  //     console.log(res);
+  //   })
+  //   .catch((error) => {
+  //     console.error("error", error);
+  //   });
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -69,28 +95,35 @@ const NoLoginMainComponent = () => {
     return `${year}/${month}/${day}`;
   };
 
+  const handleCardClick = (card) => {
+    navigate("/pickzone/:loggedInPersonalId/:personalId");
+  };
+
   return (
     <div className="main_container">
-      <NoLoginBannerSlide />
+      {isLoggedIn ? <LoginBannerUserCard /> : <NoLoginBannerSlide />}
+
       <div className="pickzone">
         <h1>PICK 존</h1>
         <div className="user_card_container">
-          {pickCards.slice(0, 4).map((card) => {
+          <PickCard />
+          {pickCards.slice(0, 3).map((pick, index) => {
             const userImage =
-              card.gender === "MALE" ? personalMImage : personalFImage;
-            const jobNames = card.jobName ? card.jobName.split(",") : [];
-            const techNames = card.techName ? card.techName.split(",") : [];
-
+              pick.gender === "MALE" ? personalMImage : personalFImage;
             return (
-              <PickCard
-                key={card.personalId}
-                personalId={card.personalId}
-                userImage={userImage}
-                jobNames={jobNames}
-                userName={card.userName}
-                userCareer={card.personalCareer}
-                userIntro={card.userIntro}
-                techNames={techNames}
+              <MainPickCard
+                key={index}
+                companyId={pick.companyId}
+                personalId={pick.personalId}
+                userId={pick.userId}
+                userName={pick.userName}
+                userIntro={pick.userIntro}
+                gender={userImage}
+                jobName={pick.jobName}
+                personalCareer={pick.personalCareer}
+                techUrl={pick.techUrl}
+                scrap={pick.scrap}
+                onClick={() => handleCardClick(pick.userId)}
               />
             );
           })}
@@ -115,8 +148,6 @@ const NoLoginMainComponent = () => {
       </div>
       <div className="company_slide">
         <h1>직존과 함께하는 기업</h1>
-        <CompanySilde />
-        <CompanySilde />
         <CompanySilde />
       </div>
     </div>

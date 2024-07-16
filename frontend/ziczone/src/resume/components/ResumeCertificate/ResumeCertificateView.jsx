@@ -32,6 +32,6 @@ const ResumeCertificateView = () => {
             ))}
         </div>
     );
-}
+};
 
 export default ResumeCertificateView;

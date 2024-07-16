@@ -17,7 +17,7 @@ const Modal = ({ isOpen, onClose, userName, onOpen, selectedCard}) => {
             payHistoryDate : new Date().toISOString()
         };
 
-        axios.post('/api/open-card', openCardData)
+        axios.post('/api/personal/open-card', openCardData)
             .then(response => {
                 if(response.status === 200){
                     onOpen();
@@ -58,7 +58,7 @@ const Modal = ({ isOpen, onClose, userName, onOpen, selectedCard}) => {
                         <img src={berry} alt="Berry" />50
                     </div>
                     {/* 나의 베리 값 나중에 수정 필요 */}
-                    <p className={Modalstyle.modal_user_points}>나의 베리: 420</p>
+                    <p className={Modalstyle.modal_user_points}>나의 베리: 420 <img src={berry} className={Modalstyle.modal_my_point_img} alt="Berry" /></p>
                     <div className={Modalstyle.modal_buttons}>
                         <button className={Modalstyle.cancel_btn} onClick={onClose}>
                             취소

@@ -5,7 +5,7 @@ import Jobs from '../../../common/stackjob/components/Jobs';
 
 const JobInput = () => {
     return (
-        <div className="inputform job">
+        <div className="inputform signup_job">
             <p>희망 분야<span>*최대 3개</span></p>
             <Jobs type="join"/>
         </div>

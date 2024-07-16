@@ -33,6 +33,6 @@ const ResumeCurriculumView = () => {
             ))}
         </div>
     );
-}
+};
 
 export default ResumeCurriculumView;

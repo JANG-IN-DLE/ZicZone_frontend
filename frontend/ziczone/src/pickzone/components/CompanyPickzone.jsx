@@ -10,6 +10,19 @@ import PickZoneTitlestyle from '../styles/PickZoneTitle.module.css';
 import PickZoneJobstyle from '../styles/PickZoneJob.module.css';
 import PickCardCommstyle from '../../common/card/styles/PickCardComm.module.css';
 
+// 이름 마스킹 함수
+const maskName = (name) => {
+    if(name.length === 2) {
+        return `${name[0]}*`    // 이름이 2글자면 마지막 *
+    }else if(name.length > 2){
+        const first = name[0];
+        const last = name[name.length - 1];
+        const masked = name.slice(1, -1).replace(/./g, '*');
+        return `${first}${masked}${last}`;
+    }
+    return name;
+}
+
 function CompanyPickzone() {
     const [pickCards, setPickCards] = useState([]);
     const [jobs, setJobs] = useState([]);
@@ -26,22 +39,25 @@ function CompanyPickzone() {
     const companyId = 1;
 
     useEffect(() => {
-        axios.get(`/api/pickcards?loggedInPersonalId=${loggedInCompanyId}`)
-            .then(response => {
-                setPickCards(response.data)
-            })
-            .catch(error => {
-                console.error('Error fetching pick cards: ' , error)
-            });
+        const fetchData = async() => {
+            try {
+                // PickCards 데이터 가져옴
+                const pickCardsResponse = await axios.get(`/api/company/pickcards?loggedInCompanyId=${loggedInCompanyId}`);
+                const maskedData = pickCardsResponse.data.map(card => ({
+                    ...card,
+                    userName: maskName(card.userName)
+                }));
+                setPickCards(maskedData);
 
-            axios.get('/api/jobs')
-                .then(response => {
-                    // 맨앞에 전체 항목
-                    setJobs([{ jobId: 'all', jobName: '전체' }, ...response.data]);
-                })
-                .catch(error => {
-                    console.error('Error fetching jobs: ', error)
-                });
+                // Jobs 데이터를 가져옴
+                const jobsResponse = await axios.get('/api/jobs');
+                setJobs([{ jobId: 'all', jobName: '전체'}, ...jobsResponse.data ]);
+            }catch(error) {
+                console.error('Error fetching data: ', error);
+            }
+        };
+
+        fetchData();
     }, []);
 
     const handleCardClick = (card) => {

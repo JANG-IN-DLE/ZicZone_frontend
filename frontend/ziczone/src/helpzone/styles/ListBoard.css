@@ -4,3 +4,16 @@
     padding-top: 150px;
     padding-bottom: 150px;
 }
+
+.lb_menu {
+    display: flex;
+    justify-content: space-between;
+}
+
+.lb_write {
+    width: 95px;
+}
+
+.lb_menu_left {
+    display: flex;
+}

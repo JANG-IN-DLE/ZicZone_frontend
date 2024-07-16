@@ -1,80 +1,90 @@
 .modal {
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    left: 50%;
-    background-color: rgba(0, 0, 0, 0.4);
-    margin-top: -50px;
-    z-index: 10;
-  }
+  position: fixed;
+  top: -140px;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 1080px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  background: rgba(0,0,0,0.4);
+  overflow: hidden;
+}
 
   .company_modal_body {
-    position: absolute;
-    top: 50%;
-
-    width: 540px;
-    height: 320px;
-    text-align: center;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-
-    background-color: rgb(255, 255, 255);
-    border-radius: 28px;
-    box-shadow: 4px 4px 16px #d4d4d4,
-    -8px -8px 16px #ffffff;
+    background-color: white;
+    padding: 5px;
+    border-radius: 10px;
+    width: 520px;
+    height: 300px;
+    position: relative;
+    border-image-source: linear-gradient(123.89deg,
+    rgba(170, 170, 170, 0.3) 9.82%,
+    rgba(170, 170, 170, 0.05) 32.32%,
+    rgba(170, 170, 170, 0.2) 61.65%,
+    rgba(170, 170, 170, 0.05) 90.18%);
+    box-shadow: 5px 5px 20px 0px rgba(0, 0, 0, 0.15),
+      4px 4px 4px 0px rgba(255, 255, 255, 0.1) inset;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
   }
 
   .modal_header {
     width: 100%;
-    height: 40px;
+    height: 20px;
     border-bottom: 0.5px solid #b3b3b3;
   }
 
   .circles {
-    height: 100%;
     display: flex;
     align-items: center;
-    margin-left: 15px;
-  }
-
-  .header_circle {
-    width: 12px;
-    height: 12px;
-    border-radius: 32px;
-    margin-left: 12px;
-
   }
 
   .header_circle_red {
     background-color: #DE2E2E;
+    width: 12px;
+    height: 12px;
+    border-radius: 32px;
+    margin-left: 12px;
   }
 
   .header_circle_yellow {
     background-color: #FBB63D;
+    width: 12px;
+    height: 12px;
+    border-radius: 32px;
+    margin-left: 12px;
   }
 
   .header_circle_green {
     background-color: #1FBF42;
+    width: 12px;
+    height: 12px;
+    border-radius: 32px;
+    margin-left: 12px;
   }
 
   .modal_content {
-    padding: 16px;
     text-align: center;
   }
   
   .modal_title {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: bold;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
+    margin-top: 40px;
+    color: #5D5D5D;
   }
   
   .modal_subtitle {
-    font-size: 12px;
-    color: #888;
-    margin-bottom: 16px;
+    font-size: 14px;
+    width: 350px;
+    margin: 5px auto 5px;
+    text-align: center;
+    color: #ABABAB;
   }
   
   .modal_points {
@@ -83,7 +93,16 @@
     justify-content: center;
     font-size: 24px;
     font-weight: bold;
-    margin-bottom: 16px;
+    margin: 5px auto 16px;
+    background: rgba(0, 81, 186, 0.08);
+    width: 115px;
+    height: 55px;
+    border-radius: 12px;
+  }
+  .modal_my_point_img{
+    width: 14px;
+    height: 14px;
+    margin-right: 8px;
   }
   
   .modal_points img {
@@ -100,24 +119,32 @@
   
   .modal_buttons {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
   }
   
   .cancel_btn, .open_btn {
-    flex: 1;
-    padding: 12px;
+    padding: 10px 20px;
     border: none;
-    border-radius: 4px;
-    font-size: 16px;
+    border-radius: 12px;
     cursor: pointer;
+    font-size: 16px;
+    width: 170px;
+    margin: 5px 5px 5px 5px;
   }
   
   .cancel_btn {
-    background-color: #f5f5f5;
-    margin-right: 8px;
+    background-color: #FFFFFF;
+    border: 1px solid #5D5D5D;
   }
   
   .open_btn {
-    background-color: #007bff;
+    background-color: #0051BA;
     color: white;
   }
+
+.open_btn:hover{
+  background-color: #0069F2;
+}
+.cancel_btn:hover{
+  background-color: rgba(0, 0, 0, 0.07);
+}

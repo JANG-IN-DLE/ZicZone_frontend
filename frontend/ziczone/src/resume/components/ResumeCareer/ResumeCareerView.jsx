@@ -19,6 +19,7 @@ const ResumeCareerView = () => {
             })
     }, [userId])
 
+
     return (
         <div className="resume_career">
             <div className="resume_career_title">

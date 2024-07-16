@@ -22,19 +22,19 @@ const PageButton = ({ currentPage, totalPages, onPageChange }) => {
 
   return (
     <div className="pagination">
-      <button onClick={ handlePrevPage } disabled={ currentPage === 1 }>
+      <button onClick={handlePrevPage} disabled={currentPage === 1}>
         {'<'}
       </button>
       {pages.map(page => (
         <button
-          key={ page }
+          key={page}
           onClick={() => onPageChange(page)}
-          className={ page === currentPage ? "active" : "" }
+          className={page === currentPage ? "active" : ""}
         >
-          { page }
+          {page}
         </button>
       ))}
-      <button onClick={ handleNextPage } disabled={ currentPage === totalPages }>
+      <button onClick={handleNextPage} disabled={currentPage === totalPages}>
         {'>'}
       </button>
     </div>

@@ -8,7 +8,7 @@ import PostForm from "./PostForm";
 
 const CUBoard = () => {
   const location = useLocation();
-  const { postData: initialPostData, isEditMode: initialEditMode } = location.state || {};
+  const { postData: initialPostData, isEditMode: initialEditMode, userId, corrId } = location.state || {};
   const navigate = useNavigate();
   const [isEditMode, setIsEditMode] = useState(initialEditMode || false);
 
@@ -31,14 +31,14 @@ const CUBoard = () => {
   };
 
   const handlePostSubmitSuccess = () => {
-    navigate('/rdboard');
+    navigate(`/rdboard/${corrId}`, { state: { userId } });
   };
 
   useEffect(() => {
-    const UserProfile = async () => {
+    const fetchUserProfile = async () => {
       try {
-        const profileResponse = await axios.get(`/api/board/myProfile`);
-        
+        const profileResponse = await axios.get(`/api/personal/board/myProfile/${userId}`);
+
         const profileData = profileResponse.data;
         setUserProfile({
           jobs: profileData.jobName.split(','),
@@ -54,21 +54,33 @@ const CUBoard = () => {
         console.error("오류 메시지: ", error);
       }
     };
-
-    UserProfile();
-  }, []);
+    if (userId) {
+      fetchUserProfile();
+    }
+  }, [userId]);
 
   return (
     <div>
       <div className="b_section">
         <div className="b_profile_card">
-          <ProfileCard {...userProfile} />
+          <ProfileCard
+            {...userProfile}
+            userId={userId}
+          />
         </div>
         <div className="b_right">
           <div className="b_description">
-            <Description isEditMode={ isEditMode } />
+            <Description
+              isEditMode={isEditMode}
+            />
             <div className="b_title_form">
-              <PostForm isEditMode={ isEditMode } initialData={ initialData } onSubmit={ handlePostSubmitSuccess } />
+              <PostForm
+                isEditMode={isEditMode}
+                initialData={initialData}
+                userId={userId}
+                corrId={corrId}
+                onSubmit={handlePostSubmitSuccess}
+              />
             </div>
           </div>
         </div>

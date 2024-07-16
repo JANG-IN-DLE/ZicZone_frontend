@@ -1,6 +1,7 @@
 import React from "react";
 
 const ResumeCurriculumInputView = ({ curriDate, curriContent, curriCompany }) => {
+
     return (
         <div className="resume_curri_input">
             <div className="resume_circle"></div>

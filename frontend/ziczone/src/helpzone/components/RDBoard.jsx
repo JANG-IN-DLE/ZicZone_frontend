@@ -1,18 +1,21 @@
-import React from "react";
-import "../styles/RDBoard.css";
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import axios from "axios";
 import ProfileCard from "./ProfileCard";
 import RDescription from "./RDescription";
 import PostView from "./PostView";
 import Button from "./Button";
+import CommentList from "./comment/CommentList";
+import "../styles/RDBoard.css";
 
 const RDBoard = () => {
   const { corrId } = useParams();
-  const userId = 13; // 로그인 구현되면 실제 로그인된 사용자의 userId를 사용
+  const location = useLocation();
+  const userId = location.state?.userId || localStorage.getItem("userId");
   const navigate = useNavigate();
+
   const [isEditMode, setIsEditMode] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const [userProfile, setUserProfile] = useState({
     berry: '',
@@ -23,13 +26,14 @@ const RDBoard = () => {
     point: '',
     intro: '',
     stacks: [],
-    isOwner: false // 게시물 작성자인지 여부 확인
+    isOwner: false
   });
 
   const [postData, setPostData] = useState({
     title: '',
     content: '',
-    fileUrl: ''
+    fileUrl: '',
+    commSelection: false
   });
 
   const handleEdit = () => {
@@ -39,7 +43,7 @@ const RDBoard = () => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`/api/board/${userId}/${corrId}`);
+      await axios.delete(`/api/personal/board/${corrId}/${userId}`);
       navigate('/helpzone');
     } catch (error) {
       console.error("오류 메시지: ", error);
@@ -49,10 +53,12 @@ const RDBoard = () => {
   useEffect(() => {
     const ProfileAndPost = async () => {
       try {
-        const profileResponse = await axios.get(`/api/board/profile/${corrId}`);
-        const postResponse = await axios.get(`/api/board/${corrId}`);
+        const profileResponse = await axios.get(`/api/user/board/profile/${corrId}`);
+        const postResponse = await axios.get(`/api/user/board/${corrId}`);
 
         const profileData = profileResponse.data;
+        const isOwner = profileData.userId == userId;
+  
         setUserProfile({
           berry: profileData.corrPoint,
           jobs: profileData.jobName.split(','),
@@ -62,22 +68,28 @@ const RDBoard = () => {
           point: profileData.berryPoint,
           intro: profileData.userIntro,
           stacks: profileData.techUrl ? profileData.techUrl.split(',') : [],
-          isOwner: profileData.userId === userId // 현재 사용자가 게시물 작성자인지 여부 확인
+          isOwner: isOwner
         });
 
         const postData = postResponse.data;
         setPostData({
           title: postData.corrTitle,
           content: postData.corrContent,
-          fileUrl: postData.corrPdf
+          fileUrl: postData.corrPdf,
+          commSelection: postData.commSelection
         });
+
+        setIsLoading(false);
       } catch (error) {
         console.error("오류 메시지: ", error);
       }
     };
-
     ProfileAndPost();
-  }, [corrId]);
+  }, [corrId, userId]);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div>
@@ -89,7 +101,7 @@ const RDBoard = () => {
           <div className="b_description">
             <div className="b_display_btn">
               <p className="d_title">게시물 조회</p>
-              {userProfile.isOwner && (
+              {userProfile.isOwner && !postData.commSelection && (
                 <div className="b_edit_delete">
                   <Button type="button" className="b_edit" onClick={handleEdit}>
                     수정
@@ -101,12 +113,13 @@ const RDBoard = () => {
               )}
             </div>
             <RDescription />
-            <div className="b_title_form">
-              <PostView
-                title={postData.title}
-                content={postData.content}
-                fileUrl={postData.fileUrl}
-              />
+            <PostView
+              title={postData.title}
+              content={postData.content}
+              fileUrl={postData.fileUrl}
+            />
+            <div className="b_comment">
+              <CommentList corrId={corrId} userId={userId} />
             </div>
           </div>
         </div>
