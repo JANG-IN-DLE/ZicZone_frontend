@@ -143,6 +143,13 @@ const LoginForm = ({
     };
   };
 
+  // 엔터 키를 눌렀을 때 로그인 함수 호출
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      Login();
+    }
+  };
+
   return (
     <div className="rightbox_login">
       {/* 로고 */}
@@ -178,6 +185,7 @@ const LoginForm = ({
             ? handleEmailChange
             : handlePasswordChange
         }
+        onKeyDown={title === "login" ? handleKeyDown : null} // 여기에 추가
       />
       <input
         className="input_login"
@@ -197,6 +205,7 @@ const LoginForm = ({
             ? handleCodeChange
             : handleConfirmChange
         }
+        onKeyDown={title === "login" ? handleKeyDown : null} // 여기에 추가
       />
 
       {/* 타이머 */}
