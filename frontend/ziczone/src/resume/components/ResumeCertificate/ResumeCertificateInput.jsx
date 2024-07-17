@@ -17,7 +17,7 @@ const ResumeCertificateInput = ({ id, removeInput, updateCertificate }) => {
 
     useEffect(() => {
         updateCertificate(id, certificate);
-    }, [certificate]);
+    }, [certificate, id, updateCertificate]);
 
     return (
         <div className="resume_cert_input">

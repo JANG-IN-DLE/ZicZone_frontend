@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./../../styles/ResumeCertificate.css";
 import plus_btn from "./../../assets/Plus_btn.png";
-import ResumeCertificateInput from "./../ResumeCertificate/ResumeCertificateInput";
+import ResumeCertificateInput from "./ResumeCertificateInput";
 import useAddInput from "./../../hooks/useAddInput";
 
 const ResumeCertificate = ({ setCertificate }) => {

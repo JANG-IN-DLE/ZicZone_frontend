@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./../../styles/ResumeCurriculum.css";
 import plus_btn from "./../../assets/Plus_btn.png";
-import ResumeCurriculumInputEdit from "./../ResumeCurriculum/ResumeCurriculumInputEdit";
+import ResumeCurriculumInputEdit from "./ResumeCurriculumInputEdit";
 import useAddInput from "./../../hooks/useAddInput";
 
 const ResumeCurriculum = ({ setCurriculum }) => {

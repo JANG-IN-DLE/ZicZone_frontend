@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./../../styles/ResumeEtc.css";
 import plus_btn from "./../../assets/Plus_btn.png";
-import ResumeEtcInput from "./../ResumeEtc/ResumeEtcInput";
+import ResumeEtcInput from "./ResumeEtcInput";
 import useAddInput from "./../../hooks/useAddInput";
 
 const ResumeEtc = ({ setEtc }) => {

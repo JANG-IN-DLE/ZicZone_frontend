@@ -4,7 +4,7 @@ import "./../../styles/ResumeArchive.css";
 import ResumeArchiveInputEdit from "./ResumeArchiveInputEdit";
 
 const ResumeArchiveEdit = ({ setArchive }) => {
-    const userId = 7;
+    const userId = 76;
     const [archiveData, setArchiveData] = useState({
         git: '',
         notion: '',

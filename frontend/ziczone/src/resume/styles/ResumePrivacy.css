@@ -18,6 +18,10 @@
     font-weight: bold;
 }
 
+.resume_name input::placeholder {
+    font-size: 33px;
+}
+
 .resume_name p {
     width: 234px;
     height: 40px;

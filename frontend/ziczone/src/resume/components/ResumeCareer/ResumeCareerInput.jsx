@@ -20,7 +20,7 @@ const ResumeCareerInput = ({ id, removeInput, updateCareer }) => {
 
     useEffect(() => {
         updateCareer(id, career);
-    }, [career]);
+    }, [career, id, updateCareer]);
 
     return (
         <div className="resume_career_input">

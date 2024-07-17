@@ -1,8 +1,14 @@
-import React from "react";
-import "./../../styles/ResumeIntroduction.css"
-import ResumeIntroductionInput from "./../ResumeIntroduction/ResumeIntroductionInput"
+import React, { useState, useEffect } from "react";
+import "./../../styles/ResumeIntroduction.css";
+import ResumeIntroductionInput from "./ResumeIntroductionInput";
 
-const ResumeIntroduction = () => {
+const ResumeIntroduction = ({ setIntroduction }) => {
+    const [file, setFile] = useState(null);
+
+    useEffect(() => {
+        setIntroduction(file);
+    }, [file, setIntroduction]);
+
     return (
         <div className="resume_introduction">
             <div className="resume_introduction_title">
@@ -10,9 +16,9 @@ const ResumeIntroduction = () => {
                 <p className="introduction_warning">* 자기소개서는 하나의 파일만 첨부 가능합니다. </p>
             </div>
             <div className="resume_bar"></div>
-            <ResumeIntroductionInput />
+            <ResumeIntroductionInput setFile={setFile} />
         </div>
-    )
+    );
 }
 
-export default ResumeIntroduction
+export default ResumeIntroduction;

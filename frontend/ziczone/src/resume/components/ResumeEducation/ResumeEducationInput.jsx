@@ -17,9 +17,9 @@ const ResumeEducationInput = ({ id, removeInput, updateEducation }) => {
         }));
     };
 
-    // useEffect(() => {
-    //     updateEducation(id, education);
-    // }, [education]);
+    useEffect(() => {
+        updateEducation(id, education);
+    }, [education]);
 
     return (
         <div className="resume_edu_input">

@@ -18,7 +18,7 @@ const ResumeEtcInput = ({ id, removeInput, updateEtc }) => {
 
     useEffect(() => {
         updateEtc(id, etc);
-    }, [etc]);
+    }, [etc, id, updateEtc]);
 
     return (
         <div className="resume_etc_input">

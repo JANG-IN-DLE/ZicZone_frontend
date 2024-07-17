@@ -5,7 +5,7 @@ import plus_btn from "./../../assets/Plus_btn.png";
 import ResumeEtcInputEdit from "./ResumeEtcInputEdit";
 
 const ResumeEtcEdit = ({ setEtc }) => {
-    const userId = 7;
+    const userId = 76;
     const [inputs, setInputs] = useState([]);
     const [etcList, setEtcList] = useState([]);
 

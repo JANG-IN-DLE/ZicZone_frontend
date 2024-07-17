@@ -5,7 +5,7 @@ import plus_btn from "./../../assets/Plus_btn.png";
 import ResumeEducationInputEdit from "./ResumeEducationInputEdit";
 
 const ResumeEducationEdit = ({ setEducation }) => {
-    const userId = 7;
+    const userId = 76;
     const [inputs, setInputs] = useState([]);
     const [educationList, setEducationList] = useState([]);
 
