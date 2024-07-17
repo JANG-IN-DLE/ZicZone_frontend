@@ -9,12 +9,16 @@
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 18px;
   font-family: 'Pretendard-Regular';
 }
 
 .pagination button.active {
-  font-weight: bold;
+  border: 1px solid #0051BA;
+  background-color: #0051BA;
+  color: #FFF;
+  width: 35px;
+  border-radius: 25px;
 }
 
 .pagination button:disabled {
