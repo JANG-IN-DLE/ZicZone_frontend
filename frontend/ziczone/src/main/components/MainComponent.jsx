@@ -35,7 +35,7 @@ const NoLoginMainComponent = ({ onLogout }) => {
 
     axios
       //엔드포인트로 GET요청, 파라미터를 함께 보냄
-      .get("/api/board/filter", {
+      .get("/api/user/board/filter", {
         params: {
           filterType,
           page,
