@@ -130,6 +130,7 @@ function UserPickzone() {
                     onOpen={handleOpenCard}
                     selectedCard={selectedCard}
                     userId={userId}
+                    berryPoint={selectedCard.berryPoint}
                 />
             )}
 
