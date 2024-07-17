@@ -46,11 +46,11 @@ const Header = () => {
 
     checkToken();
 
-    // 토큰 확인
-    const intervalId = setInterval(checkToken, 1000);
+    // // 토큰 확인
+    // const intervalId = setInterval(checkToken, 1000);
 
-    // 토큰 확인되면 클린 인터벌
-    return () => clearInterval(intervalId);
+    // // 토큰 확인되면 클린 인터벌
+    // return () => clearInterval(intervalId);
   }, []);
   // 최초 마운트 될 때 checkToken(); 실행
   // const intervalId = setInterval(checkToken, 1000);로 1초마다 checkToken() 호출해서 유효성 검사

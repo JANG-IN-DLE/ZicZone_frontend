@@ -69,8 +69,8 @@ function App() {
           <Route path='/pickzone/:companyId/:personalId' element={<PickzoneCompanyDetail />} />
           <Route path='/pickzone/:loggedInPersonalId/:personalId' element={<PickZoneUserDetail />} />
           <Route path='/' element={<MainComponent />} />
-          <Route path='/pickzone/:personalId' element={<PickZoneUserDetail />} />
           <Route path='/pickzone' element={<UserPickzone />} />
+          {/* <Route path='/pickzone' element={<CompanyPickzone />} /> */}
           <Route path="/helpzone" element={<ListBoard />} />
           <Route path="/cuboard" element={<CUBoard />} />
           <Route path="/rdboard/:corrId" element={<RDBoard />} />
@@ -81,7 +81,6 @@ function App() {
           <Route path='/signup-com' element={<JoinCom/>}/>
           <Route path='/signup-per' element={<JoinPer/>}/>
           <Route path='/mypage' element={<Mypage/>}/>
-          <Route path="/pickzone/:companyId/:personalId" element={<PickZoneUserDetail/>} />
         </Routes> 
          <Footer />
       </Router>
