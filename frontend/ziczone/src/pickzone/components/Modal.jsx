@@ -3,7 +3,7 @@ import Modalstyle from "../styles/Modal.module.css";
 import berry from "../../common/card/assets/berry.png"
 import axios from "axios";
 
-const Modal = ({ isOpen, onClose, userName, onOpen, selectedCard}) => {
+const Modal = ({ isOpen, onClose, userName, onOpen, selectedCard, berryPoint }) => {
     if(!isOpen) return null;
     // 일단 임시로 로그인한 사람 1
     const loggedInPersonalId = 1;
@@ -13,7 +13,7 @@ const Modal = ({ isOpen, onClose, userName, onOpen, selectedCard}) => {
         const openCardData = {
             sellerId: selectedCard.personalId,
             buyerId: loggedInPersonalId,
-            payHistoryContent: "이력서조회",
+            payHistoryContent: "이력서구매",
             payHistoryDate : new Date().toISOString()
         };
 
@@ -58,7 +58,7 @@ const Modal = ({ isOpen, onClose, userName, onOpen, selectedCard}) => {
                         <img src={berry} alt="Berry" />50
                     </div>
                     {/* 나의 베리 값 나중에 수정 필요 */}
-                    <p className={Modalstyle.modal_user_points}>나의 베리: 420 <img src={berry} className={Modalstyle.modal_my_point_img} alt="Berry" /></p>
+                    <p className={Modalstyle.modal_user_points}>나의 베리: {berryPoint} <img src={berry} className={Modalstyle.modal_my_point_img} alt="Berry" /></p>
                     <div className={Modalstyle.modal_buttons}>
                         <button className={Modalstyle.cancel_btn} onClick={onClose}>
                             취소
