@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom"; // 리액트 라우터의 Link 컴포넌트 import
+import { Link, useNavigate } from "react-router-dom";
 import header from "../assets/Header.png";
 import "./../styles/Header.css";
 import NonLogin from "./HeaderNonLogin";
@@ -14,48 +14,50 @@ const Header = () => {
   const [userRole, setUserRole] = useState();
   const [userName, setUserName] = useState("");
   const [companyLogo, setCompanyLogo] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
-    //로컬 스토리지에 토큰 담기
-    const token = localStorage.getItem("token");
+    const checkToken = () => {
+      const token = localStorage.getItem("token");
 
-    //토큰이 있다면
-    if (token) {
-      try {
-        const decodedToken = jwtDecode(token);
-        const currentTime = Date.now() / 1000;
+      if (token) {
+        try {
+          const decodedToken = jwtDecode(token);
+          const currentTime = Date.now() / 1000;
 
-        // 토큰 시간 확인해서 로그인 상태로 설정
-        if (decodedToken.exp > currentTime) {
-          setIsLoggedIn(true);
-        }
-        // 아니면 비로그인 상태
-        else {
+          //exp는 만료시간 나타내는 필드
+          if (decodedToken.exp > currentTime) {
+            setIsLoggedIn(true);
+            fetchUserData(decodedToken);
+          } else {
+            setIsLoggedIn(false);
+            clearUserData();
+          }
+        } catch (error) {
+          console.error("Invalid token", error);
           setIsLoggedIn(false);
+          clearUserData();
         }
-      } catch (error) {
-        console.error("Invalid token", error);
+      } else {
         setIsLoggedIn(false);
+        clearUserData();
       }
-    }
-  }, []);
+    };
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
+    checkToken();
 
-    if (token) {
-      try {
-        const decodedToken = jwtDecode(token);
-        fetchUserData(decodedToken);
-      } catch (error) {
-        console.error("Invalid token", error);
-      }
-    }
+    // 토큰 확인
+    const intervalId = setInterval(checkToken, 1000);
+
+    // 토큰 확인되면 클린 인터벌
+    return () => clearInterval(intervalId);
   }, []);
+  // 최초 마운트 될 때 checkToken(); 실행
+  // const intervalId = setInterval(checkToken, 1000);로 1초마다 checkToken() 호출해서 유효성 검사
 
   const fetchUserData = (decodedToken) => {
     const userId = decodedToken.userId;
-    const userType = decodedToken.role; // 'company' 또는 'personal'
+    const userType = decodedToken.role;
 
     if (userType === "COMPANY") {
       axios
@@ -79,6 +81,20 @@ const Header = () => {
           console.error("Error fetching personal user data: ", error);
         });
     }
+  };
+
+  // 토큰 검사 후 상태초기화 함수
+  const clearUserData = () => {
+    setUserName("");
+    setUserRole(null);
+    setCompanyLogo("");
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("token"); // 토큰 제거
+    setIsLoggedIn(false); // 로그인 상태 false로 설정
+    clearUserData(); // 사용자 데이터 초기화
+    window.location.href = "/";
   };
 
   return (
@@ -111,9 +127,14 @@ const Header = () => {
           {isLoggedIn ? (
             // 토큰 롤 가져와서 컴퍼니면 기업 로그인, 아니면 회원 로그인
             userRole === "COMPANY" ? (
-              <CompLogin userName={userName} companyLogo={companyLogo} />
+              <CompLogin
+                userName={userName}
+                companyLogo={companyLogo}
+                // onLogout 프롭스 전달
+                onLogout={handleLogout}
+              />
             ) : (
-              <UserLogin userName={userName} />
+              <UserLogin userName={userName} onLogout={handleLogout} />
             )
           ) : (
             // 로그인 펄스일 경우 비로그인 컴포넌트

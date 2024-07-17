@@ -7,13 +7,12 @@ import LoginBannerUserCard from "./LoginBannerUserCard";
 import axios from "axios";
 import personalMImage from "../../common/card/assets/personal_m_image.png";
 import personalFImage from "../../common/card/assets/personal_f_image.png";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import MainPickCard from "./MainPickCard";
 import PickCard from "../../common/card/components/PickCard";
 
-const NoLoginMainComponent = () => {
+const NoLoginMainComponent = ({ onLogout }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userInfo, setUserInfo] = useState(null);
   const [pickCards, setPickCards] = useState([]);
@@ -29,7 +28,6 @@ const NoLoginMainComponent = () => {
       .get("/api/pickcards")
       .then((response) => {
         setPickCards(response.data);
-        console.log("픽카드", response.data);
       })
       .catch((error) => {
         console.error("Error fetching pick cards: ", error);
@@ -55,7 +53,9 @@ const NoLoginMainComponent = () => {
     const handleWriteButton = () => {
       navigate("/cuboard"); // CUBoard로 이동
     };
+  }, []);
 
+  useEffect(() => {
     //토큰으로 로그인 확인
     const token = localStorage.getItem("token");
 
@@ -74,8 +74,16 @@ const NoLoginMainComponent = () => {
         console.error("Invalid token", error);
         setIsLoggedIn(false);
       }
+    } else {
+      setIsLoggedIn(false); // 토큰이 없으면 로그아웃 상태로 설정
     }
   }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setIsLoggedIn(false);
+    navigate("/");
+  };
 
   // axios
   //   .get("/api/main")
@@ -95,18 +103,16 @@ const NoLoginMainComponent = () => {
     return `${year}/${month}/${day}`;
   };
 
-  const handleCardClick = (card) => {
-    navigate("/pickzone/:loggedInPersonalId/:personalId");
+  const handleCardClick = (userId) => {
+    navigate(`/pickzone/${isLoggedIn ? "loggedInPersonalId" : "personalId"}`);
   };
 
   return (
     <div className="main_container">
       {isLoggedIn ? <LoginBannerUserCard /> : <NoLoginBannerSlide />}
-
       <div className="pickzone">
         <h1>PICK 존</h1>
         <div className="user_card_container">
-          <PickCard />
           {pickCards.slice(0, 3).map((pick, index) => {
             const userImage =
               pick.gender === "MALE" ? personalMImage : personalFImage;

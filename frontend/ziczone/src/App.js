@@ -12,7 +12,6 @@ import PickzoneCompanyDetail from './pickzone/components/PickzoneCompanyDetail';
 import PickZoneUserDetail from './pickzone/components/PickzoneUserDetail';
 import Footer from './common/footer/components/Footer'
 // import Pickzone from './pickzone/components/Pickzone';
-// import LoginMainComponent from './main/components/LoginMainComponent';
 import ChargeMain from './payment/components/ChargeMain';
 import MainComponent from './main/components/MainComponent';
 import Header from './common/header/components/Header';
@@ -82,13 +81,11 @@ function App() {
           <Route path='/signup-com' element={<JoinCom/>}/>
           <Route path='/signup-per' element={<JoinPer/>}/>
           <Route path='/mypage' element={<Mypage/>}/>
-          <Route path="/pickzone/:companyId/:personalId" component={<PickZoneUserDetail/>} />
+          <Route path="/pickzone/:companyId/:personalId" element={<PickZoneUserDetail/>} />
         </Routes> 
          <Footer />
       </Router>
     </div>
-
   );
-
 }
 export default App;

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import slidImage1 from "../../main/bannerimg/slide_image1.png";
 import slidImage2 from "../../main/bannerimg/slide_image2.png";
 import slidImage3 from "../../main/bannerimg/slide_image3.png";
+import personalMImage from "../../common/card/assets/personal_m_image.png";
+import personalFImage from "../../common/card/assets/personal_f_image.png";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import { Link } from "react-router-dom";
@@ -108,7 +110,9 @@ const LoginBannerSlide = () => {
         .then((res) => {
           setUserName(res.data.userName);
           setUserEmail(res.data.email);
-          setUserImg(res.data.gender);
+          setUserImg(
+            res.data.gender === "male" ? personalMImage : personalFImage
+          );
           setUserRole(userType);
         })
         .catch((error) => {
