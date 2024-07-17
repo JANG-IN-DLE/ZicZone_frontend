@@ -18,6 +18,7 @@ const ListBoard = () => {
   const [showSelect, setShowSelect] = useState(false);
   const navigate = useNavigate();
   const userId = localStorage.getItem("userId");
+  const userRole = localStorage.getItem("userRole");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -65,9 +66,11 @@ const ListBoard = () => {
               onChange={handleCheckChange}
             />
           </div>
-          <Button type="button" className="lb_write" onClick={handleWriteButton}>
-            {'글쓰기'}
-          </Button>
+          {userRole !== 'COMPANY' &&
+            <Button type="button" className="lb_write" onClick={handleWriteButton}>
+              {'글쓰기'}
+            </Button>
+          }
         </div>
         <BoardList boards={boards} />
         <PageButton currentPage={page} totalPages={totalPages} onPageChange={handlePageChange} />
