@@ -35,16 +35,13 @@ const JoinButton = ({category}) => {
                     }
                 });
             } else {
-                // FormData를 사용하여 파일과 데이터를 함께 보냄
                 const submitFormData = new FormData();
-                for (const key in formData) {
-                    if (key === 'companyLogo') {
-                        submitFormData.append(key, formData[key], formData[key].name); // 파일 이름을 포함해서 추가
-                    } else {
-                        submitFormData.append(key, formData[key]);
-                    }
-                }
-    
+                const companyUserDTO = { ...formData };
+                delete companyUserDTO.companyLogo; // companyLogo를 제외한 나머지 데이터를 JSON으로 변환
+
+                submitFormData.append('companyUserDTO', JSON.stringify(companyUserDTO));
+                submitFormData.append('companyLogo', formData.companyLogo, formData.companyLogo.name);
+
                 response = await axios.post(endpoint, submitFormData, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
