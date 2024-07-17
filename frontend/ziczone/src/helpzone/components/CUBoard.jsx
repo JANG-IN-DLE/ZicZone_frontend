@@ -8,7 +8,7 @@ import PostForm from "./PostForm";
 
 const CUBoard = () => {
   const location = useLocation();
-  const { postData: initialPostData, isEditMode: initialEditMode, userId, corrId } = location.state || {};
+  const { postData: initialPostData, isEditMode: initialEditMode, userId, corrId, fileName } = location.state || {};
   const navigate = useNavigate();
   const [isEditMode, setIsEditMode] = useState(initialEditMode || false);
 
@@ -30,9 +30,10 @@ const CUBoard = () => {
     file: initialPostData?.fileUrl || null
   };
 
-  const handlePostSubmitSuccess = () => {
-    navigate(`/rdboard/${corrId}`, { state: { userId } });
-  };
+  const handlePostSubmitSuccess = (corrId, fileName) => {
+    console.log("Navigating to rdboard with corrId:", corrId, "and fileName:", fileName); // 확인용 로그 추가
+    navigate(`/rdboard/${corrId}`, { state: { userId, fileName } });
+};
 
   useEffect(() => {
     const fetchUserProfile = async () => {
@@ -78,6 +79,7 @@ const CUBoard = () => {
                 isEditMode={isEditMode}
                 initialData={initialData}
                 userId={userId}
+                fileName={fileName}
                 corrId={corrId}
                 onSubmit={handlePostSubmitSuccess}
               />

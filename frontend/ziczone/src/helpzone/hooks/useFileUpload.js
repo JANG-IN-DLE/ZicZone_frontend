@@ -5,7 +5,7 @@ const useFileUpload = () => {
 
     const handleFileChange = (event) => {
         const selectedFile = event.target.files[0];
-        if(selectedFile && selectedFile.type === "application/pdf") {
+        if (selectedFile && selectedFile.type === "application/pdf") {
             setFile(selectedFile);
         }
     };
@@ -14,10 +14,15 @@ const useFileUpload = () => {
         setFile(null);
     };
 
+    const setInitialFile = (initialFile) => {
+        setFile(initialFile);
+    };
+
     return {
         file,
         handleFileChange,
-        handleFileRemove
+        handleFileRemove,
+        setInitialFile
     };
 }
 
