@@ -1,15 +1,15 @@
 import React from "react";
 import "../../resume/styles/Resume.css";
 import resumePhotoNull from '../assets/resumePhotoNull.svg';
-import ResumePrivacyView from "../../resume/components/ResumePrivacy/ResumePrivacyView";
-import ResumeJobView from "../../resume/components/ResumeJob/ResumeJobView";
-import ResumeTechView from "../../resume/components/ResumeTech/ResumeTechView";
-import ResumeEducationView from "../../resume/components/ResumeEducation/ResumeEducationView";
-import ResumeCareerView from "../../resume/components/ResumeCareer/ResumeCareerView";
-import ResumeCurriculumView from "../../resume/components/ResumeCurriculum/ResumeCurriculumView";
-import ResumeCertificateView from "../../resume/components/ResumeCertificate/ResumeCertificateView";
-import ResumeEtcView from "../../resume/components/ResumeEtc/ResumeEtcView";
-import ResumeArchiveView from "../../resume/components/ResumeArchive/ResumeArchiveView";
+import ResumePrivacyView from "./pickResume/resumePrivacy/ResumePrivacyView";
+import ResumeJobView from "./pickResume/resumeJob/ResumeJobView";
+import ResumeTechView from "./pickResume/resumeTech/ResumeTechView";
+import ResumeEducationView from "./pickResume/resumeEducation/ResumeEducationView";
+import ResumeCareerView from "./pickResume/resumeCareer/ResumeCareerView";
+import ResumeCurriculumView from "./pickResume/resumeCurriculum/ResumeCurriculumView";
+import ResumeCertificateView from "./pickResume/resumeCertificate/ResumeCertificateView";
+import ResumeEtcView from "./pickResume/resumeEtc/ResumeEtcView";
+import ResumeArchiveView from "./pickResume/resumeArchieve/ResumeArchiveView";
 
 // 이름 마스킹 함수
 const maskName = (name) => {
