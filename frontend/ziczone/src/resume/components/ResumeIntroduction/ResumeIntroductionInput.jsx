@@ -1,15 +1,16 @@
 import React from 'react';
 import useFileUpload from './../../hooks/useFileUpload';
 import erase from "./../../assets/Delete.png";
+import "./../../styles/ResumeIntroduction.css";
 
-const ResumeIntroductionInput = () => {
+const ResumeIntroductionInput = ({ setFile }) => {
     const {
         fileInputRef,
         fileName,
         handleButtonClick,
         handleFileChange,
         handleClearFile,
-    } = useFileUpload();
+    } = useFileUpload(setFile);
 
     return (
         <div className="resume_introduction_upload">

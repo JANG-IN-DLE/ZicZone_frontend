@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./../../styles/ResumeCareer.css";
 import plus_btn from "./../../assets/Plus_btn.png";
-import ResumeCareerInput from "./../ResumeCareer/ResumeCareerInput";
+import ResumeCareerInput from "./ResumeCareerInput";
 import useAddInput from "./../../hooks/useAddInput";
 
 const ResumeCareer = ({ setCareer }) => {

@@ -5,7 +5,7 @@ import plus_btn from "./../../assets/Plus_btn.png";
 import ResumeCareerInputEdit from "./ResumeCareerInputEdit";
 
 const ResumeCareerEdit = ({ setCareer }) => {
-    const userId = 7;
+    const userId = 76;
     const [inputs, setInputs] = useState([]);
     const [careerList, setCareerList] = useState([]);
 
@@ -55,7 +55,7 @@ const ResumeCareerEdit = ({ setCareer }) => {
         setCareer(updatedList);
     };
 
-    console.log("확인: " + JSON.stringify(careerList))
+    // console.log("확인: " + JSON.stringify(careerList))
 
     return (
         <div className="resume_career">

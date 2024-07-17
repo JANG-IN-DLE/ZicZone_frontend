@@ -15,7 +15,7 @@ import ResumePortfolioEdit from "./ResumePortfolio/ResumePortfolioEdit"
 
 
 const ResumeEdit = () => {
-    const userId = 7;
+    const userId = 77;
     const [privacy, setPrivacy] = useState({});
     const [education, setEducation] = useState({});
     const [career, setCareer] = useState({});
@@ -54,7 +54,7 @@ const ResumeEdit = () => {
                     <div className="container_bar"></div>
                     <div>
                         <ResumePrivacyEdit setPrivacy={setPrivacy}/>
-                        <ResumeJobEdit />
+                        {/* <ResumeJobEdit /> */}
                         {/* <ResumeTechEdit /> */}
                         <ResumeEducationEdit setEducation={setEducation}/>
                         <ResumeCareerEdit setCareer={setCareer}/>

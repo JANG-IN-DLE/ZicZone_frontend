@@ -5,7 +5,7 @@ import plus_btn from "./../../assets/Plus_btn.png";
 import ResumeCertificateInputEdit from "./ResumeCertificateInputEdit";
 
 const ResumeCertificateEdit = ({ setCertificate }) => {
-    const userId = 7;
+    const userId = 76;
     const [inputs, setInputs] = useState([]);
     const [certificateList, setCertificateList] = useState([]);
 

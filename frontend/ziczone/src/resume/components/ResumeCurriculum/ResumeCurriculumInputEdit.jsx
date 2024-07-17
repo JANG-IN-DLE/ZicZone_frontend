@@ -1,7 +1,7 @@
 import React from "react";
 import resume_delete from "./../../assets/Minus.png";
 
-const ResumeCurriculumInputEdit = ({ id, startDate, endDate, course, institution, removeInput, updateCurriculum }) => {
+const ResumeCurriculumInputEdit = ({ id, removeInput, updateCurriculum }) => {
     const handleChange = (e) => {
         const { name, value } = e.target;
         updateCurriculum(id, { [name]: value });
@@ -15,7 +15,6 @@ const ResumeCurriculumInputEdit = ({ id, startDate, endDate, course, institution
                     type="text"
                     name="startDate"
                     placeholder="YYYY.MM"
-                    value={startDate}
                     onChange={handleChange}
                 />
                 <p>~</p>
@@ -23,7 +22,6 @@ const ResumeCurriculumInputEdit = ({ id, startDate, endDate, course, institution
                     type="text"
                     name="endDate"
                     placeholder="YYYY.MM"
-                    value={endDate}
                     onChange={handleChange}
                 />
             </div>
@@ -32,7 +30,6 @@ const ResumeCurriculumInputEdit = ({ id, startDate, endDate, course, institution
                     type="text"
                     name="course"
                     placeholder="교육과정"
-                    value={course}
                     onChange={handleChange}
                 />
                 <div className="curri_company">
@@ -41,7 +38,6 @@ const ResumeCurriculumInputEdit = ({ id, startDate, endDate, course, institution
                         type="text"
                         name="institution"
                         placeholder="교육기관"
-                        value={institution}
                         onChange={handleChange}
                     />
                 </div>

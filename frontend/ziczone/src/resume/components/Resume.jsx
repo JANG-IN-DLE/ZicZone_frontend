@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import "./../styles/Resume.css"
 import Header from "../../common/header/components/Header"
 import ResumePrivacy from "./ResumePrivacy/ResumePrivacy"
@@ -14,6 +15,7 @@ import ResumeIntroduction from "./ResumeIntroduction/ResumeIntroduction";
 import ResumePortfolio from "./ResumePortfolio/ResumePortfolio";
 
 const Resume = () => {
+    const userId = 77;
     const [privacy, setPrivacy] = useState({});
     const [job, setJob] = useState({});
     const [tech, setTech] = useState({});
@@ -26,13 +28,19 @@ const Resume = () => {
     const [introduction, setIntroduction] = useState({});
     const [portfolio, setPortfolio] = useState({});
 
-
     const handleSave = async () => {
         const resumeData = {
             privacy, job, tech, education, career, curriculum, certificate, etc, archive, introduction, portfolio
         };
 
-        alert("저장되었습니다.");
+        try {
+            const response = await axios.post(`/api/resumes/${userId}`, resumeData);
+            console.log('응답 데이터:', response.data);
+            alert("저장되었습니다.");
+        } catch (error) {
+            console.error('저장 중 오류 발생:', error);
+            alert("저장 중 오류가 발생했습니다.");
+        }
     };
 
     return (
@@ -64,4 +72,4 @@ const Resume = () => {
     )
 }
 
-export default Resume
+export default Resume;

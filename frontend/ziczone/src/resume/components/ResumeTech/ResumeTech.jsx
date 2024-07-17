@@ -5,13 +5,13 @@ import useDropdown from './../../hooks/useDropdown'
 import useFilter from "../../hooks/useFilter";
 import dropdown from "./../../assets/Dropdown.png";
 
-const ResumeTech = ({setTech}) => {
+const ResumeTech = ({ setTech }) => {
     const [dropdownVisible, toggleDropdown, selectedItems, updateSelectedItems] = useDropdown(false);
     const [filter, setFilter] = useFilter("");
 
     useEffect(() => {
         setTech(selectedItems);
-    }, [selectedItems, setTech])
+    }, [selectedItems, setTech]);
 
     return (
         <div className="resume_tech">
@@ -30,12 +30,11 @@ const ResumeTech = ({setTech}) => {
             <div className="resume_tech_select">
                 <div className="tech_select" onClick={toggleDropdown}>
                     <input 
-                    type="text" 
-                    placeholder="기술 스택을 선택해주세요." 
-                    value={filter}
-                    onChange={(e) => setFilter(e.target.value)}
+                        type="text" 
+                        placeholder="기술 스택을 선택해주세요." 
+                        value={filter}
+                        onChange={(e) => setFilter(e.target.value)}
                     />
-                    {/* <span>기술 스택을 선택해주세요.</span> */}
                     <img src={dropdown} alt="Dropdown" />
                 </div>
                 {dropdownVisible && (

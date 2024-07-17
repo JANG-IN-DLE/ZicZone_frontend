@@ -7,7 +7,7 @@ import birthdateIcon from "./../../assets/Birthdate.png";
 import useUploadImage from "../../hooks/useUploadImage";
 
 const ResumePrivacyEdit = ({ setPrivacy }) => {
-    const userId = 7;
+    const userId = 76;
     const [resumeName, setResumeName] = useState('');
     const [resumeEmail, setResumeEmail] = useState('');
     const [resumePhone, setResumePhone] = useState('');
