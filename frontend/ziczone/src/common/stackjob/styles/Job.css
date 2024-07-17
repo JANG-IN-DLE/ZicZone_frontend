@@ -18,6 +18,10 @@
     margin-bottom: 10px;
 }
 
+.jobs>.jobcom:active{
+    transform: scale(0.97);
+}
+
 .jobs>.jobcom:hover{
     cursor: pointer;
     background-color: #0051BA;

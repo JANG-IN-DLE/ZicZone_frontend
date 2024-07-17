@@ -48,6 +48,10 @@
     cursor: pointer;
     flex-shrink: 0;
   }
+
+  .address-input input[type="button"]:active{
+    transform: scale(0.97);
+}
   
   .address-input input[placeholder="상세주소"] {
     border-bottom: 1px solid #ccc;
