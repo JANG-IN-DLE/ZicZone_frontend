@@ -22,6 +22,26 @@ const Modal = ({
     }
   };
 
+  function formatDate() {
+    const [year, month, day] = companyYear.split("-");
+    const formattedMonth = parseInt(month, 10);
+    const formattedDay = parseInt(day, 10);
+
+    return `${year}년 ${formattedMonth}월 ${formattedDay}일`;
+  }
+
+  function formatNum(companyNum) {
+    const part1 = companyNum.slice(0, 3);
+    const part2 = companyNum.slice(3, 5);
+    const part3 = companyNum.slice(5, 10);
+
+    return `${part1}-${part2}-${part3}`;
+  }
+
+  function removeAddr(companyAddr) {
+    return companyAddr.split("||").join(" ");
+  }
+
   return (
     <div className="background" onClick={backClick}>
       <div className="company_modal">
@@ -49,11 +69,11 @@ const Modal = ({
               </div>
               <div className="com_num">
                 <div className="num">사업자등록번호</div>
-                <div className="num_content">{companyNum}</div>
+                <div className="num_content">{formatNum(companyNum)}</div>
               </div>
               <div className="com_addr">
                 <div className="addr">기업 주소</div>
-                <div className="addr_content">{companyAddr}</div>
+                <div className="addr_content">{removeAddr(companyAddr)}</div>
               </div>
               <div className="com_email">
                 <div className="email">이메일</div>
@@ -61,9 +81,9 @@ const Modal = ({
               </div>
               <div className="com_year">
                 <div className="year">설립 연도</div>
-                <div className="year_cotent">{companyYear}</div>
+                <div className="year_cotent">{formatDate(companyYear)}</div>
               </div>
-              <button className="close_btn" onClick={onClose}>
+              <button className="modal_close_btn" onClick={onClose}>
                 닫기
               </button>
             </div>

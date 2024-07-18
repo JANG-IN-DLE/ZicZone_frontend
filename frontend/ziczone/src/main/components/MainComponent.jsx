@@ -11,6 +11,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import MainPickCard from "./MainPickCard";
 import PickCard from "../../common/card/components/PickCard";
+import Layout from "../../common/layout/layout";
 
 const NoLoginMainComponent = ({ onLogout }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -108,55 +109,58 @@ const NoLoginMainComponent = ({ onLogout }) => {
   };
 
   return (
-    <div className="main_container">
-      {isLoggedIn ? <LoginBannerUserCard /> : <NoLoginBannerSlide />}
-      <div className="pickzone">
-        <h1>PICK 존</h1>
-        <div className="user_card_container">
-          {pickCards.slice(0, 3).map((pick, index) => {
-            const userImage =
-              pick.gender === "MALE" ? personalMImage : personalFImage;
+    <Layout>
+      <div className="main_container">
+        {isLoggedIn ? <LoginBannerUserCard /> : <NoLoginBannerSlide />}
+        <div className="pickzone">
+          <h1>PICK 존</h1>
+          <div className="user_card_container">
+            {pickCards.slice(0, 3).map((pick, index) => {
+              const userImage =
+                pick.gender === "MALE" ? personalMImage : personalFImage;
+              return (
+                <MainPickCard
+                  key={index}
+                  companyId={pick.companyId}
+                  personalId={pick.personalId}
+                  userId={pick.userId}
+                  userName={pick.userName}
+                  userIntro={pick.userIntro}
+                  gender={userImage}
+                  jobName={pick.jobName}
+                  personalCareer={pick.personalCareer}
+                  techUrl={pick.techUrl}
+                  scrap={pick.scrap}
+                  onClick={() => handleCardClick(pick.userId)}
+                  berryPoint={pick.berryPoint}
+                />
+              );
+            })}
+          </div>
+        </div>
+        <div className="helpzone">
+          <h1>HELP 존</h1>
+          {helpZones.slice(0, 5).map((list) => {
             return (
-              <MainPickCard
-                key={index}
-                companyId={pick.companyId}
-                personalId={pick.personalId}
-                userId={pick.userId}
-                userName={pick.userName}
-                userIntro={pick.userIntro}
-                gender={userImage}
-                jobName={pick.jobName}
-                personalCareer={pick.personalCareer}
-                techUrl={pick.techUrl}
-                scrap={pick.scrap}
-                onClick={() => handleCardClick(pick.userId)}
+              <HelpZone
+                key={list.userId}
+                userId={list.userId}
+                userName={list.userName}
+                corrModify={formatDate(list.corrModify)}
+                corrPoint={list.corrPoint}
+                corrTitle={list.corrTitle}
+                corrView={list.corrView}
+                personalCareer={list.personalCareer}
               />
             );
           })}
         </div>
+        <div className="company_slide">
+          <h1>직존과 함께하는 기업</h1>
+          <CompanySilde />
+        </div>
       </div>
-      <div className="helpzone">
-        <h1>HELP 존</h1>
-        {helpZones.slice(0, 5).map((list) => {
-          return (
-            <HelpZone
-              key={list.userId}
-              userId={list.userId}
-              userName={list.userName}
-              corrModify={formatDate(list.corrModify)}
-              corrPoint={list.corrPoint}
-              corrTitle={list.corrTitle}
-              corrView={list.corrView}
-              personalCareer={list.personalCareer}
-            />
-          );
-        })}
-      </div>
-      <div className="company_slide">
-        <h1>직존과 함께하는 기업</h1>
-        <CompanySilde />
-      </div>
-    </div>
+    </Layout>
   );
 };
 

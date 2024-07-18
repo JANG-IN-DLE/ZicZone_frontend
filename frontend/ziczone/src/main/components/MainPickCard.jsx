@@ -14,6 +14,7 @@ const PickCard = ({
   techUrl = [],
   userId,
   personalId,
+  berryPoint,
 }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userType, setUserType] = useState(null);
@@ -79,6 +80,7 @@ const PickCard = ({
           techUrl,
           userId,
           personalId,
+          berryPoint,
         });
         setIsModalOpen(true);
       }
@@ -146,7 +148,7 @@ const PickCard = ({
         <Modal
           isOpen={isModalOpen}
           onClose={handleModalClose}
-          userName={userName}
+          userName={maskName(userName)}
           onOpen={handleModalOpen}
           selectedCard={selectedCard}
         />

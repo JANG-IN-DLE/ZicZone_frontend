@@ -31,6 +31,7 @@ import MainPickCard from './main/components/MainPickCard'
 
 function App() {
   // const [userType, setUserType] = useState(null);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // 나중에 로그인 할때 session에서 회원 정보 비교하기 위해서
   // useEffect(() => {
@@ -64,7 +65,7 @@ function App() {
 <div>
 
       <Router>
-        <Header />
+        {/* <Header/> */}
         <Routes>
           <Route path='/pickzone/:companyId/:personalId' element={<PickzoneCompanyDetail />} />
           <Route path='/pickzone/:loggedInPersonalId/:personalId' element={<PickZoneUserDetail />} />
@@ -81,8 +82,9 @@ function App() {
           <Route path='/signup-com' element={<JoinCom/>}/>
           <Route path='/signup-per' element={<JoinPer/>}/>
           <Route path='/mypage' element={<Mypage/>}/>
+          <Route path='/ChargeMain' element={<ChargeMain/>}/>
         </Routes> 
-         <Footer />
+         {/* <Footer /> */}
       </Router>
     </div>
   );

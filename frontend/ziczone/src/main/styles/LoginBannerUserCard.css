@@ -22,6 +22,8 @@
       list-style: none;
       padding: 0;
       margin: 0;
+      cursor: pointer;
+      border-radius: 8px;
     }
 
     .login_slide_item {
@@ -59,10 +61,8 @@
 
     .arrow {
       display: inline-block;
-      width: 25px;
-      height: 25px;
-      border-left: 3px solid #b3b3b3;
-      border-bottom: 3px solid #b3b3b3;
+      width: 35px;
+      height: 35px;
       position: absolute;
       top: 45%;
       cursor: pointer;
@@ -71,12 +71,10 @@
 
     .arrow.left {
       left: 30px;
-      transform: rotate(45deg)
     }
 
     .arrow.right {
       right: 30px;
-      transform: rotate(-135deg)
     }
 
     .login_user_card {
@@ -93,7 +91,7 @@
     .login_user_image {
       height: 70px;
       width: 70px;
-      border: 0.5px solid #0051BA;
+      /* border: 0.5px solid #0051BA; */
       border-radius: 40px;
       margin-top: 50px;
       background-color: white;
