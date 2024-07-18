@@ -11,20 +11,15 @@
 }
 
     .company_modal {
-      position: absolute;
       display: flex;
       justify-content: center;
-      left: 50%;
-      background-color: rgba(0, 0, 0, 0.4);
       margin-top: -50px;
     }
 
     .company_modal_body {
-      position: absolute;
-      top: 50%;
-
+    position: fixed;
       width: 540px;
-      height: 720px;
+      height: 650px;
       text-align: center;
 
       display: flex;
@@ -86,7 +81,7 @@
     }
 
     .com_logo_img {
-      border: 0.5px solid #0051BA;
+      /* border: 0.5px solid #0051BA; */
       border-radius: 40px;
       background-color: white;
       width: 70px;
@@ -109,7 +104,7 @@
       width: 450px;
       height: 40px;
       border-bottom: 0.5px solid #b3b3b3;
-      margin-top: 20px;
+      margin-top: 5px;
       font-size: 24px;
       font-weight: 800;
     }
@@ -118,12 +113,12 @@
       width: 420px;
       font-size: 14px;
       color: #b3b3b3;
-      margin-top: 10px;
+      margin-top: 5px;
       line-height: 1.5;
     }
 
     .com_info {
-      margin-top: 25px;
+      margin-top: 20px;
       width: 420px;
       height: 400px;
       font-weight: 500;
@@ -153,19 +148,20 @@
       color: #818181;
     }
 
-    .com_addr {
-      height: 50px;
-    }
+    .modal_close_btn {
 
-    .close_btn {
-
-      width: 70px;
+      width: 320px;
       height: 40px;
       margin-top: 10px;
       border: 0.5px solid #818181;
-      border-radius: 12px;
       background-color: white;
-      font-size: 16px;
+      border-radius: 12px;
+      font-size: 18px;
+      color: #5D5D5D;
+      font-weight: 700;
       cursor: pointer;
+    }
 
+    .modal_close_btn:active{
+    transform: scale(0.97);
     }

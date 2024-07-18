@@ -3,6 +3,8 @@ import slidImage1 from "../../main/bannerimg/slide_image1.png";
 import slidImage2 from "../../main/bannerimg/slide_image2.png";
 import slidImage3 from "../../main/bannerimg/slide_image3.png";
 import { Link } from "react-router-dom";
+import left from "../../main/left.png";
+import right from "../../main/right.png";
 
 const NoLoginBannerSlide = () => {
   const slideItems = [
@@ -60,8 +62,16 @@ const NoLoginBannerSlide = () => {
   return (
     <>
       <div className="wrap">
-        <div className="arrow left" id="prev"></div>
-        <div className="arrow right" id="next"></div>
+        <div
+          className="arrow left"
+          id="prev"
+          style={{ background: "url(" + left + ")" }}
+        ></div>
+        <div
+          className="arrow right"
+          id="next"
+          style={{ background: "url(" + right + ")" }}
+        ></div>
         <ul className="slide">
           <li
             className="slide_item"
