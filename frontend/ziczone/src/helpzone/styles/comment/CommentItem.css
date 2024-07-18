@@ -3,8 +3,8 @@
     justify-content: space-between;
     width: 242px;
     height: 33px;
-    background-color: rgba(0, 81, 186, 0.08);
-    border-radius: 4px;
+    background-color: rgba(0, 81, 186, 0.1);
+    border-radius: 20px;
     position: relative;
     margin-bottom: 10px;
 }
@@ -13,12 +13,12 @@
     width: 14px;
     height: 14px;
     margin: auto;
-    margin-left: 10px;
+    margin-left: 13px;
 }
 
 .ci_select_show p {
     font-size: 15px;
-    font-family: 'Giants-Bold';
+    font-family: 'Giants';
     line-height: 33px;
     position: absolute;
     left: 40px;
@@ -58,6 +58,13 @@
     margin-bottom: 4px;
     display: flex;
     justify-content: space-between;
+}
+
+.ci_info_left span{
+    margin-left: 8px;
+    font-size: 13px;
+    line-height: 13px;
+    color: #ABABAB;
 }
 
 .ci_content,

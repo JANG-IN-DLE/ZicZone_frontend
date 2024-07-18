@@ -6,6 +6,28 @@ import "../../styles/comment/CommentItem.css";
 import selectIcon from "../../assets/selectIcon.png";
 import SelectModal from "../SelectModal";
 
+// 특정 날짜와 현재 시간의 차이 계산 -> 상대적인 시간 반환
+export const getRelativeTime = (dateString) => {
+    const now = new Date();
+    const past = new Date(dateString);
+    const diff = now - past;
+
+    const seconds = Math.floor(diff / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+
+    if (seconds < 60) {
+        return `${seconds}초 전`;
+    } else if (minutes < 60) {
+        return `${minutes}분 전`;
+    } else if (hours < 24) {
+        return `${hours}시간 전`;
+    } else {
+        return `${days}일 전`;
+    }
+};
+
 const CommentItem = ({ comment, board, userId, selectedCommentId, onCommentUpdated, onCommentDeleted, onCommentSelected }) => {
     const [isEditing, setIsEditing] = useState(false);
     const [editComment, setEditComment] = useState(comment.commContent);
@@ -101,7 +123,10 @@ const CommentItem = ({ comment, board, userId, selectedCommentId, onCommentUpdat
                 </div>
                 <div className="ci_body">
                     <div className='ci_info'>
-                        {maskName(comment.userName)} | {comment.personalCareer}
+                        <div className="ci_info_left">
+                            {maskName(comment.userName)} | {comment.personalCareer}
+                            <span>{getRelativeTime(comment.commModify)}</span>
+                        </div>
                         <div className="ci_button">
                             {Number(comment.userId) === Number(userId) && selectedCommentId === null && (
                                 isEditing ? (
