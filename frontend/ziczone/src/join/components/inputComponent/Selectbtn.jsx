@@ -60,7 +60,7 @@ const Selectbtn = ({ options = [], field, handleSelect }) => {
 
   const handleChange = (selectedOption) => {
     if(field==="techIds"){
-      handleSelect(selectedOption);
+      handleSelect(selectedOption ? selectedOption : []);
     }else if(field==="personalCareer"){
       updateFormData(field, selectedOption ? selectedOption.value : null);
     }

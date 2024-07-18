@@ -3,10 +3,12 @@ import '../../styles/form_base.css';
 import perjoinbtn from "../../assets/perjoinbtn.png"
 import comjoinbtn from "../../assets/comjoinbtn.png"
 import { useFormContext } from '../FormContext';
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 
 const JoinButton = ({category}) => {
     const {formData} = useFormContext();
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -52,6 +54,7 @@ const JoinButton = ({category}) => {
                 if(response.data === "Personal user signup successful" || response.data === "Company user signup successful"){
                     console.log("회원가입 성공 : ", response.data);
                     alert(response.data);
+                    navigate('/login');
                 }else{
                     console.log("회원가입 실패 : ", response.data);
                     alert(response.data);
