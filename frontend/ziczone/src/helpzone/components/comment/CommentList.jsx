@@ -3,7 +3,7 @@ import axios from "axios";
 import CommentInput from "./CommentInput";
 import CommentItem from "./CommentItem";
 
-const CommentList = ({ corrId, userId }) => {
+const CommentList = ({ corrId, userId, onCommentSelected }) => {
     const [comments, setComments] = useState([]);
     const [selectedCommentId, setSelectedCommentId] = useState(null);
     const [board, setBoard] = useState(null);
@@ -19,12 +19,16 @@ const CommentList = ({ corrId, userId }) => {
             const response = await axios.get(`/api/user/comments/${corrId}`);
             if (response.status === 200) {
                 const commentsData = response.data;
-                setComments(commentsData);
                 const selectedComment = commentsData.find(comment => comment.commSelection);
                 if (selectedComment) {
                     setSelectedCommentId(selectedComment.commId);
+                    setComments([
+                        selectedComment,
+                        ...commentsData.filter(comment => comment.commId !== selectedComment.commId)
+                    ]);
                 } else {
                     setSelectedCommentId(null);
+                    setComments(commentsData);
                 }
             }
         } catch (error) {
@@ -57,11 +61,15 @@ const CommentList = ({ corrId, userId }) => {
 
     const handleCommentSelected = (selectedComment) => {
         setSelectedCommentId(selectedComment.commId);
-        setComments(comments.map(comment =>
-            comment.commId === selectedComment.commId
-                ? { ...comment, commSelection: true }
-                : { ...comment, commSelection: false }
-        ));
+        setComments([
+            { ...selectedComment, commSelection: true },
+            ...comments.map(comment =>
+                comment.commId === selectedComment.commId
+                    ? { ...comment, commSelection: true }
+                    : { ...comment, commSelection: false }
+            ).filter(comment => comment.commId !== selectedComment.commId)
+        ]);
+        onCommentSelected();
     };
 
     return (

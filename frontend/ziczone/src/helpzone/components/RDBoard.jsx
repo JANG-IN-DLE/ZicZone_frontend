@@ -12,11 +12,12 @@ const RDBoard = () => {
   const { corrId } = useParams();
   const location = useLocation();
   const userId = location.state?.userId || localStorage.getItem("userId");
-  const initialFileName = location.state?.fileName || ""; // 초기 파일 이름
+  const initialFileName = location.state?.fileName || "";
   const navigate = useNavigate();
 
   const [isEditMode, setIsEditMode] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [isCommentSelected, setIsCommentSelected] = useState(false);
 
   const [userProfile, setUserProfile] = useState({
     berry: '',
@@ -80,6 +81,7 @@ const RDBoard = () => {
           commSelection: postData.commSelection
         });
 
+        setIsCommentSelected(postData.commSelection);
         setIsLoading(false);
       } catch (error) {
         console.error("오류 메시지: ", error);
@@ -87,6 +89,10 @@ const RDBoard = () => {
     };
     ProfileAndPost();
   }, [corrId, userId, initialFileName]);
+
+  const handleCommentSelected = () => {
+    setIsCommentSelected(true);
+  };
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -102,7 +108,7 @@ const RDBoard = () => {
           <div className="b_description">
             <div className="b_display_btn">
               <p className="d_title">게시물 조회</p>
-              {userProfile.isOwner && !postData.commSelection && (
+              {userProfile.isOwner && !isCommentSelected && (
                 <div className="b_edit_delete">
                   <Button type="button" className="b_edit" onClick={handleEdit}>
                     수정
@@ -120,7 +126,7 @@ const RDBoard = () => {
               fileUrl={postData.fileUrl}
             />
             <div className="b_comment">
-              <CommentList corrId={corrId} userId={userId} />
+              <CommentList corrId={corrId} userId={userId} onCommentSelected={handleCommentSelected} />
             </div>
           </div>
         </div>

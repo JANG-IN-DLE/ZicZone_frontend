@@ -32,13 +32,14 @@ const CommentItem = ({ comment, board, userId, selectedCommentId, onCommentUpdat
     const [isEditing, setIsEditing] = useState(false);
     const [editComment, setEditComment] = useState(comment.commContent);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isSelected, setIsSelected] = useState(comment.commSelection);
 
     const personal_image = comment.gender === 'MALE' ? personal_m_image : personal_f_image;
 
     const maskName = (name) => {
         if (name.length < 2) return name;
         if (name.length === 2) {
-            return `${name[0]}*`;
+            return `${name[0]}*}`;
         }
         const maskedLength = name.length - 2;
         const start = name[0];
@@ -85,7 +86,8 @@ const CommentItem = ({ comment, board, userId, selectedCommentId, onCommentUpdat
                 params: { userId: userId }
             });
             if (response.status === 200) {
-                onCommentSelected(response.data);
+                onCommentSelected({ ...comment, commSelection: true });
+                setIsSelected(true);
                 closeModal();
             }
         } catch (error) {
@@ -108,7 +110,7 @@ const CommentItem = ({ comment, board, userId, selectedCommentId, onCommentUpdat
     return (
         <div>
             <SelectModal isOpen={isModalOpen} onClose={closeModal} onConfirm={confirmSelection} userName={maskName(comment.userName)} corrPoint={comment.corrPoint} />
-            {comment.commSelection && (
+            {isSelected && (
                 <div className="ci_select_show">
                     <img src={selectIcon} alt="채택완료핀" />
                     <p>채택된 댓글</p>
@@ -165,7 +167,7 @@ const CommentItem = ({ comment, board, userId, selectedCommentId, onCommentUpdat
                                     </>
                                 )
                             )}
-                            {board && Number(board.userId) === Number(userId) && !comment.commSelection && selectedCommentId === null && Number(comment.userId) !== Number(userId) && (
+                            {board && Number(board.userId) === Number(userId) && !isSelected && selectedCommentId === null && Number(comment.userId) !== Number(userId) && (
                                 <button
                                     type="button"
                                     onClick={openModal}
