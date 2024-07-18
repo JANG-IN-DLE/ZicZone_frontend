@@ -7,6 +7,7 @@ const CommentList = ({ corrId, userId }) => {
     const [comments, setComments] = useState([]);
     const [selectedCommentId, setSelectedCommentId] = useState(null);
     const [board, setBoard] = useState(null);
+    const userRole = localStorage.getItem("userRole");
 
     useEffect(() => {
         fetchComments();
@@ -65,7 +66,11 @@ const CommentList = ({ corrId, userId }) => {
 
     return (
         <div className="comment-section">
-            <CommentInput corrId={corrId} userId={userId} onCommentAdded={handleCommentAdded} />
+            {
+                userRole !== "COMPANY" && (
+                    <CommentInput corrId={corrId} userId={userId} onCommentAdded={handleCommentAdded} />
+                )
+            }
             <ul className="comment-list">
                 {comments.map((comment) => (
                     <CommentItem
