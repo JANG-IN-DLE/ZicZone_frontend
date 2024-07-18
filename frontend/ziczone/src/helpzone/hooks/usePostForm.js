@@ -6,13 +6,27 @@ const usePostForm = (initialBerry = 100, initialData = {}, userId, corrId, isEdi
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [file, setFile] = useState(null);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [userPoint, setUserPoint] = useState(0);
 
     useEffect(() => {
         setSelectedBerry(initialData.berry || initialBerry);
         setTitle(initialData.title || '');
         setFile(initialData.file || null);
         setContent(initialData.content || '');
-    }, [initialData, initialBerry]);
+
+        const fetchUserPoint = async () => {
+            try {
+                const response = await axios.get(`/api/personal/board/myProfile/${userId}`);
+                setUserPoint(response.data.point);
+                console.log(setUserPoint);
+            } catch (error) {
+                console.error('사용자 포인트를 가져오는 중 오류 발생:', error);
+            }
+        };
+
+        fetchUserPoint();
+    }, [initialData, initialBerry, userId]);
 
     const handleBerrySelect = (value) => {
         setSelectedBerry(value);
@@ -31,6 +45,20 @@ const usePostForm = (initialBerry = 100, initialData = {}, userId, corrId, isEdi
     };
 
     const handleSubmit = async () => {
+        if (isSubmitting) {
+            return;
+        }
+
+        if (!title || !content || !file) {
+            alert('제목, 내용 및 첨부파일을 모두 입력해 주세요.');
+            return;
+        }
+
+        if (selectedBerry > userPoint) {
+            alert('보유한 베리가 부족합니다.');
+            return;
+        }
+
         const formData = new FormData();
         formData.append("berry", selectedBerry);
         formData.append("title", title);
@@ -42,8 +70,9 @@ const usePostForm = (initialBerry = 100, initialData = {}, userId, corrId, isEdi
             const defaultFile = new Blob(["default content"], { type: "application/pdf" });
             formData.append("file", defaultFile, "default.pdf");
         }
-    
+
         try {
+            setIsSubmitting(true);
             const response = isEditMode 
                 ? await axios.put(`/api/personal/board/${corrId}/${userId}`, formData, {
                     headers: {
@@ -55,7 +84,7 @@ const usePostForm = (initialBerry = 100, initialData = {}, userId, corrId, isEdi
                         'Content-Type': 'multipart/form-data'
                     }
                 });
-    
+
             if (response.status === 200) {
                 const { corrId, fileName } = response.data;
                 if (corrId) {
@@ -67,14 +96,19 @@ const usePostForm = (initialBerry = 100, initialData = {}, userId, corrId, isEdi
                 console.error("게시물 등록/수정 실패");
             }
         } catch (error) {
+            alert(error.response?.data?.message || "게시물 등록 중 오류가 발생했습니다.");
             console.error("게시물 등록/수정 중 에러 발생", error);
+        } finally {
+            setIsSubmitting(false);
         }
     };
-    
+
     return {
         selectedBerry,
         title,
         content,
+        file,
+        userPoint,
         handleBerrySelect,
         handleTitleChange,
         handleContentChange,

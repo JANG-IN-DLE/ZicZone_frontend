@@ -15,7 +15,6 @@ const SelectModal = ({ isOpen, onClose, onConfirm, userName, corrPoint }) => {
                     <div className="sm_board_point">
                         <img src={berry} alt="베리 아이콘" />{`${corrPoint}`}
                     </div>
-                    <p>{`나의 베리 : 베리`}</p>
                 </div>
                 <div className="sm_modal_buttons">
                     <button onClick={onClose} className="cancel_btn">취소</button>
