@@ -36,32 +36,15 @@ function App() {
     setUserType(localStorage.getItem("userRole"));
   }, []);
 
-  // if(userType === null) {
-  //   return <div>Loading...</div>
-  // }
 
   return (
-
-//   <div>
-  //   <Router>
-  //   <Routes>
-  //     <Route path='/pickzone/:companyId/:personalId' element={<PickzoneCompanyDetail />} />
-  //     {/* <Route path='/pickzone/:loggedInPersonalId/:personalId' element={<PickZoneUserDetail />} /> */}
-  //     {/* <Route path='/pickzone/:personalId' element={userType === 'COMPANY' ? <PickzoneCompanyDetail /> : <PickzoneUserDtail />} /> */}
-  //     <Route path='/pickzone' element={<CompanyPickzone />} />
-  //     {/* <Route path='/pickzone' element={<UserPickzone />} /> */}
-  //     {/* <Route path='/pickzone' element={userType === 'COMPANY' ? <CompanyPickzone /> : <UserPickzone />} /> */}
-  //   </Routes>
-  // </Router>
-  //   </div>
 <div>
 
       <Router>
-        <Header />
+        {/* <Header/> */}
         <Routes>
           <Route path='/' element={<MainComponent />} />
           <Route path='/pickzone' element={userType === 'COMPANY' ? <CompanyPickzone /> : <UserPickzone />} />
-          {/* <Route path='/pickzone/:loggedInPersonalId/:personalId' element={userType === 'PERSONAL' ? <PickZoneUserDetail /> : "권한이 없습니다"} /> */}
           <Route path='/pickzone/:loggedInUserId/:personalId' element={userType === 'COMPANY' ? <PickzoneCompanyDetail /> : <PickZoneUserDetail />} />
           <Route path="/helpzone" element={<ListBoard />} />
           <Route path="/cuboard" element={<CUBoard />} />
@@ -73,8 +56,9 @@ function App() {
           <Route path='/signup-com' element={<JoinCom/>}/>
           <Route path='/signup-per' element={<JoinPer/>}/>
           <Route path='/mypage' element={<Mypage/>}/>
+          <Route path='/ChargeMain' element={<ChargeMain/>}/>
         </Routes> 
-         <Footer />
+         {/* <Footer /> */}
       </Router>
     </div>
   );

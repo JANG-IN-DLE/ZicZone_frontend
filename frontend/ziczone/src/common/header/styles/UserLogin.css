@@ -7,11 +7,12 @@
 .user_login_alarm {
     display: flex;
     align-items: center;
-    margin-right: 15px;
+    margin-right: 20px;
 }
 
 .user_login_name {
     font-size: 18px;
+    position: relative;
 }
 
 .dropdown {
@@ -22,6 +23,8 @@
 .dropdown_list {
     display: none;
     position: absolute;
+    top: 20px;
+    left: -20px;
     margin-left: -5px;
 }
 

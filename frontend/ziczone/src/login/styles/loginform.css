@@ -112,6 +112,11 @@
     border: 1.5px solid #0051BA;
     border-radius: 4px;
 }
+
+.rightbox_login>.loginbtn_login:active{
+    transform: scale(0.97);
+}
+
 .rightbox_login>.loginbtn_login:hover{
     cursor: pointer;
 }

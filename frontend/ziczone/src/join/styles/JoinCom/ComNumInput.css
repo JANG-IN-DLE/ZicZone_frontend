@@ -23,6 +23,10 @@
     margin-left: 8px;
 }
 
+.num_input>button:active{
+    transform: scale(0.97);
+}
+
 .num_input>.valid{
     background-color: #0051BA;
     color: #FFFFFF;

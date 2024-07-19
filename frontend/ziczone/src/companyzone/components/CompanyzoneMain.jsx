@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import CompanyHeader from "./CompanyHeader";
 import CompanyCard from "./CompanyCard";
-import Modal from "./Modal";
+import CompanyzoneModal from "./CompanyzoneModal";
 import "../styles/CompanyMain.css";
 import axios from "axios";
+import Layout from "../../common/layout/layout";
 
 const CompanyzoneMain = () => {
   const [openModalInfo, setOpenModalInfo] = useState(null);
@@ -30,38 +31,40 @@ const CompanyzoneMain = () => {
   }, []);
 
   return (
-    <div className="main_container">
-      <CompanyHeader />
-      <div className="company_container">
-        {companyData.slice(2).map((company, index) => (
-          <CompanyCard
-            key={index}
-            companyLogo={company.companyLogo}
-            userName={company.user.userName}
-            userIntro={company.user.userIntro}
-            // 온클릭 => 매핑중인 인덱스 요소
-            onCardClick={() => handleCardClick(index + 2)}
-          />
-        ))}
-        {/* openModalInfo가 존재할때 렌더링  */}
-        {openModalInfo && (
-          <Modal
-            // 열린상태
-            isOpen={true}
-            // 모달 닫기 이벤트 핸들러 설정
-            onClose={handleCloseModal}
-            companyLogo={openModalInfo.companyLogo}
-            userName={openModalInfo.user.userName}
-            userIntro={openModalInfo.user.userIntro}
-            companyCeo={openModalInfo.companyCeo}
-            companyNum={openModalInfo.companyNum}
-            companyAddr={openModalInfo.companyAddr}
-            email={openModalInfo.user.email}
-            companyYear={openModalInfo.companyYear}
-          />
-        )}
+    <Layout>
+      <div className="main_container">
+        <CompanyHeader />
+        <div className="company_container">
+          {companyData.slice(2).map((company, index) => (
+            <CompanyCard
+              key={index}
+              companyLogo={company.companyLogo}
+              userName={company.user.userName}
+              userIntro={company.user.userIntro}
+              // 온클릭 => 매핑중인 인덱스 요소
+              onCardClick={() => handleCardClick(index + 2)}
+            />
+          ))}
+          {/* openModalInfo가 존재할때 렌더링  */}
+          {openModalInfo && (
+            <CompanyzoneModal
+              // 열린상태
+              isOpen={true}
+              // 모달 닫기 이벤트 핸들러 설정
+              onClose={handleCloseModal}
+              companyLogo={openModalInfo.companyLogo}
+              userName={openModalInfo.user.userName}
+              userIntro={openModalInfo.user.userIntro}
+              companyCeo={openModalInfo.companyCeo}
+              companyNum={openModalInfo.companyNum}
+              companyAddr={openModalInfo.companyAddr}
+              email={openModalInfo.user.email}
+              companyYear={openModalInfo.companyYear}
+            />
+          )}
+        </div>
       </div>
-    </div>
+    </Layout>
   );
 };
 

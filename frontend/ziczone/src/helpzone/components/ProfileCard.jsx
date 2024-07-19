@@ -1,11 +1,10 @@
-/* HELP존 게시물 작성 & 조회(isViewMode)할 때 왼쪽 상단에 있는 프로필 카드 */
 import React from "react";
 import "../styles/ProfileCard.css";
 import personal_m_image from "../../common/card/assets/personal_m_image.png";
 import personal_f_image from "../../common/card/assets/personal_f_image.png";
 import berry_image from "../../common/card/assets/berry.png";
 
-const ProfileCard = ({ berry, jobs, gender, userName, career, point, intro, stacks, isViewMode }) => {
+const ProfileCard = ({ berry, jobs, gender, userName, career, point, intro, stacks, isViewMode, isOwner }) => {
     // 프로필 이미지
     const personal_image = gender === 'MALE' ? personal_m_image : personal_f_image;
 
@@ -25,7 +24,7 @@ const ProfileCard = ({ berry, jobs, gender, userName, career, point, intro, stac
         <div>
             {isViewMode && (
                 <div>
-                    <p className='pc_info'><span>HELP</span> {maskName(userName)}님!</p>
+                    <p className='pc_info'><span>HELP</span> {!isOwner ? maskName(userName) : userName}님!</p>
                     <div className='pc_post_berry'>{berry} 베리</div>
                 </div>
             )}
@@ -37,13 +36,13 @@ const ProfileCard = ({ berry, jobs, gender, userName, career, point, intro, stac
                     <img src={personal_image} alt='프로필 이미지' />
                 </div>
                 <p className='pc_name_career'>
-                    {isViewMode ? maskName(userName) : userName} | {career}
+                    {isViewMode && !isOwner ? maskName(userName) : userName} | {career}
                 </p>
-                {!isViewMode && (
+                {(!isViewMode || isOwner) && (
                     <div className='pc_point'>
                         <img src={berry_image} alt='포인트 베리 이미지' />
                         <p className='pc_point_berry'>
-                            {point} 베리
+                            {point}
                         </p>
                     </div>
                 )}

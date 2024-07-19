@@ -1,6 +1,6 @@
 @import url('./header.css');
 @import url('./company.css');
-@import url('./Modal.css');
+@import url('./CompanyzoneModal.css');
 
 
         @font-face {
@@ -26,6 +26,7 @@
 
         .main_container {
             margin: auto;
-            padding-top: 145px;
+            padding-top: 140px;
             width: 1080px;
+            padding-bottom: 140px;
         }
