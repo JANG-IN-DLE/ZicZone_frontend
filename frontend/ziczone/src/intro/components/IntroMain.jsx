@@ -8,6 +8,7 @@ import introImg4 from "../../intro/introImg4.png";
 import introImg5 from "../../intro/introImg5.png";
 import CompanySilde from "../../main/components/CompanySilde";
 import { Link } from "react-router-dom";
+import Layout from "../../common/layout/layout";
 
 const IntroMain = () => {
   // uesRef써서 DOM에 접근할 수 있는 참조 변수 만듬
@@ -66,133 +67,135 @@ const IntroMain = () => {
 
   return (
     <>
-      <div className="ziczone_intro_container">
-        <article className="banner">
-          <div className="intro_container">
-            <p ref={h2Ref} className="blinking_txt"></p>
-            <span ref={cursorRef} className="cursor">
-              |
-            </span>
+      <Layout>
+        <div className="ziczone_intro_container">
+          <article className="banner">
+            <div className="intro_container">
+              <p ref={h2Ref} className="blinking_txt"></p>
+              <span ref={cursorRef} className="cursor">
+                |
+              </span>
+            </div>
+          </article>
+          <div className="introimg">
+            <img src={Image} alt="" />
           </div>
-        </article>
-        <div className="introimg">
-          <img src={Image} alt="" />
-        </div>
 
-        <div className="ziczone_introduce">
-          <div className="ziczone_introduce_text">
-            <div
-              // thresholds.current[0]를 참조해서 스크롤 위치에 따른
-              // 삼항연산자 사용. 배열에 등록된 값을 초과하냐?
-              // 참이면 textslide_left, 거짓이면 "slideback_left"
-              id="intro1"
-              className={`intro ${
-                scrollY > thresholds.current[0]
-                  ? "textslide_left"
-                  : "slideback_left"
-              } `}
-            >
-              <img className="intro_leftani" src={introImg1} alt="" />
-              <p className="intro_leftani_text">
-                역량을 보여주고, <br />
-                기업의 관심을 받는 서비스
-                <br />
-                잠재력을 발휘하세요
-              </p>
-            </div>
-          </div>
-          <div className="ziczone_introduce_text">
-            <div
-              id="intro2"
-              className={`intro ${
-                scrollY > thresholds.current[1]
-                  ? "textslide_right"
-                  : "slideback_right"
-              }`}
-            >
-              <img className="intro_rightani" src={introImg2} alt="" />
-              <p>
-                <br />
-                포트폴리오 관리와 <br />
-                기업의 직접 연락이
-                <br />
-                가능한 플랫폼
-                <br />
-              </p>
-            </div>
-          </div>
-          <div className="ziczone_introduce_text">
-            <div
-              id="intro3"
-              className={`intro ${
-                scrollY > thresholds.current[2]
-                  ? "textslide_left"
-                  : "slideback_left"
-              }`}
-            >
-              <img className="intro_leftani" src={introImg3} alt="" />
-              <p className="intro_leftani_text">
-                <br />
-                기업의 관심을 받는 <br />
-                가장 쉬운 방법
-                <br />
-              </p>
-            </div>
-          </div>
-          <div className="ziczone_introduce_text">
-            <div
-              id="intro4"
-              className={`intro ${
-                scrollY > thresholds.current[3]
-                  ? "textslide_right"
-                  : "slideback_right"
-              }`}
-            >
-              <img className="intro_rightani" src={introImg4} alt="" />
-              <p>
-                <br />
-                <br />
-                당신의 기회를 잡으세요
-                <br />
-              </p>
-            </div>
-          </div>
-          <div className="ziczone_introduce_text">
-            <div
-              id="intro5"
-              className={`intro1 ${
-                scrollY > thresholds.current[4]
-                  ? "textslide_right"
-                  : "slideback_right"
-              }`}
-            >
-              경험과 역량을 기업과 공유하세요
-            </div>
-          </div>
-        </div>
-
-        <div className="company_slide">
-          <div className="ziczone_sign_company">직존 등록 기업</div>
-          <CompanySilde />
-          <CompanySilde />
-          <CompanySilde />
-        </div>
-        <div className="ziczone_join">
-          <div
-            className="ziczone_signup"
-            style={{ background: "url(" + introImg5 + ")" }}
-          >
-            <div className="ziczone_signup_text">
-              <Link
-                to="/signup"
-                style={{ textDecoration: "none", color: "white" }}
+          <div className="ziczone_introduce">
+            <div className="ziczone_introduce_text">
+              <div
+                // thresholds.current[0]를 참조해서 스크롤 위치에 따른
+                // 삼항연산자 사용. 배열에 등록된 값을 초과하냐?
+                // 참이면 textslide_left, 거짓이면 "slideback_left"
+                id="intro1"
+                className={`intro ${
+                  scrollY > thresholds.current[0]
+                    ? "textslide_left"
+                    : "slideback_left"
+                } `}
               >
-                직존 회원가입 바로가기
-              </Link>
+                <img className="intro_leftani" src={introImg1} alt="" />
+                <p className="intro_leftani_text">
+                  역량을 보여주고, <br />
+                  기업의 관심을 받는 서비스
+                  <br />
+                  잠재력을 발휘하세요
+                </p>
+              </div>
+            </div>
+            <div className="ziczone_introduce_text">
+              <div
+                id="intro2"
+                className={`intro ${
+                  scrollY > thresholds.current[1]
+                    ? "textslide_right"
+                    : "slideback_right"
+                }`}
+              >
+                <img className="intro_rightani" src={introImg2} alt="" />
+                <p>
+                  <br />
+                  포트폴리오 관리와 <br />
+                  기업의 직접 연락이
+                  <br />
+                  가능한 플랫폼
+                  <br />
+                </p>
+              </div>
+            </div>
+            <div className="ziczone_introduce_text">
+              <div
+                id="intro3"
+                className={`intro ${
+                  scrollY > thresholds.current[2]
+                    ? "textslide_left"
+                    : "slideback_left"
+                }`}
+              >
+                <img className="intro_leftani" src={introImg3} alt="" />
+                <p className="intro_leftani_text">
+                  <br />
+                  기업의 관심을 받는 <br />
+                  가장 쉬운 방법
+                  <br />
+                </p>
+              </div>
+            </div>
+            <div className="ziczone_introduce_text">
+              <div
+                id="intro4"
+                className={`intro ${
+                  scrollY > thresholds.current[3]
+                    ? "textslide_right"
+                    : "slideback_right"
+                }`}
+              >
+                <img className="intro_rightani" src={introImg4} alt="" />
+                <p>
+                  <br />
+                  <br />
+                  당신의 기회를 잡으세요
+                  <br />
+                </p>
+              </div>
+            </div>
+            <div className="ziczone_introduce_text">
+              <div
+                id="intro5"
+                className={`intro1 ${
+                  scrollY > thresholds.current[4]
+                    ? "textslide_right"
+                    : "slideback_right"
+                }`}
+              >
+                경험과 역량을 기업과 공유하세요
+              </div>
+            </div>
+          </div>
+
+          <div className="company_slide">
+            <div className="ziczone_sign_company">직존 등록 기업</div>
+            <CompanySilde />
+            <CompanySilde />
+            <CompanySilde />
+          </div>
+          <div className="ziczone_join">
+            <div
+              className="ziczone_signup"
+              style={{ background: "url(" + introImg5 + ")" }}
+            >
+              <div className="ziczone_signup_text">
+                <Link
+                  to="/signup"
+                  style={{ textDecoration: "none", color: "white" }}
+                >
+                  직존 회원가입 바로가기
+                </Link>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </Layout>
     </>
   );
 };
