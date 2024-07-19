@@ -39,7 +39,7 @@ const CommentItem = ({ comment, board, userId, selectedCommentId, onCommentUpdat
     const maskName = (name) => {
         if (name.length < 2) return name;
         if (name.length === 2) {
-            return `${name[0]}*}`;
+            return `${name[0]}*`;
         }
         const maskedLength = name.length - 2;
         const start = name[0];
