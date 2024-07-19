@@ -8,6 +8,7 @@ import Button from "./Button";
 import BoardList from "./BoardList";
 import PageButton from "./PageButton";
 import BerryCheck from "./BerryCheck";
+import Layout from "../../common/layout/layout";
 
 const ListBoard = () => {
   const [boards, setBoards] = useState([]);
@@ -28,7 +29,7 @@ const ListBoard = () => {
             filterType,
             page,
             size,
-            showSelect
+            showSelect,
           },
         });
         setBoards(response.data.dtoList);
@@ -42,7 +43,7 @@ const ListBoard = () => {
   }, [filterType, page, size, showSelect]);
 
   const handleWriteButton = () => {
-    navigate('/cuboard', { state: { userId } });
+    navigate("/cuboard", { state: { userId } });
   };
 
   const handlePageChange = (newPage) => {
@@ -55,26 +56,36 @@ const ListBoard = () => {
 
   return (
     <div>
-      <div className='lb_section'>
-        <HelpZoneIntro />
-        <div className='lb_menu'>
-          <div className="lb_menu_left">
-            <FilterButtons setFilterType={setFilterType} />
-            <BerryCheck
-              label="채택 제외"
-              checked={showSelect}
-              onChange={handleCheckChange}
-            />
+      <Layout>
+        <div className="lb_section">
+          <HelpZoneIntro />
+          <div className="lb_menu">
+            <div className="lb_menu_left">
+              <FilterButtons setFilterType={setFilterType} />
+              <BerryCheck
+                label="채택 제외"
+                checked={showSelect}
+                onChange={handleCheckChange}
+              />
+            </div>
+            {userRole !== "COMPANY" && (
+              <Button
+                type="button"
+                className="lb_write"
+                onClick={handleWriteButton}
+              >
+                {"글쓰기"}
+              </Button>
+            )}
           </div>
-          {userRole !== 'COMPANY' &&
-            <Button type="button" className="lb_write" onClick={handleWriteButton}>
-              {'글쓰기'}
-            </Button>
-          }
+          <BoardList boards={boards} />
+          <PageButton
+            currentPage={page}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+          />
         </div>
-        <BoardList boards={boards} />
-        <PageButton currentPage={page} totalPages={totalPages} onPageChange={handlePageChange} />
-      </div>
+      </Layout>
     </div>
   );
 };
