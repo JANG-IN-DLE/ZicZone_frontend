@@ -53,7 +53,7 @@ const Header = () => {
         .get(`/api/main/companyUser/${userId}`)
         .then((res) => {
           setUserName(res.data.userName);
-          setCompanyLogo(res.data.companyLogo);
+          setCompanyLogo(res.data.companyLogoUrl);
           setUserRole(userType);
         })
         .catch((error) => {
