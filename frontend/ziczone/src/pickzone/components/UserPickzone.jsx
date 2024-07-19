@@ -10,6 +10,7 @@ import Modal from "./Modal";
 import PickCardCommstyle from '../../common/card/styles/PickCardComm.module.css';
 import PickMeTitle from '../assets/pickZoneTitle.png';
 import PickZoneTitlestyle from '../styles/PickZoneTitle.module.css';
+import NonCardstyle from '../styles/NonCard.module.css';
 
 // 이름 마스킹 함수
 const maskName = (name) => {
@@ -32,19 +33,18 @@ function UserPickzone() {
     // 선택된 카드를 저장하는 상태
     const [ selectedCard, setSelectedCard ] = useState(null);
     // 선택된 Job을 저장하는 상태
-    const [selectedJobs, setSelectedJobs] = useState([]);
-    // 로그인된 회원 정보 userId (나중에 로그인 기능 되면 수정필요, 임시로 1)
-    const [userId, setUserId] = useState("1");
+    const [selectedJobs, setSelectedJobs] = useState(['전체']);
     // pickzoneDetail로 가는 hook
     const navigate = useNavigate();
-    // 현재 로그인된 personalId를 임시로 1이라고 가정
-    const loggedInPersonalId = 1;
+    // localStroage에서 userId, userRole을 가져옴
+    const loggedInUserId = localStorage.getItem("userId");
+    const userRole = localStorage.getItem("userRole");
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 // PickCards 데이터 가져옴
-                const pickCardsResponse = await axios.get(`/api/personal/pickcards?loggedInPersonalId=${loggedInPersonalId}`);
+                const pickCardsResponse = await axios.get(`/api/personal/pickcards?loggedInUserId=${loggedInUserId}`);
                 const maskedData = pickCardsResponse.data.map(card => ({
                     ...card,
                     userName: maskName(card.userName)
@@ -59,11 +59,11 @@ function UserPickzone() {
             }
         };
         fetchData();
-    }, []);
+    }, [loggedInUserId]);
 
     const handleCardClick = (card) => {
         if(card.payHistoryId && card.payHistoryId.length > 0){
-            navigate(`/pickzone/${loggedInPersonalId}/${card.personalId}`);
+            navigate(`/pickzone/${loggedInUserId}/${card.personalId}`);
         }else{
             setSelectedCard(card);
             setIsOpen(true);
@@ -75,28 +75,29 @@ function UserPickzone() {
     };
     const handleOpenCard = () => {
         if(selectedCard){
-            // 로그인된 personalId도 보낸다
-            navigate(`/pickzone/${loggedInPersonalId}/${selectedCard.personalId}`);
+            // 로그인된 userId도 보낸다
+            navigate(`/pickzone/${loggedInUserId}/${selectedCard.personalId}`);
         }
     };
     // Job을 선택해서 hook에 담는다.
     const handleJobClick = (job) => {
         if(job.jobName === '전체'){
-            setSelectedJobs([]);
+            setSelectedJobs(['전체']);
         }else{
             setSelectedJobs(prevSelectedJobs => {
                 if(prevSelectedJobs.includes(job.jobName)){
                     return prevSelectedJobs.filter(j => j !== job.jobName);
                 }else{
-                    return [...prevSelectedJobs, job.jobName];
+                    return [...prevSelectedJobs.filter(j => j !== '전체'), job.jobName];
                 }
-            })
+            });
         }
     };
 
     // 선택된 job이 있으면 pickcard의 job과 일치하는 것 걸러서 보여줄거야
-    const filteredPickCards = selectedJobs.length > 0
-    ? pickCards.filter(card => { 
+    const filteredPickCards = selectedJobs.includes('전체')
+    ? pickCards
+    : pickCards.filter(card => { 
         return card.jobName && selectedJobs.some(job => card.jobName.split(',').includes(job));
     })
     // 각 카드가 선택된 직업과 얼마나 많이 겹치는지를 계산하여 점수화하고, 점수가 높은 순서대로 정렬합니다.
@@ -104,8 +105,7 @@ function UserPickzone() {
         const aMatches = a.jobName.split(',').filter(job => selectedJobs.includes(job)).length;
         const bMatches = b.jobName.split(',').filter(job => selectedJobs.includes(job)).length;
         return bMatches - aMatches;
-    })
-    : pickCards;
+    });
 
     return (
         <div>
@@ -129,13 +129,14 @@ function UserPickzone() {
                     userName={selectedCard.userName}
                     onOpen={handleOpenCard}
                     selectedCard={selectedCard}
-                    userId={userId}
+                    loggedInUserId={loggedInUserId}
                     berryPoint={selectedCard.berryPoint}
                 />
             )}
 
                 
-                {filteredPickCards.map(card => {
+                {filteredPickCards.length > 0 ? (
+                    filteredPickCards.map(card => {
                     const userImage = card.gender === 'MALE' ? personalMImage : personalFImage;
                     const jobNames = card.jobName ? card.jobName.split(',') : [];
                     const techUrls = card.techUrl ? card.techUrl.split(',') : [];
@@ -151,10 +152,15 @@ function UserPickzone() {
                                 userIntro={card.userIntro}
                                 techUrls={techUrls}
                                 onClick={() => handleCardClick(card)}
+                                isCompany={userRole === "COMPANY"}
                             />
-                    );
+                    );   
                     
-                })}
+                })
+                
+            ) : (
+                <p className={NonCardstyle.card_none}>게시물이 없습니다.</p>
+            )}
             </div>
         </div>
     );

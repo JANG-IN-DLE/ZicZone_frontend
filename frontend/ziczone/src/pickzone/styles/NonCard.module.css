@@ -1,0 +1,10 @@
+.card_non{
+    position: absolute;
+    height: 580px;
+    line-height: 580px;
+    margin: 0px auto;
+    text-align: center;
+    font-size: 18px;
+    font-family: 'Pretendard-Regular';
+    color: #5D5D5D;
+}
