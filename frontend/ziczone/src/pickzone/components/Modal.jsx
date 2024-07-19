@@ -1,18 +1,24 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Modalstyle from "../styles/Modal.module.css";
 import berry from "../../common/card/assets/berry.png"
 import axios from "axios";
+import helpModal from "../../helpzone/assets/helpModal.png";
 
-const Modal = ({ isOpen, onClose, userName, onOpen, selectedCard, berryPoint }) => {
+const Modal = ({ isOpen, onClose, userName, onOpen, selectedCard, berryPoint, loggedInUserId }) => {
+    const navigate = useNavigate();
     if(!isOpen) return null;
-    // 일단 임시로 로그인한 사람 1
-    const loggedInPersonalId = 1;
 
     // handleOpen을 실행하면 openCardData를 보낸다.
     const handleOpen = () => {
+        if(berryPoint < 50) {
+            navigate('/ChargeMain');
+            return;
+        }
+
         const openCardData = {
             sellerId: selectedCard.personalId,
-            buyerId: loggedInPersonalId,
+            buyerId: loggedInUserId,
             payHistoryContent: "이력서구매",
             payHistoryDate : new Date().toISOString()
         };
@@ -23,13 +29,9 @@ const Modal = ({ isOpen, onClose, userName, onOpen, selectedCard, berryPoint }) 
                     onOpen();
                 }
                 // pay_history에 buyerId와 sellerId가 존재하면 리다이렉트
-                else if(response.status === 303) {
-                    alert("이미 결제한 이력서입니다.")
-                    setTimeout(() => {
-                        window.location.href = response.headers.location;
-                    }, 3000);
+                // else if(response.status === 303) {
                     
-                }
+                // }
             })
             .catch(error => {
                 console.error("Error opening card:", error);
@@ -40,37 +42,23 @@ const Modal = ({ isOpen, onClose, userName, onOpen, selectedCard, berryPoint }) 
     };
 
     return(
-        <div className={Modalstyle.modal}>
-            <div className={Modalstyle.company_modal_body} onClick={(e)=>e.stopPropagation()}>
-                <div className={Modalstyle.modal_header}>
-                    <div className={Modalstyle.circles}>
-                        <div className={Modalstyle.header_circle_red}></div>
-                        <div className={Modalstyle.header_circle_yellow}></div>
-                        <div className={Modalstyle.header_circle_green}></div>
-                    </div>
+        <div className={Modalstyle.select_modal}>
+        <img src={helpModal} alt="모달" />
+        <div className={Modalstyle.sm_modal_content}>
+            <p className={Modalstyle.sm_modal_content_1}>{`${userName}님의 댓글을 채택하시겠습니까?`}</p>
+            <p className={Modalstyle.sm_modal_content_2}>*구매 후 해당 회원이 수정, 삭제하기 전까지만 열람 가능합니다.</p>
+            <div className={Modalstyle.sm_point_info}>
+                <div className={Modalstyle.sm_board_point}>
+                    <img src={berry} alt="베리 아이콘" /> 50
                 </div>
-                <div className={Modalstyle.modal_content}>
-                    <p className={Modalstyle.modal_title}>{`${userName}님의 지원서를 열람하시겠습니까?`} </p>
-                    <p className={Modalstyle.modal_subtitle}>
-                        *구매 후 해당 회원이 수정, 삭제하기 전까지만 열람 가능합니다.
-                    </p>
-                    <div className={Modalstyle.modal_points}>
-                        <img src={berry} alt="Berry" />50
-                    </div>
-                    {/* 나의 베리 값 나중에 수정 필요 */}
-                    <p className={Modalstyle.modal_user_points}>나의 베리: {berryPoint} <img src={berry} className={Modalstyle.modal_my_point_img} alt="Berry" /></p>
-                    <div className={Modalstyle.modal_buttons}>
-                        <button className={Modalstyle.cancel_btn} onClick={onClose}>
-                            취소
-                        </button>
-                        {/* 열람을 클릭하면 pickzone/1로 넘어갈 수 있게 수정 필요 */}
-                        <button className={Modalstyle.open_btn} onClick={handleOpen}>
-                            열람
-                        </button>
-                    </div>
-                </div>
+                <p>{`나의 베리 : ${berryPoint}베리`} </p>
+            </div>
+            <div className={Modalstyle.sm_modal_buttons}>
+                <button onClick={onClose} className={Modalstyle.cancel_btn}>취소</button>
+                <button onClick={handleOpen} className={Modalstyle.confirm_btn}>열람</button>
             </div>
         </div>
+    </div>
     )
 }
 

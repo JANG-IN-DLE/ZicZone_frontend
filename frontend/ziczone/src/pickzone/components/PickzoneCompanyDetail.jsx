@@ -18,7 +18,7 @@ const maskName = (name) => {
 }
 
 export default function PickzoneCompanyDetail(){
-    const {companyId, personalId} = useParams();
+    const { loggedInUserId, personalId } = useParams();
     // 회원 정보 담는 hook
     const [ userCard, setUserCard ] = useState(null);
     // resume 정보 담는 hook
@@ -30,9 +30,13 @@ export default function PickzoneCompanyDetail(){
     // Pick 상테 추적 hook
     const [isPicked, setIsPicked] = useState(false);
 
+    // localStorage에서 userRole 값을 가져와 isCompany 설정
+    const userRole = localStorage.getItem("userRole");
+    const isCompany = userRole === "COMPANY";
+
     useEffect(() => {
         // (CompanyId로 로그인되어을때) personalId가지고 해당하는 회원 정보 가져오기(pickDetail  왼쪽 회원 정보)
-        axios.get(`/api/company/pickcards/${companyId}/${personalId}`)
+        axios.get(`/api/company/pickcards/${loggedInUserId}/${personalId}`)
             .then(response => {
                     const maskedUserCard = {
                         ...response.data,
@@ -57,7 +61,7 @@ export default function PickzoneCompanyDetail(){
                 console.log('Error fetching user resume details: ' , error);
             });
 
-    }, [companyId, personalId]);
+    }, [loggedInUserId, personalId]);
     // pick이 되어있으면 userName을 정확하게 표시
     useEffect(() => {
         if(userCard && isPicked) {
@@ -66,7 +70,7 @@ export default function PickzoneCompanyDetail(){
                 userName: userCard.userName
             }));
         }
-    }, [ isPicked, userCard ]);
+    }, [ isPicked ]);
 
     if(!userCard || !userResume){
         return <div>Loading...</div>;
@@ -85,7 +89,7 @@ export default function PickzoneCompanyDetail(){
     // "Pick" 클릭시
     const handlePickConfirm = () => {
         axios.post('/api/company/pick', {
-            companyId: companyId,
+            userId: loggedInUserId,
             personalId: personalId
         })
         .then(response => {
@@ -107,7 +111,7 @@ export default function PickzoneCompanyDetail(){
             selectedSection={selectedSection}
             setSelectedSection={setSelectedSection}
             userResume={userResume}
-            isCompany={true}
+            isCompany={isCompany}
             onPickClick={handlePickClick}
             isScrap={userCard.scrap}
             isPicked={isPicked}// pick 상태 전달

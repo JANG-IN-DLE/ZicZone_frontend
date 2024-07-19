@@ -10,10 +10,8 @@ import personalFImage from '../../common/card/assets/personal_f_image.png';
 import UserProfilestyle from "../styles/UserProfile.module.css";
 
 
-const UserProfile = ({ userCard, jobNames, techUrls, selectedSection, setSelectedSection, userResume, onPickClick, isScrap, isPicked}) => {
+const UserProfile = ({ userCard, jobNames, techUrls, selectedSection, setSelectedSection, userResume, onPickClick, isScrap, isPicked, isCompany}) => {
     const userImage = userCard.gender === 'MALE' ? personalMImage : personalFImage;
-    const isCompany = false; // 개인
-    // const isCompany = true; // 기업
 
     const renderSection = () => {
         switch(selectedSection){
@@ -60,10 +58,13 @@ const UserProfile = ({ userCard, jobNames, techUrls, selectedSection, setSelecte
                     userIntro={userCard.userIntro}
                     techUrls={techUrls}
                     isScrap={isScrap}
+                    isCompany={isCompany}
                     />
                 <ul className={UserProfilestyle.up_ul_container}>
                     <li className={`${UserProfilestyle.up_li_resume} ${selectedSection === 'resume' ? UserProfilestyle.active : '' }`} onClick={() => setSelectedSection('resume')}>이력서</li>
+                    {userResume.personalState && (
                     <li className={`${UserProfilestyle.up_li_coverLetter} ${selectedSection === 'coverLetter' ? UserProfilestyle.active : '' }`} onClick={() => setSelectedSection('coverLetter')}>자기소개서</li>
+                    )}
                     {userResume.portfolios && userResume.portfolios.map((portfolio, index) => (
                         <li className={`${UserProfilestyle[`up_li_port${index}`]} ${selectedSection === `portfolio${index + 1}` ? UserProfilestyle.active : ''}`} key={index} onClick={() => setSelectedSection(`portfolio${index + 1}`)}>
                             포트폴리오 {index + 1}

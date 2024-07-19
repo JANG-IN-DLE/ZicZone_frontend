@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Resume from './resume/components/Resume';
 import ResumeView from "./resume/components/ResumeView"
 
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import axios from 'axios';
 import UserPickzone from './pickzone/components/UserPickzone';
 import CompanyPickzone from './pickzone/components/CompanyPickzone';
@@ -30,20 +30,13 @@ import MainPickCard from './main/components/MainPickCard'
 
 
 function App() {
-  // const [userType, setUserType] = useState(null);
+  const [ userType, setUserType ] = useState(null);
 
-  // 나중에 로그인 할때 session에서 회원 정보 비교하기 위해서
-  // useEffect(() => {
-  //   axios.get('/api/session-user-type')
-  //     .then(response => {
-  //       setUserType(response.data.userType);
-  //     })
-  //     .catch(error => {
-  //       console.error("Error fetching user type from session: ", error);
-  //     });
-  // }, []);
+  useEffect(() => {
+    setUserType(localStorage.getItem("userRole"));
+  }, []);
 
-  // if(userType === null){
+  // if(userType === null) {
   //   return <div>Loading...</div>
   // }
 
@@ -66,11 +59,10 @@ function App() {
       <Router>
         <Header />
         <Routes>
-          <Route path='/pickzone/:companyId/:personalId' element={<PickzoneCompanyDetail />} />
-          <Route path='/pickzone/:loggedInPersonalId/:personalId' element={<PickZoneUserDetail />} />
           <Route path='/' element={<MainComponent />} />
-          <Route path='/pickzone' element={<UserPickzone />} />
-          {/* <Route path='/pickzone' element={<CompanyPickzone />} /> */}
+          <Route path='/pickzone' element={userType === 'COMPANY' ? <CompanyPickzone /> : <UserPickzone />} />
+          {/* <Route path='/pickzone/:loggedInPersonalId/:personalId' element={userType === 'PERSONAL' ? <PickZoneUserDetail /> : "권한이 없습니다"} /> */}
+          <Route path='/pickzone/:loggedInUserId/:personalId' element={userType === 'COMPANY' ? <PickzoneCompanyDetail /> : <PickZoneUserDetail />} />
           <Route path="/helpzone" element={<ListBoard />} />
           <Route path="/cuboard" element={<CUBoard />} />
           <Route path="/rdboard/:corrId" element={<RDBoard />} />

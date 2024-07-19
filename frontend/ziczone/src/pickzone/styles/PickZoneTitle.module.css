@@ -13,7 +13,7 @@
 
 .pick_zone_intro {
     margin-bottom: 10px;
-    padding-top: 120px;
+    padding-top: 140px;
 }
 
 .pzi_title {
@@ -26,6 +26,7 @@
     font-size: 40px;
     color: #000;
     margin-bottom: 0px;
+    text-shadow: 2px 2px 4px rgba(61, 61, 61, 0.5);
 }
 
 .pzi_title > img {
