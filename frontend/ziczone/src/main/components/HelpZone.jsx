@@ -53,7 +53,6 @@ const HelpZone = ({
     try {
       await axios.put(`/api/user/board/viewCnt/${userId}/${corrId}`);
       navigate(`/rdboard/${corrId}`, { state: { userId } });
-      console.log("ㅇㄹㄴㄼ3ㄷ");
     } catch (error) {
       console.error("오류 메시지: ", error);
     }
@@ -65,7 +64,6 @@ const HelpZone = ({
         const response = await axios.get(`/api/user/board/${corrId}`);
         setBoardData(response.data);
         setView(response.data.corrView);
-        console.log("셋뷰", response.data.corrView);
       } catch (error) {
         console.error("오류 메시지: ", error);
       }
