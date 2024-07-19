@@ -4,12 +4,35 @@ import personal_f_image from "../../../common/card/assets/personal_f_image.png";
 import personal_m_image from "../../../common/card/assets/personal_m_image.png";
 import "../../styles/comment/CommentItem.css";
 import selectIcon from "../../assets/selectIcon.png";
-import SelectModal from "../SelectModal";
+import ConfirmModal from "../ConfirmModal";
+
+// 특정 날짜와 현재 시간의 차이 계산 -> 상대적인 시간 반환
+export const getRelativeTime = (dateString) => {
+    const now = new Date();
+    const past = new Date(dateString);
+    const diff = now - past;
+
+    const seconds = Math.floor(diff / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+
+    if (seconds < 60) {
+        return `${seconds}초 전`;
+    } else if (minutes < 60) {
+        return `${minutes}분 전`;
+    } else if (hours < 24) {
+        return `${hours}시간 전`;
+    } else {
+        return `${days}일 전`;
+    }
+};
 
 const CommentItem = ({ comment, board, userId, selectedCommentId, onCommentUpdated, onCommentDeleted, onCommentSelected }) => {
     const [isEditing, setIsEditing] = useState(false);
     const [editComment, setEditComment] = useState(comment.commContent);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isSelected, setIsSelected] = useState(comment.commSelection);
 
     const personal_image = comment.gender === 'MALE' ? personal_m_image : personal_f_image;
 
@@ -63,7 +86,8 @@ const CommentItem = ({ comment, board, userId, selectedCommentId, onCommentUpdat
                 params: { userId: userId }
             });
             if (response.status === 200) {
-                onCommentSelected(response.data);
+                onCommentSelected({ ...comment, commSelection: true });
+                setIsSelected(true);
                 closeModal();
             }
         } catch (error) {
@@ -85,8 +109,8 @@ const CommentItem = ({ comment, board, userId, selectedCommentId, onCommentUpdat
 
     return (
         <div>
-            <SelectModal isOpen={isModalOpen} onClose={closeModal} onConfirm={confirmSelection} userName={maskName(comment.userName)} corrPoint={comment.corrPoint} />
-            {comment.commSelection && (
+            <ConfirmModal isOpen={isModalOpen} onClose={closeModal} onConfirm={confirmSelection} userName={maskName(comment.userName)} corrPoint={comment.corrPoint} />
+            {isSelected && (
                 <div className="ci_select_show">
                     <img src={selectIcon} alt="채택완료핀" />
                     <p>채택된 댓글</p>
@@ -101,7 +125,10 @@ const CommentItem = ({ comment, board, userId, selectedCommentId, onCommentUpdat
                 </div>
                 <div className="ci_body">
                     <div className='ci_info'>
-                        {maskName(comment.userName)} | {comment.personalCareer}
+                        <div className="ci_info_left">
+                            {maskName(comment.userName)} | {comment.personalCareer}
+                            <span>{getRelativeTime(comment.commModify)}</span>
+                        </div>
                         <div className="ci_button">
                             {Number(comment.userId) === Number(userId) && selectedCommentId === null && (
                                 isEditing ? (
@@ -140,7 +167,7 @@ const CommentItem = ({ comment, board, userId, selectedCommentId, onCommentUpdat
                                     </>
                                 )
                             )}
-                            {board && Number(board.userId) === Number(userId) && !comment.commSelection && selectedCommentId === null && Number(comment.userId) !== Number(userId) && (
+                            {board && Number(board.userId) === Number(userId) && !isSelected && selectedCommentId === null && Number(comment.userId) !== Number(userId) && (
                                 <button
                                     type="button"
                                     onClick={openModal}
