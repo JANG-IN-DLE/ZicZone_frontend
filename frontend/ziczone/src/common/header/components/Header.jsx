@@ -72,11 +72,48 @@ const Header = () => {
     }
   };
 
+  // 토큰 검사 후 상태초기화 함수
+  const clearUserData = () => {
+    setUserName("");
+    setUserRole(null);
+    setCompanyLogo("");
+  };
+
+  const handleLogout = async () => {
+    const token = localStorage.getItem("token");
+    const userId = localStorage.getItem("userId");
+    const userRole = localStorage.getItem("userRole");
+
+    if (userId && token && userRole === 'PERSONAL') {
+      try {
+          await axios.post(`/sse/logout/${userId}`, {}, {
+              headers: {
+                  Authorization: token
+              }
+          });
+          // LocalStorage에서 토큰, id, role 삭제
+          localStorage.removeItem('token');
+          localStorage.removeItem('userId');
+          localStorage.removeItem('userRole');
+      } catch (error) {
+          console.error('Logout failed:', error);
+      }
+    }else{
+       // LocalStorage에서 토큰, id, role 삭제
+       localStorage.removeItem('token');
+       localStorage.removeItem('userId');
+       localStorage.removeItem('userRole');
+    }
+
+    setIsLoggedIn(false); // 로그인 상태 false로 설정
+    clearUserData(); // 사용자 데이터 초기화
+
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("userRole");
     localStorage.removeItem("userId");
     // localStorage.removeItem("href");
+
     window.location.href = "/";
   };
 
