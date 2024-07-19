@@ -5,6 +5,7 @@ import alarm from "../assets/Alarm.png";
 import useDropdown from "../hooks/useDropdown";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import AlarmList from "./Alarm";
 
 const UserLogin = ({ userName, onLogout }) => {
   const { open, Dropdown } = useDropdown();
@@ -12,9 +13,7 @@ const UserLogin = ({ userName, onLogout }) => {
   return (
     <>
       <div className="user_login">
-        <div className="user_login_alarm">
-          <img src={alarm} alt="Alarm" />
-        </div>
+        <AlarmList/>
         <div className="user_login_name">
           {userName}
           <div className={`dropdown_list ${open ? "show" : ""}`}>
