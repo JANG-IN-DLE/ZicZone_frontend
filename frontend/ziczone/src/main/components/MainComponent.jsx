@@ -18,7 +18,7 @@ const NoLoginMainComponent = ({ board }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userInfo, setUserInfo] = useState(null);
   const [pickCards, setPickCards] = useState([]);
-  const [helpZones, sethelpZones] = useState([]);
+  const [helpZones, setHelpZones] = useState([]);
   const [filterType, setFilterType] = useState("latest");
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(8);
@@ -45,9 +45,7 @@ const NoLoginMainComponent = ({ board }) => {
         },
       })
       .then((res) => {
-        // 응답 데이터는 res.data.dtoList에 있고 이 데이터를 helpZones 상태에 저장함
-        sethelpZones(res.data.dtoList);
-        console.log("헬프존 api ", res.data);
+        setHelpZones(res.data.dtoList);
       })
       .catch((error) => {
         console.error("Error help", error);
@@ -98,12 +96,12 @@ const NoLoginMainComponent = ({ board }) => {
         <div className="pickzone">
           <h1>PICK 존</h1>
           <div className="user_card_container">
-            {pickCards.slice(0, 4).map((pick, index) => {
+            {pickCards.slice(0, 4).map((pick) => {
               const userImage =
                 pick.gender === "MALE" ? personalMImage : personalFImage;
               return (
                 <MainPickCard
-                  key={index}
+                  key={pick.userId} // 키값 변경
                   companyId={pick.companyId}
                   personalId={pick.personalId}
                   userId={pick.userId}
@@ -123,9 +121,13 @@ const NoLoginMainComponent = ({ board }) => {
         </div>
         <div className="helpzone">
           <h1>HELP 존</h1>
-          {helpZones.slice(0, 5).map((board) => (
-            <BoardItem key={board.corrId} board={board} userId={userId} />
-          ))}
+          {Array.isArray(helpZones) &&
+            helpZones.length > 0 &&
+            helpZones
+              .slice(0, 5)
+              .map((board) => (
+                <BoardItem key={board.corrId} board={board} userId={userId} />
+              ))}
         </div>
         <div className="company_slide">
           <h1>직존과 함께하는 기업</h1>
