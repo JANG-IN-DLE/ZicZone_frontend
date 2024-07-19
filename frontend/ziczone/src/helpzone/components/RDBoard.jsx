@@ -7,6 +7,7 @@ import PostView from "./PostView";
 import Button from "./Button";
 import CommentList from "./comment/CommentList";
 import "../styles/RDBoard.css";
+import ConfirmModal from "./ConfirmModal";
 
 const RDBoard = () => {
   const { corrId } = useParams();
@@ -18,6 +19,7 @@ const RDBoard = () => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isCommentSelected, setIsCommentSelected] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const [userProfile, setUserProfile] = useState({
     berry: '',
@@ -94,9 +96,22 @@ const RDBoard = () => {
     setIsCommentSelected(true);
   };
 
+  const openDeleteModal = () => {
+    setIsDeleteModalOpen(true);
+  };
+
+  const closeDeleteModal = () => {
+    setIsDeleteModalOpen(false);
+  };
+
+  const confirmDelete = async () => {
+    await handleDelete();
+    closeDeleteModal();
+  };
+
   if (isLoading) {
     return <div>Loading...</div>;
-  }
+  };
 
   return (
     <div>
@@ -113,7 +128,7 @@ const RDBoard = () => {
                   <Button type="button" className="b_edit" onClick={handleEdit}>
                     수정
                   </Button>
-                  <Button type="button" className="b_delete" onClick={handleDelete}>
+                  <Button type="button" className="b_delete" onClick={openDeleteModal}>
                     삭제
                   </Button>
                 </div>
@@ -131,6 +146,13 @@ const RDBoard = () => {
           </div>
         </div>
       </div>
+      <ConfirmModal
+        isOpen={isDeleteModalOpen}
+        onClose={closeDeleteModal}
+        onConfirm={confirmDelete}
+        message="정말로 게시물을 삭제하시겠습니까?"
+        mode="delete"
+      />
     </div>
   );
 }

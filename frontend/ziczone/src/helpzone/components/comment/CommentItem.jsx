@@ -4,7 +4,7 @@ import personal_f_image from "../../../common/card/assets/personal_f_image.png";
 import personal_m_image from "../../../common/card/assets/personal_m_image.png";
 import "../../styles/comment/CommentItem.css";
 import selectIcon from "../../assets/selectIcon.png";
-import SelectModal from "../SelectModal";
+import ConfirmModal from "../ConfirmModal";
 
 // 특정 날짜와 현재 시간의 차이 계산 -> 상대적인 시간 반환
 export const getRelativeTime = (dateString) => {
@@ -109,7 +109,7 @@ const CommentItem = ({ comment, board, userId, selectedCommentId, onCommentUpdat
 
     return (
         <div>
-            <SelectModal isOpen={isModalOpen} onClose={closeModal} onConfirm={confirmSelection} userName={maskName(comment.userName)} corrPoint={comment.corrPoint} />
+            <ConfirmModal isOpen={isModalOpen} onClose={closeModal} onConfirm={confirmSelection} userName={maskName(comment.userName)} corrPoint={comment.corrPoint} />
             {isSelected && (
                 <div className="ci_select_show">
                     <img src={selectIcon} alt="채택완료핀" />
