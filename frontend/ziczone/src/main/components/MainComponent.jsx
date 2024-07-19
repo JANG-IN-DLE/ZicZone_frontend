@@ -12,8 +12,9 @@ import { jwtDecode } from "jwt-decode";
 import MainPickCard from "./MainPickCard";
 import PickCard from "../../common/card/components/PickCard";
 import Layout from "../../common/layout/layout";
+import BoardItem from "../../helpzone/components/BoardItem";
 
-const NoLoginMainComponent = ({ onLogout }) => {
+const NoLoginMainComponent = ({ board }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userInfo, setUserInfo] = useState(null);
   const [pickCards, setPickCards] = useState([]);
@@ -46,18 +47,14 @@ const NoLoginMainComponent = ({ onLogout }) => {
       .then((res) => {
         // 응답 데이터는 res.data.dtoList에 있고 이 데이터를 helpZones 상태에 저장함
         sethelpZones(res.data.dtoList);
+        console.log("헬프존 api ", res.data);
       })
       .catch((error) => {
         console.error("Error help", error);
       });
-
-    const handleWriteButton = () => {
-      navigate("/cuboard"); // CUBoard로 이동
-    };
   }, []);
 
   useEffect(() => {
-    //토큰으로 로그인 확인
     const token = localStorage.getItem("token");
 
     if (token) {
@@ -80,21 +77,7 @@ const NoLoginMainComponent = ({ onLogout }) => {
     }
   }, []);
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    setIsLoggedIn(false);
-    navigate("/");
-  };
-
-  // axios
-  //   .get("/api/main")
-  //   .then((res) => {
-  //     setBanner(res.data);
-  //     console.log(res);
-  //   })
-  //   .catch((error) => {
-  //     console.error("error", error);
-  //   });
+  const userId = localStorage.getItem("userId");
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -115,7 +98,7 @@ const NoLoginMainComponent = ({ onLogout }) => {
         <div className="pickzone">
           <h1>PICK 존</h1>
           <div className="user_card_container">
-            {pickCards.slice(0, 3).map((pick, index) => {
+            {pickCards.slice(0, 4).map((pick, index) => {
               const userImage =
                 pick.gender === "MALE" ? personalMImage : personalFImage;
               return (
@@ -140,20 +123,9 @@ const NoLoginMainComponent = ({ onLogout }) => {
         </div>
         <div className="helpzone">
           <h1>HELP 존</h1>
-          {helpZones.slice(0, 5).map((list) => {
-            return (
-              <HelpZone
-                key={list.userId}
-                userId={list.userId}
-                userName={list.userName}
-                corrModify={formatDate(list.corrModify)}
-                corrPoint={list.corrPoint}
-                corrTitle={list.corrTitle}
-                corrView={list.corrView}
-                personalCareer={list.personalCareer}
-              />
-            );
-          })}
+          {helpZones.slice(0, 5).map((board) => (
+            <BoardItem key={board.corrId} board={board} userId={userId} />
+          ))}
         </div>
         <div className="company_slide">
           <h1>직존과 함께하는 기업</h1>

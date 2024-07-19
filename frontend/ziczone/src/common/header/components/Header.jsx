@@ -13,6 +13,7 @@ const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userRole, setUserRole] = useState();
   const [userName, setUserName] = useState("");
+  const [userId, setUserId] = useState("");
   const [companyLogo, setCompanyLogo] = useState("");
   const navigate = useNavigate();
 
@@ -31,29 +32,17 @@ const Header = () => {
             fetchUserData(decodedToken);
           } else {
             setIsLoggedIn(false);
-            clearUserData();
           }
         } catch (error) {
           console.error("Invalid token", error);
           setIsLoggedIn(false);
-          clearUserData();
         }
       } else {
         setIsLoggedIn(false);
-        clearUserData();
       }
     };
-
     checkToken();
-
-    // // 토큰 확인
-    // const intervalId = setInterval(checkToken, 1000);
-
-    // // 토큰 확인되면 클린 인터벌
-    // return () => clearInterval(intervalId);
   }, []);
-  // 최초 마운트 될 때 checkToken(); 실행
-  // const intervalId = setInterval(checkToken, 1000);로 1초마다 checkToken() 호출해서 유효성 검사
 
   const fetchUserData = (decodedToken) => {
     const userId = decodedToken.userId;
@@ -83,17 +72,11 @@ const Header = () => {
     }
   };
 
-  // 토큰 검사 후 상태초기화 함수
-  const clearUserData = () => {
-    setUserName("");
-    setUserRole(null);
-    setCompanyLogo("");
-  };
-
   const handleLogout = () => {
-    localStorage.removeItem("token"); // 토큰 제거
-    setIsLoggedIn(false); // 로그인 상태 false로 설정
-    clearUserData(); // 사용자 데이터 초기화
+    localStorage.removeItem("token");
+    localStorage.removeItem("userRole");
+    localStorage.removeItem("userId");
+    // localStorage.removeItem("href");
     window.location.href = "/";
   };
 
