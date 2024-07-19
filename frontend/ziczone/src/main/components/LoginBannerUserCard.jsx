@@ -100,7 +100,7 @@ const LoginBannerSlide = () => {
         .then((res) => {
           setUserName(res.data.userName);
           setUserEmail(res.data.email);
-          setCompanyLogo(res.data.companyLogo);
+          setCompanyLogo(res.data.companyLogoUrl);
           setUserRole(userType);
         })
         .catch((error) => {

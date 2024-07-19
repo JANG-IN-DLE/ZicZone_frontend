@@ -26,17 +26,19 @@ const NoLoginMainComponent = ({ board }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios
-      .get("/api/pickcards")
-      .then((response) => {
-        setPickCards(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching pick cards: ", error);
-      });
+    fetchHelpZones();
+  }, [filterType, page, size]);
 
+  useEffect(() => {
+    checkLoginStatus();
+  }, []);
+
+  useEffect(() => {
+    fetchPickCards();
+  }, [isLoggedIn, userInfo]);
+
+  const fetchHelpZones = () => {
     axios
-      //엔드포인트로 GET요청, 파라미터를 함께 보냄
       .get("/api/user/board/filter", {
         params: {
           filterType,
@@ -48,21 +50,19 @@ const NoLoginMainComponent = ({ board }) => {
         setHelpZones(res.data.dtoList);
       })
       .catch((error) => {
-        console.error("Error help", error);
+        console.error("Error fetching help zones: ", error);
       });
-  }, []);
+  };
 
-  useEffect(() => {
+  const checkLoginStatus = () => {
     const token = localStorage.getItem("token");
-
     if (token) {
       try {
         const decodedToken = jwtDecode(token);
         const currentTime = Date.now() / 1000;
-
         if (decodedToken.exp > currentTime) {
           setIsLoggedIn(true);
-          setUserInfo(decodedToken); // 토큰에서 필요한 사용자 정보 설정
+          setUserInfo(decodedToken);
         } else {
           setIsLoggedIn(false);
         }
@@ -71,12 +71,13 @@ const NoLoginMainComponent = ({ board }) => {
         setIsLoggedIn(false);
       }
     } else {
-      setIsLoggedIn(false); // 토큰이 없으면 로그아웃 상태로 설정
+      setIsLoggedIn(false);
     }
-  }, []);
+  };
 
-  const userId = localStorage.getItem("userId");
+  const tokenUserId = localStorage.getItem("userId");
 
+  // 날짜 형식 바꾸기
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const year = date.getFullYear();
@@ -85,8 +86,37 @@ const NoLoginMainComponent = ({ board }) => {
     return `${year}/${month}/${day}`;
   };
 
-  const handleCardClick = (userId) => {
+  const handleCardClick = (tokenUserId) => {
     navigate(`/pickzone/${isLoggedIn ? "loggedInPersonalId" : "personalId"}`);
+  };
+
+  const fetchPickCards = async () => {
+    if (!isLoggedIn || !userInfo) {
+      console.error("User is not logged in or userInfo is not available");
+      return;
+    }
+    let endpoint = "/api/pickcards"; // 기본 비로그인 엔드포인트
+    const loggedInUserId = userInfo.userId;
+    if (isLoggedIn) {
+      switch (userInfo.role) {
+        case "COMPANY":
+          endpoint = `/api/company/pickcards?loggedInUserId=${loggedInUserId}`;
+          break;
+        case "PERSONAL":
+          endpoint = `/api/personal/pickcards?loggedInUserId=${loggedInUserId}`;
+          break;
+        default:
+          console.error("Unknown user role");
+          return;
+      }
+    }
+
+    try {
+      const response = await axios.get(endpoint);
+      setPickCards(response.data); // 응답 데이터를 pickCards 상태로 설정
+    } catch (error) {
+      console.error("Error fetching pick cards: ", error);
+    }
   };
 
   return (
@@ -112,8 +142,9 @@ const NoLoginMainComponent = ({ board }) => {
                   personalCareer={pick.personalCareer}
                   techUrl={pick.techUrl}
                   scrap={pick.scrap}
-                  onClick={() => handleCardClick(pick.userId)}
+                  onClick={() => handleCardClick(pick.loggedInUserId)}
                   berryPoint={pick.berryPoint}
+                  loggedInUserId={tokenUserId}
                 />
               );
             })}
@@ -126,7 +157,11 @@ const NoLoginMainComponent = ({ board }) => {
             helpZones
               .slice(0, 5)
               .map((board) => (
-                <BoardItem key={board.corrId} board={board} userId={userId} />
+                <BoardItem
+                  key={board.corrId}
+                  board={board}
+                  userId={tokenUserId}
+                />
               ))}
         </div>
         <div className="company_slide">
