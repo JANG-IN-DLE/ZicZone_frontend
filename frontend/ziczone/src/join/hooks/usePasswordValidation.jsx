@@ -51,6 +51,8 @@ const usePasswordValidation = (type, email) => {
             if (response.status === 200 && response.data === "change Password Success") {
                 console.log(response.data);
                 setIsChangePassword("changeSuccess");
+                alert("비밀번호 변경이 완료되었습니다.");
+                window.location.reload();
             }else{
                 console.log(response.data);
                 setIsChangePassword("changeFail");

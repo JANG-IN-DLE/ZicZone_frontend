@@ -31,7 +31,6 @@ const CUBoard = () => {
   };
 
   const handlePostSubmitSuccess = (corrId, fileName) => {
-    console.log("Navigating to rdboard with corrId:", corrId, "and fileName:", fileName); // 확인용 로그 추가
     navigate(`/rdboard/${corrId}`, { state: { userId, fileName } });
 };
 

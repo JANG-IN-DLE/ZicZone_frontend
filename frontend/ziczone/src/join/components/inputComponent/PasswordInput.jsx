@@ -1,6 +1,7 @@
 import React from 'react';
 import "../../styles/JoinCom/PasswordInput.css"
 import check from '../../assets/check.png'
+import wrong from '../../assets/wrong.png'
 import usePasswordValidation from '../../hooks/usePasswordValidation';
 
 const PasswordInput = () => {
@@ -26,9 +27,9 @@ const PasswordInput = () => {
                         onChange={handlePasswordChange}
                     />
                     <img
-                        src={check}
+                        src={isPasswordValid ? check : wrong}
                         alt=""
-                        style={{ visibility: isPasswordValid ? 'visible' : 'hidden' }}
+                        style={{ visibility: password === '' ? 'hidden' : 'visible' }}
                     />
                 </div>
             </div>
@@ -42,9 +43,9 @@ const PasswordInput = () => {
                         onChange={handleConfirmChange}
                     />
                     <img
-                        src={check}
+                        src={isConfirmValid ? check : wrong}
                         alt=""
-                        style={{ visibility: isConfirmValid ? 'visible' : 'hidden' }}
+                        style={{ visibility: confirmPassword === '' ? 'hidden' : 'visible' }}
                     />
                 </div>
             </div>

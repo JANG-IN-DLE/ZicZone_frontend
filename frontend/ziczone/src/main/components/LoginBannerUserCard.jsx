@@ -7,6 +7,8 @@ import personalFImage from "../../common/card/assets/personal_f_image.png";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import { Link } from "react-router-dom";
+import left from "../../main/left.png";
+import right from "../../main/right.png";
 
 const LoginBannerSlide = () => {
   const [userData, setUserData] = useState([]);
@@ -98,7 +100,7 @@ const LoginBannerSlide = () => {
         .then((res) => {
           setUserName(res.data.userName);
           setUserEmail(res.data.email);
-          setCompanyLogo(res.data.companyLogo);
+          setCompanyLogo(res.data.companyLogoUrl);
           setUserRole(userType);
         })
         .catch((error) => {
@@ -125,8 +127,16 @@ const LoginBannerSlide = () => {
     <>
       <div className="slide_container">
         <div className="login_wrap">
-          <div className="arrow left" id="prev"></div>
-          <div className="arrow right" id="next"></div>
+          <div
+            className="arrow left"
+            id="prev"
+            style={{ background: "url(" + left + ")" }}
+          ></div>
+          <div
+            className="arrow right"
+            id="next"
+            style={{ background: "url(" + right + ")" }}
+          ></div>
           <ul className="slide">
             <li
               className="login_slide_item"

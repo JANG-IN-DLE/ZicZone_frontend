@@ -15,7 +15,7 @@
 
 .sm_modal_content {
     position: absolute;
-    top: 50%;
+    top: 53%;
     left: 50%;
     transform: translate(-50%, -50%);
     display: flex;
@@ -47,12 +47,12 @@
 .sm_board_point {
     display: flex;
     align-items: center;
+    justify-content: center;
     font-size: 22px;
     font-family: 'Giants-Bold';
     font-weight: bold;
     border: none;
     width: 115px;
-    padding: 10px;
     height: 55px;
     border-radius: 12px;
     background-color: rgba(0, 81, 186, 0.08);
@@ -68,6 +68,7 @@
     display: flex;
     justify-content: center;
     gap: 10px;
+    margin-top: 10px;
 }
 
 .confirm_btn {

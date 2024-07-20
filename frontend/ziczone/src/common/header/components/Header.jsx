@@ -13,6 +13,7 @@ const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userRole, setUserRole] = useState();
   const [userName, setUserName] = useState("");
+  const [userId, setUserId] = useState("");
   const [companyLogo, setCompanyLogo] = useState("");
   const navigate = useNavigate();
 
@@ -31,29 +32,17 @@ const Header = () => {
             fetchUserData(decodedToken);
           } else {
             setIsLoggedIn(false);
-            clearUserData();
           }
         } catch (error) {
           console.error("Invalid token", error);
           setIsLoggedIn(false);
-          clearUserData();
         }
       } else {
         setIsLoggedIn(false);
-        clearUserData();
       }
     };
-
     checkToken();
-
-    // 토큰 확인
-    const intervalId = setInterval(checkToken, 1000);
-
-    // 토큰 확인되면 클린 인터벌
-    return () => clearInterval(intervalId);
   }, []);
-  // 최초 마운트 될 때 checkToken(); 실행
-  // const intervalId = setInterval(checkToken, 1000);로 1초마다 checkToken() 호출해서 유효성 검사
 
   const fetchUserData = (decodedToken) => {
     const userId = decodedToken.userId;
@@ -64,7 +53,7 @@ const Header = () => {
         .get(`/api/main/companyUser/${userId}`)
         .then((res) => {
           setUserName(res.data.userName);
-          setCompanyLogo(res.data.companyLogo);
+          setCompanyLogo(res.data.companyLogoUrl);
           setUserRole(userType);
         })
         .catch((error) => {
@@ -90,12 +79,36 @@ const Header = () => {
     setCompanyLogo("");
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem("token"); // 토큰 제거
+  const handleLogout = async () => {
+    const token = localStorage.getItem("token");
+    const userId = localStorage.getItem("userId");
+    const userRole = localStorage.getItem("userRole");
+
+    if (userId && token && userRole === 'PERSONAL') {
+      try {
+          await axios.post(`/sse/logout/${userId}`, {}, {
+              headers: {
+                  Authorization: token
+              }
+          });
+          // LocalStorage에서 토큰, id, role 삭제
+          localStorage.removeItem('token');
+          localStorage.removeItem('userId');
+          localStorage.removeItem('userRole');
+      } catch (error) {
+          console.error('Logout failed:', error);
+      }
+    }else{
+       // LocalStorage에서 토큰, id, role 삭제
+       localStorage.removeItem('token');
+       localStorage.removeItem('userId');
+       localStorage.removeItem('userRole');
+    }
+
     setIsLoggedIn(false); // 로그인 상태 false로 설정
     clearUserData(); // 사용자 데이터 초기화
-    window.location.href = "/";
-  };
+  }
+ 
 
   return (
     <div className="header">

@@ -1,0 +1,83 @@
+.user_login_alarm{
+    position: relative;
+}
+
+.user_login_alarm_bellimg{
+    width: 26px;
+}
+
+.user_login_alarm_dotimg{
+    width: 5px;
+    position: absolute;
+    right: -1px;
+    top: -1px;
+}
+
+/* 알림 드롭다운 리스트 */
+.dropdown_alarmlist{
+    /* display: none; */
+    background-color: rgb(255, 255, 255);
+    /* 스크롤 */
+    overflow: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: #0051BA20 #ffffff00;
+    
+    position: absolute;
+    padding: 8px 12px;
+    top: 40px;
+    right: 8px;
+    width: 420px;
+    height: 180px;
+    border-radius: 4px;
+    border: 0.2px solid #b2b2b2;
+
+    /* 그림자 */
+    box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.15),
+    4px 4px 4px 0px rgba(255, 255, 255, 0.1) inset;
+}
+
+/* 알림 한줄 */
+.alarm_content{
+    height: 40px;
+    padding: 4px;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 0.5px solid #b2b2b2;
+    /* border: 1px solid blue; */
+}
+
+/* 읽음표시 */
+.dropdown_alarmlist>.read{
+    /* background-color: #b2b2b225; */
+}
+
+/* 마지막요소는 구분선X */
+.alarm_content:last-child{
+    border: none;
+}
+
+.alarm_content>.alarm_content_detail{
+    font-size: 14px;
+    color: #5d5d5d;
+}
+
+.alarm_content_right{
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.alarm_content_right>*{
+    font-size: 12px;
+    color: #b2b2b2;
+}
+.alarm_content_berry{
+    color: #0051BA;
+}
+
+
+/* B2B2B2 */

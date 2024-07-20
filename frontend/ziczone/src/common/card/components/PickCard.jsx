@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import {useNavigate} from "react-router-dom";
 import PickCardCommstyle from '../styles/PickCardComm.module.css';
@@ -6,18 +6,16 @@ import scrapImg from "../assets/scrap.svg";
 import unscrapImg from "../assets/unscrap.svg";
 
 
-const PickCard = ({onClick, userImage, jobNames=[], userName, userCareer, userIntro, techUrls=[], personalId, isScrap}) => {
-    const isCompanyUser = false; // 개인
-    // const isCompanyUser = true; // 기업
-
+const PickCard = ({onClick, userImage, jobNames=[], userName, userCareer, userIntro, techUrls=[], personalId, isScrap, isCompany}) => {
     // scrap 여부를 확인하는 hook
     const [scrap, setScrap] = useState(isScrap);
 
     const handleScrapClick = async (e) => {
         e.stopPropagation();
         try{
+            const userId = localStorage.getItem("userId");
             // 보낼 때 userName뿐만 아니라 지금 로그인한 회원 Id까지 보내야할 것 같아. companyId는 임시로 1
-            const response = await axios.post('/api/company/scrap', { personalId, companyId:1 });
+            const response = await axios.post('/api/company/scrap', { personalId, userId });
             if(response.status === 200) {
                 setScrap(!scrap);
             }
@@ -28,7 +26,7 @@ const PickCard = ({onClick, userImage, jobNames=[], userName, userCareer, userIn
     
     return (
                 <div className={PickCardCommstyle.user_card} onClick={onClick}>
-                    {isCompanyUser && (
+                    {isCompany && (
                         <button className={PickCardCommstyle.scrap_button} onClick={handleScrapClick}>
                             <img src={scrap ? unscrapImg : scrapImg} alt="Scrap"/>
                         </button>

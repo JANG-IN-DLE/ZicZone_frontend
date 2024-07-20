@@ -19,7 +19,7 @@ const CommentInput = ({ corrId, userId, commId, onCommentAdded }) => {
                 commContent: commentContent,
                 corrId: corrId,
                 userId: userId,
-                commId: commId
+                commId: commId,
             }, {
                 headers: {
                     'Content-Type': 'application/json'

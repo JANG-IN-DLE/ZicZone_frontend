@@ -1,4 +1,4 @@
-.modal {
+.select_modal {
   position: fixed;
   top: -140px;
   left: 0;
@@ -9,142 +9,113 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 20;
+  z-index: 9999;
   background: rgba(0,0,0,0.4);
   overflow: hidden;
 }
 
-  .company_modal_body {
-    background-color: white;
-    padding: 5px;
-    border-radius: 10px;
-    width: 520px;
-    height: 300px;
-    position: relative;
-    border-image-source: linear-gradient(123.89deg,
-    rgba(170, 170, 170, 0.3) 9.82%,
-    rgba(170, 170, 170, 0.05) 32.32%,
-    rgba(170, 170, 170, 0.2) 61.65%,
-    rgba(170, 170, 170, 0.05) 90.18%);
-    box-shadow: 5px 5px 20px 0px rgba(0, 0, 0, 0.15),
-      4px 4px 4px 0px rgba(255, 255, 255, 0.1) inset;
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-  }
+.select_modal img {
+  width: 520px;
+  height: 332px;
+  position: relative;
+}
 
-  .modal_header {
-    width: 100%;
-    height: 20px;
-    border-bottom: 0.5px solid #b3b3b3;
-  }
+.sm_modal_content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  z-index: 1; 
+}
 
-  .circles {
-    display: flex;
-    align-items: center;
-  }
+.sm_modal_content_1 {
+  margin-top: 5px;
+  font-size: 24px;
+  font-weight: bold;
+  font-family: 'Pretendard-Regular';
+  color: #5D5D5D;
+}
+.sm_modal_content_2 {
+  margin-top: 5px;
+  font-size: 12px;
+  font-family: 'Pretendard-Regular';
+  color: #989898;
+}
 
-  .header_circle_red {
-    background-color: #DE2E2E;
-    width: 12px;
-    height: 12px;
-    border-radius: 32px;
-    margin-left: 12px;
-  }
+.sm_point_info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 25px auto;
+}
 
-  .header_circle_yellow {
-    background-color: #FBB63D;
-    width: 12px;
-    height: 12px;
-    border-radius: 32px;
-    margin-left: 12px;
-  }
+.sm_point_info p {
+  font-size: 16px;
+  font-family: 'Pretendard-Regular';
+  color: #ABABAB;
+}
 
-  .header_circle_green {
-    background-color: #1FBF42;
-    width: 12px;
-    height: 12px;
-    border-radius: 32px;
-    margin-left: 12px;
-  }
+.sm_board_point {
+  display: flex;
+  align-items: center;
+  font-size: 22px;
+  font-family: 'Giants-Bold';
+  font-weight: bold;
+  border: none;
+  width: 115px;
+  padding: 10px;
+  height: 55px;
+  border-radius: 12px;
+  background-color: rgba(0, 81, 186, 0.08);
+}
 
-  .modal_content {
-    text-align: center;
-  }
-  
-  .modal_title {
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    margin-top: 40px;
-    color: #5D5D5D;
-  }
-  
-  .modal_subtitle {
-    font-size: 14px;
-    width: 350px;
-    margin: 5px auto 5px;
-    text-align: center;
-    color: #ABABAB;
-  }
-  
-  .modal_points {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    font-weight: bold;
-    margin: 5px auto 16px;
-    background: rgba(0, 81, 186, 0.08);
-    width: 115px;
-    height: 55px;
-    border-radius: 12px;
-  }
-  .modal_my_point_img{
-    width: 14px;
-    height: 14px;
-    margin-right: 8px;
-  }
-  
-  .modal_points img {
-    width: 24px;
-    height: 24px;
-    margin-right: 8px;
-  }
-  
-  .modal_user_points {
-    font-size: 14px;
-    color: #666;
-    margin-bottom: 24px;
-  }
-  
-  .modal_buttons {
-    display: flex;
-    justify-content: center;
-  }
-  
-  .cancel_btn, .open_btn {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    font-size: 16px;
-    width: 170px;
-    margin: 5px 5px 5px 5px;
-  }
-  
-  .cancel_btn {
-    background-color: #FFFFFF;
-    border: 1px solid #5D5D5D;
-  }
-  
-  .open_btn {
-    background-color: #0051BA;
-    color: white;
-  }
+.sm_board_point img {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}
 
-.open_btn:hover{
+.sm_modal_buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.confirm_btn {
+  width: 170px;
+  height: 40px;
+  background-color: #0051BA;
+  color: white;
+  font-family: 'Pretendard-Regular';
+  font-weight: bold;
+  font-size: 20px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.cancel_btn {
+  width: 170px;
+  height: 40px;
+  background-color: #FFF;
+  color: #5D5D5D;
+  font-family: 'Pretendard-Regular';
+  font-weight: bold;
+  font-size: 20px;
+  border: 1px solid #5D5D5D;
+  border-radius: 12px;
+  cursor: pointer;
+}
+.confirm_btn:hover {
   background-color: #0069F2;
 }
-.cancel_btn:hover{
-  background-color: rgba(0, 0, 0, 0.07);
+.cancel_btn:hover {
+  background-color: rgba(93, 93, 93, 0.1);
+}
+
+.cancel_btn:active,
+.confirm_btn:active {
+  transform: scale(0.97);
 }

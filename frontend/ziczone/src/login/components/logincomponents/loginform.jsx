@@ -54,18 +54,6 @@ const LoginForm = ({
     }
   }, [isAuth, setCurrentForm]);
 
-  useEffect(() => {
-    console.log("로그인");
-    console.log("email : ", email);
-    console.log("password : ", password);
-    console.log("비밀번호 찾기(이메일 인증)");
-    console.log("authEmail : ", authEmail);
-    console.log("authcode : ", authCode);
-    console.log("비밀번호 변경");
-    console.log("newPassword : ", newPassword);
-    console.log("confirmPassword : ", confirmPassword);
-  }, [email, password, authEmail, authCode, newPassword, confirmPassword]);
-
   const handleInputChange = (value) => (e) => {
     value(e.target.value);
   };
@@ -86,27 +74,20 @@ const LoginForm = ({
 
   //로그인 요청
   const Login = async () => {
-    console.log("@@@");
     try {
       const response = await axios.post("http://localhost:3000/api/login", {
         email,
         password,
       });
 
-      console.log("Response:", response);
-
       if (response.data.message === "Auth Success") {
         const token = response.headers["authorization"];
-        console.log("Token:", token);
+        // console.log("Token:", token);
 
         localStorage.setItem("token", token);
         const decodedRole = decodeTokenAndSaveRoleAndSaveId(token);
-        console.log("Decoded from JWT:", decodedRole);
+        // console.log("Decoded from JWT:", decodedRole);
         setLoginFail("");
-
-        if (decodedRole.role === "PERSONAL") {
-          subscribeToSSE(decodedRole.userId, token);
-        }
         navigate("/");
 
         // 로그인 성공 후 추가 작업 (예: 홈 페이지로 리다이렉트)
@@ -124,23 +105,13 @@ const LoginForm = ({
     }
   };
 
-  //알림구독요청
-  const subscribeToSSE = async (userId, token) => {
-    const eventSource = new EventSource(
-      `http://localhost:12000/sse/subscribe/${userId}?token=${token}`
-    );
+  
 
-    eventSource.addEventListener("alarm", function (e) {
-      const alarm = JSON.parse(e.data);
-      alert(
-        `New alarm: ${alarm.senderId} -> ${alarm.receiverId} (${alarm.type})`
-      );
-    });
-
-    eventSource.onerror = function () {
-      console.error("Error in SSE connection");
-      eventSource.close();
-    };
+  // 엔터 키를 눌렀을 때 로그인 함수 호출
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      Login();
+    }
   };
 
   return (
@@ -178,6 +149,7 @@ const LoginForm = ({
             ? handleEmailChange
             : handlePasswordChange
         }
+        onKeyDown={title === "login" ? handleKeyDown : null} // 여기에 추가
       />
       <input
         className="input_login"
@@ -197,6 +169,7 @@ const LoginForm = ({
             ? handleCodeChange
             : handleConfirmChange
         }
+        onKeyDown={title === "login" ? handleKeyDown : null} // 여기에 추가
       />
 
       {/* 타이머 */}

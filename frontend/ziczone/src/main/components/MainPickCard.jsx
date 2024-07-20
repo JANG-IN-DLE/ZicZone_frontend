@@ -14,6 +14,8 @@ const PickCard = ({
   techUrl = [],
   userId,
   personalId,
+  berryPoint,
+  loggedInUserId,
 }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userType, setUserType] = useState(null);
@@ -63,11 +65,7 @@ const PickCard = ({
       navigate("/login");
     } else {
       if (userType === "COMPANY") {
-        // companyId가 배열이 아니도록 수정
-        const validCompanyId = Array.isArray(companyId)
-          ? companyId[0]
-          : companyId;
-        navigate(`/pickzone/${validCompanyId}/${personalId}`);
+        navigate(`/pickzone/${loggedInUserId}/${personalId}`);
       } else if (userType === "PERSONAL") {
         setSelectedCard({
           userName,
@@ -79,6 +77,7 @@ const PickCard = ({
           techUrl,
           userId,
           personalId,
+          berryPoint,
         });
         setIsModalOpen(true);
       }
@@ -146,9 +145,10 @@ const PickCard = ({
         <Modal
           isOpen={isModalOpen}
           onClose={handleModalClose}
-          userName={userName}
+          userName={maskName(userName)}
           onOpen={handleModalOpen}
           selectedCard={selectedCard}
+          berryPoint={berryPoint}
         />
       )}
     </>

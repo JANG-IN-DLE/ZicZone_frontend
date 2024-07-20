@@ -11,12 +11,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import MainPickCard from "./MainPickCard";
 import PickCard from "../../common/card/components/PickCard";
+import Layout from "../../common/layout/layout";
+import BoardItem from "../../helpzone/components/BoardItem";
 
-const NoLoginMainComponent = ({ onLogout }) => {
+const NoLoginMainComponent = ({ board }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userInfo, setUserInfo] = useState(null);
   const [pickCards, setPickCards] = useState([]);
-  const [helpZones, sethelpZones] = useState([]);
+  const [helpZones, setHelpZones] = useState([]);
   const [filterType, setFilterType] = useState("latest");
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(8);
@@ -24,18 +26,20 @@ const NoLoginMainComponent = ({ onLogout }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios
-      .get("/api/pickcards")
-      .then((response) => {
-        setPickCards(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching pick cards: ", error);
-      });
+    fetchHelpZones();
+  }, [filterType, page, size]);
 
+  useEffect(() => {
+    checkLoginStatus();
+  }, []);
+
+  useEffect(() => {
+    fetchPickCards();
+  }, [isLoggedIn, userInfo]);
+
+  const fetchHelpZones = () => {
     axios
-      //엔드포인트로 GET요청, 파라미터를 함께 보냄
-      .get("/api/board/filter", {
+      .get("/api/user/board/filter", {
         params: {
           filterType,
           page,
@@ -43,30 +47,22 @@ const NoLoginMainComponent = ({ onLogout }) => {
         },
       })
       .then((res) => {
-        // 응답 데이터는 res.data.dtoList에 있고 이 데이터를 helpZones 상태에 저장함
-        sethelpZones(res.data.dtoList);
+        setHelpZones(res.data.dtoList);
       })
       .catch((error) => {
-        console.error("Error help", error);
+        console.error("Error fetching help zones: ", error);
       });
+  };
 
-    const handleWriteButton = () => {
-      navigate("/cuboard"); // CUBoard로 이동
-    };
-  }, []);
-
-  useEffect(() => {
-    //토큰으로 로그인 확인
+  const checkLoginStatus = () => {
     const token = localStorage.getItem("token");
-
     if (token) {
       try {
         const decodedToken = jwtDecode(token);
         const currentTime = Date.now() / 1000;
-
         if (decodedToken.exp > currentTime) {
           setIsLoggedIn(true);
-          setUserInfo(decodedToken); // 토큰에서 필요한 사용자 정보 설정
+          setUserInfo(decodedToken);
         } else {
           setIsLoggedIn(false);
         }
@@ -75,26 +71,13 @@ const NoLoginMainComponent = ({ onLogout }) => {
         setIsLoggedIn(false);
       }
     } else {
-      setIsLoggedIn(false); // 토큰이 없으면 로그아웃 상태로 설정
+      setIsLoggedIn(false);
     }
-  }, []);
-
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    setIsLoggedIn(false);
-    navigate("/");
   };
 
-  // axios
-  //   .get("/api/main")
-  //   .then((res) => {
-  //     setBanner(res.data);
-  //     console.log(res);
-  //   })
-  //   .catch((error) => {
-  //     console.error("error", error);
-  //   });
+  const tokenUserId = localStorage.getItem("userId");
 
+  // 날짜 형식 바꾸기
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const year = date.getFullYear();
@@ -103,60 +86,90 @@ const NoLoginMainComponent = ({ onLogout }) => {
     return `${year}/${month}/${day}`;
   };
 
-  const handleCardClick = (userId) => {
+  const handleCardClick = (tokenUserId) => {
     navigate(`/pickzone/${isLoggedIn ? "loggedInPersonalId" : "personalId"}`);
   };
 
+  const fetchPickCards = async () => {
+    if (!isLoggedIn || !userInfo) {
+      console.error("User is not logged in or userInfo is not available");
+      return;
+    }
+    let endpoint = "/api/pickcards"; // 기본 비로그인 엔드포인트
+    const loggedInUserId = userInfo.userId;
+    if (isLoggedIn) {
+      switch (userInfo.role) {
+        case "COMPANY":
+          endpoint = `/api/company/pickcards?loggedInUserId=${loggedInUserId}`;
+          break;
+        case "PERSONAL":
+          endpoint = `/api/personal/pickcards?loggedInUserId=${loggedInUserId}`;
+          break;
+        default:
+          console.error("Unknown user role");
+          return;
+      }
+    }
+
+    try {
+      const response = await axios.get(endpoint);
+      setPickCards(response.data); // 응답 데이터를 pickCards 상태로 설정
+    } catch (error) {
+      console.error("Error fetching pick cards: ", error);
+    }
+  };
+
   return (
-    <div className="main_container">
-      {isLoggedIn ? <LoginBannerUserCard /> : <NoLoginBannerSlide />}
-      <div className="pickzone">
-        <h1>PICK 존</h1>
-        <div className="user_card_container">
-          {pickCards.slice(0, 3).map((pick, index) => {
-            const userImage =
-              pick.gender === "MALE" ? personalMImage : personalFImage;
-            return (
-              <MainPickCard
-                key={index}
-                companyId={pick.companyId}
-                personalId={pick.personalId}
-                userId={pick.userId}
-                userName={pick.userName}
-                userIntro={pick.userIntro}
-                gender={userImage}
-                jobName={pick.jobName}
-                personalCareer={pick.personalCareer}
-                techUrl={pick.techUrl}
-                scrap={pick.scrap}
-                onClick={() => handleCardClick(pick.userId)}
-              />
-            );
-          })}
+    <Layout>
+      <div className="main_container">
+        {isLoggedIn ? <LoginBannerUserCard /> : <NoLoginBannerSlide />}
+        <div className="pickzone">
+          <h1>PICK 존</h1>
+          <div className="user_card_container">
+            {pickCards.slice(0, 4).map((pick) => {
+              const userImage =
+                pick.gender === "MALE" ? personalMImage : personalFImage;
+              return (
+                <MainPickCard
+                  key={pick.userId} // 키값 변경
+                  companyId={pick.companyId}
+                  personalId={pick.personalId}
+                  userId={pick.userId}
+                  userName={pick.userName}
+                  userIntro={pick.userIntro}
+                  gender={userImage}
+                  jobName={pick.jobName}
+                  personalCareer={pick.personalCareer}
+                  techUrl={pick.techUrl}
+                  scrap={pick.scrap}
+                  onClick={() => handleCardClick(pick.loggedInUserId)}
+                  berryPoint={pick.berryPoint}
+                  loggedInUserId={tokenUserId}
+                />
+              );
+            })}
+          </div>
+        </div>
+        <div className="helpzone">
+          <h1>HELP 존</h1>
+          {Array.isArray(helpZones) &&
+            helpZones.length > 0 &&
+            helpZones
+              .slice(0, 5)
+              .map((board) => (
+                <BoardItem
+                  key={board.corrId}
+                  board={board}
+                  userId={tokenUserId}
+                />
+              ))}
+        </div>
+        <div className="company_slide">
+          <h1>직존과 함께하는 기업</h1>
+          <CompanySilde />
         </div>
       </div>
-      <div className="helpzone">
-        <h1>HELP 존</h1>
-        {helpZones.slice(0, 5).map((list) => {
-          return (
-            <HelpZone
-              key={list.userId}
-              userId={list.userId}
-              userName={list.userName}
-              corrModify={formatDate(list.corrModify)}
-              corrPoint={list.corrPoint}
-              corrTitle={list.corrTitle}
-              corrView={list.corrView}
-              personalCareer={list.personalCareer}
-            />
-          );
-        })}
-      </div>
-      <div className="company_slide">
-        <h1>직존과 함께하는 기업</h1>
-        <CompanySilde />
-      </div>
-    </div>
+    </Layout>
   );
 };
 

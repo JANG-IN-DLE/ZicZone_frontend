@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
+import axios from "axios";
 
 const HelpZone = ({
   corrModify,
@@ -8,7 +9,14 @@ const HelpZone = ({
   corrView,
   personalCareer,
   userName,
+  userId,
+  corrId,
+  isLoggedIn,
 }) => {
+  const navigate = useNavigate();
+  const [boardData, setBoardData] = useState();
+  const [view, setView] = useState();
+
   const getPointStyle = (point) => {
     switch (point) {
       case 100:
@@ -37,9 +45,40 @@ const HelpZone = ({
     return `${start}${"*".repeat(maskedLength)}${end}`;
   };
 
+  const handleItemClick = async () => {
+    if (!isLoggedIn) {
+      navigate("/login"); // 로그인 페이지로 이동
+      return;
+    }
+    try {
+      await axios.put(`/api/user/board/viewCnt/${userId}/${corrId}`);
+      navigate(`/rdboard/${corrId}`, { state: { userId } });
+    } catch (error) {
+      console.error("오류 메시지: ", error);
+    }
+  };
+
+  useEffect(() => {
+    const fetchBoardData = async () => {
+      try {
+        const response = await axios.get(`/api/user/board/${corrId}`);
+        setBoardData(response.data);
+        setView(response.data.corrView);
+      } catch (error) {
+        console.error("오류 메시지: ", error);
+      }
+    };
+
+    fetchBoardData();
+  }, [corrId]); // corrId가 변경될 때마다 데이터 새로 고침
+
   return (
     <>
-      <div className="help_list">
+      <div
+        className="help_list"
+        onClick={handleItemClick}
+        style={{ cursor: "pointer" }}
+      >
         <div className="help_list_berry" style={getPointStyle(corrPoint)}>
           {corrPoint}
         </div>
@@ -54,7 +93,7 @@ const HelpZone = ({
           <div className="help_list_create_date">{corrModify}</div>
           <div className="help_list_viewcnt">
             조회수
-            <span className="help_list_viewcnt_num">{corrView}</span>
+            <span className="help_list_viewcnt_num"> {corrView}</span>
           </div>
         </div>
       </div>

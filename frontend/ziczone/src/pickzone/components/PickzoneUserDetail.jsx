@@ -17,18 +17,24 @@ const maskName = (name) => {
 }
 
 export default function PickZoneUserDetail() {
-    const { loggedInPersonalId , personalId} = useParams();
+    const { loggedInUserId , personalId} = useParams();
     // 회원 정보 담는 hook
     const [userCard, setuserCard] = useState(null);
     // resume 정보 담는 hook
     const[userResume, setUserResume] = useState(null);
     // 선택 섹션 추적hook
     const[selectedSection, setSelectedSection] = useState("resume");
+    // 사용자 유형을 추적하는 hook
+    const [isCompany, setIsCompany] = useState(false);
 
 
     useEffect(() => {
+        // 사용자 유형 가져오기
+        const userType = localStorage.getItem("userRole");
+        setIsCompany(userType === "COMPANY");
+
         // pickDetail에서 왼쪽에 회원정보 가져오는 axios
-        axios.get(`/api/personal/pickcards/${loggedInPersonalId}/${personalId}`)
+        axios.get(`/api/personal/pickcards/${loggedInUserId}/${personalId}`)
             .then(response => {
                 const maskedUserCard = {
                     ...response.data,
@@ -51,7 +57,7 @@ export default function PickZoneUserDetail() {
             .catch(error => {
                 console.log('Error fetching user resume details: ', error )
             });
-    }, [loggedInPersonalId, personalId]);
+    }, [loggedInUserId, personalId]);
     // 2개 api 같이 가져올 때 밑에 구문 작성해야 rendering 할때 같이 가져와진다.
     if(!userCard || !userResume) {
         return <div>Loading...</div>
@@ -69,6 +75,7 @@ export default function PickZoneUserDetail() {
             selectedSection={selectedSection}
             setSelectedSection={setSelectedSection}
             userResume={userResume}
+            isCompany={isCompany}
         />
     );
 }

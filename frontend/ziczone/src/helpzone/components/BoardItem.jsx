@@ -29,7 +29,7 @@ export const getRelativeTime = (dateString) => {
 const getPointStyle = (point) => {
   switch (point) {
     case 100:
-      return { backgroundColor: '#FFFFFF', color: '#000000' };
+      return { backgroundColor: '#FFFFFF', color: '#000000', border: '2px solid #000', lineHeight: '27px'};
     case 200:
       return { backgroundColor: 'rgba(0, 81, 186, 0.25)', color: '#FFFFFF' };
     case 500:

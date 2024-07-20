@@ -21,8 +21,8 @@ const Footer = () => {
             <li>이메일 : ziczoneHelp@gmail.com / Fax : 02-1234-5678</li>
           </div>
           <div className="footer_addr">
-            <li className>우리 주소 : </li>
-            <li className>사업자 번호 : </li>
+            <li>우리 주소 : </li>
+            <li>사업자 번호 : </li>
           </div>
           <div>
             <li>Copyright ⓒ 장인들. All rights reserved.</li>
