@@ -23,11 +23,11 @@ RUN npm run build
 RUN apt-get update && apt-get install -y nginx
 
 # Nginx 설정 복사
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY frontend/ziczone/nginx/nginx.conf /etc/nginx/nginx.conf
 
 # Command to run the application
-# CMD ["nginx", "-g", "daemon off;"]
-CMD ["npm", "start"]
+CMD ["nginx", "-g", "daemon off;"]
+# CMD ["npm", "start"]
 
 # Expose port
 EXPOSE 3000
