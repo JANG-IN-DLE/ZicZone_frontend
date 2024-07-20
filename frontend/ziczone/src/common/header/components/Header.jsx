@@ -105,6 +105,7 @@ const Header = () => {
        localStorage.removeItem('userRole');
     }
 
+    window.location.reload('/');
     setIsLoggedIn(false); // 로그인 상태 false로 설정
     clearUserData(); // 사용자 데이터 초기화
   }
