@@ -179,7 +179,10 @@ const LoginBannerSlide = () => {
           </div>
           <div className="login_user_email">{userEmail}</div>
           <div className="main_mypage">
-            <Link to="/mypage" style={{ textDecoration: "none" }}>
+            <Link
+              to={userRole === "COMPANY" ? `/company/userId` : `/personal/userId`}
+              style={{ textDecoration: "none" }}
+            >
               <p> 마이페이지</p>
             </Link>
           </div>

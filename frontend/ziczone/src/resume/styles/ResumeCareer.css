@@ -48,6 +48,7 @@
 .resume_career_input p {
     border: none;
     font-size: 17px;
+    margin: 0 5px;
 }
 
 .resume_career_input input:focus {
@@ -75,11 +76,11 @@
 }
 
 .career_date input {
-    width: 80px;
+    width: 65px;
 }
 
 .career_date p {
-    margin: 0 10px;
+    margin: 0 5px;
 }
 
 .career_company {

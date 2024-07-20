@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./../../styles/ResumeEducation.css";
 import plus_btn from "./../../assets/Plus_btn.png";
 import ResumeEducationInput from "./ResumeEducationInput";
@@ -8,20 +8,31 @@ const ResumeEducation = ({ setEducation }) => {
     const [inputs, addInput, removeInput] = useAddInput();
     const [educationList, setEducationList] = useState([]);
 
-    const updateEducation = (id, newEducation) => {
+    const updateEducation = (id, education) => {
+        console.log("JSON.stringify(education)" + JSON.stringify(education));
+        console.log("JSON.stringify(id): " + JSON.stringify(id))
         setEducationList((prevList) => {
+            // console.log("JSON.stringify(prevList): " + JSON.stringify(prevList))
             const updatedList = prevList.map((edu) =>
-                edu.id === id ? { ...edu, ...newEducation } : edu
+                edu.id === id ? { ...edu, ...education } : edu
             );
-            setEducation(updatedList);
+            console.log("JSON.stringify(updatedList): " + JSON.stringify(updatedList))
+            if (!updatedList.find(edu => edu.id === id)) {
+                updatedList.push({ id, ...education });
+            }
             return updatedList;
         });
     };
+
 
     const addEducationInput = () => {
         const id = addInput();
         setEducationList((prevList) => [...prevList, { id, date: "", history: "", scorePoint: "", scoreStandard: "" }]);
     };
+    useEffect(() => {
+        console.log("educationList updated: ", educationList);
+        setEducation(educationList);
+    }, [educationList, setEducation]);
 
     return (
         <div className="resume_edu">
@@ -37,7 +48,11 @@ const ResumeEducation = ({ setEducation }) => {
                 <ResumeEducationInput
                     key={id}
                     id={id}
-                    removeInput={() => removeInput(id)}
+                    removeInput={() => {removeInput(id);
+                        setEducationList((prevList) => 
+                            prevList.filter((edu) => edu.id !== id)
+                        );
+                    }}
                     updateEducation={updateEducation}
                 />
             ))}

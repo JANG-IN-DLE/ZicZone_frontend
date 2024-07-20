@@ -4,13 +4,13 @@ import BoardItem from './MypageUserComment';
 import PageButton from '../PageButton';
 
 const MypageCommentHistory = () => {
-    const userId = 7;
+    const userId = localStorage.getItem('userId')
     const [commentData, setCommentData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 8; // 한 페이지당 컴포넌트 4개
 
     useEffect(() => {
-        axios.get(`/api/mycomm/${userId}`)
+        axios.get(`/api/personal/mycomm/${userId}`)
             .then(response => {
                 setCommentData(response.data);
             })
@@ -29,8 +29,8 @@ const MypageCommentHistory = () => {
 
     return (
         <div>
-            <div>
-                {commentData.length > 0 && commentData.map((comment) => (
+            <div className='post_comment_history'>
+                {currentItems.map((comment) => (
                     <BoardItem key={comment.commId} comment={comment} />
                 ))}
             </div>

@@ -4,11 +4,11 @@ import ResumeIntroductionInputView from "./ResumeIntroductionInputView";
 import axios from "axios";
 
 const ResumeIntroductionView = () => {
-    const userId = 7; // 사용자 ID
+    const userId = localStorage.getItem("userId")
     const [personalState, setPersonalState] = useState('');
 
     useEffect(() => {
-        axios.get(`/api/resumes/${userId}`)
+        axios.get(`/api/personal/resumes/user/${userId}`)
             .then(response => {
                 setPersonalState(response.data.personalState);
             })

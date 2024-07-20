@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import './../../styles/MypageEdit.css'
+import edit_modal from './../../assets/Personal_Edit.png'
 
 const MypageUserModal = ({ setIsModalOpen }) => {
     const handleCloseClick = () => {
         setIsModalOpen(false);
     };
 
-    const userId = 7;
+    const userId = localStorage.getItem('userId')
     const [intro, setIntro] = useState("");
     const [career, setCareer] = useState("");
     const [currentPassword, setCurrentPassword] = useState("");
@@ -19,7 +20,7 @@ const MypageUserModal = ({ setIsModalOpen }) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`/api/user/${userId}`);
+                const response = await axios.get(`/api/personal/${userId}`);
                 const { personalVisible, companyVisible, personalCareer, user } = response.data;
                 setPersonalVisible(personalVisible);
                 setCompanyVisible(companyVisible);
@@ -40,12 +41,13 @@ const MypageUserModal = ({ setIsModalOpen }) => {
                 personalCareer: career,
                 personalVisible,
                 companyVisible,
-                ...(changePassword && { changePassword, currentPassword })
+                currentPassword,
+                ...(changePassword && { changePassword })
             };
 
             console.log("Update data:", updateData); // 콘솔 로그 추가
 
-            await axios.put(`/api/personal-user/${userId}`, updateData);
+            await axios.put(`/api/personal/${userId}`, updateData);
             setIsModalOpen(false);
         } catch (error) {
             console.error("업데이트 오류: ", error);

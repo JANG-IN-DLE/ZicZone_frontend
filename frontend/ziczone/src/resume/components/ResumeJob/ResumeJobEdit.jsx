@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import "./../../styles/ResumeJob.css";
 import JobDropdown from "../ResumeDropdown/JobDropdown";
 import useDropdown from './../../hooks/useDropdown';
@@ -6,10 +7,25 @@ import dropdown from "./../../assets/Dropdown.png";
 
 const ResumeJobEdit = ({ setJob }) => {
     const [dropdownVisible, toggleDropdown, selectedItems, updateSelectedItems] = useDropdown(false);
+    const [jobPositions, setJobPositions] = useState([]);
+    const userId = localStorage.getItem("userId");
 
-    // useEffect(() => {
-    //     setJob(selectedItems);
-    // }, [selectedItems, setJob]);
+    useEffect(() => {
+        axios.get(`/api/personal/resumes/${userId}`)
+            .then(response => {
+                const positions = response.data.jobPositions.map(position => position.job.jobName);
+                setJobPositions(positions);
+                // API에서 가져온 값을 selectedItems에 반영
+                updateSelectedItems(positions);
+            })
+            .catch(error => {
+                console.error("Error fetching job positions", error);
+            });
+    }, [userId]);
+
+    useEffect(() => {
+        setJob(selectedItems);
+    }, [selectedItems, setJob]);
 
     return (
         <div className="resume_job">
@@ -17,9 +33,9 @@ const ResumeJobEdit = ({ setJob }) => {
                 <p className="job_title">개발 직무</p>
                 {selectedItems && selectedItems.length > 0 && (
                     <div className="selected_job_container">
-                        {selectedItems.map((item, index) => (
+                        {selectedItems.map((job, index) => (
                             <div key={index} className="selected_job">
-                                {item}
+                                {job}
                             </div>
                         ))}
                     </div>
@@ -32,6 +48,7 @@ const ResumeJobEdit = ({ setJob }) => {
                 </div>
                 {dropdownVisible && (
                     <JobDropdown 
+                        jobPositions={jobPositions}
                         selectedItems={selectedItems} 
                         updateSelectedItems={updateSelectedItems} 
                     />

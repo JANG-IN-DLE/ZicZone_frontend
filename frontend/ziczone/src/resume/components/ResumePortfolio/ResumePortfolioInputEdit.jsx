@@ -1,22 +1,27 @@
 import React from 'react';
 import useFileUpload from './../../hooks/useFileUpload';
 import file_delete from "./../../assets/Delete.png";
-import resume_delete from "./../../assets/Minus.png"
+import resume_delete from "./../../assets/Minus.png";
 
-const ResumePortfolioInputEdit = ({ id, removeInput }) => {
+const ResumePortfolioInputEdit = ({ id, fileName, removeInput, updatePortfolio }) => {
+    const setFile = (file) => {
+        const newFileName = file ? file.name : '';
+        updatePortfolio(id, { fileName: newFileName, file });
+    };
+
     const {
         fileInputRef,
-        fileName,
+        fileName: uploadedFileName,
         handleButtonClick,
         handleFileChange,
         handleClearFile,
-    } = useFileUpload();
+    } = useFileUpload(setFile, fileName);
 
     return (
         <div className="resume_portfolio_upload">
             <div className='portfolio_file_upload'>
-                {fileName && <span className="portfolio_file_name">{fileName}</span>}
-                {fileName && <img src={file_delete} alt="삭제" onClick={handleClearFile} style={{ cursor: 'pointer' }} />}
+                {uploadedFileName && <span className="portfolio_file_name">{uploadedFileName}</span>}
+                {uploadedFileName && <img src={file_delete} alt="삭제" onClick={handleClearFile} style={{ cursor: 'pointer' }} />}
             </div>
             <button onClick={handleButtonClick} className="port_upload_button">
                 파일첨부

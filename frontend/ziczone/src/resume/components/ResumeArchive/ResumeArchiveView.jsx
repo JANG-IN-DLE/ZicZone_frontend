@@ -4,7 +4,7 @@ import ResumeArchiveInputView from "./../ResumeArchive/ResumeArchiveInputView";
 import axios from "axios";
 
 const ResumeArchiveView = () => {
-    const userId = 7; // 사용자 ID
+    const userId = localStorage.getItem("userId")
     const [archiveData, setArchiveData] = useState({
         arch_git: '',
         arch_notion: '',
@@ -12,7 +12,7 @@ const ResumeArchiveView = () => {
     });
 
     useEffect(() => {
-        axios.get(`/api/resumes/${userId}`)
+        axios.get(`/api/personal/resumes/user/${userId}`)
             .then(response => {
                 setArchiveData(response.data.archive);
             })
@@ -28,9 +28,9 @@ const ResumeArchiveView = () => {
             </div>
             <div className="resume_bar"></div>
             <ResumeArchiveInputView
-                archGit={archiveData.arch_git}
-                archNotion={archiveData.arch_notion}
-                archBlog={archiveData.arch_blog}
+                archGit={archiveData.archGit}
+                archNotion={archiveData.archNotion}
+                archBlog={archiveData.archBlog}
             />
         </div>
     );

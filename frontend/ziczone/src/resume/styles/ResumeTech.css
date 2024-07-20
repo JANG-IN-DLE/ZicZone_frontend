@@ -29,7 +29,7 @@
     border: none;
 }
 
-.tech_select input::placeholder{
+.tech_select input::placeholder {
     color: #9b9b9b;
 }
 
@@ -49,21 +49,18 @@
     flex-wrap: wrap;
 }
 
-.selected_tech{
-    width: auto;
-    height: 35px;
-    background-color: #0051ba;
-    color: #fff;
+.selected_tech {
     margin: 0 8px 12px 0;
-    border-radius: 52px;
-    font-size: 16px;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0 20px;
 }
 
-.pk_resume_tech_container{
+.selected_tech img {
+    height: 35px;
+}
+
+.pk_resume_tech_container {
     width: 623px;
     height: auto;
     display: flex;
@@ -72,7 +69,7 @@
     align-items: center;
 }
 
-.pk_resume_tech{
+.pk_resume_tech {
     width: auto;
     height: 35px;
     color: #fff;

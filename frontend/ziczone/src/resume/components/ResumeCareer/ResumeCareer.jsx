@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./../../styles/ResumeCareer.css";
 import plus_btn from "./../../assets/Plus_btn.png";
 import ResumeCareerInput from "./ResumeCareerInput";
@@ -13,7 +13,9 @@ const ResumeCareer = ({ setCareer }) => {
             const updatedList = prevList.map((career) =>
                 career.id === id ? { ...career, ...newCareer } : career
             );
-            setCareer(updatedList);
+            if (!updatedList.find(career => career.id === id)) {
+                updatedList.push({ id, ...newCareer });
+            }
             return updatedList;
         });
     };
@@ -22,6 +24,10 @@ const ResumeCareer = ({ setCareer }) => {
         const id = addInput();
         setCareerList((prevList) => [...prevList, { id, startDate: "", endDate: "", companyName: "", position: "", job: "" }]);
     };
+
+    useEffect(() => {
+        setCareer(careerList);
+    }, [careerList, setCareer]);
 
     return (
         <div className="resume_career">
@@ -36,7 +42,12 @@ const ResumeCareer = ({ setCareer }) => {
                 <ResumeCareerInput
                     key={id}
                     id={id}
-                    removeInput={() => removeInput(id)}
+                    removeInput={() => {
+                        removeInput(id);
+                        setCareerList((prevList) => 
+                            prevList.filter((career) => career.id !== id)
+                        );
+                    }}
                     updateCareer={updateCareer}
                 />
             ))}

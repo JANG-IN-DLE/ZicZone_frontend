@@ -6,17 +6,17 @@ import useAddInput from "./../../hooks/useAddInput"
 import axios from "axios";
 
 const ResumePortfolioView = () => {
-    const userId = 7; // 사용자 ID
+    const userId = localStorage.getItem("userId")
     const [portfolioData, setPortfolioData] = useState('');
 
     useEffect(() => {
         axios.get(`/api/resumes/${userId}`)
-        .then(response => {
-            setPortfolioData(response.data.portfolioData)
-        })
-        .catch(error => {
-            console.log("portfolioData 호출 실패", error);
-        })
+            .then(response => {
+                setPortfolioData(response.data.portfolioData)
+            })
+            .catch(error => {
+                console.log("portfolioData 호출 실패", error);
+            })
     }, [userId])
 
     return (

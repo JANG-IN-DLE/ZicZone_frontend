@@ -10,14 +10,23 @@
     height: 150px;
     background-color: rgba(0, 81, 186, 0.02);
     border-radius: 16px;
-    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.15);
     font-size: 16px;
     padding-top: 25px;
     margin-right: 28px;
+    cursor: pointer;
+    border-image-source: linear-gradient(123.89deg,
+            rgba(170, 170, 170, 0.3) 9.82%,
+            rgba(170, 170, 170, 0.05) 32.32%,
+            rgba(170, 170, 170, 0.2) 61.65%,
+            rgba(170, 170, 170, 0.05) 90.18%);
+    box-shadow: 5px 5px 20px 0px rgba(0, 0, 0, 0.15),
+        4px 4px 4px 0px rgba(255, 255, 255, 0.1) inset;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
 }
 
 .mypage_user_resume div {
-    margin-bottom: 14px ;
+    margin-bottom: 14px;
 }
 
 .mypage_user_resume img {
@@ -30,10 +39,18 @@
     width: 148px;
     height: 100px;
     border-radius: 16px;
-    box-shadow: 4px 2px 10px rgba(0, 0, 0, 0.15);
     padding-top: 25px;
     margin-bottom: 10px;
     cursor: pointer;
+    border-image-source: linear-gradient(123.89deg,
+            rgba(170, 170, 170, 0.3) 9.82%,
+            rgba(170, 170, 170, 0.05) 32.32%,
+            rgba(170, 170, 170, 0.2) 61.65%,
+            rgba(170, 170, 170, 0.05) 90.18%);
+    box-shadow: 5px 5px 20px 0px rgba(0, 0, 0, 0.15),
+        4px 4px 4px 0px rgba(255, 255, 255, 0.1) inset;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
 }
 
 .mypage_user_point {
@@ -47,15 +64,24 @@
     width: 148px;
     height: 40px;
     background-color: rgba(0, 81, 186, 0.1);
-    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.15);
     font-size: 14px;
     color: #0051ba;
     font-weight: bold;
     border-radius: 16px;
     padding-top: 10px;
+    cursor: pointer;
+    border-image-source: linear-gradient(123.89deg,
+            rgba(170, 170, 170, 0.3) 9.82%,
+            rgba(170, 170, 170, 0.05) 32.32%,
+            rgba(170, 170, 170, 0.2) 61.65%,
+            rgba(170, 170, 170, 0.05) 90.18%);
+    box-shadow: 5px 5px 20px 0px rgba(0, 0, 0, 0.15),
+        4px 4px 4px 0px rgba(255, 255, 255, 0.1) inset;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
 }
 
-.mypage_right_flex{
+.mypage_right_flex {
     display: flex;
 }
 
@@ -75,7 +101,7 @@
 }
 
 /* 기업 */
-.mypage_company_right{
+.mypage_company_right {
     display: flex;
     align-items: center;
     width: 480px;
@@ -86,7 +112,7 @@
     text-align: left;
 }
 
-.mypage_company_intro p{
+.mypage_company_intro p {
     color: #5D5D5D;
     font-size: 20px;
 }

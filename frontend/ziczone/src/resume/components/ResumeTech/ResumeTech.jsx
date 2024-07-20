@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "./../../styles/ResumeTech.css";
 import TechDropdown from "./../ResumeDropdown/TechStackDropdown";
-import useDropdown from './../../hooks/useDropdown'
+import useDropdown from './../../hooks/useDropdown';
 import useFilter from "../../hooks/useFilter";
 import dropdown from "./../../assets/Dropdown.png";
 
@@ -17,11 +17,11 @@ const ResumeTech = ({ setTech }) => {
         <div className="resume_tech">
             <div className="resume_tech_title">
                 <p>기술 스택</p>
-                {selectedItems && selectedItems.length > 0 && (
+                {selectedItems.length > 0 && (
                     <div className="selected_tech_container">
                         {selectedItems.map((item, index) => (
                             <div key={index} className="selected_tech">
-                                {item}
+                                <img src={item.techUrl} alt={item.techName} title={item.techName} />
                             </div>
                         ))}
                     </div>
@@ -31,7 +31,7 @@ const ResumeTech = ({ setTech }) => {
                 <div className="tech_select" onClick={toggleDropdown}>
                     <input 
                         type="text" 
-                        placeholder="기술 스택을 선택해주세요." 
+                        placeholder="기술 스택을 선택해주세요."
                         value={filter}
                         onChange={(e) => setFilter(e.target.value)}
                     />

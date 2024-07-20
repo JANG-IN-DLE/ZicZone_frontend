@@ -1,20 +1,32 @@
 import { useState } from "react";
 
 const useModal = () => {
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-    const handleOpenModal = () => {
-        setIsModalOpen(true);
+    const handleOpenPasswordModalOpen = () => {
+        setIsPasswordModalOpen(true);
+    }
+
+    const handleClosePasswordModalOpen = () => {
+        setIsPasswordModalOpen(false);
+    }
+
+    const handleOpenEditModalOpen = () => {
+        setIsEditModalOpen(true);
     };
 
-    const handleCloseModal = () => {
-        setIsModalOpen(false);
+    const handleCloseEditModalOpen = () => {
+        setIsEditModalOpen(false);
     };
 
     return {
-        isModalOpen,
-        handleOpenModal,
-        handleCloseModal,
+        isPasswordModalOpen,
+        handleOpenPasswordModalOpen,
+        handleClosePasswordModalOpen,
+        isEditModalOpen,
+        handleOpenEditModalOpen,
+        handleCloseEditModalOpen
     };
 };
 

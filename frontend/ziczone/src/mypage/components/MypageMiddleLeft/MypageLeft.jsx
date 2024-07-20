@@ -2,6 +2,8 @@ import React from "react";
 import "./../../styles/MypageLeft.css";
 
 const MypageLeft = ({ userName, personalCareer, userIntro, email, jobPositions, techStacks }) => {
+    const jobNames = jobPositions.split(", ").map(job => job.trim());
+
     return (
         <div>
             <div className="mypage_user_title">
@@ -19,7 +21,11 @@ const MypageLeft = ({ userName, personalCareer, userIntro, email, jobPositions, 
                     </div>
                     <div className="mypage_user_detail">
                         <div className="email">{email}</div>
-                        <div className="job">{jobPositions}</div>
+                        <div className="job">
+                            {jobNames.map((job, index) => (
+                                <span key={index} className="job-tag">#{job}</span>
+                            ))}
+                        </div>
                         <div className="mypage_user_tech">
                             <ul>
                                 {techStacks.map((techItem, index) => (

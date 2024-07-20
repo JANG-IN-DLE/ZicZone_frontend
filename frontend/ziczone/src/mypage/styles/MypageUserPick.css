@@ -32,8 +32,10 @@
 
 .mypage_pick_company_name p {
     font-size: 30px;
+    color: #5d5d5d;
 }
 
 .mypage_pick_company_intro p {
     font-size: 13px;
+    color: #989898;
 }

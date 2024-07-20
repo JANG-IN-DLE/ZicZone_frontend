@@ -7,7 +7,7 @@ import birthdateIcon from "./../../assets/Birthdate.png";
 import useUploadImage from "../../hooks/useUploadImage";
 
 const ResumePrivacyEdit = ({ setPrivacy }) => {
-    const userId = 76;
+    const userId = localStorage.getItem("userId")
     const [resumeName, setResumeName] = useState('');
     const [resumeEmail, setResumeEmail] = useState('');
     const [resumePhone, setResumePhone] = useState('');
@@ -19,7 +19,7 @@ const ResumePrivacyEdit = ({ setPrivacy }) => {
     });
 
     useEffect(() => {
-        axios.get(`/api/resumes/${userId}`)
+        axios.get(`/api/personal/resumes/user/${userId}`)
             .then(response => {
                 const { resumeName, resumeDate, phoneNum, resumePhoto, resumeEmail } = response.data;
                 setResumeName(resumeName);
@@ -34,8 +34,8 @@ const ResumePrivacyEdit = ({ setPrivacy }) => {
     }, []);
 
     useEffect(() => {
-        setPrivacy({ resumeName, resumeEmail, resumePhone, resumeBirth, resumePhoto });
-    }, [resumeName, resumeEmail, resumePhone, resumeBirth, resumePhoto, setPrivacy]);
+        setPrivacy({ resumeName, resumeEmail, resumePhone, resumeBirth, resumePhoto: imageSrc });
+    }, [resumeName, resumeEmail, resumePhone, resumeBirth, imageSrc, setPrivacy]);
 
     const handleImageClick = () => {
         document.getElementById('imageInput').click();

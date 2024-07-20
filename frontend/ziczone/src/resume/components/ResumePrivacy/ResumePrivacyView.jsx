@@ -10,7 +10,7 @@ import axios from "axios";
 const ResumePrivacyView = () => {
     const { imageSrc } = useUploadImage();
     
-    const userId = 7;
+    const userId = localStorage.getItem("userId")
     const [privacyData, setPrivacyData] = useState({
         resumeName: "",
         resumeEmail: "",
@@ -20,7 +20,7 @@ const ResumePrivacyView = () => {
     });
 
     useEffect(() => {
-        axios.get(`/api/resumes/${userId}`)
+        axios.get(`/api/personal/resumes/user/${userId}`)
             .then(response => {
                 const data = response.data;
                 setPrivacyData({
