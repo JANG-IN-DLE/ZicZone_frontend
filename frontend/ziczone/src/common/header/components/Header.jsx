@@ -107,15 +107,8 @@ const Header = () => {
 
     setIsLoggedIn(false); // 로그인 상태 false로 설정
     clearUserData(); // 사용자 데이터 초기화
-
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("userRole");
-    localStorage.removeItem("userId");
-    // localStorage.removeItem("href");
-
-    window.location.href = "/";
-  };
+  }
+ 
 
   return (
     <div className="header">
