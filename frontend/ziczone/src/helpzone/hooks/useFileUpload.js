@@ -15,7 +15,7 @@ const useFileUpload = () => {
     };
 
     const setInitialFile = (initialFile) => {
-        setFile(initialFile);
+        setFile({ name: initialFile });
     };
 
     return {

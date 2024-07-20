@@ -19,7 +19,6 @@ const usePostForm = (initialBerry = 100, initialData = {}, userId, corrId, isEdi
             try {
                 const response = await axios.get(`/api/personal/board/myProfile/${userId}`);
                 setUserPoint(response.data.point);
-                console.log(setUserPoint);
             } catch (error) {
                 console.error('사용자 포인트를 가져오는 중 오류 발생:', error);
             }
@@ -73,7 +72,7 @@ const usePostForm = (initialBerry = 100, initialData = {}, userId, corrId, isEdi
 
         try {
             setIsSubmitting(true);
-            const response = isEditMode 
+            const response = isEditMode
                 ? await axios.put(`/api/personal/board/${corrId}/${userId}`, formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
