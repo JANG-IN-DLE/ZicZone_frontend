@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./../../styles/ResumeEtc.css";
 import plus_btn from "./../../assets/Plus_btn.png";
 import ResumeEtcInput from "./ResumeEtcInput";
@@ -13,6 +13,9 @@ const ResumeEtc = ({ setEtc }) => {
             const updatedList = prevList.map((etc) =>
                 etc.id === id ? { ...etc, ...newEtc } : etc
             );
+            if (!updatedList.find(etc => etc.id === id)) {
+                updatedList.push({ id, ...newEtc });
+            }
             return updatedList;
         });
     };
@@ -20,11 +23,6 @@ const ResumeEtc = ({ setEtc }) => {
     const addEtcInput = () => {
         const id = addInput();
         setEtcList((prevList) => [...prevList, { id, startDate: "", endDate: "", description: "" }]);
-    };
-
-    const handleRemoveInput = (id) => {
-        removeInput(id);
-        setEtcList((prevList) => prevList.filter((etc) => etc.id !== id));
     };
 
     useEffect(() => {
@@ -45,7 +43,12 @@ const ResumeEtc = ({ setEtc }) => {
                 <ResumeEtcInput
                     key={id}
                     id={id}
-                    removeInput={() => handleRemoveInput(id)}
+                    removeInput={() => {
+                        removeInput(id);
+                        setEtcList((prevList) => 
+                            prevList.filter((etc) => etc.id !== id)
+                        );
+                    }}
                     updateEtc={updateEtc}
                 />
             ))}
@@ -53,4 +56,4 @@ const ResumeEtc = ({ setEtc }) => {
     );
 };
 
-export default ResumeEtc;
+export default ResumeEtc

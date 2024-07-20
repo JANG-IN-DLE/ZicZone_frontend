@@ -5,11 +5,11 @@ import axios from "axios";
 
 
 const ResumeEtcView = () => {
-    const userId = 7; // 사용자 ID
+    const userId = localStorage.getItem("userId")
     const [etcData, setEtcData] = useState([]);
 
     useEffect(() => {
-        axios.get(`/api/resumes/${userId}`)
+        axios.get(`/api/personal/resumes/user/${userId}`)
             .then(response => {
                 setEtcData(response.data.etcs);
             })
@@ -29,8 +29,8 @@ const ResumeEtcView = () => {
             {etcData.map((etc, index) => (
                 <ResumeEtcInputView
                     key={index}
-                    etcDate={etc.etc_date}
-                    etcContent={etc.etc_content}
+                    etcDate={etc.etcDate}
+                    etcContent={etc.etcContent}
                 />
             ))}
         </div>

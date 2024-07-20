@@ -4,13 +4,13 @@ import BoardItem from '../../../../helpzone/components/BoardItem';
 import PageButton from '../PageButton';
 
 const MypagePostHistory = () => {
-    const userId = 7;
+    const userId = localStorage.getItem('userId')
     const [postData, setPostData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 8; // 한 페이지당 컴포넌트 4개
 
     useEffect(() => {
-        axios.get(`/api/myboard/${userId}`)
+        axios.get(`/api/personal/myboard/${userId}`)
             .then(response => {
                 setPostData(response.data);
             })
@@ -29,8 +29,8 @@ const MypagePostHistory = () => {
 
     return (
         <div>
-            <div>
-                {postData.map((post) => (
+            <div className='post_comment_history'>
+                {currentItems.map((post) => (
                     <BoardItem key={post.corrId} board={post} />
                 ))}
             </div>

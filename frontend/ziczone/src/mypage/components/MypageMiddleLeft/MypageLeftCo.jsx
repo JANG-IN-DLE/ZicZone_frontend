@@ -18,8 +18,9 @@ const MypageLeftCo = ({ userName, companyCeo, companyNum, companyAddr, email }) 
                     <div className="mypage_company_detail">
                         <div className="company_num">{companyNum}</div>
                         <div className="company_addr" style={{ height: '50px' }}>
-                            {mainAddress}
-                            {detailAddress && `, ${detailAddress}`}
+                            <p>{mainAddress},</p>
+                            {/* {detailAddress && `, ${detailAddress}`} */}
+                            <p>{detailAddress}</p>
                         </div>
                         <div className="company_email">{email}</div>
                     </div>

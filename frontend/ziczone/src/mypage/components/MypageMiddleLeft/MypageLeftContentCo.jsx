@@ -3,7 +3,7 @@ import axios from 'axios';
 import MypageLeftCo from "./MypageLeftCo";
 
 function MypageLeftContentCo() {
-    const userId = 1;
+    const userId = localStorage.getItem('userId')
     const [leftData, setLeftData] = useState({
         userName: "",
         companyCeo: "",
@@ -18,7 +18,7 @@ function MypageLeftContentCo() {
                 setLeftData({
                     userName: response.data.user.userName,
                     companyCeo: response.data.companyCeo,
-                    companyNum: response.data.companyNum,
+                    companyNum: formatCompanyNum(response.data.companyNum),
                     companyAddr: response.data.companyAddr,
                     email: response.data.user.email,
                 });
@@ -26,7 +26,12 @@ function MypageLeftContentCo() {
             .catch(error => {
                 console.error("leftData 호출 실패", error);
             });
-    }, []);
+    }, [userId]);
+
+    const formatCompanyNum = (num) => {
+        if (num.length !== 10) return num; // 길이가 10이 아닐 경우 그대로 반환
+        return `${num.substring(0, 3)}-${num.substring(3, 5)}-${num.substring(5)}`;
+    };
 
     return (
         <div>

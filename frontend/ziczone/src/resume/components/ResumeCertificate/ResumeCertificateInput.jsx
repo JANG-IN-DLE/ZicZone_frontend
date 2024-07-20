@@ -17,16 +17,28 @@ const ResumeCertificateInput = ({ id, removeInput, updateCertificate }) => {
 
     useEffect(() => {
         updateCertificate(id, certificate);
-    }, [certificate, id, updateCertificate]);
+    }, [certificate, id]);
 
     return (
         <div className="resume_cert_input">
             <div className="resume_circle"></div>
             <div className="cert_date">
-                <input type="text" name="date" placeholder="YYYY.MM" value={certificate.date} onChange={handleChange} />
+                <input 
+                    type="text" 
+                    name="date" 
+                    placeholder="YYYY.MM" 
+                    value={certificate.date} 
+                    onChange={handleChange} 
+                />
             </div>
             <div className="cert_history">
-                <input type="text" name="name" placeholder="자격증 이름" value={certificate.name} onChange={handleChange} />
+                <input 
+                    type="text" 
+                    name="name" 
+                    placeholder="자격증 이름" 
+                    value={certificate.name} 
+                    onChange={handleChange} 
+                />
             </div>
             <div className="cert_delete" onClick={removeInput}>
                 <img src={resume_delete} alt="delete" />

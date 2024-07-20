@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./../../../styles/MypageCompScrap.css";
-import unscrap from "./../../../../common/card/assets/scrap.svg";
-import scrap from "./../../../../common/card/assets/unscrap.svg";
+import scrap from "./../../../../common/card/assets/scrap.svg";
+import unscrap from "./../../../../common/card/assets/unscrap.svg";
 import maleImg from "./../../../../common/card/assets/personal_m_image.png";
 import femaleImg from "./../../../../common/card/assets/personal_f_image.png";
 import axios from 'axios';
@@ -13,14 +13,16 @@ const MypageCompScrap = ({ gender, jobPositions, userName, personalCareer, userI
 
     const [scrapStatus, setScrapStatus] = useState(isScrap);
 
+    const jobNames = jobPositions.split(", ").map(job => job.trim());
+
     const handleScrapClick = async (e) => {
         e.stopPropagation();
         try {
-            const response = await axios.post('/api/scrap', { personalId, companyId});
-            
+            const response = await axios.post('/api/company/scrap', { personalId, companyId });
+
             if (response.status === 200) {
                 setScrapStatus(!scrapStatus);
-                window.location.reload();
+                // window.location.reload();
             }
         } catch (error) {
             console.error("스크랩 중 오류 발생: ", error);
@@ -37,7 +39,9 @@ const MypageCompScrap = ({ gender, jobPositions, userName, personalCareer, userI
                 <img className="mypage_scrap_img" src={genderImg} alt="" />
                 <div className="scrap_content">
                     <div className="mypage_scrap_job">
-                        <p>{jobPositions}</p>
+                        {jobNames.map((job, index) => (
+                            <span key={index} className="job-tag">#{job}</span>
+                        ))}
                     </div>
                     <div className="mypage_scrap_name">
                         <p>{userName} | {personalCareer}</p>

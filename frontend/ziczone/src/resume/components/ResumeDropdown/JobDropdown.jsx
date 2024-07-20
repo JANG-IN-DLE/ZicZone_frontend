@@ -1,29 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import './../../styles/JobDropdown.css';
 
 const JobDropdown = ({ selectedItems, updateSelectedItems }) => {
-    const JobDropdownContent = [
-        "서버/백엔드",
-        "크로스플랫폼",
-        "HW/임베디드",
-        "프론트엔드",
-        "웹 풀스택",
-        "빅데이터",
-        "인공지능/머신러닝",
-        "develop/시스템",
-        "SW/솔루션",
-        "개발 PM",
-        "DBA",
-        "게임 서버",
-        "정보 보안",
-        "안드로이드",
-        "웹 퍼블리셔",
-        "블록체인",
-        "기술지원",
-        "QA",
-        "IOS",
-        "게임 클라이언트"
-    ];
+    const [jobPositions, setJobPositions] = useState([]);
+
+    // 컴포넌트가 마운트될 때 서버에서 직업 목록을 가져옵니다.
+    useEffect(() => {
+        axios.get('http://localhost:12000/api/jobs')
+            .then(response => {
+                const jobNames = response.data.map(job => job.jobName);
+                setJobPositions(jobNames);
+            })
+            .catch(error => {
+                console.error('Failed to fetch job positions:', error);
+            });
+    }, []); // 빈 배열을 의존성 배열로 넣어 최초 마운트 시에만 요청을 보냅니다.
 
     const handleCheckboxChange = (job) => {
         if (selectedItems.includes(job)) {
@@ -35,7 +27,7 @@ const JobDropdown = ({ selectedItems, updateSelectedItems }) => {
 
     return (
         <div className="job_dropdown_list">
-            {JobDropdownContent.map((job, index) => (
+            {jobPositions.map((job, index) => (
                 <div key={index}>
                     <input
                         type='checkbox'

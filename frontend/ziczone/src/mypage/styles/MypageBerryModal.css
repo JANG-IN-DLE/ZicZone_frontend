@@ -1,21 +1,27 @@
 .mypage_berry_modal {
     width: 520px;
     height: 510px;
-    border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 20px;
     background-color: #fff;
+    background-image: url("./../assets/Berry_History.png");
 }
 
 .berry_status_bar {
     width: 520px;
-    height: 28px;
-    /* background-color: antiquewhite; */
-    border-bottom: 0.5px solid #949494;
+    height: 40px;
+}
+
+.my_berry_record {
+    width: 250px;
+    border-bottom: 0.7px solid #989898;
+    margin: 0 auto;
+    padding-bottom: 12px;
+    margin-top: 24px;
 }
 
 .berry_modal_container {
     margin: 0 auto;
-    width: 250px;
+    width: 500px;
     height: 350px;
     text-align: center;
     overflow-y: scroll;
@@ -25,9 +31,7 @@
 .my_berry_record p {
     font-size: 24px;
     text-align: center;
-    margin-top: 24px;
-    padding-bottom: 12px;
-    border-bottom: 0.7px solid #989898;
+    justify-content: center;
 }
 
 .mypage_history_bar {

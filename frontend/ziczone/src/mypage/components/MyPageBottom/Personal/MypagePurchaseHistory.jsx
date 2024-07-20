@@ -4,13 +4,13 @@ import MypageUserPurchase from './MypageUserPurchase';
 import PageButton from '../PageButton';
 
 const MypagePurchaseHistory = () => {
-    const userId = 7;
+    const userId = localStorage.getItem('userId');
     const [purchaseData, setPurchaseData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 4; // 한 페이지당 컴포넌트 4개
 
     useEffect(() => {
-        axios.get(`/api/purchased/${userId}`)
+        axios.get(`/api/personal/purchased/${userId}`)
             .then(response => {
                 setPurchaseData(response.data.personalUsers);
             })

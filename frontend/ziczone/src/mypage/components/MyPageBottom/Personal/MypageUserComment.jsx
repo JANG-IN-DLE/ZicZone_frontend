@@ -1,5 +1,5 @@
 import React from 'react';
-import "./../../../../helpzone/styles/BoardItem.css";
+import "./../../../styles/BoardItem.css";
 
 // 특정 날짜와 현재 시간의 차이 계산 -> 상대적인 시간 반환
 export const getRelativeTime = (dateString) => {

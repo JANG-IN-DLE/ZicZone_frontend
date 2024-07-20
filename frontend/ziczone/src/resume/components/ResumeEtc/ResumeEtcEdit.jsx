@@ -5,18 +5,18 @@ import plus_btn from "./../../assets/Plus_btn.png";
 import ResumeEtcInputEdit from "./ResumeEtcInputEdit";
 
 const ResumeEtcEdit = ({ setEtc }) => {
-    const userId = 76;
+    const userId = localStorage.getItem("userId")
     const [inputs, setInputs] = useState([]);
     const [etcList, setEtcList] = useState([]);
 
     useEffect(() => {
         // 서버로부터 데이터 가져오기
-        axios.get(`/api/resumes/${userId}`)
+        axios.get(`/api/personal/resumes/${userId}`)
             .then(response => {
                 const data = response.data.etcs.map(etc => ({
-                    id: etc.etc_id,
-                    startDate: etc.etc_date.split('~')[0],
-                    description: etc.etc_content
+                    id: etc.etcId,
+                    startDate: etc.etcDate.split('~')[0],
+                    description: etc.etcContent
                 }));
                 setEtcList(data);
                 setInputs(data.map(etc => etc.id));

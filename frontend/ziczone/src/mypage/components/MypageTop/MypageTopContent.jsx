@@ -3,13 +3,14 @@ import MypageTop from "./MypageTop";
 import axios from "axios";
 
 const MypageTopContent = () => {
-    const userId = 7;
+    const userId = localStorage.getItem('userId')
+
     const [topData, setTopData] = useState({
         gender: ""
     })
 
     useEffect(() => {
-        axios.get(`/api/user/${userId}`)
+        axios.get(`/api/personal/${userId}`)
             .then(response => {
                 setTopData({
                     gender: response.data.gender

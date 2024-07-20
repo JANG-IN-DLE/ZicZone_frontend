@@ -60,6 +60,10 @@
     margin-left: 14px;
 }
 
+.resume_birthdate input {
+    width: 142px;
+}
+
 .resume_email p,
 .resume_phone p,
 .resume_birthdate p {

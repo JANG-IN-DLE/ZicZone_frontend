@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./../../styles/ResumeCurriculum.css";
 import plus_btn from "./../../assets/Plus_btn.png";
 import ResumeCurriculumInputEdit from "./ResumeCurriculumInputEdit";
@@ -13,6 +13,9 @@ const ResumeCurriculum = ({ setCurriculum }) => {
             const updatedList = prevList.map((curriculum) =>
                 curriculum.id === id ? { ...curriculum, ...newCurriculum } : curriculum
             );
+            if (!updatedList.find(curriculum => curriculum.id === id)) {
+                updatedList.push({ id, ...newCurriculum });
+            }
             return updatedList;
         });
     };
@@ -20,11 +23,6 @@ const ResumeCurriculum = ({ setCurriculum }) => {
     const addCurriculumInput = () => {
         const id = addInput();
         setCurriculumList((prevList) => [...prevList, { id, startDate: "", endDate: "", course: "", institution: "" }]);
-    };
-
-    const handleRemoveInput = (id) => {
-        removeInput(id);
-        setCurriculumList((prevList) => prevList.filter((curriculum) => curriculum.id !== id));
     };
 
     useEffect(() => {
@@ -44,12 +42,17 @@ const ResumeCurriculum = ({ setCurriculum }) => {
                 <ResumeCurriculumInputEdit
                     key={id}
                     id={id}
-                    removeInput={() => handleRemoveInput(id)}
+                    removeInput={() => {
+                        removeInput(id);
+                        setCurriculumList((prevList) => 
+                            prevList.filter((curriculum) => curriculum.id !== id)
+                        );
+                    }}
                     updateCurriculum={updateCurriculum}
                 />
             ))}
         </div>
     );
-}
+};
 
 export default ResumeCurriculum;

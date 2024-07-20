@@ -4,16 +4,15 @@ import MypageCompScrap from './MypageCompScrap';
 import PageButton from './../PageButton';
 
 const MypageScrapHistory = () => {
-    const userId = 1; // 로그인한 사용자의 ID를 설정
+    const userId = localStorage.getItem('userId')
     const [scrapData, setScrapData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 4; // 한 페이지당 컴포넌트 4개
 
     useEffect(() => {
-        axios.get(`/api/company-user-scraps/${userId}`)
+        axios.get(`/api/company/scraps/${userId}`)
             .then(response => {
                 setScrapData(response.data);
-                // console.log("강승규: ", JSON.stringify(response.data, null, 2));
             })
             .catch(error => {
                 console.error('Error fetching data:', error);

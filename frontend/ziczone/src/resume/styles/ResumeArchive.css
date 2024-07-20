@@ -31,7 +31,7 @@
 }
 
 .archive_input {
-    width: 430px;
+    width: 500px;
 }
 
 .archive_input div {
@@ -58,7 +58,7 @@
 .archive_notion input,
 .archive_blog input {
     border: none;
-    width: 250px;
+    width: 280px;
     height: 20px;
     font-size: 17px;
 }

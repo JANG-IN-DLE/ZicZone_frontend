@@ -1,18 +1,21 @@
-import React,{useEffect} from 'react';
+import React, { useEffect } from 'react';
 import useFileUpload from './../../hooks/useFileUpload';
 import erase from "./../../assets/Delete.png";
 
-const ResumeIntroductionInputEdit = ({ initialFileName }) => {
+const ResumeIntroductionInputEdit = ({ initialFileName, updateIntroduction }) => {
+    const setFile = (file) => {
+        updateIntroduction(file);
+    };
+
     const {
         fileInputRef,
         fileName,
         handleButtonClick,
         handleFileChange,
         handleClearFile,
-    } = useFileUpload(initialFileName);
+    } = useFileUpload(setFile, initialFileName);
 
     useEffect(() => {
-        // console.log('Initial fileName in useEffect:', initialFileName);
     }, [initialFileName]);
 
     return (

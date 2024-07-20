@@ -8,7 +8,8 @@ const ResumeEducationInput = ({ id, removeInput, updateEducation }) => {
         scorePoint: "",
         scoreStandard: ""
     });
-
+    console.log("education: " + JSON.stringify(education))
+    // console.log("JSON.stringify(id): " + JSON.stringify(id))
     const handleChange = (e) => {
         const { name, value } = e.target;
         setEducation((prevEducation) => ({
@@ -19,7 +20,7 @@ const ResumeEducationInput = ({ id, removeInput, updateEducation }) => {
 
     useEffect(() => {
         updateEducation(id, education);
-    }, [education]);
+    }, [id, education]);
 
     return (
         <div className="resume_edu_input">
@@ -31,6 +32,7 @@ const ResumeEducationInput = ({ id, removeInput, updateEducation }) => {
                     placeholder="YYYY.MM"
                     value={education.date}
                     onChange={handleChange}
+                    maxLength={7}
                 />
             </div>
             <div className="edu_history">

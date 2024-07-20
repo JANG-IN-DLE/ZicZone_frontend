@@ -4,11 +4,11 @@ import ResumeCertificateInputView from "./../ResumeCertificate/ResumeCertificate
 import axios from "axios";
 
 const ResumeCertificateView = () => {
-    const userId = 7; // 사용자 ID
+    const userId = localStorage.getItem("userId")
     const [certificateData, setCertificateData] = useState([]);
 
     useEffect(() => {
-        axios.get(`/api/resumes/${userId}`)
+        axios.get(`/api/personal/resumes/user/${userId}`)
             .then(response => {
                 setCertificateData(response.data.certificates);
             })
@@ -26,7 +26,7 @@ const ResumeCertificateView = () => {
             {certificateData.map((cert, index) => (
                 <ResumeCertificateInputView
                     key={index}
-                    certDate={cert.cert_date}
+                    certDate={cert.certDate}
                     certName={cert.cert}
                 />
             ))}

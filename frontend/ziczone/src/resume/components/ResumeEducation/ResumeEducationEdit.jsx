@@ -5,17 +5,17 @@ import plus_btn from "./../../assets/Plus_btn.png";
 import ResumeEducationInputEdit from "./ResumeEducationInputEdit";
 
 const ResumeEducationEdit = ({ setEducation }) => {
-    const userId = 76;
+    const userId = localStorage.getItem("userId")
     const [inputs, setInputs] = useState([]);
     const [educationList, setEducationList] = useState([]);
 
     useEffect(() => {
         // 서버로부터 데이터 가져오기
-        axios.get(`/api/resumes/${userId}`)
+        axios.get(`/api/personal/resumes/${userId}`)
             .then(response => {
                 const data = response.data.educations.map(edu => ({
                     id: edu.edu_id,
-                    date: edu.edu_date,
+                    date: edu.eduDate,
                     history: edu.edu,
                     scorePoint: edu.credit.split('/')[0],
                     scoreStandard: edu.credit.split('/')[1]

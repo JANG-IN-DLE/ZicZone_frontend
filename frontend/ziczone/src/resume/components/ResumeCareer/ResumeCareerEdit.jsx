@@ -5,21 +5,21 @@ import plus_btn from "./../../assets/Plus_btn.png";
 import ResumeCareerInputEdit from "./ResumeCareerInputEdit";
 
 const ResumeCareerEdit = ({ setCareer }) => {
-    const userId = 76;
+    const userId = localStorage.getItem("userId")
     const [inputs, setInputs] = useState([]);
     const [careerList, setCareerList] = useState([]);
 
     useEffect(() => {
         // 서버로부터 데이터 가져오기
-        axios.get(`/api/resumes/${userId}`)
+        axios.get(`/api/personal/resumes/${userId}`)
             .then(response => {
                 const data = response.data.careers.map(career => ({
-                    id: career.career_id,
-                    startDate: career.career_date.split('~')[0],
-                    endDate: career.career_date.split('~')[1],
-                    companyName: career.career_name,
-                    position: career.career_position,
-                    job: career.career_job
+                    id: career.careerId,
+                    startDate: career.careerDate.split('~')[0],
+                    endDate: career.careerDate.split('~')[1],
+                    companyName: career.careerName,
+                    position: career.careerPosition,
+                    job: career.careerJob
                 }));
                 setCareerList(data);
                 setInputs(data.map(career => career.id));

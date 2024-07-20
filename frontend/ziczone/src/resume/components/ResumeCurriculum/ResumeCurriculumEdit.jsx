@@ -5,20 +5,20 @@ import plus_btn from "./../../assets/Plus_btn.png";
 import ResumeCurriculumInputEdit from "./ResumeCurriculumInputEdit";
 
 const ResumeCurriculum = ({ setCurriculum }) => {
-    const userId = 76;
+    const userId = localStorage.getItem("userId")
     const [inputs, setInputs] = useState([]);
     const [curriculumList, setCurriculumList] = useState([]);
 
     useEffect(() => {
         // 서버로부터 데이터 가져오기
-        axios.get(`/api/resumes/${userId}`)
+        axios.get(`/api/personal/resumes/${userId}`)
             .then(response => {
                 const data = response.data.curriculums.map(curri => ({
-                    id: curri.curri_id,
-                    startDate: curri.curri_date.split('~')[0],
-                    endDate: curri.curri_date.split('~')[1],
-                    course: curri.curri_content,
-                    institution: curri.curri_company
+                    id: curri.curriId,
+                    startDate: curri.curriDate.split('~')[0],
+                    endDate: curri.curriDate.split('~')[1],
+                    course: curri.curriContent,
+                    institution: curri.curriCompany
                 }));
                 setCurriculumList(data);
                 setInputs(data.map(curri => curri.id));
