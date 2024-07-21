@@ -17,6 +17,7 @@ const ResumeEducationInputEdit = ({ id, date, history, scorePoint, scoreStandard
                     placeholder="YYYY.MM"
                     value={date}
                     onChange={handleChange}
+                    maxLength={7}
                 />
             </div>
             <div className="edu_history">
@@ -26,6 +27,7 @@ const ResumeEducationInputEdit = ({ id, date, history, scorePoint, scoreStandard
                     placeholder="OO대학교 OO학과 졸업"
                     value={history}
                     onChange={handleChange}
+                    style={{width: "250px"}}
                 />
                 <div className="edu_score">
                     <input
@@ -35,6 +37,7 @@ const ResumeEducationInputEdit = ({ id, date, history, scorePoint, scoreStandard
                         placeholder="학점"
                         value={scorePoint}
                         onChange={handleChange}
+                        maxLength={3}
                     />
                     <p> / </p>
                     <input
@@ -44,6 +47,7 @@ const ResumeEducationInputEdit = ({ id, date, history, scorePoint, scoreStandard
                         placeholder="기준학점"
                         value={scoreStandard}
                         onChange={handleChange}
+                        maxLength={3}
                     />
                 </div>
             </div>

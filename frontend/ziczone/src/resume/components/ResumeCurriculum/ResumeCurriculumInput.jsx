@@ -25,9 +25,9 @@ const ResumeCurriculumInput = ({ id, removeInput, updateCurriculum }) => {
         <div className="resume_curri_input">
             <div className="resume_circle"></div>
             <div className="curri_date">
-                <input type="text" name="startDate" placeholder="YYYY.MM" value={curriculum.startDate} onChange={handleChange} />
+                <input type="text" name="startDate" placeholder="YYYY.MM" value={curriculum.startDate} onChange={handleChange} maxLength={7} />
                 <p>~</p>
-                <input type="text" name="endDate" placeholder="YYYY.MM" value={curriculum.endDate} onChange={handleChange} />
+                <input type="text" name="endDate" placeholder="YYYY.MM" value={curriculum.endDate} onChange={handleChange} maxLength={7} />
             </div>
             <div className="curri_history">
                 <input type="text" name="course" placeholder="교육과정" value={curriculum.course} onChange={handleChange} />

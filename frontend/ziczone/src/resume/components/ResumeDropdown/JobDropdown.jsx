@@ -19,7 +19,12 @@ const JobDropdown = ({ selectedItems, updateSelectedItems }) => {
 
     const handleCheckboxChange = (job) => {
         if (selectedItems.includes(job)) {
-            updateSelectedItems(selectedItems.filter(item => item !== job));
+            // 최소 하나 이상 선택하도록 막음
+            if (selectedItems.length > 1) {
+                updateSelectedItems(selectedItems.filter(item => item !== job));
+            } else {
+                alert("최소 한 개 이상의 개발 직무를 선택하셔야 합니다.");
+            }
         } else if (selectedItems.length < 3) {
             updateSelectedItems([...selectedItems, job]);
         }

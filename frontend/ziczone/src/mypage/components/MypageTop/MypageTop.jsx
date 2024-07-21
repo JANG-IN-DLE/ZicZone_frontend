@@ -7,8 +7,7 @@ import maleImg from "../../../common/card/assets/personal_m_image.png"
 import femaleImg from "../../../common/card/assets/personal_f_image.png"
 
 const MypageTop = ({ gender }) => {
-    const { isPasswordModalOpen,
-        handleOpenPasswordModalOpen, handleClosePasswordModalOpen, isEditModalOpen, handleOpenEditModalOpen, handleCloseEditModalOpen } = useModal();
+    const { isPasswordModalOpen, handleOpenPasswordModalOpen, handleClosePasswordModalOpen, isEditModalOpen, handleOpenEditModalOpen, handleCloseEditModalOpen } = useModal();
 
     const genderImg = gender === 'MALE' ? maleImg : femaleImg;
 
@@ -30,7 +29,7 @@ const MypageTop = ({ gender }) => {
             </div>
 
             {/* 모달 컴포넌트를 상태 변수에 따라 조건부로 렌더링 */}
-            {isPasswordModalOpen && <CheckPassword setIsModalOpen={handlePasswordSuccess} />}
+            {isPasswordModalOpen && <CheckPassword setIsModalOpen={handleClosePasswordModalOpen} onSuccess={handlePasswordSuccess} />}
             {isEditModalOpen && <MypageUserModal setIsModalOpen={handleCloseEditModalOpen} />}
         </div>
     )

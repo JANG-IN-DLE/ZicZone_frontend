@@ -8,8 +8,7 @@ const ResumeEducationInput = ({ id, removeInput, updateEducation }) => {
         scorePoint: "",
         scoreStandard: ""
     });
-    console.log("education: " + JSON.stringify(education))
-    // console.log("JSON.stringify(id): " + JSON.stringify(id))
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setEducation((prevEducation) => ({
@@ -42,6 +41,7 @@ const ResumeEducationInput = ({ id, removeInput, updateEducation }) => {
                     placeholder="OO대학교 OO학과 졸업"
                     value={education.history}
                     onChange={handleChange}
+                    style={{width: "250px"}}
                 />
                 <div className="edu_score">
                     <input
@@ -51,6 +51,7 @@ const ResumeEducationInput = ({ id, removeInput, updateEducation }) => {
                         placeholder="학점"
                         value={education.scorePoint}
                         onChange={handleChange}
+                        maxLength={3}
                     />
                     <p> / </p>
                     <input
@@ -60,6 +61,7 @@ const ResumeEducationInput = ({ id, removeInput, updateEducation }) => {
                         placeholder="기준학점"
                         value={education.scoreStandard}
                         onChange={handleChange}
+                        maxLength={3}
                     />
                 </div>
             </div>

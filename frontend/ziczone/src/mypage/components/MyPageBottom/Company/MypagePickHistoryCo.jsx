@@ -34,6 +34,7 @@ const MypagePickHistoryCo = () => {
                 {currentItems.map((user, index) => (
                     <MypageCompPick
                         key={index}
+                        personalId={user.personalId}
                         userName={user.user.userName}
                         personalCareer={user.personalCareer}
                         userIntro={user.user.userIntro}

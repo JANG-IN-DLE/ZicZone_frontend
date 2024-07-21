@@ -17,6 +17,7 @@ const LoginBannerSlide = () => {
   const [userImg, setUserImg] = useState([]);
   const [companyLogo, setCompanyLogo] = useState([]);
   const [userRole, setUserRole] = useState();
+  const userId = localStorage.getItem("userId")
 
   const slideItems = [
     { id: 1, src: slidImage1, alt: "배너1" },
@@ -190,7 +191,7 @@ const LoginBannerSlide = () => {
           <div className="login_user_email">{userEmail}</div>
           <div className="main_mypage">
             <Link
-              to={userRole === "COMPANY" ? `/company/userId` : `/personal/userId`}
+              to={userRole === "COMPANY" ? `/company/${userId}` : `/personal/${userId}`}
               style={{ textDecoration: "none" }}
             >
               <p> 마이페이지</p>

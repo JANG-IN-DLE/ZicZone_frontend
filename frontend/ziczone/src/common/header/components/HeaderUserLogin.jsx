@@ -8,17 +8,18 @@ import axios from "axios";
 import AlarmList from "./Alarm";
 
 const UserLogin = ({ userName, onLogout }) => {
-  const { open, Dropdown } = useDropdown();
+  const { open, Dropdown, dropdownRef } = useDropdown();
+  const userId = localStorage.getItem("userId")
 
   return (
     <>
-      <div className="user_login">
+      <div className="user_login" ref={dropdownRef}>
         <AlarmList/>
         <div className="user_login_name">
           {userName}
           <div className={`dropdown_list ${open ? "show" : ""}`}>
             <div className="list1">
-              <Link to="/personal/userId">마이페이지</Link>
+              <Link to={`/personal/${userId}`}>마이페이지</Link>
             </div>
             <div className="list2">
               <Link to="/" onClick={onLogout}>

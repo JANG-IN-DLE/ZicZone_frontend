@@ -17,6 +17,7 @@ const ResumeEtcInputEdit = ({ id, startDate, description, removeInput, updateEtc
                     placeholder="YYYY.MM"
                     value={startDate}
                     onChange={handleChange}
+                    maxLength={7}
                 />
             </div>
             <div className="etc_history">

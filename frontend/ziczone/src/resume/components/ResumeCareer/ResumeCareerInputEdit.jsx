@@ -34,6 +34,7 @@ const ResumeCareerInputEdit = ({ id, startDate, endDate, companyName, position, 
                     placeholder="기업명"
                     value={companyName}
                     onChange={handleChange}
+                    style={{width: "250px"}}
                 />
                 <div className="career_company">
                     <input

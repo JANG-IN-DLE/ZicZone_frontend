@@ -6,10 +6,11 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 const CompLogin = ({ companyLogo, userName, onLogout }) => {
-  const { open, Dropdown } = useDropdown();
+  const { open, Dropdown, dropdownRef } = useDropdown();
+  const userId = localStorage.getItem("userId")
 
   return (
-    <div className="comp_login">
+    <div className="comp_login" ref={dropdownRef}>
       <div className="comp_login_logo">
         {/* 컴퍼니로고가 있다면 이미지에 로고 띄우고 없으면 공백 처리 */}
         {companyLogo ? <img src={companyLogo} alt="Company Logo" /> : null}
@@ -18,7 +19,7 @@ const CompLogin = ({ companyLogo, userName, onLogout }) => {
         {userName}
         <div className={`dropdown_list ${open ? "show" : ""}`}>
           <div className="list1">
-            <Link to="/company/userId">마이페이지</Link>
+            <Link to={`/company/${userId}`}>마이페이지</Link>
           </div>
           <div className="list2">
             <Link to="/" onClick={onLogout}>

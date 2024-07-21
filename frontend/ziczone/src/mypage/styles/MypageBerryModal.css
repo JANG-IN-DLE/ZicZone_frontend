@@ -4,6 +4,7 @@
     border-radius: 20px;
     background-color: #fff;
     background-image: url("./../assets/Berry_History.png");
+    position: fixed;
 }
 
 .berry_status_bar {
@@ -38,31 +39,34 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
-    width: 250px;
-    margin: 23px auto;
+    width: 300px;
+    margin: 30px auto;
+    justify-content: center;
+    align-items: center;
 }
 
 .history_bar_item {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    /* padding: 12px 0;
-    border-bottom: 1px solid #ccc; */
+    /* justify-content: space-between; */
     font-size: 18px;
-}
-
-.history_bar_date,
-.history_bar_record,
-.history_bar_bucket {
-    text-align: left;
 }
 
 .history_bar_date {
     text-align: left;
+    width: 48px;
+    margin-right: 12px;
+}
+
+.history_bar_record {
+    width: 118px;
+    text-align: left;
+    margin-right: 12px;
 }
 
 .history_bar_bucket {
     text-align: right;
+    width: 80px;
 }
 
 .berry_history_close {

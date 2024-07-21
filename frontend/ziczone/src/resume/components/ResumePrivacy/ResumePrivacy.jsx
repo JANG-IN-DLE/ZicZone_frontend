@@ -10,12 +10,12 @@ const ResumePrivacy = ({ setPrivacy }) => {
 
     const [resumeName, setResumeName] = useState('');
     const [resumeEmail, setResumeEmail] = useState('');
-    const [phoneNum, setResumePhone] = useState('');
+    const [phone_num, setResumePhone] = useState('');
     const [resumeDate, setResumeBirth] = useState('');
 
     useEffect(() => {
-        setPrivacy({ resumeName, resumeEmail, phoneNum, resumeDate, resumePhotoUrl: imageFile });
-    }, [resumeName, resumeEmail, phoneNum, resumeDate, imageFile, setPrivacy]);
+        setPrivacy({ resumeName, resumeEmail, phone_num, resumeDate, resumePhotoUrl: imageFile });
+    }, [resumeName, resumeEmail, phone_num, resumeDate, imageFile, setPrivacy]);
 
     const handleImageClick = () => {
         document.getElementById('imageInput').click();
@@ -33,7 +33,7 @@ const ResumePrivacy = ({ setPrivacy }) => {
                 </div>
                 <div className="resume_phone">
                     <img src={phone} alt="Phone" />
-                    <input type="text" placeholder="010-0000-0000" value={phoneNum} maxLength={13} onChange={(e) => setResumePhone(e.target.value)} />
+                    <input type="text" placeholder="010-0000-0000" value={phone_num} maxLength={13} onChange={(e) => setResumePhone(e.target.value)} />
                 </div>
                 <div className="resume_birthdate">
                     <img src={birthdate} alt="Birthdate" />
