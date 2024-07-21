@@ -23,6 +23,7 @@ const FileUpload = ({ onFileChange, initialFile }) => {
         handleFileRemove();
         onFileChange(null);
     };
+
     return (
         <div className="file_upload">
             <label htmlFor="pdf_input" className="fu_label">
