@@ -6,16 +6,16 @@ import birthdate from "./../../assets/Birthdate.png";
 import useUploadImage from "../../hooks/useUploadImage";
 
 const ResumePrivacy = ({ setPrivacy }) => {
-    const { imageSrc, isImageUploaded, handleImageChange, handleDeleteImage } = useUploadImage();
+    const { imageSrc, isImageUploaded, handleImageChange, handleDeleteImage, imageFile } = useUploadImage();
 
     const [resumeName, setResumeName] = useState('');
     const [resumeEmail, setResumeEmail] = useState('');
-    const [resumePhone, setResumePhone] = useState('');
-    const [resumeBirth, setResumeBirth] = useState('');
+    const [phoneNum, setResumePhone] = useState('');
+    const [resumeDate, setResumeBirth] = useState('');
 
     useEffect(() => {
-        setPrivacy({ resumeName, resumeEmail, resumePhone, resumeBirth, imageSrc });
-    }, [resumeName, resumeEmail, resumePhone, resumeBirth, imageSrc, setPrivacy]);
+        setPrivacy({ resumeName, resumeEmail, phoneNum, resumeDate, resumePhotoUrl: imageFile });
+    }, [resumeName, resumeEmail, phoneNum, resumeDate, imageFile, setPrivacy]);
 
     const handleImageClick = () => {
         document.getElementById('imageInput').click();
@@ -25,7 +25,7 @@ const ResumePrivacy = ({ setPrivacy }) => {
         <div className="resume_privacy">
             <div className="resume_privacy_left">
                 <div className="resume_name">
-                    <input type="text" placeholder="이름" value={resumeName} onChange={(e) => setResumeName(e.target.value)} />
+                    <input type="text" placeholder="이름" value={resumeName} maxLength={3} onChange={(e) => setResumeName(e.target.value)} />
                 </div>
                 <div className="resume_email">
                     <img src={email} alt="Email" />
@@ -33,11 +33,11 @@ const ResumePrivacy = ({ setPrivacy }) => {
                 </div>
                 <div className="resume_phone">
                     <img src={phone} alt="Phone" />
-                    <input type="text" placeholder="010-0000-0000" value={resumePhone} onChange={(e) => setResumePhone(e.target.value)} />
+                    <input type="text" placeholder="010-0000-0000" value={phoneNum} maxLength={13} onChange={(e) => setResumePhone(e.target.value)} />
                 </div>
                 <div className="resume_birthdate">
                     <img src={birthdate} alt="Birthdate" />
-                    <input type="text" placeholder="YYYY년 MM월 DD일" value={resumeBirth} onChange={(e) => setResumeBirth(e.target.value)} />
+                    <input type="date" placeholder="YYYY년 MM월 DD일" value={resumeDate} onChange={(e) => setResumeBirth(e.target.value)} />
                 </div>
             </div>
             <div className="resume_privacy_right">

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./../../styles/ResumePortfolio.css";
 import plus_btn from "./../../assets/Plus_btn.png";
 import ResumePortfolioInput from "./ResumePortfolioInput";
@@ -13,6 +13,9 @@ const ResumePortfolio = ({ setPortfolio }) => {
             const updatedList = prevList.map((portfolio) =>
                 portfolio.id === id ? { ...portfolio, ...newPortfolio } : portfolio
             );
+            if (!updatedList.find(portfolio => portfolio.id === id)) {
+                updatedList.push({ id, ...newPortfolio });
+            }
             return updatedList;
         });
     };
@@ -20,11 +23,6 @@ const ResumePortfolio = ({ setPortfolio }) => {
     const addPortfolioInput = () => {
         const id = addInput();
         setPortfolioList((prevList) => [...prevList, { id, file: null }]);
-    };
-
-    const handleRemoveInput = (id) => {
-        removeInput(id);
-        setPortfolioList((prevList) => prevList.filter((portfolio) => portfolio.id !== id));
     };
 
     useEffect(() => {
@@ -44,7 +42,12 @@ const ResumePortfolio = ({ setPortfolio }) => {
                 <ResumePortfolioInput
                     key={id}
                     id={id}
-                    removeInput={() => handleRemoveInput(id)}
+                    removeInput={() => {
+                        removeInput(id);
+                        setPortfolioList((prevList) => 
+                            prevList.filter((portfolio) => portfolio.id !== id)
+                        );
+                    }}
                     updatePortfolio={updatePortfolio}
                 />
             ))}

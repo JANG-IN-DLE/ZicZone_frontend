@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import axios from 'axios';
 import '../../styles/MypageEdit.css';
-import company_edit from "./../../assets/Company_Edit.png";
+import company_edit from "./../../assets/Logo_Edit.png";
 import { FormProvider } from './../../../join/components/FormContext';
 import AddressInput from './AddressInput';
 
@@ -10,7 +10,7 @@ const MypageCompanyModal = ({ setIsModalOpen }) => {
         setIsModalOpen(false);
     };
 
-    const userId = 1;
+    const userId = localStorage.getItem('userId')
     const [logo, setLogo] = useState('');
     const [userName, setUserName] = useState('');
     const [intro, setIntro] = useState("");
@@ -51,9 +51,10 @@ const MypageCompanyModal = ({ setIsModalOpen }) => {
                 ...(changePassword && { changePassword })
             };
 
-            console.log("Update data:", updateData);
+            // console.log("Update data:", updateData);
 
-            await axios.put(`/api/company-user/${userId}`, updateData);
+            await axios.put(`/api/company/${userId}`, updateData);
+            alert("정보가 수정되었습니다.")
             setIsModalOpen(false);
         } catch (error) {
             console.error("업데이트 오류: ", error);

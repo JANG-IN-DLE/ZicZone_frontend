@@ -3,7 +3,7 @@ import MypageTopCo from "./MypageTopCo";
 import axios from "axios";
 
 const MypageTopContentCo = () => {
-    const userId = 1;
+    const userId = localStorage.getItem('userId')
     const [topData, setTopData] = useState({
         companyLogo: ""
     })

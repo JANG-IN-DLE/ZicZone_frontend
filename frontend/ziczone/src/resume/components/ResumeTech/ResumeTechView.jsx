@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "./../../styles/ResumeTech.css";
-import useDropdown from './../../hooks/useDropdown'
 
-const ResumeTechView = ({techUrls=[]}) => {
-    // const [selectedItems] = useDropdown(false);
+const ResumeTechView = () => {
+    const userId = localStorage.getItem('userId');
+    const [techUrls, setTechUrls] = useState([]);
 
+    useEffect(() => {
+        axios.get(`/api/personal/resumes/user/${userId}`)
+            .then(response => {
+                const techStacks = response.data.techStacks || [];
+                const urls = techStacks.map(stack => stack.tech.techUrl);
+                setTechUrls(urls);
+            })
+            .catch(error => {
+                console.error("Failed to fetch tech stacks", error);
+            });
+    }, [userId]);
 
     return (
         <div className="resume_tech">
@@ -20,6 +32,6 @@ const ResumeTechView = ({techUrls=[]}) => {
             </div>
         </div>
     );
-}
+};
 
 export default ResumeTechView;

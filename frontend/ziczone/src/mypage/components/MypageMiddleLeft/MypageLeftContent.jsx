@@ -3,7 +3,7 @@ import axios from 'axios';
 import MypageLeft from "./MypageLeft";
 
 function MypageLeftContent() {
-    const userId = 7;
+    const userId = localStorage.getItem('userId')
     const [leftData, setLeftData] = useState({
         userName: "",
         personalCareer: "",
@@ -14,7 +14,7 @@ function MypageLeftContent() {
     });
 
     useEffect(() => {
-        axios.get(`/api/user/${userId}`)
+        axios.get(`/api/personal/${userId}`)
             .then(response => {
                 const jobPositions = response.data.jobPositions.map(position => position.job.jobName).join(", ");
                 const techStacks = response.data.techStacks.map(stack => ({

@@ -4,11 +4,11 @@ import ResumeCurriculumInputView from "./../ResumeCurriculum/ResumeCurriculumInp
 import axios from "axios";
 
 const ResumeCurriculumView = () => {
-    const userId = 7; // 사용자 ID
+    const userId = localStorage.getItem("userId")
     const [curriculumData, setCurriculumData] = useState([]);
 
     useEffect(() => {
-        axios.get(`/api/resumes/${userId}`)
+        axios.get(`/api/personal/resumes/user/${userId}`)
             .then(response => {
                 setCurriculumData(response.data.curriculums);
             })
@@ -26,9 +26,9 @@ const ResumeCurriculumView = () => {
             {curriculumData.map((curri, index) => (
                 <ResumeCurriculumInputView
                     key={index}
-                    curriDate={curri.curri_date}
-                    curriContent={curri.curri_content}
-                    curriCompany={curri.curri_company}
+                    curriDate={curri.curriDate}
+                    curriContent={curri.curriContent}
+                    curriCompany={curri.curriCompany}
                 />
             ))}
         </div>

@@ -18,18 +18,36 @@ const ResumeEtcInput = ({ id, removeInput, updateEtc }) => {
 
     useEffect(() => {
         updateEtc(id, etc);
-    }, [etc, id, updateEtc]);
+    }, [etc, id]);
 
     return (
         <div className="resume_etc_input">
             <div className="resume_circle"></div>
             <div className="etc_date">
-                <input type="text" name="startDate" placeholder="YYYY.MM" value={etc.startDate} onChange={handleChange} />
+                <input 
+                    type="text" 
+                    name="startDate" 
+                    placeholder="YYYY.MM" 
+                    value={etc.startDate} 
+                    onChange={handleChange} 
+                />
                 <p>~</p>
-                <input type="text" name="endDate" placeholder="YYYY.MM" value={etc.endDate} onChange={handleChange} />
+                <input 
+                    type="text" 
+                    name="endDate" 
+                    placeholder="YYYY.MM" 
+                    value={etc.endDate} 
+                    onChange={handleChange} 
+                />
             </div>
             <div className="etc_history">
-                <input type="text" name="description" placeholder="기타" value={etc.description} onChange={handleChange} />
+                <input 
+                    type="text" 
+                    name="description" 
+                    placeholder="기타" 
+                    value={etc.description} 
+                    onChange={handleChange} 
+                />
             </div>
             <div className="cert_delete" onClick={removeInput}>
                 <img src={resume_delete} alt="delete" />

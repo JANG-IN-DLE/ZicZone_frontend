@@ -4,11 +4,11 @@ import "./../../styles/ResumeEducation.css";
 import ResumeEducationInputView from "./ResumeEducationInputView";
 
 const ResumeEducationView = () => {
-    const userId = 7;
+    const userId = localStorage.getItem("userId")
     const [educationData, setEducationData] = useState([]);
 
     useEffect(() => {
-        axios.get(`/api/resumes/${userId}`)
+        axios.get(`/api/personal/resumes/user/${userId}`)
             .then(response => {
                 setEducationData(response.data.educations);
             })
@@ -27,7 +27,7 @@ const ResumeEducationView = () => {
             {educationData.map((edu, index) => (
                 <ResumeEducationInputView
                     key={index}
-                    eduDate={edu.edu_date}
+                    eduDate={edu.eduDate}
                     eduSchool={edu.edu}
                     eduScore={edu.credit.split('/')[0]}
                     eduStandard={edu.credit.split('/')[1]}

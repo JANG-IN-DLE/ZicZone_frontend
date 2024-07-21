@@ -26,6 +26,9 @@ import JoinCom from './join/components/Join_Com'
 import JoinPer from './join/components/Join_Per'
 import Mypage from './mypage/components/MypageUser';
 import MainPickCard from './main/components/MainPickCard'
+import MypageCompany from './mypage/components/MypageCompany';
+import CheckPassword from './mypage/components/MypageModal/CheckPassword';
+import ResumeEdit from "./resume/components/ResumeEdit"
 
 
 
@@ -55,8 +58,11 @@ function App() {
           <Route path='/signup' element={<JoinSelect/>}/>
           <Route path='/signup-com' element={<JoinCom/>}/>
           <Route path='/signup-per' element={<JoinPer/>}/>
-          <Route path='/mypage' element={<Mypage/>}/>
-          <Route path='/ChargeMain' element={<ChargeMain/>}/>
+          <Route path="/pickzone/:companyId/:personalId" element={<PickZoneUserDetail/>} />
+          <Route path="/personal/:userId" element={<Mypage />} />
+          <Route path="/company/:userId" element={<MypageCompany />} />
+          <Route path="/personal/resumes/userId" element={<Resume />} />
+          <Route path="/charge" element={<ChargeMain/>} />
         </Routes> 
          {/* <Footer /> */}
       </Router>

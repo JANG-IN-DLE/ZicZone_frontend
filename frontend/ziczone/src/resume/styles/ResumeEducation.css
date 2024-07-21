@@ -48,6 +48,7 @@
 .resume_edu_input p {
     border: none;
     font-size: 17px;
+    margin: 0 5px;
 }
 
 .resume_edu_input input:focus {

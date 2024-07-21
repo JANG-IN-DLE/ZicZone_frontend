@@ -4,7 +4,7 @@ import "./../../styles/ResumeArchive.css";
 import ResumeArchiveInputEdit from "./ResumeArchiveInputEdit";
 
 const ResumeArchiveEdit = ({ setArchive }) => {
-    const userId = 76;
+    const userId = localStorage.getItem("userId")
     const [archiveData, setArchiveData] = useState({
         git: '',
         notion: '',
@@ -13,18 +13,18 @@ const ResumeArchiveEdit = ({ setArchive }) => {
 
     useEffect(() => {
         // 서버로부터 데이터 가져오기
-        axios.get(`/api/resumes/${userId}`)
+        axios.get(`/api/personal/resumes/${userId}`)
             .then(response => {
                 const data = response.data.archive;
                 setArchiveData({
-                    git: data.arch_git,
-                    notion: data.arch_notion,
-                    blog: data.arch_blog
+                    git: data.archGit,
+                    notion: data.archNotion,
+                    blog: data.archBlog
                 });
                 setArchive({
-                    git: data.arch_git,
-                    notion: data.arch_notion,
-                    blog: data.arch_blog
+                    git: data.archGit,
+                    notion: data.archNotion,
+                    blog: data.archBlog
                 });
             })
             .catch(error => {

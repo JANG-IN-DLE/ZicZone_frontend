@@ -36,11 +36,10 @@
     .company_modal_header {
       width: 540px;
       height: 40px;
-      margin-top: -15px;
     }
 
     .circles {
-      height: 100%;
+      height: 10px;
       display: flex;
       align-items: center;
       margin-left: 15px;
@@ -51,6 +50,9 @@
       height: 12px;
       border-radius: 32px;
       margin-left: 12px;
+      display: flex;
+      align-content: center;
+      margin-top: 30px;
 
     }
 
@@ -82,10 +84,10 @@
 
     .com_logo_img {
       /* border: 0.5px solid #0051BA; */
-      border-radius: 40px;
+      border-radius: 45px;
       background-color: white;
-      width: 70px;
-      height: 70px;
+      width: 90px;
+      height: 90px;
       overflow: hidden;
       display: flex;
       justify-content: center;

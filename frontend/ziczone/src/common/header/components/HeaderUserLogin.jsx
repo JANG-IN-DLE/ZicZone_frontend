@@ -18,7 +18,7 @@ const UserLogin = ({ userName, onLogout }) => {
           {userName}
           <div className={`dropdown_list ${open ? "show" : ""}`}>
             <div className="list1">
-              <Link to="/mypage">마이페이지</Link>
+              <Link to="/personal/userId">마이페이지</Link>
             </div>
             <div className="list2">
               <Link to="/" onClick={onLogout}>

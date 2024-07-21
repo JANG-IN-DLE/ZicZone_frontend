@@ -1,50 +1,78 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "./../styles/Resume.css"
-import ResumePrivacyEdit from "./ResumePrivacy/ResumePrivacyEdit"
+import "./../styles/Resume.css";
+import ResumePrivacyEdit from "./ResumePrivacy/ResumePrivacyEdit";
 import ResumeJobEdit from "./ResumeJob/ResumeJobEdit";
-import ResumeTechEdit from "./ResumeTech/ResumeTechEdit"
-import ResumeEducationEdit from "./ResumeEducation/ResumeEducationEdit"
+import ResumeTechEdit from "./ResumeTech/ResumeTechEdit";
+import ResumeEducationEdit from "./ResumeEducation/ResumeEducationEdit";
 import ResumeCareerEdit from "./ResumeCareer/ResumeCareerEdit";
 import ResumeCurriculumEdit from "./ResumeCurriculum/ResumeCurriculumEdit";
 import ResumeCertificateEdit from "./ResumeCertificate/ResumeCertificateEdit";
 import ResumeEtcEdit from "./ResumeEtc/ResumeEtcEdit";
 import ResumeArchiveEdit from "./ResumeArchive/ResumeArchiveEdit";
 import ResumeIntroductionEdit from "./ResumeIntroduction/ResumeIntroductionEdit";
-import ResumePortfolioEdit from "./ResumePortfolio/ResumePortfolioEdit"
-
+import ResumePortfolioEdit from "./ResumePortfolio/ResumePortfolioEdit";
 
 const ResumeEdit = () => {
-    const userId = 77;
+    const userId = localStorage.getItem("userId");
     const [privacy, setPrivacy] = useState({});
-    const [education, setEducation] = useState({});
-    const [career, setCareer] = useState({});
-    const [curriculum, setCurriculum] = useState({});
-    const [certificate, setCertificate] = useState({});
-    const [etc, setEtc] = useState({});
+    const [job, setJob] = useState([]);
+    const [tech, setTech] = useState([]);
+    const [education, setEducation] = useState([]);
+    const [career, setCareer] = useState([]);
+    const [curriculum, setCurriculum] = useState([]);
+    const [certificate, setCertificate] = useState([]);
+    const [etc, setEtc] = useState([]);
     const [archive, setArchive] = useState({});
+    const [introduction, setIntroduction] = useState({ fileName: '', file: null });
+    const [portfolio, setPortfolio] = useState([]);
 
     const EditSave = () => {
-        const resumeEditData = {
+        const resumeDTO = {
             privacy,
+            job,
+            tech,
             education,
             career,
             curriculum,
             certificate,
             etc,
             archive
+        };
+
+        const formData = new FormData();
+        formData.append("resumeDTO", JSON.stringify(resumeDTO));
+
+        // Add portfolio files to FormData
+        portfolio.forEach((item) => {
+            if (item.file) {
+                formData.append("portfolios", item.file);
+            }
+        });
+
+        if (privacy.resumePhoto) {
+            formData.append("resumePhoto", privacy.resumePhoto);
         }
 
-        console.log('Sending data:', JSON.stringify(resumeEditData, null, 2));
+        if (introduction.file) {
+            formData.append("personalState", introduction.file);
+        }
 
-        axios.put(`/api/resumes/${userId}`, resumeEditData)
+        // formData 내용을 출력
+        for (let [key, value] of formData.entries()) {
+            console.log(`${key}:`, value);
+        }
+
+        axios.put(`/api/personal/resumes/${userId}/update`, formData)
             .then(response => {
-                console.log("지원서 수정 성공: " + response)
+                console.log("지원서 수정 성공: " + response);
+                alert("저장되었습니다.");
             })
             .catch(error => {
-                console.error("지원서 수정 실패: " + error)
-            })
-    }
+                console.error("지원서 수정 실패: " + error);
+                alert("저장 중 오류가 발생했습니다.");
+            });
+    };
 
     return (
         <div>
@@ -53,17 +81,17 @@ const ResumeEdit = () => {
                     <p className="resume_title">직존 지원서</p>
                     <div className="container_bar"></div>
                     <div>
-                        <ResumePrivacyEdit setPrivacy={setPrivacy}/>
-                        {/* <ResumeJobEdit /> */}
-                        {/* <ResumeTechEdit /> */}
-                        <ResumeEducationEdit setEducation={setEducation}/>
-                        <ResumeCareerEdit setCareer={setCareer}/>
-                        <ResumeCurriculumEdit setCurriculum={setCurriculum}/>
-                        <ResumeCertificateEdit setCertificate={setCertificate}/>
-                        <ResumeEtcEdit setEtc={setEtc}/>
+                        <ResumePrivacyEdit setPrivacy={setPrivacy} />
+                        <ResumeJobEdit setJob={setJob} />
+                        <ResumeTechEdit setTech={setTech} />
+                        <ResumeEducationEdit setEducation={setEducation} />
+                        <ResumeCareerEdit setCareer={setCareer} />
+                        <ResumeCurriculumEdit setCurriculum={setCurriculum} />
+                        <ResumeCertificateEdit setCertificate={setCertificate} />
+                        <ResumeEtcEdit setEtc={setEtc} />
                         <ResumeArchiveEdit setArchive={setArchive} />
-                        {/* <ResumeIntroductionEdit /> */}
-                        {/* <ResumePortfolioEdit /> */}
+                        <ResumeIntroductionEdit setIntroduction={setIntroduction} />
+                        <ResumePortfolioEdit setPortfolio={setPortfolio} />
                     </div>
                     <div className="resume_save">
                         <button className="resume_save_btn" onClick={EditSave}>저장하기</button>
@@ -71,7 +99,7 @@ const ResumeEdit = () => {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default ResumeEdit;

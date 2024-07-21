@@ -5,12 +5,12 @@ import ResumeCareerInputView from "./../ResumeCareer/ResumeCareerInputView";
 import useViewInput from "./../../hooks/useViewInput";
 
 const ResumeCareerView = () => {
-    const userId = 7;
+    const userId = localStorage.getItem("userId")
 
     const [careerData, setCareerData] = useState([]);
 
     useEffect(() => {
-        axios.get(`/api/resumes/${userId}`)
+        axios.get(`/api/personal/resumes/user/${userId}`)
             .then(response => {
                 setCareerData(response.data.careers)
             })
@@ -29,10 +29,10 @@ const ResumeCareerView = () => {
             {careerData.map((career, index) => (
                 <ResumeCareerInputView
                     key={index}
-                    careerDate={career.career_date}
-                    careerName={career.career_name}
-                    careerPosition={career.career_position}
-                    careerJob={career.career_job}
+                    careerDate={career.careerDate}
+                    careerName={career.careerName}
+                    careerPosition={career.careerPosition}
+                    careerJob={career.careerJob}
                 />
             ))}
         </div>

@@ -3,7 +3,7 @@ import MypageRightCo from "./MypageRightCo";
 import axios from "axios";
 
 const MypageRightContentCo = () => {
-    const userId = 1;
+    const userId = localStorage.getItem('userId')
     const [rightData, setRightData] = useState('');
 
     useEffect(() => {

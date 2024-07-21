@@ -1,14 +1,21 @@
 import React from "react";
 import './../../styles/MypageTop.css'
 import MypageUserModal from "../MypageModal/MypageUserModal";
+import CheckPassword from "../MypageModal/CheckPassword";
 import useModal from "../../hooks/useEditModal";
 import maleImg from "../../../common/card/assets/personal_m_image.png"
 import femaleImg from "../../../common/card/assets/personal_f_image.png"
 
-const MypageTop = ({gender}) => {
-    const { isModalOpen, handleOpenModal, handleCloseModal } = useModal();
+const MypageTop = ({ gender }) => {
+    const { isPasswordModalOpen,
+        handleOpenPasswordModalOpen, handleClosePasswordModalOpen, isEditModalOpen, handleOpenEditModalOpen, handleCloseEditModalOpen } = useModal();
 
     const genderImg = gender === 'MALE' ? maleImg : femaleImg;
+
+    const handlePasswordSuccess = () => {
+        handleClosePasswordModalOpen();
+        handleOpenEditModalOpen();
+    }
 
     return (
         <div className="mypage_top">
@@ -19,11 +26,12 @@ const MypageTop = ({gender}) => {
                 </div>
             </div>
             <div className="mypage_top_edit">
-                <button onClick={handleOpenModal}>정보 수정</button>
+                <button onClick={handleOpenPasswordModalOpen}>정보 수정</button>
             </div>
 
             {/* 모달 컴포넌트를 상태 변수에 따라 조건부로 렌더링 */}
-            {isModalOpen && <MypageUserModal setIsModalOpen={handleCloseModal} />}
+            {isPasswordModalOpen && <CheckPassword setIsModalOpen={handlePasswordSuccess} />}
+            {isEditModalOpen && <MypageUserModal setIsModalOpen={handleCloseEditModalOpen} />}
         </div>
     )
 }

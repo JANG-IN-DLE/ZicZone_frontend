@@ -74,22 +74,19 @@ const LoginForm = ({
 
   //로그인 요청
   const Login = async () => {
-    console.log("@@@");
     try {
       const response = await axios.post("http://localhost:3000/api/login", {
         email,
         password,
       });
 
-      console.log("Response:", response);
-
       if (response.data.message === "Auth Success") {
         const token = response.headers["authorization"];
-        console.log("Token:", token);
+        // console.log("Token:", token);
 
         localStorage.setItem("token", token);
         const decodedRole = decodeTokenAndSaveRoleAndSaveId(token);
-        console.log("Decoded from JWT:", decodedRole);
+        // console.log("Decoded from JWT:", decodedRole);
         setLoginFail("");
         navigate("/");
 

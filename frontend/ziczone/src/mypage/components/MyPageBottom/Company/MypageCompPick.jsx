@@ -6,6 +6,7 @@ import femaleImg from "./../../../../common/card/assets/personal_f_image.png"
 const MypageCompPick = ({ gender, jobPositions, userName, personalCareer, userIntro, techStacks }) => {
 
     const genderImg = gender === 'MALE' ? maleImg : femaleImg;
+    const jobNames = jobPositions.split(", ").map(job => job.trim());
 
     return (
         <div className="mypage_comp_pick">
@@ -13,7 +14,9 @@ const MypageCompPick = ({ gender, jobPositions, userName, personalCareer, userIn
                 <img className="mypage_pick_img" src={genderImg} alt="" />
                 <div className="pick_content">
                     <div className="mypage_pick_job">
-                        <p>{jobPositions}</p>
+                        {jobNames.map((job, index) => (
+                            <span key={index} className="job-tag">#{job}</span>
+                        ))}
                     </div>
                     <div className="mypage_pick_name">
                         <p>{userName} | {personalCareer}</p>

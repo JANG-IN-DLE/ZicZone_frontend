@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./../../styles/ResumeCertificate.css";
 import plus_btn from "./../../assets/Plus_btn.png";
 import ResumeCertificateInput from "./ResumeCertificateInput";
@@ -13,6 +13,9 @@ const ResumeCertificate = ({ setCertificate }) => {
             const updatedList = prevList.map((certificate) =>
                 certificate.id === id ? { ...certificate, ...newCertificate } : certificate
             );
+            if (!updatedList.find(certificate => certificate.id === id)) {
+                updatedList.push({ id, ...newCertificate });
+            }
             return updatedList;
         });
     };
@@ -20,11 +23,6 @@ const ResumeCertificate = ({ setCertificate }) => {
     const addCertificateInput = () => {
         const id = addInput();
         setCertificateList((prevList) => [...prevList, { id, date: "", name: "" }]);
-    };
-
-    const handleRemoveInput = (id) => {
-        removeInput(id);
-        setCertificateList((prevList) => prevList.filter((certificate) => certificate.id !== id));
     };
 
     useEffect(() => {
@@ -44,7 +42,12 @@ const ResumeCertificate = ({ setCertificate }) => {
                 <ResumeCertificateInput
                     key={id}
                     id={id}
-                    removeInput={() => handleRemoveInput(id)}
+                    removeInput={() => {
+                        removeInput(id);
+                        setCertificateList((prevList) => 
+                            prevList.filter((certificate) => certificate.id !== id)
+                        );
+                    }}
                     updateCertificate={updateCertificate}
                 />
             ))}

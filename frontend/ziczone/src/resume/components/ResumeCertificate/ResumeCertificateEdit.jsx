@@ -5,17 +5,17 @@ import plus_btn from "./../../assets/Plus_btn.png";
 import ResumeCertificateInputEdit from "./ResumeCertificateInputEdit";
 
 const ResumeCertificateEdit = ({ setCertificate }) => {
-    const userId = 76;
+    const userId = localStorage.getItem("userId")
     const [inputs, setInputs] = useState([]);
     const [certificateList, setCertificateList] = useState([]);
 
     useEffect(() => {
         // 서버로부터 데이터 가져오기
-        axios.get(`/api/resumes/${userId}`)
+        axios.get(`/api/personal/resumes/${userId}`)
             .then(response => {
                 const data = response.data.certificates.map(cert => ({
-                    id: cert.cert_id,
-                    date: cert.cert_date,
+                    id: cert.certId,
+                    date: cert.certDate,
                     name: cert.cert
                 }));
                 setCertificateList(data);

@@ -20,22 +20,56 @@ const ResumeCareerInput = ({ id, removeInput, updateCareer }) => {
 
     useEffect(() => {
         updateCareer(id, career);
-    }, [career, id, updateCareer]);
+    }, [career, id]);
 
     return (
         <div className="resume_career_input">
             <div className="resume_circle"></div>
             <div className="career_date">
-                <input type="text" name="startDate" placeholder="YYYY.MM" value={career.startDate} onChange={handleChange} />
+                <input 
+                    type="text" 
+                    name="startDate" 
+                    placeholder="YYYY.MM" 
+                    value={career.startDate} 
+                    onChange={handleChange} 
+                    maxLength={7}
+                />
                 <p>~</p>
-                <input type="text" name="endDate" placeholder="YYYY.MM" value={career.endDate} onChange={handleChange} />
+                <input 
+                    type="text" 
+                    name="endDate" 
+                    placeholder="YYYY.MM" 
+                    value={career.endDate} 
+                    onChange={handleChange} 
+                    maxLength={7}
+                />
             </div>
             <div className="career_history">
-                <input type="text" name="companyName" placeholder="기업명" value={career.companyName} onChange={handleChange} />
+                <input 
+                    type="text" 
+                    name="companyName" 
+                    placeholder="기업명" 
+                    value={career.companyName} 
+                    onChange={handleChange} 
+                />
                 <div className="career_company">
-                    <input className="career_company_position" type="text" name="position" placeholder="직책" value={career.position} onChange={handleChange} />
+                    <input 
+                        className="career_company_position" 
+                        type="text" 
+                        name="position" 
+                        placeholder="직책" 
+                        value={career.position} 
+                        onChange={handleChange} 
+                    />
                     <p> / </p>
-                    <input className="career_company_job" type="text" name="job" placeholder="직무" value={career.job} onChange={handleChange} />
+                    <input 
+                        className="career_company_job" 
+                        type="text" 
+                        name="job" 
+                        placeholder="직무" 
+                        value={career.job} 
+                        onChange={handleChange} 
+                    />
                 </div>
             </div>
             <div className="career_delete" onClick={removeInput}>

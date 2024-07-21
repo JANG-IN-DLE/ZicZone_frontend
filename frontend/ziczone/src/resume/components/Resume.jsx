@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "./../styles/Resume.css"
-import Header from "../../common/header/components/Header"
-import ResumePrivacy from "./ResumePrivacy/ResumePrivacy"
+import "./../styles/Resume.css";
+import Header from "../../common/header/components/Header";
+import ResumePrivacy from "./ResumePrivacy/ResumePrivacy";
 import ResumeJob from "./ResumeJob/ResumeJob";
-import ResumeTech from "./ResumeTech/ResumeTech"
-import ResumeEducation from "./../components/ResumeEducation/ResumeEducation"
+import ResumeTech from "./ResumeTech/ResumeTech";
+import ResumeEducation from "./../components/ResumeEducation/ResumeEducation";
 import ResumeCareer from "./ResumeCareer/ResumeCareer";
 import ResumeCurriculum from "./ResumeCurriculum/ResumeCurriculum";
 import ResumeCertificate from "./ResumeCertificate/ResumeCertificate";
@@ -15,26 +15,61 @@ import ResumeIntroduction from "./ResumeIntroduction/ResumeIntroduction";
 import ResumePortfolio from "./ResumePortfolio/ResumePortfolio";
 
 const Resume = () => {
-    const userId = 77;
+    const userId = localStorage.getItem("userId");
     const [privacy, setPrivacy] = useState({});
-    const [job, setJob] = useState({});
-    const [tech, setTech] = useState({});
-    const [education, setEducation] = useState({});
-    const [career, setCareer] = useState({});
-    const [curriculum, setCurriculum] = useState({});
-    const [certificate, setCertificate] = useState({});
-    const [etc, setEtc] = useState({});
+    const [job, setJob] = useState([]);
+    const [tech, setTech] = useState([]);
+    const [education, setEducation] = useState([]);
+    const [career, setCareer] = useState([]);
+    const [curriculum, setCurriculum] = useState([]);
+    const [certificate, setCertificate] = useState([]);
+    const [etc, setEtc] = useState([]);
     const [archive, setArchive] = useState({});
-    const [introduction, setIntroduction] = useState({});
-    const [portfolio, setPortfolio] = useState({});
+    const [introduction, setIntroduction] = useState(null);
+    const [portfolios, setPortfolio] = useState([]);
 
     const handleSave = async () => {
-        const resumeData = {
-            privacy, job, tech, education, career, curriculum, certificate, etc, archive, introduction, portfolio
+        const resumeDTO = {
+            privacy,
+            job,
+            tech,
+            education,
+            career,
+            curriculum,
+            certificate,
+            etc,
+            archive,
         };
 
+        const formData = new FormData();
+        formData.append("resumeDTO", JSON.stringify(resumeDTO));
+
+        // Add portfolio files to FormData
+        portfolios.forEach((item, index) => {
+            if (item.file) {
+                formData.append("portfolios", item.file);  // 수정된 부분
+            }
+        });
+
+        if (privacy.resumePhotoUrl) {
+            formData.append("resumePhoto", privacy.resumePhotoUrl);
+        }
+
+        if (introduction) {
+            formData.append("personalState", introduction);  // 수정된 부분
+        }
+
+        // formData 내용을 출력
+        for (let [key, value] of formData.entries()) {
+            console.log(`${key}:`, value);
+        }
+
         try {
-            const response = await axios.post(`/api/resumes/${userId}`, resumeData);
+            const response = await axios.post(`/api/personal/resumes/${userId}`, formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            });
             console.log('응답 데이터:', response.data);
             alert("저장되었습니다.");
         } catch (error) {
@@ -42,6 +77,7 @@ const Resume = () => {
             alert("저장 중 오류가 발생했습니다.");
         }
     };
+    console.log("Resume education: " + JSON.stringify(education));
 
     return (
         <div>
@@ -69,7 +105,7 @@ const Resume = () => {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default Resume;
