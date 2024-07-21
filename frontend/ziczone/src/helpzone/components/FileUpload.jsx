@@ -1,15 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import "../styles/FileUpload.css";
 import useFileUpload from "../hooks/useFileUpload.js";
 
 const FileUpload = ({ onFileChange, initialFile }) => {
     const { file, handleFileChange, handleFileRemove, setInitialFile } = useFileUpload();
-
+    const initialFileSet = useRef(false);
+    
     useEffect(() => {
-        if (initialFile) {
-            const initialFileObject = { name: initialFile };
-            setInitialFile(initialFileObject);
-            onFileChange(initialFileObject);
+        if (initialFile && !initialFileSet.current) {
+            setInitialFile(initialFile);
+            onFileChange({ name: initialFile });
+            initialFileSet.current = true;
         }
     }, [initialFile, setInitialFile, onFileChange]);
 

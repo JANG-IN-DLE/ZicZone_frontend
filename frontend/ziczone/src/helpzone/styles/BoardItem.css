@@ -3,6 +3,7 @@
     border-bottom: 1px solid #000;
     margin-bottom: 20px;
     cursor: pointer;
+    position: relative;
 }
 
 .item_point {
@@ -42,4 +43,6 @@
 .bi_container_end {
     color: #ABABAB;
     font-size: 14px;
+    position: absolute;
+    right: 10px;
 }

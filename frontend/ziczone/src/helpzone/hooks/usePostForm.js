@@ -8,18 +8,18 @@ const usePostForm = (initialBerry = 100, initialData = {}, userId, corrId, isEdi
     const [file, setFile] = useState(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [userPoint, setUserPoint] = useState(0);
+    const [existingFile, setExistingFile] = useState(initialData.file || null);
 
     useEffect(() => {
         setSelectedBerry(initialData.berry || initialBerry);
         setTitle(initialData.title || '');
-        setFile(initialData.file || null);
+        setFile(null);
         setContent(initialData.content || '');
 
         const fetchUserPoint = async () => {
             try {
                 const response = await axios.get(`/api/personal/board/myProfile/${userId}`);
                 setUserPoint(response.data.point);
-                console.log(setUserPoint);
             } catch (error) {
                 console.error('사용자 포인트를 가져오는 중 오류 발생:', error);
             }
@@ -49,7 +49,7 @@ const usePostForm = (initialBerry = 100, initialData = {}, userId, corrId, isEdi
             return;
         }
 
-        if (!title || !content || !file) {
+        if (!title || !content || (!file && !existingFile)) {
             alert('제목, 내용 및 첨부파일을 모두 입력해 주세요.');
             return;
         }
@@ -64,16 +64,16 @@ const usePostForm = (initialBerry = 100, initialData = {}, userId, corrId, isEdi
         formData.append("title", title);
         formData.append("content", content);
         formData.append("userId", userId);
+
         if (file) {
             formData.append("file", file);
-        } else {
-            const defaultFile = new Blob(["default content"], { type: "application/pdf" });
-            formData.append("file", defaultFile, "default.pdf");
+        } else if (existingFile) {
+            formData.append("existingFileName", existingFile);
         }
 
         try {
             setIsSubmitting(true);
-            const response = isEditMode 
+            const response = isEditMode
                 ? await axios.put(`/api/personal/board/${corrId}/${userId}`, formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data'

@@ -12,10 +12,9 @@ import ConfirmModal from "./ConfirmModal";
 const RDBoard = () => {
   const { corrId } = useParams();
   const location = useLocation();
-  const userId = location.state?.userId || localStorage.getItem("userId");
-  const initialFileName = location.state?.fileName || "";
   const navigate = useNavigate();
-
+  const [userId, setUserId] = useState(location.state?.userId || localStorage.getItem("userId"));
+  const [initialFileName, setInitialFileName] = useState(location.state?.fileName || "");
   const [isEditMode, setIsEditMode] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isCommentSelected, setIsCommentSelected] = useState(false);
@@ -37,11 +36,12 @@ const RDBoard = () => {
     title: '',
     content: '',
     fileUrl: '',
+    fileName: '',
     commSelection: false
   });
 
   const handleEdit = () => {
-    navigate('/cuboard', { state: { postData, isEditMode: true, userId, fileName: initialFileName } });
+    navigate('/cuboard', { state: { postData, isEditMode: true, userId, corrId} });
     setIsEditMode(true);
   };
 
@@ -55,14 +55,14 @@ const RDBoard = () => {
   };
 
   useEffect(() => {
-    const ProfileAndPost = async () => {
+    const fetchProfileAndPost = async () => {
       try {
         const profileResponse = await axios.get(`/api/user/board/profile/${corrId}`);
         const postResponse = await axios.get(`/api/user/board/${corrId}`);
 
         const profileData = profileResponse.data;
         const isOwner = profileData.userId === Number(userId);
-  
+
         setUserProfile({
           berry: profileData.corrPoint,
           jobs: profileData.jobName.split(','),
@@ -79,7 +79,8 @@ const RDBoard = () => {
         setPostData({
           title: postData.corrTitle,
           content: postData.corrContent,
-          fileUrl: postData.corrPdf || initialFileName,
+          fileUrl: postData.corrPdfUrl,
+          fileName: postData.corrPdfFileName,
           commSelection: postData.commSelection
         });
 
@@ -89,8 +90,9 @@ const RDBoard = () => {
         console.error("오류 메시지: ", error);
       }
     };
-    ProfileAndPost();
-  }, [corrId, userId, initialFileName]);
+
+    fetchProfileAndPost();
+  }, [corrId, userId]);
 
   const handleCommentSelected = () => {
     setIsCommentSelected(true);

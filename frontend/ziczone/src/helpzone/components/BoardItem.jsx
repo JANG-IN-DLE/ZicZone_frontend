@@ -59,9 +59,11 @@ const BoardItem = ({ board }) => {
   const navigate = useNavigate();
   const userId = localStorage.getItem("userId");
 
-  const handleItemClick = () => {
+  const handleItemClick = async () => {
     try {
-      axios.put(`/api/user/board/viewCnt/${userId}/${board.corrId}`);
+      if (userId) {
+        await axios.put(`/api/user/board/viewCnt/${userId}/${board.corrId}`);
+      }
       navigate(`/rdboard/${board.corrId}`, { state: { userId } });
     } catch (error) {
       console.error('오류 메시지: ', error);

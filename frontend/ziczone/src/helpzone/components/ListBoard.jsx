@@ -8,6 +8,7 @@ import Button from "./Button";
 import BoardList from "./BoardList";
 import PageButton from "./PageButton";
 import BerryCheck from "./BerryCheck";
+import ConfirmModal from "./ConfirmModal";
 import Layout from "../../common/layout/layout";
 
 const ListBoard = () => {
@@ -18,8 +19,10 @@ const ListBoard = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [showSelect, setShowSelect] = useState(false);
   const navigate = useNavigate();
-  const userId = localStorage.getItem("userId");
-  const userRole = localStorage.getItem("userRole");
+  const [userId, setUserId] = useState(null);
+  const [userRole, setUserRole] = useState(null);
+  const [userPoint, setUserPoint] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,8 +45,35 @@ const ListBoard = () => {
     fetchData();
   }, [filterType, page, size, showSelect]);
 
+  useEffect(() => {
+    const id = localStorage.getItem("userId");
+    const role = localStorage.getItem("userRole");
+    setUserId(id);
+    setUserRole(role);
+  }, []);
+
+  useEffect(() => {
+    if (userId) {
+      const fetchUserPoint = async () => {
+        try {
+          const response = await axios.get(`/api/personal/board/myProfile/${userId}`);
+          setUserPoint(response.data.berryPoint);
+        } catch (error) {
+          console.error("포인트 정보를 가져오는 중 오류 발생: ", error);
+        }
+      };
+      fetchUserPoint();
+    }
+  }, [userId]);
+
   const handleWriteButton = () => {
-    navigate("/cuboard", { state: { userId } });
+    if (!userId) {
+      navigate('/Login');
+    } else if (userPoint < 100) {
+      setIsModalOpen(true);
+    } else {
+      navigate('/cuboard', { state: { userId } });
+    }
   };
 
   const handlePageChange = (newPage) => {
@@ -52,6 +82,15 @@ const ListBoard = () => {
 
   const handleCheckChange = () => {
     setShowSelect(!showSelect);
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleChargeRedirect = (path) => {
+    setIsModalOpen(false);
+    navigate(path);
   };
 
   return (
@@ -77,14 +116,16 @@ const ListBoard = () => {
                 {"글쓰기"}
               </Button>
             )}
-          </div>
-          <BoardList boards={boards} />
-          <PageButton
-            currentPage={page}
-            totalPages={totalPages}
-            onPageChange={handlePageChange}
-          />
-        </div>
+        <BoardList boards={boards} />
+        <PageButton currentPage={page} totalPages={totalPages} onPageChange={handlePageChange} />
+      </div>
+      <ConfirmModal
+        isOpen={isModalOpen}
+        onClose={handleModalClose}
+        onConfirm={handleChargeRedirect}
+        userPoint={userPoint}
+        mode="berryCheck"
+      />
       </Layout>
     </div>
   );

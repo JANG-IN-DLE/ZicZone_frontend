@@ -1,6 +1,7 @@
 .cin_wrapper {
     width: 734px;
     display: flex;
+    position: relative;
 }
 
 .cin_input {
@@ -13,9 +14,18 @@
     margin-bottom: 20px;
     font-size: 16px;
     font-family: 'Pretendard-Regular';
+    position: relative;
 }
 
 .cin_input::placeholder {
     font-size: 16px;
     color: #CCC;
+}
+
+.cin_char_count {
+    position: absolute;
+    bottom: 25px;
+    right: 90px;
+    font-size: 12px;
+    color: #666;
 }

@@ -1,10 +1,10 @@
 .board_list {
-    margin-top: 57px;
+    margin-top: 50px;
     height: 550px;
 }
 
 .bl_none {
-    height: 580px;
+    height: 600px;
     line-height: 580px;
     margin: 0 auto;
     text-align: center;

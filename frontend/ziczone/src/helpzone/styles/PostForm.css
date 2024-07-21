@@ -53,6 +53,14 @@ textarea {
     outline: none;
 }
 
+.pf_char_count {
+    text-align: right;
+    margin-top: 5px;
+    font-size: 14px;
+    font-family: 'Pretendard-Regular';
+    color: #666;
+}
+
 .pf_pdf {
     margin-top: 21px;
 }
