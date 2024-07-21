@@ -30,14 +30,7 @@ const ResumeEtcInput = ({ id, removeInput, updateEtc }) => {
                     placeholder="YYYY.MM" 
                     value={etc.startDate} 
                     onChange={handleChange} 
-                />
-                <p>~</p>
-                <input 
-                    type="text" 
-                    name="endDate" 
-                    placeholder="YYYY.MM" 
-                    value={etc.endDate} 
-                    onChange={handleChange} 
+                    maxLength={7}
                 />
             </div>
             <div className="etc_history">

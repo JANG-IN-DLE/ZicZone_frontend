@@ -28,7 +28,8 @@ const ResumeCertificateInput = ({ id, removeInput, updateCertificate }) => {
                     name="date" 
                     placeholder="YYYY.MM" 
                     value={certificate.date} 
-                    onChange={handleChange} 
+                    onChange={handleChange}
+                    maxLength={7}
                 />
             </div>
             <div className="cert_history">

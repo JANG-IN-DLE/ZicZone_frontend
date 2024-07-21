@@ -43,6 +43,7 @@
 .resume_etc_input input {
     border: none;
     font-size: 17px;
+    width: 250px;
 }
 
 .resume_etc_input p {

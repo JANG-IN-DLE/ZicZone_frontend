@@ -9,14 +9,10 @@ const ResumeEducation = ({ setEducation }) => {
     const [educationList, setEducationList] = useState([]);
 
     const updateEducation = (id, education) => {
-        console.log("JSON.stringify(education)" + JSON.stringify(education));
-        console.log("JSON.stringify(id): " + JSON.stringify(id))
         setEducationList((prevList) => {
-            // console.log("JSON.stringify(prevList): " + JSON.stringify(prevList))
             const updatedList = prevList.map((edu) =>
                 edu.id === id ? { ...edu, ...education } : edu
             );
-            console.log("JSON.stringify(updatedList): " + JSON.stringify(updatedList))
             if (!updatedList.find(edu => edu.id === id)) {
                 updatedList.push({ id, ...education });
             }
@@ -30,7 +26,6 @@ const ResumeEducation = ({ setEducation }) => {
         setEducationList((prevList) => [...prevList, { id, date: "", history: "", scorePoint: "", scoreStandard: "" }]);
     };
     useEffect(() => {
-        console.log("educationList updated: ", educationList);
         setEducation(educationList);
     }, [educationList, setEducation]);
 

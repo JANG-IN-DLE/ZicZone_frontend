@@ -3,7 +3,7 @@
     border-bottom: 1px solid #000;
     margin-bottom: 20px;
     cursor: pointer;
-    margin-left: 47px;
+    /* margin-left: 47px; */
 }
 
 .item_point {
@@ -18,7 +18,7 @@
 }
 
 .bi_container_center {
-    width: 793px;
+    width: 840px;
     height: 46px;
     font-family: 'Pretendard-Regular';
     margin-left: 45px;

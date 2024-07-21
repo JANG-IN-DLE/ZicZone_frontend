@@ -28,7 +28,7 @@ const MypageTopCo = ({companyLogo}) => {
             </div>
 
             {/* 모달 컴포넌트를 상태 변수에 따라 조건부로 렌더링 */}
-            {isPasswordModalOpen && <CheckPassword setIsModalOpen={handlePasswordSuccess} />}
+            {isPasswordModalOpen && <CheckPassword setIsModalOpen={handleClosePasswordModalOpen} onSuccess={handlePasswordSuccess} />}
             {isEditModalOpen && <MypageCompanyModal setIsModalOpen={handleCloseEditModalOpen} />}
         </div>
     )

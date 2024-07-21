@@ -49,6 +49,7 @@ const MypageUserModal = ({ setIsModalOpen }) => {
 
             await axios.put(`/api/personal/${userId}`, updateData);
             setIsModalOpen(false);
+            alert("수정사항이 저장되었습니다.")
         } catch (error) {
             console.error("업데이트 오류: ", error);
         }

@@ -1,21 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import "./../../styles/CheckPassword.css"
 import axios from "axios";
 
-const CheckPassword = ({ setIsModalOpen }) => {
-
+const CheckPassword = ({ setIsModalOpen, onSuccess }) => {
+    const [currentPassword, setCurrentPassword] = useState("");
     const userId = localStorage.getItem("userId");
     const userRole = localStorage.getItem("userRole");
 
     const handleCloseClick = () => {
         setIsModalOpen(false);
     };
-
+    
     const confirmPassword = () => {
-        axios.post(`api/personal/${userId}`, userRole)
+
+        axios.post(`/api/user/pw/${userId}`, {
+                password: currentPassword,
+                role: userRole
+        })
             .then(respoonse => {
                 console.log("비밀번호 검증 완료: " + respoonse);
                 alert("본인 확인되었습니다.")
+                onSuccess();
             })
             .catch(error => {
                 console.error("비밀번호 검증 실패: " + error);
@@ -30,7 +35,11 @@ const CheckPassword = ({ setIsModalOpen }) => {
                     <p>현재 비밀번호 확인</p>
                 </div>
                 <div className="passoword_check_right">
-                    <input type="password" placeholder="현재 비밀번호 입력" />
+                    <input type="password"
+                        placeholder="현재 비밀번호 입력"
+                        value={currentPassword}
+                        onChange={(e) => setCurrentPassword(e.target.value)}
+                    />
                 </div>
             </div>
             <div className="passoword_check_cancel">

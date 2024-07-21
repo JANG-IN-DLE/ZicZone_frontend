@@ -77,7 +77,6 @@ const Resume = () => {
             alert("저장 중 오류가 발생했습니다.");
         }
     };
-    console.log("Resume education: " + JSON.stringify(education));
 
     return (
         <div>

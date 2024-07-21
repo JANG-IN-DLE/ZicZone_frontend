@@ -1,24 +1,24 @@
 import React from "react";
-import './../../styles/MypageBerryModal.css'
+import './../../styles/MypageBerryModal.css';
 
-const MypageHistoryBar = ({app_payment_date, berry_record, berry_bucket}) => {
+const MypageHistoryBar = ({ historyData }) => {
     return (
         <div className="mypage_history_bar">
-            {app_payment_date.map((date, index) => (
+            {historyData.map((item, index) => (
                 <div key={index} className="history_bar_item">
                     <div className="history_bar_date">
-                        <span>{date}</span>
+                        <span>{item.date}</span>
                     </div>
                     <div className="history_bar_record">
-                        <span>{berry_record[index]}</span>
+                        <span>{item.content}</span>
                     </div>
                     <div className="history_bar_bucket">
-                        <span>{berry_bucket[index]}</span>
+                        <span>{item.berry}</span>
                     </div>
                 </div>
             ))}
         </div>
-    )
-}
+    );
+};
 
-export default MypageHistoryBar
+export default MypageHistoryBar;

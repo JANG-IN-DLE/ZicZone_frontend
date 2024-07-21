@@ -51,6 +51,7 @@ const ResumeCareerInput = ({ id, removeInput, updateCareer }) => {
                     placeholder="기업명" 
                     value={career.companyName} 
                     onChange={handleChange} 
+                    style={{width: "250px"}}
                 />
                 <div className="career_company">
                     <input 
@@ -59,7 +60,7 @@ const ResumeCareerInput = ({ id, removeInput, updateCareer }) => {
                         name="position" 
                         placeholder="직책" 
                         value={career.position} 
-                        onChange={handleChange} 
+                        onChange={handleChange}
                     />
                     <p> / </p>
                     <input 

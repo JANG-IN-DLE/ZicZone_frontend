@@ -2,6 +2,7 @@ import React from 'react';
 import "../styles/BoardItem.css";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 // 특정 날짜와 현재 시간의 차이 계산 -> 상대적인 시간 반환
 export const getRelativeTime = (dateString) => {
@@ -71,7 +72,8 @@ const BoardItem = ({ board }) => {
   };
 
   return (
-    <div className='bi_container' onClick={handleItemClick}>
+    <Link to={`/rdboard/${board.corrId}`} style={{ textDecoration: "none", color: "#000"}}>
+    <div className='bi_container' onClick={handleItemClick} style={{marginLeft: "47px"}}>
       <div className='item_point' style={getPointStyle(board.corrPoint)}>
         {board.corrPoint}
       </div>
@@ -95,6 +97,7 @@ const BoardItem = ({ board }) => {
         </div>
       </div>
     </div>
+    </Link>
   );
 };
 

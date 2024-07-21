@@ -41,21 +41,28 @@ const MypageCompanyModal = ({ setIsModalOpen }) => {
     }, []);
 
     const handleSaveClick = async () => {
+        const payload = {
+            userName: userName,
+            userIntro: intro,
+            companyAddr: addr,
+            logo,
+            currentPassword,
+            ...(changePassword && { changePassword })
+        };
+
+        const formData = new FormData();
+        formData.append('payload', JSON.stringify(payload));
+        formData.append('logoFile', logo);
+
         try {
-            const updateData = {
-                userName: userName,
-                userIntro: intro,
-                companyAddr: addr,
-                companyLogo: logo,
-                currentPassword,
-                ...(changePassword && { changePassword })
-            };
-
-            // console.log("Update data:", updateData);
-
-            await axios.put(`/api/company/${userId}`, updateData);
-            alert("정보가 수정되었습니다.")
-            setIsModalOpen(false);
+            const response = await axios.put(`/api/company/${userId}`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+            console.log('response: ', response.data);
+            alert("수정사항 저장되었습니다.")
+            setIsModalOpen(false)
         } catch (error) {
             console.error("업데이트 오류: ", error);
         }
