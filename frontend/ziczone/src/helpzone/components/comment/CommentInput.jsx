@@ -7,6 +7,13 @@ import "../../styles/comment/CommentInput.css";
 const CommentInput = ({ corrId, userId, commId, onCommentAdded }) => {
     const [commentContent, setCommentContent] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [commCharCount, setCommCharCount] = useState(commentContent.length);
+
+    const handleContentChangeWithCount = (event) => {
+      const newContent = event.target.value;
+      setCommCharCount(newContent.length);
+      handleCommentContentChange(event);
+    };
 
     const handleCommentContentChange = (e) => {
         setCommentContent(e.target.value);
@@ -36,6 +43,7 @@ const CommentInput = ({ corrId, userId, commId, onCommentAdded }) => {
             if (response.status === 200) {
                 onCommentAdded(response.data);
                 setCommentContent('');
+                setCommCharCount(0);
             }
         } catch (error) {
             console.error("댓글 등록 실패: ", error.response ? error.response.data : error.message);
@@ -58,9 +66,11 @@ const CommentInput = ({ corrId, userId, commId, onCommentAdded }) => {
                     <input
                         className="cin_input"
                         value={commentContent}
-                        onChange={handleCommentContentChange}
+                        onChange={handleContentChangeWithCount}
+                        maxLength={255}
                         placeholder="댓글을 입력하세요"
-                    />
+                        />
+                      <div className="cin_char_count">{commCharCount}/255</div>
                     <div>
                         <Button type="button" className="cin_btn">완료</Button>
                     </div>
