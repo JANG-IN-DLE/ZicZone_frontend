@@ -8,6 +8,7 @@ import Button from "./Button";
 import CommentList from "./comment/CommentList";
 import "../styles/RDBoard.css";
 import ConfirmModal from "./ConfirmModal";
+import Layout from "../../common/layout/layout";
 
 const RDBoard = () => {
   const { corrId } = useParams();
@@ -41,7 +42,7 @@ const RDBoard = () => {
   });
 
   const handleEdit = () => {
-    navigate('/cuboard', { state: { postData, isEditMode: true, userId, corrId} });
+    navigate('/cuboard', { state: { postData, isEditMode: true, userId, corrId } });
     setIsEditMode(true);
   };
 
@@ -117,44 +118,46 @@ const RDBoard = () => {
 
   return (
     <div>
-      <div className="b_section">
-        <div className="b_profile_card">
-          <ProfileCard {...userProfile} isViewMode={true} />
-        </div>
-        <div className="b_right">
-          <div className="b_description">
-            <div className="b_display_btn">
-              <p className="d_title">게시물 조회</p>
-              {userProfile.isOwner && !isCommentSelected && (
-                <div className="b_edit_delete">
-                  <Button type="button" className="b_edit" onClick={handleEdit}>
-                    수정
-                  </Button>
-                  <Button type="button" className="b_delete" onClick={openDeleteModal}>
-                    삭제
-                  </Button>
-                </div>
-              )}
-            </div>
-            <RDescription />
-            <PostView
-              title={postData.title}
-              content={postData.content}
-              fileUrl={postData.fileUrl}
-            />
-            <div className="b_comment">
-              <CommentList corrId={corrId} userId={userId} onCommentSelected={handleCommentSelected} />
+      <Layout>
+        <div className="b_section">
+          <div className="b_profile_card">
+            <ProfileCard {...userProfile} isViewMode={true} />
+          </div>
+          <div className="b_right">
+            <div className="b_description">
+              <div className="b_display_btn">
+                <p className="d_title">게시물 조회</p>
+                {userProfile.isOwner && !isCommentSelected && (
+                  <div className="b_edit_delete">
+                    <Button type="button" className="b_edit" onClick={handleEdit}>
+                      수정
+                    </Button>
+                    <Button type="button" className="b_delete" onClick={openDeleteModal}>
+                      삭제
+                    </Button>
+                  </div>
+                )}
+              </div>
+              <RDescription />
+              <PostView
+                title={postData.title}
+                content={postData.content}
+                fileUrl={postData.fileUrl}
+              />
+              <div className="b_comment">
+                <CommentList corrId={corrId} userId={userId} onCommentSelected={handleCommentSelected} />
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <ConfirmModal
-        isOpen={isDeleteModalOpen}
-        onClose={closeDeleteModal}
-        onConfirm={confirmDelete}
-        message="정말로 게시물을 삭제하시겠습니까?"
-        mode="delete"
-      />
+        <ConfirmModal
+          isOpen={isDeleteModalOpen}
+          onClose={closeDeleteModal}
+          onConfirm={confirmDelete}
+          message="정말로 게시물을 삭제하시겠습니까?"
+          mode="delete"
+        />
+      </Layout>
     </div>
   );
 }
