@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import BoardItem from '../../../../helpzone/components/BoardItem';
+import BoardItem from './MypageUserPost';
 import PageButton from '../PageButton';
 
 const MypagePostHistory = () => {

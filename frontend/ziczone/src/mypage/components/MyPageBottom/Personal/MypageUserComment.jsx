@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const getPointStyle = (point) => {
   switch (point) {
     case 100:
-      return { backgroundColor: '#FFFFFF', color: '#000000' };
+      return { backgroundColor: '#FFFFFF', color: '#000000', border: '2px solid #000', lineHeight: '27px'};
     case 200:
       return { backgroundColor: 'rgba(0, 81, 186, 0.25)', color: '#FFFFFF' };
     case 500:
@@ -48,9 +48,9 @@ const BoardItem = ({ comment }) => {
           <div className='item_date'>
             {formatDate(comment.commModify)}
           </div>
-          <div className='item_view'>
+          {/* <div className='item_view'>
             조회수 {comment.corrView}
-          </div>
+          </div> */}
         </div>
       </div>
     </Link>
