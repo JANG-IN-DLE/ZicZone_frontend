@@ -29,6 +29,9 @@ import MainPickCard from './main/components/MainPickCard'
 import MypageCompany from './mypage/components/MypageCompany';
 import CheckPassword from './mypage/components/MypageModal/CheckPassword';
 import ResumeEdit from "./resume/components/ResumeEdit"
+import CheckoutPage from './mypage/components/Toss/CheckoutPage';
+import { SuccessPage } from './mypage/components/Toss/SuccessPage';
+import { FailPage } from './mypage/components/Toss/FailPage';
 
 
 
@@ -63,6 +66,9 @@ function App() {
           <Route path="/company/:userId" element={<MypageCompany />} />
           <Route path="/personal/resumes/:userId" element={<Resume />} />
           <Route path="/charge" element={<ChargeMain/>} />
+          <Route path='/toss' element={<CheckoutPage/>}/>
+          <Route path='/success' element={<SuccessPage/>}/>
+          <Route path='/fail' element={<FailPage/>}/>
         </Routes> 
          {/* <Footer /> */}
       </Router>
