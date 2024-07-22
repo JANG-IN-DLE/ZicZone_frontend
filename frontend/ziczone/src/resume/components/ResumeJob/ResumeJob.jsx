@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import "./../../styles/ResumeJob.css";
 import JobDropdown from "../ResumeDropdown/JobDropdown";
 import useDropdown from './../../hooks/useDropdown';
@@ -6,10 +6,24 @@ import dropdown from "./../../assets/Dropdown.png";
 
 const ResumeJob = ({ setJob }) => {
     const [dropdownVisible, toggleDropdown, selectedItems, updateSelectedItems] = useDropdown(false);
+    const dropdownRef = useRef(null);
 
     useEffect(() => {
         setJob(selectedItems);
     }, [selectedItems, setJob]);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                toggleDropdown(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [toggleDropdown]);
 
     return (
         <div className="resume_job">
@@ -25,8 +39,8 @@ const ResumeJob = ({ setJob }) => {
                     </div>
                 )}
             </div>
-            <div className="resume_job_select">
-                <div className="job_select" onClick={toggleDropdown}>
+            <div className="resume_job_select" ref={dropdownRef}>
+                <div className="job_select" onClick={() => toggleDropdown(!dropdownVisible)}>
                     <span>개발 직무를 선택해주세요.</span>
                     <img src={dropdown} alt="Dropdown" />
                 </div>

@@ -4,7 +4,7 @@ const useDropdown = (initialVisible) => {
     const [dropdownVisible, setDropdownVisible] = useState(initialVisible);
     const [selectedItems, setSelectedItems] = useState([]);
 
-    const toggleDropdown = () => setDropdownVisible(!dropdownVisible);
+    const toggleDropdown = (value) => setDropdownVisible(value);
 
     const updateSelectedItems = (items) => setSelectedItems(items);
 

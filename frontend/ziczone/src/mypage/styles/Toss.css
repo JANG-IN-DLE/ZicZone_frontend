@@ -7,10 +7,10 @@
     height: 100%;
     }
     
-    a {
+    /* a {
     text-decoration: none;
     text-align: center;
-    }
+    } */
     
     .wrapper {
     display: flex;

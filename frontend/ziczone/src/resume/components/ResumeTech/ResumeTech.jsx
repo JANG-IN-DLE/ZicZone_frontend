@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import "./../../styles/ResumeTech.css";
 import TechDropdown from "./../ResumeDropdown/TechStackDropdown";
 import useDropdown from './../../hooks/useDropdown';
@@ -8,10 +8,29 @@ import dropdown from "./../../assets/Dropdown.png";
 const ResumeTech = ({ setTech }) => {
     const [dropdownVisible, toggleDropdown, selectedItems, updateSelectedItems] = useDropdown(false);
     const [filter, setFilter] = useFilter("");
+    const dropdownRef = useRef(null);
 
     useEffect(() => {
         setTech(selectedItems);
     }, [selectedItems, setTech]);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                toggleDropdown(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [toggleDropdown]);
+
+    const handleInputClick = (e) => {
+        e.stopPropagation();
+        toggleDropdown(true);
+    };
 
     return (
         <div className="resume_tech">
@@ -27,13 +46,14 @@ const ResumeTech = ({ setTech }) => {
                     </div>
                 )}
             </div>
-            <div className="resume_tech_select">
-                <div className="tech_select" onClick={toggleDropdown}>
+            <div className="resume_tech_select" ref={dropdownRef}>
+                <div className="tech_select" onClick={() => toggleDropdown(!dropdownVisible)}>
                     <input 
                         type="text" 
                         placeholder="기술 스택을 선택해주세요."
                         value={filter}
                         onChange={(e) => setFilter(e.target.value)}
+                        onClick={handleInputClick}
                     />
                     <img src={dropdown} alt="Dropdown" />
                 </div>

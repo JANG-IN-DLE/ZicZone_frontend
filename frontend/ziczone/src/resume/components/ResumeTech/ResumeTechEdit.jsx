@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import "./../../styles/ResumeTech.css";
 import TechDropdown from "./../ResumeDropdown/TechStackDropdown";
@@ -11,6 +11,7 @@ const ResumeTechEdit = ({ setTech }) => {
     const [filter, setFilter] = useFilter("");
     const [techStacks, setTechStacks] = useState([]);
     const userId = localStorage.getItem("userId");
+    const dropdownRef = useRef(null);
 
     useEffect(() => {
         axios.get(`/api/personal/resumes/${userId}`)
@@ -28,6 +29,24 @@ const ResumeTechEdit = ({ setTech }) => {
         setTech(selectedItems);
     }, [selectedItems, setTech]);
 
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                toggleDropdown(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [toggleDropdown]);
+
+    const handleInputClick = (e) => {
+        e.stopPropagation();
+        toggleDropdown(true);
+    };
+
     return (
         <div className="resume_tech">
             <div className="resume_tech_title">
@@ -42,13 +61,14 @@ const ResumeTechEdit = ({ setTech }) => {
                     </div>
                 )}
             </div>
-            <div className="resume_tech_select">
-                <div className="tech_select" onClick={toggleDropdown}>
+            <div className="resume_tech_select" ref={dropdownRef}>
+                <div className="tech_select" onClick={() => toggleDropdown(!dropdownVisible)}>
                     <input 
-                    type="text" 
-                    placeholder="기술 스택을 선택해주세요. (최대 7개까지 선택 가능)" 
-                    value={filter}
-                    onChange={(e) => setFilter(e.target.value)}
+                        type="text" 
+                        placeholder="기술 스택을 선택해주세요. (최대 7개까지 선택 가능)" 
+                        value={filter}
+                        onChange={(e) => setFilter(e.target.value)}
+                        onClick={handleInputClick}
                     />
                     <img src={dropdown} alt="Dropdown" />
                 </div>

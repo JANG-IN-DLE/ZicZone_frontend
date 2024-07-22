@@ -1,19 +1,17 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import header from "../assets/Header.png";
 import "./../styles/Header.css";
 import NonLogin from "./HeaderNonLogin";
 import UserLogin from "./HeaderUserLogin";
 import CompLogin from "./HeaderCompLogin";
-import { useState, useEffect } from "react";
-import { jwtDecode } from "jwt-decode";
+import {jwtDecode} from "jwt-decode";
 import axios from "axios";
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userRole, setUserRole] = useState();
   const [userName, setUserName] = useState("");
-  const [userId, setUserId] = useState("");
   const [companyLogo, setCompanyLogo] = useState("");
   const navigate = useNavigate();
 
@@ -26,7 +24,6 @@ const Header = () => {
           const decodedToken = jwtDecode(token);
           const currentTime = Date.now() / 1000;
 
-          //exp는 만료시간 나타내는 필드
           if (decodedToken.exp > currentTime) {
             setIsLoggedIn(true);
             fetchUserData(decodedToken);
@@ -72,7 +69,6 @@ const Header = () => {
     }
   };
 
-  // 토큰 검사 후 상태초기화 함수
   const clearUserData = () => {
     setUserName("");
     setUserRole(null);
@@ -84,74 +80,73 @@ const Header = () => {
     const userId = localStorage.getItem("userId");
     const userRole = localStorage.getItem("userRole");
 
-    if (userId && token && userRole === 'PERSONAL') {
+    if (userId && token && userRole === "PERSONAL") {
       try {
-          await axios.post(`/sse/logout/${userId}`, {}, {
-              headers: {
-                  Authorization: token
-              }
-          });
-          // LocalStorage에서 토큰, id, role 삭제
-          localStorage.removeItem('token');
-          localStorage.removeItem('userId');
-          localStorage.removeItem('userRole');
+        await axios.post(`/sse/logout/${userId}`, {}, {
+          headers: {
+            Authorization: token,
+          },
+        });
+        localStorage.removeItem("token");
+        localStorage.removeItem("userId");
+        localStorage.removeItem("userRole");
       } catch (error) {
-          console.error('Logout failed:', error);
+        console.error("Logout failed:", error);
       }
-    }else{
-       // LocalStorage에서 토큰, id, role 삭제
-       localStorage.removeItem('token');
-       localStorage.removeItem('userId');
-       localStorage.removeItem('userRole');
+    } else {
+      localStorage.removeItem("token");
+      localStorage.removeItem("userId");
+      localStorage.removeItem("userRole");
     }
 
-    window.location.reload('/');
-    setIsLoggedIn(false); // 로그인 상태 false로 설정
-    clearUserData(); // 사용자 데이터 초기화
-  }
- 
+    window.location.reload("/");
+    setIsLoggedIn(false);
+    clearUserData();
+  };
 
   return (
     <div className="header">
       <nav className="header_nav">
         <div className="header_logo">
-          <Link to="/">
+          <NavLink to="/">
             <img src={header} alt="Logo" />
-          </Link>
+          </NavLink>
         </div>
         <div className="header_nav_list">
           <div className="header_pick_zone">
             <div>
-              <Link to="/pickzone">PICK존</Link>
+              <NavLink to="/pickzone" activeClassName="active">
+                PICK존
+              </NavLink>
             </div>
           </div>
           <div className="header_help_zone">
             <div>
-              <Link to="/helpzone">HELP존</Link>
+              <NavLink to="/helpzone" activeClassName="active">
+                HELP존
+              </NavLink>
             </div>
           </div>
           <div className="header_company_zone">
             <div>
-              <Link to="/companyzone">COMPANY존</Link>
+              <NavLink to="/companyzone" activeClassName="active">
+                COMPANY존
+              </NavLink>
             </div>
           </div>
         </div>
         <div className="login_component_div">
-          {/* 로그인이 트루일 경우 */}
           {isLoggedIn ? (
-            // 토큰 롤 가져와서 컴퍼니면 기업 로그인, 아니면 회원 로그인
             userRole === "COMPANY" ? (
               <CompLogin
                 userName={userName}
                 companyLogo={companyLogo}
-                // onLogout 프롭스 전달
                 onLogout={handleLogout}
               />
             ) : (
               <UserLogin userName={userName} onLogout={handleLogout} />
             )
           ) : (
-            // 로그인 펄스일 경우 비로그인 컴포넌트
             <NonLogin />
           )}
         </div>

@@ -13,6 +13,7 @@ import ResumeEtc from "./ResumeEtc/ResumeEtc";
 import ResumeArchive from "./ResumeArchive/ResumeArchive";
 import ResumeIntroduction from "./ResumeIntroduction/ResumeIntroduction";
 import ResumePortfolio from "./ResumePortfolio/ResumePortfolio";
+import Layout from "../../common/layout/layout";
 
 const Resume = () => {
     const userId = localStorage.getItem("userId");
@@ -79,31 +80,32 @@ const Resume = () => {
     };
 
     return (
-        <div>
-            {/* <Header /> */}
-            <div className="resume">
-                <div className="resume_container">
-                    <p className="resume_title">직존 지원서</p>
-                    <div className="container_bar"></div>
-                    <div>
-                        <ResumePrivacy setPrivacy={setPrivacy} />
-                        <ResumeJob setJob={setJob} />
-                        <ResumeTech setTech={setTech} />
-                        <ResumeEducation setEducation={setEducation} />
-                        <ResumeCareer setCareer={setCareer} />
-                        <ResumeCurriculum setCurriculum={setCurriculum} />
-                        <ResumeCertificate setCertificate={setCertificate} />
-                        <ResumeEtc setEtc={setEtc} />
-                        <ResumeArchive setArchive={setArchive} />
-                        <ResumeIntroduction setIntroduction={setIntroduction} />
-                        <ResumePortfolio setPortfolio={setPortfolio} />
-                    </div>
-                    <div className="resume_save">
-                        <button className="resume_save_btn" onClick={handleSave}>저장하기</button>
+        <Layout>
+            <div>
+                <div className="resume">
+                    <div className="resume_container">
+                        <p className="resume_title">직존 지원서</p>
+                        <div className="container_bar"></div>
+                        <div>
+                            <ResumePrivacy setPrivacy={setPrivacy} />
+                            <ResumeJob setJob={setJob} />
+                            <ResumeTech setTech={setTech} />
+                            <ResumeEducation setEducation={setEducation} />
+                            <ResumeCareer setCareer={setCareer} />
+                            <ResumeCurriculum setCurriculum={setCurriculum} />
+                            <ResumeCertificate setCertificate={setCertificate} />
+                            <ResumeEtc setEtc={setEtc} />
+                            <ResumeArchive setArchive={setArchive} />
+                            <ResumeIntroduction setIntroduction={setIntroduction} />
+                            <ResumePortfolio setPortfolio={setPortfolio} />
+                        </div>
+                        <div className="resume_save">
+                            <button className="resume_save_btn" onClick={handleSave}>저장하기</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </Layout>
     );
 };
 

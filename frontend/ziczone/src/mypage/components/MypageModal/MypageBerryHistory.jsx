@@ -9,7 +9,7 @@ const MypageBerryHistory = () => {
     useEffect(() => {
         const fetchBerryHistory = async () => {
             try {
-                const response = await axios.post(`http://localhost:12000/api/personal/points/${userId}`);
+                const response = await axios.post(`http://localhost:12000/api/payments/personal/points/${userId}`);
                 const payment = response.data.payment;
                 const payHistory = response.data.payHistory;
 

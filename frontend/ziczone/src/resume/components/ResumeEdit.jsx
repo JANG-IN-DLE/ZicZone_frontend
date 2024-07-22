@@ -12,6 +12,7 @@ import ResumeEtcEdit from "./ResumeEtc/ResumeEtcEdit";
 import ResumeArchiveEdit from "./ResumeArchive/ResumeArchiveEdit";
 import ResumeIntroductionEdit from "./ResumeIntroduction/ResumeIntroductionEdit";
 import ResumePortfolioEdit from "./ResumePortfolio/ResumePortfolioEdit";
+import Layout from "../../common/layout/layout";
 
 const ResumeEdit = () => {
     const userId = localStorage.getItem("userId");
@@ -75,30 +76,32 @@ const ResumeEdit = () => {
     };
 
     return (
-        <div>
-            <div className="resume">
-                <div className="resume_container">
-                    <p className="resume_title">직존 지원서</p>
-                    <div className="container_bar"></div>
-                    <div>
-                        <ResumePrivacyEdit setPrivacy={setPrivacy} />
-                        <ResumeJobEdit setJob={setJob} />
-                        <ResumeTechEdit setTech={setTech} />
-                        <ResumeEducationEdit setEducation={setEducation} />
-                        <ResumeCareerEdit setCareer={setCareer} />
-                        <ResumeCurriculumEdit setCurriculum={setCurriculum} />
-                        <ResumeCertificateEdit setCertificate={setCertificate} />
-                        <ResumeEtcEdit setEtc={setEtc} />
-                        <ResumeArchiveEdit setArchive={setArchive} />
-                        <ResumeIntroductionEdit setIntroduction={setIntroduction} />
-                        <ResumePortfolioEdit setPortfolio={setPortfolio} />
-                    </div>
-                    <div className="resume_save">
-                        <button className="resume_save_btn" onClick={EditSave}>저장하기</button>
+        <Layout>
+            <div>
+                <div className="resume">
+                    <div className="resume_container">
+                        <p className="resume_title">직존 지원서</p>
+                        <div className="container_bar"></div>
+                        <div>
+                            <ResumePrivacyEdit setPrivacy={setPrivacy} />
+                            <ResumeJobEdit setJob={setJob} />
+                            <ResumeTechEdit setTech={setTech} />
+                            <ResumeEducationEdit setEducation={setEducation} />
+                            <ResumeCareerEdit setCareer={setCareer} />
+                            <ResumeCurriculumEdit setCurriculum={setCurriculum} />
+                            <ResumeCertificateEdit setCertificate={setCertificate} />
+                            <ResumeEtcEdit setEtc={setEtc} />
+                            <ResumeArchiveEdit setArchive={setArchive} />
+                            <ResumeIntroductionEdit setIntroduction={setIntroduction} />
+                            <ResumePortfolioEdit setPortfolio={setPortfolio} />
+                        </div>
+                        <div className="resume_save">
+                            <button className="resume_save_btn" onClick={EditSave}>저장하기</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </Layout>
     );
 };
 
