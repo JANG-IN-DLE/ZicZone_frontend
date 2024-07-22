@@ -5,7 +5,7 @@ import "./../styles/Header.css";
 import NonLogin from "./HeaderNonLogin";
 import UserLogin from "./HeaderUserLogin";
 import CompLogin from "./HeaderCompLogin";
-import {jwtDecode} from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 
 const Header = () => {
@@ -50,7 +50,7 @@ const Header = () => {
         .get(`/api/main/companyUser/${userId}`)
         .then((res) => {
           setUserName(res.data.userName);
-          setCompanyLogo(res.data.companyLogoUrl);
+          setCompanyLogo(res.data.companyLogo);
           setUserRole(userType);
         })
         .catch((error) => {
@@ -82,11 +82,15 @@ const Header = () => {
 
     if (userId && token && userRole === "PERSONAL") {
       try {
-        await axios.post(`/sse/logout/${userId}`, {}, {
-          headers: {
-            Authorization: token,
-          },
-        });
+        await axios.post(
+          `/sse/logout/${userId}`,
+          {},
+          {
+            headers: {
+              Authorization: token,
+            },
+          }
+        );
         localStorage.removeItem("token");
         localStorage.removeItem("userId");
         localStorage.removeItem("userRole");

@@ -24,6 +24,7 @@ const CompanyzoneMain = () => {
       .get("/api/companyzone")
       .then((res) => {
         setCompanyData(res.data);
+        console.log("컴퍼니", res);
       })
       .catch((error) => {
         console.error("컴퍼니존 에러 : ", error);
@@ -38,7 +39,7 @@ const CompanyzoneMain = () => {
           {companyData.slice(2).map((company, index) => (
             <CompanyCard
               key={index}
-              companyLogo={company.companyLogo}
+              companyLogo={company.companyLogoUrl}
               userName={company.user.userName}
               userIntro={company.user.userIntro}
               // 온클릭 => 매핑중인 인덱스 요소
@@ -52,7 +53,7 @@ const CompanyzoneMain = () => {
               isOpen={true}
               // 모달 닫기 이벤트 핸들러 설정
               onClose={handleCloseModal}
-              companyLogo={openModalInfo.companyLogo}
+              companyLogo={openModalInfo.companyLogoUrl}
               userName={openModalInfo.user.userName}
               userIntro={openModalInfo.user.userIntro}
               companyCeo={openModalInfo.companyCeo}
