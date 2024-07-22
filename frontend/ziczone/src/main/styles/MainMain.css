@@ -36,10 +36,17 @@
         .main_container h1 {
             font-size: 36px;
             margin-bottom: 30px;
+            font-family: 'Giants-Bold';
+            font-weight: 700;
+            font-style: normal;    
+            text-shadow: 2px 2px 4px rgba(61, 61, 61, 0.5);    
         }
 
         .pickzone,
         .helpzone {
             margin-top: 75px;
+        }
 
+        .main_helpzone{
+         padding-bottom: 40px;
         }
