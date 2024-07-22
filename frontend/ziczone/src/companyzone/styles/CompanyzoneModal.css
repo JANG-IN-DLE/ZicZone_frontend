@@ -112,18 +112,25 @@
     }
 
     .modal_com_intro {
+      display: -webkit-box;
+      -webkit-box-orient: vertical; /* 수직 방향으로 설정 */
+      -webkit-line-clamp: 2; /* 표시할 줄 수 설정 */
       width: 420px;
       font-size: 14px;
       color: #b3b3b3;
       margin-top: 5px;
       line-height: 1.5;
+      height: 40px;
+      overflow: hidden; /* 넘치는 텍스트 숨기기 */
+      text-overflow: ellipsis; /* 넘치는 텍스트를 '...'으로 표시 */
     }
 
     .com_info {
-      margin-top: 20px;
+      margin-top: 25px;
       width: 420px;
       height: 400px;
       font-weight: 500;
+      
     }
 
     .com_ceo,
