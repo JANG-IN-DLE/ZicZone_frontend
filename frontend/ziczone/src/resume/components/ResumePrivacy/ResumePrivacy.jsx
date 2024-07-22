@@ -4,6 +4,7 @@ import email from "./../../assets/Email.png";
 import phone from "./../../assets/Phone.png";
 import birthdate from "./../../assets/Birthdate.png";
 import useUploadImage from "../../hooks/useUploadImage";
+import axios from "axios";
 
 const ResumePrivacy = ({ setPrivacy }) => {
     const { imageSrc, isImageUploaded, handleImageChange, handleDeleteImage, imageFile } = useUploadImage();
@@ -20,6 +21,9 @@ const ResumePrivacy = ({ setPrivacy }) => {
     const handleImageClick = () => {
         document.getElementById('imageInput').click();
     };
+
+    // axios.get(`/api/resumes/${userId}`)
+    // .then(response.data)
 
     return (
         <div className="resume_privacy">

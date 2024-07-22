@@ -7,18 +7,23 @@ import useFilter from "../../hooks/useFilter";
 import dropdown from "./../../assets/Dropdown.png";
 
 const ResumeTechEdit = ({ setTech }) => {
-    const [dropdownVisible, toggleDropdown, selectedItems, updateSelectedItems] = useDropdown(false);
+    const [dropdownVisible, toggleDropdown] = useDropdown(false);
+    const [selectedItems, setSelectedItems] = useState([]);
     const [filter, setFilter] = useFilter("");
     const [techStacks, setTechStacks] = useState([]);
     const userId = localStorage.getItem("userId");
     const dropdownRef = useRef(null);
 
     useEffect(() => {
-        axios.get(`/api/personal/resumes/${userId}`)
+        axios.get(`/api/personal/resumes/user/${userId}`)
             .then(response => {
-                const techs = response.data.techStacks.map(stack => stack.tech.techName);
+                const techs = response.data.techStacks.map(stack => ({
+                    techId: stack.tech.techId,
+                    techName: stack.tech.techName,
+                    techUrl: stack.tech.techUrl
+                }));
                 setTechStacks(techs);
-                updateSelectedItems(techs);
+                setSelectedItems(techs); // setSelectedItems 사용
             })
             .catch(error => {
                 console.error("Error fetching tech stacks", error);
@@ -40,11 +45,24 @@ const ResumeTechEdit = ({ setTech }) => {
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
-    }, [toggleDropdown]);
+    }, []);
 
     const handleInputClick = (e) => {
         e.stopPropagation();
         toggleDropdown(true);
+    };
+
+    const handleTechSelect = (tech) => {
+        const alreadySelected = selectedItems.some(item => item.techId === tech.techId);
+        if (alreadySelected) {
+            if (selectedItems.length > 1) {
+                setSelectedItems(selectedItems.filter(item => item.techId !== tech.techId));
+            } else {
+                alert("최소 한 개 이상의 기술 스택을 선택하셔야 합니다.");
+            }
+        } else if (selectedItems.length < 7) {
+            setSelectedItems([...selectedItems, tech]);
+        }
     };
 
     return (
@@ -74,8 +92,9 @@ const ResumeTechEdit = ({ setTech }) => {
                 </div>
                 {dropdownVisible && (
                     <TechDropdown
+                        techStacks={techStacks}
                         selectedItems={selectedItems}
-                        updateSelectedItems={updateSelectedItems}
+                        handleTechSelect={handleTechSelect}
                         filter={filter}
                     />
                 )}

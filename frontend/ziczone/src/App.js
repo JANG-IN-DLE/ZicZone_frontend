@@ -64,7 +64,7 @@ function App() {
           <Route path="/pickzone/:companyId/:personalId" element={<PickZoneUserDetail/>} />
           <Route path="/personal/:userId" element={<Mypage />} />
           <Route path="/company/:userId" element={<MypageCompany />} />
-          <Route path="/personal/resumes/:userId" element={<Resume />} />
+          <Route path="/personal/resumes/:userId" element={<ResumeView />} />
           <Route path="/charge" element={<ChargeMain/>} />
           <Route path='/toss' element={<CheckoutPage/>}/>
           <Route path='/success' element={<SuccessPage/>}/>

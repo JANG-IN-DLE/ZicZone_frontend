@@ -8,6 +8,7 @@ import useUploadImage from "../../hooks/useUploadImage";
 
 const ResumePrivacyEdit = ({ setPrivacy }) => {
     const userId = localStorage.getItem("userId")
+    const [resumeId, setResumeId] = useState(0)
     const [resumeName, setResumeName] = useState('');
     const [resumeEmail, setResumeEmail] = useState('');
     const [resumePhone, setResumePhone] = useState('');
@@ -21,7 +22,8 @@ const ResumePrivacyEdit = ({ setPrivacy }) => {
     useEffect(() => {
         axios.get(`/api/personal/resumes/user/${userId}`)
             .then(response => {
-                const { resumeName, resumeDate, phoneNum, resumePhoto, resumeEmail } = response.data;
+                const { resumeId, resumeName, resumeDate, phoneNum, resumePhoto, resumeEmail } = response.data;
+                setResumeId(resumeId);
                 setResumeName(resumeName);
                 setResumeBirth(resumeDate);
                 setResumePhone(phoneNum);
@@ -34,8 +36,8 @@ const ResumePrivacyEdit = ({ setPrivacy }) => {
     }, []);
 
     useEffect(() => {
-        setPrivacy({ resumeName, resumeEmail, resumePhone, resumeBirth, resumePhoto: imageSrc });
-    }, [resumeName, resumeEmail, resumePhone, resumeBirth, imageSrc, setPrivacy]);
+        setPrivacy({ resumeId, resumeName, resumeEmail, resumePhone, resumeBirth, resumePhoto: imageSrc });
+    }, [resumeId, resumeName, resumeEmail, resumePhone, resumeBirth, imageSrc, setPrivacy]);
 
     const handleImageClick = () => {
         document.getElementById('imageInput').click();
@@ -45,38 +47,38 @@ const ResumePrivacyEdit = ({ setPrivacy }) => {
         <div className="resume_privacy">
             <div className="resume_privacy_left">
                 <div className="resume_name">
-                    <input 
-                        type="text" 
-                        placeholder="이름" 
-                        value={resumeName} 
-                        onChange={(e) => setResumeName(e.target.value)} 
+                    <input
+                        type="text"
+                        placeholder="이름"
+                        value={resumeName}
+                        onChange={(e) => setResumeName(e.target.value)}
                     />
                 </div>
                 <div className="resume_email">
                     <img src={emailIcon} alt="Email" />
-                    <input 
-                        type="text" 
-                        placeholder="ziczone@email.com" 
-                        value={resumeEmail} 
-                        onChange={(e) => setResumeEmail(e.target.value)} 
+                    <input
+                        type="text"
+                        placeholder="ziczone@email.com"
+                        value={resumeEmail}
+                        onChange={(e) => setResumeEmail(e.target.value)}
                     />
                 </div>
                 <div className="resume_phone">
                     <img src={phoneIcon} alt="Phone" />
-                    <input 
-                        type="text" 
-                        placeholder="010-0000-0000" 
-                        value={resumePhone} 
-                        onChange={(e) => setResumePhone(e.target.value)} 
+                    <input
+                        type="text"
+                        placeholder="010-0000-0000"
+                        value={resumePhone}
+                        onChange={(e) => setResumePhone(e.target.value)}
                     />
                 </div>
                 <div className="resume_birthdate">
                     <img src={birthdateIcon} alt="Birthdate" />
-                    <input 
-                        type="text" 
-                        placeholder="YYYY년 MM월 DD일" 
-                        value={resumeBirth} 
-                        onChange={(e) => setResumeBirth(e.target.value)} 
+                    <input
+                        type="date"
+                        placeholder="YYYY년 MM월 DD일"
+                        value={resumeBirth}
+                        onChange={(e) => setResumeBirth(e.target.value)}
                     />
                 </div>
             </div>

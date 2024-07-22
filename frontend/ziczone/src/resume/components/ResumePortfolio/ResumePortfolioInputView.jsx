@@ -1,14 +1,16 @@
 import React from 'react';
 
-const ResumePortfolioInputView = ({portfolioData}) => {
+const ResumePortfolioInputView = ({ personalState }) => {
 
     return (
         <div className="resume_portfolio_upload">
-            <div className='portfolio_file_upload'>
-                <p className="portfolio_file_name">
-                    {portfolioData}
-                </p>
-            </div>
+            {personalState.map((port, index) => (
+                <div className='portfolio_file_upload' key = {index}>
+                    <p className="portfolio_file_name">
+                        {port}
+                    </p>
+                </div>
+            ))}
         </div>
     );
 };

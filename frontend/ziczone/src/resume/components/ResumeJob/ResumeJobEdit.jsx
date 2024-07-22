@@ -12,12 +12,14 @@ const ResumeJobEdit = ({ setJob }) => {
     const dropdownRef = useRef(null);
 
     useEffect(() => {
-        axios.get(`/api/personal/resumes/${userId}`)
+        axios.get(`/api/personal/resumes/user/${userId}`)
             .then(response => {
-                const positions = response.data.jobPositions.map(position => position.job.jobName);
+                const positions = response.data.jobPositions.map(position => ({
+                    jobId: position.job.jobId,
+                    jobName: position.job.jobName
+                }));
                 setJobPositions(positions);
-                // API에서 가져온 값을 selectedItems에 반영
-                updateSelectedItems(positions);
+                updateSelectedItems(positions); // API에서 가져온 값을 selectedItems에 반영
             })
             .catch(error => {
                 console.error("Error fetching job positions", error);
@@ -49,7 +51,7 @@ const ResumeJobEdit = ({ setJob }) => {
                     <div className="selected_job_container">
                         {selectedItems.map((job, index) => (
                             <div key={index} className="selected_job">
-                                {job}
+                                {job.jobName}
                             </div>
                         ))}
                     </div>

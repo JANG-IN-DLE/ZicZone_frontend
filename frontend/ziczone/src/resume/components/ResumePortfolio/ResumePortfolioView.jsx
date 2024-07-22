@@ -7,17 +7,24 @@ import axios from "axios";
 
 const ResumePortfolioView = () => {
     const userId = localStorage.getItem("userId")
-    const [portfolioData, setPortfolioData] = useState('');
+    const [portfolioData, setPortfolioData] = useState([]);
 
     useEffect(() => {
-        axios.get(`/api/resumes/${userId}`)
+        axios.get(`/api/personal/resumes/user/${userId}`)
             .then(response => {
-                setPortfolioData(response.data.portfolioData)
+                const portFileName = response.data.portfolios.map(port => port.portFileName)
+                console.log("로그: " + portFileName)
+                setPortfolioData(portFileName)
             })
             .catch(error => {
                 console.log("portfolioData 호출 실패", error);
             })
     }, [userId])
+
+    useEffect(() => {
+        console.log("포트: ", JSON.stringify(portfolioData));
+    }, [portfolioData]);
+
 
     return (
         <div className="resume_portfolio">

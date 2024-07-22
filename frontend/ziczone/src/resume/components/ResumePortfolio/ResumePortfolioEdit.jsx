@@ -10,11 +10,11 @@ const ResumePortfolioEdit = ({ setPortfolio }) => {
     const [portfolioList, setPortfolioList] = useState([]);
 
     useEffect(() => {
-        axios.get(`/api/personal/resumes/${userId}`)
+        axios.get(`/api/personal/resumes/user/${userId}`)
             .then(response => {
                 const data = response.data.portfolios.map(port => ({
                     id: port.portId,
-                    fileName: port.portFileFileName,
+                    fileName: port.portFileName,
                     file: null // 파일 객체를 초기화
                 }));
                 setPortfolioList(data);

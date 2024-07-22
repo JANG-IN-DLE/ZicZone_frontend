@@ -13,6 +13,7 @@ import ResumeArchiveEdit from "./ResumeArchive/ResumeArchiveEdit";
 import ResumeIntroductionEdit from "./ResumeIntroduction/ResumeIntroductionEdit";
 import ResumePortfolioEdit from "./ResumePortfolio/ResumePortfolioEdit";
 import Layout from "../../common/layout/layout";
+// import dayjs from 'dayjs';
 
 const ResumeEdit = () => {
     const userId = localStorage.getItem("userId");
@@ -28,17 +29,75 @@ const ResumeEdit = () => {
     const [introduction, setIntroduction] = useState({ fileName: '', file: null });
     const [portfolio, setPortfolio] = useState([]);
 
+    console.log("값 확인: " + JSON.stringify(job))
+
     const EditSave = () => {
         const resumeDTO = {
-            privacy,
-            job,
-            tech,
-            education,
-            career,
-            curriculum,
-            certificate,
-            etc,
-            archive
+            resumeId: privacy.resumeId,
+            resumeName: privacy.resumeName,
+            resumeDate: privacy.resumeDate,
+            phoneNum: privacy.phoneNum,
+            resumePhotoUrl: privacy.resumePhotoUrl,
+            resumePhotoUuid: privacy.resumePhotoUuid,
+            resumePhotoFileName: privacy.resumePhotoFileName,
+            resumeEmail: privacy.resumeEmail,
+            // resumeUpdate: dayjs().format('YYYY-MM-DDTHH:mm:ss'),
+            personalStateUrl: introduction.fileName,
+            personalStateUuid: introduction.fileUuid,
+            personalStateFileName: introduction.fileName,
+            personalId: userId,
+            archive: archive,
+            etcs: etc.map((item, index) => ({
+                etcId: item.id, // 인덱스를 ID로 사용하거나 실제 ID를 사용
+                etcContent: item.description,
+                etcDate: item.startDate
+            })),
+            curriculums: curriculum.map((item, index) => ({
+                curriId: item.id, // 인덱스를 ID로 사용하거나 실제 ID를 사용
+                curriContent: item.course,
+                curriCompany: item.institution,
+                curriDate: `${item.startDate}~${item.endDate}`
+            })),
+            careers: career.map((item, index) => ({
+                careerId: item.id, // 인덱스를 ID로 사용하거나 실제 ID를 사용
+                careerName: item.companyName,
+                careerJob: item.job,
+                careerPosition: item.position,
+                careerDate: `${item.startDate}~${item.endDate}`
+            })),
+            educations: education.map((item, index) => ({
+                eduId: item.id, // 인덱스를 ID로 사용하거나 실제 ID를 사용
+                edu: item.history,
+                credit: `${item.scorePoint}/${item.scoreStandard}`,
+                eduDate: item.date
+            })),
+            certificates: certificate.map((item, index) => ({
+                certId: item.id, // 인덱스를 ID로 사용하거나 실제 ID를 사용
+                cert: item.name,
+                certDate: item.date
+            })),
+            jobPositions: job.map((item, index) => ({
+                userJobId: index, // 인덱스를 ID로 사용하거나 실제 ID를 사용
+                job: {
+                    jobId: item.jobId,
+                    jobName: item.jobName
+                }
+            })),
+            techStacks: tech.map((item, index) => ({
+                userTechId: index, // 인덱스를 ID로 사용하거나 실제 ID를 사용
+                tech: {
+                    techId: item.techId,
+                    techName: item.techName,
+                    techUrl: item.techUrl
+                }
+            })),
+            portfolios: portfolio.length > 0 ? portfolio.map((item, index) => ({
+                portId: index, // 인덱스를 ID로 사용하거나 실제 ID를 사용
+                portFileUrl: item.fileUrl,
+                portFileUuid: item.fileUuid,
+                portFileName: item.fileName,
+                resumeId: userId
+            })) : [] // 빈 배열을 전달
         };
 
         const formData = new FormData();
