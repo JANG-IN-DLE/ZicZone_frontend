@@ -38,7 +38,7 @@ const MypageCompScrap = ({ gender, jobPositions, userName, personalCareer, userI
 
     return (
         <div className="mypage_comp_scrap">
-            <Link to={`/pickzone/${userId}/${personalId}`} style={{color: "#000"}}>
+            <Link to={`/pickzone/${userId}/${personalId}`} style={{textDecoration: "none" ,color: "#000"}}>
                 <div className="mypage_comp_scrap_content">
                     <img className="mypage_scrap_img" src={genderImg} alt="" />
                     <div className="scrap_content">
