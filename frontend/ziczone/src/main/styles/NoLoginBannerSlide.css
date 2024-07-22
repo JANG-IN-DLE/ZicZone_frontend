@@ -38,18 +38,24 @@
       justify-content: flex-end;
       padding-left: 70px;
       margin-top: 30px;
-    }
-
-    .slide_text p {
+      align-items: flex-start;
       left: 120px;
       color: white;
-      font-size: 30px;
+    }
+
+    .slide_in_text {
+      left: 120px;
+      color: white;
+      font-size: 36px;
       font-weight: 900;
       margin: 0;
     }
 
-    .slide_text p.text {
-      font-size: 42px;
+    .slide_in_text_sub{
+      color: white;
+      font-size: 26px;
+      font-weight: 900;
+      margin: 0;
     }
 
 

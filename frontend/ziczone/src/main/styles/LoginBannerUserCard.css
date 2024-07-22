@@ -38,25 +38,32 @@
 
     .slide_text {
       height: 250px;
-      width: 794px;
+      width: 900px;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
       padding-left: 70px;
       margin-top: 30px;
+      align-items: flex-start;
+      left: 120px;
+      color: white;
     }
 
-    .slide_text p {
+    .slide_in_text {
       left: 120px;
+      color: white;
+      font-size: 36px;
+      font-weight: 900;
+      margin: 0;
+    }
+
+    .slide_in_text_sub{
       color: white;
       font-size: 26px;
       font-weight: 900;
       margin: 0;
     }
 
-    .slide_text p.text {
-      font-size: 42px;
-    }
 
 
     .arrow {
@@ -80,7 +87,8 @@
     .login_user_card {
     height: 320px;
     width: 260px;
-    border: 0.5px solid #b3b3b3;
+    box-shadow: 4px 4px 16px #d4d4d4,
+    -8px -8px 16px #ffffff;
     border-radius: 8px;
     margin-left: 26px;
     display: flex;
