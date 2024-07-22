@@ -95,7 +95,7 @@ const MainComponent = ({ board }) => {
       <div className="main_container">
         {isLoggedIn ? <LoginBannerUserCard /> : <NoLoginBannerSlide />}
         <div className="pickzone">
-          <h1>PICK 존</h1>
+          <h1>PICK존</h1>
           <div className="user_card_container"></div>
           {!isLoggedIn ? (
             <NonLoginMain />
@@ -106,7 +106,7 @@ const MainComponent = ({ board }) => {
           ) : null}
         </div>
         <div className="helpzone">
-          <h1>HELP 존</h1>
+          <h1 className="main_helpzone">HELP존</h1>
           {Array.isArray(helpZones) &&
             helpZones.length > 0 &&
             helpZones

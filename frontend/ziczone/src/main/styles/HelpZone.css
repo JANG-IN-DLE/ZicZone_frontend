@@ -1,9 +1,11 @@
         .help_container {
             width: 1080px;
             height: 375px;
+            
         }
 
         .help_list {
+            /* margin-top: 40px; */
             height: 75px;
             /* overflow: hidden; */
             display: flex;
