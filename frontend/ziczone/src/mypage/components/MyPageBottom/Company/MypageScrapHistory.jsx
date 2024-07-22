@@ -43,7 +43,7 @@ const MypageScrapHistory = () => {
                         })) : []}
                         gender={user.gender}
                         personalId={user.personalId}
-                        companyId={user.companyId}
+                        // companyId={user.companyId}
                         isScrap={user.scrap}
                     />
                 ))}

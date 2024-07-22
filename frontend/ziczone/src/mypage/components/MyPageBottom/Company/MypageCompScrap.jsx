@@ -5,9 +5,12 @@ import unscrap from "./../../../../common/card/assets/unscrap.svg";
 import maleImg from "./../../../../common/card/assets/personal_m_image.png";
 import femaleImg from "./../../../../common/card/assets/personal_f_image.png";
 import axios from 'axios';
+import { Link } from "react-router-dom";
 
 const MypageCompScrap = ({ gender, jobPositions, userName, personalCareer, userIntro, techStacks, isScrap, personalId, companyId }) => {
     const [isScrapped, setIsScrapped] = useState(true); // 초기 스크랩 상태를 true로 설정
+
+    const userId = localStorage.getItem("userId");
 
     const genderImg = gender === 'MALE' ? maleImg : femaleImg;
 
@@ -16,9 +19,9 @@ const MypageCompScrap = ({ gender, jobPositions, userName, personalCareer, userI
     const jobNames = jobPositions.split(", ").map(job => job.trim());
 
     const handleScrapClick = async (e) => {
-        e.stopPropagation();
+        e.stopPropagation(); // 이벤트 전파를 막아 Link 동작을 막음
         try {
-            const response = await axios.post('/api/company/scrap', { personalId, companyId });
+            const response = await axios.post('/api/company/scrap', { personalId, userId });
 
             if (response.status === 200) {
                 setScrapStatus(!scrapStatus);
@@ -35,37 +38,39 @@ const MypageCompScrap = ({ gender, jobPositions, userName, personalCareer, userI
 
     return (
         <div className="mypage_comp_scrap">
-            <div className="mypage_comp_scrap_content">
-                <img className="mypage_scrap_img" src={genderImg} alt="" />
-                <div className="scrap_content">
-                    <div className="mypage_scrap_job">
-                        {jobNames.map((job, index) => (
-                            <span key={index} className="job-tag">#{job}</span>
-                        ))}
-                    </div>
-                    <div className="mypage_scrap_name">
-                        <p>{userName} | {personalCareer}</p>
-                    </div>
-                    <div className="mypage_scrap_intro">
-                        <p>{userIntro}</p>
-                    </div>
-                    <div className="mypage_scrap_tech">
-                        <ul>
-                            {techStacks.map((techItem, index) => (
-                                <li key={index}>
-                                    {techItem.techUrl ? (
-                                        <img src={techItem.techUrl} alt={techItem.techName} />
-                                    ) : (
-                                        techItem.techName
-                                    )}
-                                </li>
+            <Link to={`/pickzone/${userId}/${personalId}`} style={{color: "#000"}}>
+                <div className="mypage_comp_scrap_content">
+                    <img className="mypage_scrap_img" src={genderImg} alt="" />
+                    <div className="scrap_content">
+                        <div className="mypage_scrap_job">
+                            {jobNames.map((job, index) => (
+                                <span key={index} className="job-tag">#{job}</span>
                             ))}
-                        </ul>
+                        </div>
+                        <div className="mypage_scrap_name">
+                            <p>{userName} | {personalCareer}</p>
+                        </div>
+                        <div className="mypage_scrap_intro">
+                            <p>{userIntro}</p>
+                        </div>
+                        <div className="mypage_scrap_tech">
+                            <ul>
+                                {techStacks.map((techItem, index) => (
+                                    <li key={index}>
+                                        {techItem.techUrl ? (
+                                            <img src={techItem.techUrl} alt={techItem.techName} />
+                                        ) : (
+                                            techItem.techName
+                                        )}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
                     </div>
                 </div>
-                <div className="scrap_or_nonscrap" onClick={handleScrapClick}>
-                    <img src={scrapStatus ? scrap : unscrap} alt="스크랩 상태" />
-                </div>
+            </Link>
+            <div className="scrap_or_nonscrap" onClick={handleScrapClick}>
+                <img src={scrapStatus ? scrap : unscrap} alt="스크랩 상태" />
             </div>
         </div>
     );

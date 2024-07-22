@@ -5,20 +5,22 @@ import Header from "../../common/header/components/Header";
 import MypageLeftCo from "./MypageMiddleLeft/MypageLeftContentCo";
 import MypageRightCo from "./MypageMiddleRight/MypageRightContentCo";
 import MypageBottomCo from "./MyPageBottom/MypageBottomCo";
+import Layout from "../../common/layout/layout";
 
 const MypageCompany = () => {
     return (
-        <div>
-            {/* <Header /> */}
-            <div className="mypage_container">
-                <MypageTop />
-                <div className="mypage_user_grid">
-                    <MypageLeftCo />
-                    <MypageRightCo />
+        <Layout>
+            <div>
+                <div className="mypage_container">
+                    <MypageTop />
+                    <div className="mypage_user_grid">
+                        <MypageLeftCo />
+                        <MypageRightCo />
+                    </div>
+                    <MypageBottomCo />
                 </div>
-                <MypageBottomCo />
             </div>
-        </div>
+        </Layout>
     )
 }
 

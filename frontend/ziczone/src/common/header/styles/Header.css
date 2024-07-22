@@ -48,3 +48,9 @@
     align-items: center;
     margin-left: auto;
 }
+
+.header_nav .active {
+    font-weight: bold;
+    color: #0051ba;
+  }
+  

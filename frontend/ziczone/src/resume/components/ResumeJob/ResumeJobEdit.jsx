@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import "./../../styles/ResumeJob.css";
 import JobDropdown from "../ResumeDropdown/JobDropdown";
@@ -9,6 +9,7 @@ const ResumeJobEdit = ({ setJob }) => {
     const [dropdownVisible, toggleDropdown, selectedItems, updateSelectedItems] = useDropdown(false);
     const [jobPositions, setJobPositions] = useState([]);
     const userId = localStorage.getItem("userId");
+    const dropdownRef = useRef(null);
 
     useEffect(() => {
         axios.get(`/api/personal/resumes/${userId}`)
@@ -27,6 +28,19 @@ const ResumeJobEdit = ({ setJob }) => {
         setJob(selectedItems);
     }, [selectedItems, setJob]);
 
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                toggleDropdown(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [toggleDropdown]);
+
     return (
         <div className="resume_job">
             <div className="resume_job_title">
@@ -41,8 +55,8 @@ const ResumeJobEdit = ({ setJob }) => {
                     </div>
                 )}
             </div>
-            <div className="resume_job_select">
-                <div className="job_select" onClick={toggleDropdown}>
+            <div className="resume_job_select" ref={dropdownRef}>
+                <div className="job_select" onClick={() => toggleDropdown(!dropdownVisible)}>
                     <span>개발 직무를 선택해주세요. (최대 3개까지 선택 가능)</span>
                     <img src={dropdown} alt="Dropdown" />
                 </div>

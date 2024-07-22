@@ -10,7 +10,7 @@ const MypageCompPick = ({ gender, personalId, jobPositions, userName, personalCa
     const jobNames = jobPositions.split(", ").map(job => job.trim());
 
     return (
-        // <Link to={`/pickzone/${userId}/${personalId}`} style={{textDecoration: "none"}}>
+        <Link to={`/pickzone/${userId}/${personalId}`} style={{ color: "#000" }}>
             <div className="mypage_comp_pick">
                 <div className="mypage_comp_pick_content">
                     <img className="mypage_pick_img" src={genderImg} alt="" />
@@ -20,7 +20,7 @@ const MypageCompPick = ({ gender, personalId, jobPositions, userName, personalCa
                                 <span key={index} className="job-tag">#{job}</span>
                             ))}
                         </div>
-                        <div className="mypage_pick_name" style={{color: "#000"}}>
+                        <div className="mypage_pick_name" style={{ color: "#000" }}>
                             <p>{userName} | {personalCareer}</p>
                         </div>
                         <div className="mypage_pick_intro">
@@ -42,7 +42,7 @@ const MypageCompPick = ({ gender, personalId, jobPositions, userName, personalCa
                     </div>
                 </div>
             </div>
-        // </Link>
+        </Link>
     );
 }
 

@@ -9,7 +9,7 @@ const MypageRightContent = () => {
     useEffect(() => {
         const fetchBerryPoints = async () => {
             try {
-                const response = await axios.get(`http://localhost:12000/api/personal/totalBerryPoints/${userId}`);
+                const response = await axios.get(`http://localhost:12000/api/payments/personal/totalBerryPoints/${userId}`);
                 setBerryPoint(response.data.totalBerryPoints);
             } catch (error) {
                 console.error("Error fetching berry points:", error);

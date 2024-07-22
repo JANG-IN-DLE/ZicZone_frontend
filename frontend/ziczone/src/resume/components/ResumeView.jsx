@@ -11,34 +11,37 @@ import ResumeEtcView from "./ResumeEtc/ResumeEtcView";
 import ResumeArchiveView from "./ResumeArchive/ResumeArchiveView";
 import ResumeIntroductionView from "./ResumeIntroduction/ResumeIntroductionView";
 import ResumePortfolioView from "./ResumePortfolio/ResumePortfolioView";
+import Layout from "../../common/layout/layout";
 
 const ResumeView = () => {
 
     return (
-        <div>
-            <div className="resume">
-                <div className="resume_container">
-                    <p className="resume_title">직존 지원서</p>
-                    <div className="container_bar"></div>
-                    <div>
-                        <ResumePrivacyView />
-                        <ResumeJobView />
-                        <ResumeTechView />
-                        <ResumeEducationView />
-                        <ResumeCareerView />
-                        <ResumeCurriculumView />
-                        <ResumeCertificateView />
-                        <ResumeEtcView />
-                        <ResumeArchiveView />
-                        <ResumeIntroductionView />
-                        <ResumePortfolioView />
-                    </div>
-                    <div className="resume_save">
-                        <button className="resume_save_btn">수정하기</button>
+        <Layout>
+            <div>
+                <div className="resume">
+                    <div className="resume_container">
+                        <p className="resume_title">직존 지원서</p>
+                        <div className="container_bar"></div>
+                        <div>
+                            <ResumePrivacyView />
+                            <ResumeJobView />
+                            <ResumeTechView />
+                            <ResumeEducationView />
+                            <ResumeCareerView />
+                            <ResumeCurriculumView />
+                            <ResumeCertificateView />
+                            <ResumeEtcView />
+                            <ResumeArchiveView />
+                            <ResumeIntroductionView />
+                            <ResumePortfolioView />
+                        </div>
+                        <div className="resume_save">
+                            <button className="resume_save_btn">수정하기</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </Layout>
     )
 }
 

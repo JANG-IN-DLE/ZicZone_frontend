@@ -37,7 +37,7 @@ const BoardItem = ({ comment }) => {
           {comment.corrPoint}
         </div>
         <div className='bi_container_center'>
-          <div className='item_title'>
+          <div className='item_title' style={{width: "840px"}}>
             {comment.commContent}
           </div>
           <div className='item_userInfo'>
