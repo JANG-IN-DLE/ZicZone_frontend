@@ -100,8 +100,9 @@ const LoginBannerSlide = () => {
         .then((res) => {
           setUserName(res.data.userName);
           setUserEmail(res.data.email);
-          setCompanyLogo(res.data.companyLogoUrl);
+          setCompanyLogo(res.data.companyLogo);
           setUserRole(userType);
+          console.log(("컴퍼니입니다", res));
         })
         .catch((error) => {
           console.error("Error fetching company user data: ", error);
