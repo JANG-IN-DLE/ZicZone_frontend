@@ -10,7 +10,7 @@ const MypageCompPick = ({ gender, personalId, jobPositions, userName, personalCa
     const jobNames = jobPositions.split(", ").map(job => job.trim());
 
     return (
-        <Link to={`/pickzone/${userId}/${personalId}`} style={{ color: "#000" }}>
+        <Link to={`/pickzone/${userId}/${personalId}`} style={{ textDecoration: "none", color: "#000" }}>
             <div className="mypage_comp_pick">
                 <div className="mypage_comp_pick_content">
                     <img className="mypage_pick_img" src={genderImg} alt="" />
