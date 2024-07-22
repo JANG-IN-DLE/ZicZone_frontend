@@ -17,7 +17,6 @@ const LoginBannerSlide = () => {
   const [userImg, setUserImg] = useState([]);
   const [companyLogo, setCompanyLogo] = useState([]);
   const [userRole, setUserRole] = useState();
-  const userId = localStorage.getItem("userId")
 
   const slideItems = [
     { id: 1, src: slidImage1, alt: "배너1" },
@@ -145,8 +144,10 @@ const LoginBannerSlide = () => {
             >
               <Link to="/ziczoneintro" style={{ textDecoration: "none" }}>
                 <div className="slide_text">
-                  <p className="text">직존</p>
-                  <p>기업이 인재를 채용하는 서비스</p>
+                  <p className="slide_in_text">직존</p>
+                  <p className="slide_in_text_sub">
+                    기업이 인재를 채용하는 서비스
+                  </p>
                 </div>
               </Link>
             </li>
@@ -158,8 +159,8 @@ const LoginBannerSlide = () => {
               }
             >
               <div className="slide_text">
-                <p className="text">다큐프라임 보러가기</p>
-                <p>
+                <p className="slide_in_text">다큐프라임 보러가기</p>
+                <p className="slide_in_text_sub">
                   인공지능 AI 발전으로 우리는 생존을 위해 무엇을 준비해야하나
                 </p>
               </div>
@@ -170,7 +171,7 @@ const LoginBannerSlide = () => {
               onClick={() => window.open("https://www.ncloud.com/")}
             >
               <div className="slide_text">
-                <p className="text">네이버 클라우드 바로가기</p>
+                <p className="slide_in_text">네이버 클라우드 바로가기</p>
               </div>
             </li>
           </ul>
@@ -191,7 +192,9 @@ const LoginBannerSlide = () => {
           <div className="login_user_email">{userEmail}</div>
           <div className="main_mypage">
             <Link
-              to={userRole === "COMPANY" ? `/company/${userId}` : `/personal/${userId}`}
+              to={
+                userRole === "COMPANY" ? `/company/userId` : `/personal/userId`
+              }
               style={{ textDecoration: "none" }}
             >
               <p> 마이페이지</p>
