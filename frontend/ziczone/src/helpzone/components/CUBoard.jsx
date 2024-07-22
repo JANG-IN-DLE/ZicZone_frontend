@@ -5,6 +5,7 @@ import "../styles/CUBoard.css";
 import ProfileCard from "./ProfileCard";
 import Description from "./Description";
 import PostForm from "./PostForm";
+import Layout from "../../common/layout/layout";
 
 const CUBoard = () => {
   const location = useLocation();
@@ -55,31 +56,33 @@ const CUBoard = () => {
     fetchUserProfile();
   }, [userId]);
 
-  if(!userId || !userProfile) {
+  if (!userId || !userProfile) {
     return <div>Loading...</div>
   }
 
   return (
     <div>
-      <div className="b_section">
-        <div className="b_profile_card">
-          <ProfileCard {...userProfile} userId={userId} />
-        </div>
-        <div className="b_right">
-          <div className="b_description">
-            <Description isEditMode={isEditMode} />
-            <div className="b_title_form">
-              <PostForm
-                isEditMode={isEditMode}
-                initialData={initialData}
-                userId={userId}
-                corrId={corrId}
-                onSubmit={handlePostSubmitSuccess}
-              />
+      <Layout>
+        <div className="b_section">
+          <div className="b_profile_card">
+            <ProfileCard {...userProfile} userId={userId} />
+          </div>
+          <div className="b_right">
+            <div className="b_description">
+              <Description isEditMode={isEditMode} />
+              <div className="b_title_form">
+                <PostForm
+                  isEditMode={isEditMode}
+                  initialData={initialData}
+                  userId={userId}
+                  corrId={corrId}
+                  onSubmit={handlePostSubmitSuccess}
+                />
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </Layout>
     </div>
   );
 }

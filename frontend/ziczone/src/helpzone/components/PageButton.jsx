@@ -34,7 +34,7 @@ const PageButton = ({ currentPage, totalPages, onPageChange }) => {
           {page}
         </button>
       ))}
-      <button onClick={handleNextPage} disabled={currentPage === totalPages}>
+      <button onClick={handleNextPage} disabled={currentPage === totalPages || totalPages === 0}>
         {'>'}
       </button>
     </div>
