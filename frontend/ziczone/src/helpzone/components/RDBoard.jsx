@@ -21,6 +21,7 @@ const RDBoard = () => {
   const [isCommentSelected, setIsCommentSelected] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
+  // TODO: 이름 바꿔야대
   const [userProfile, setUserProfile] = useState({
     berry: '',
     jobs: [],
