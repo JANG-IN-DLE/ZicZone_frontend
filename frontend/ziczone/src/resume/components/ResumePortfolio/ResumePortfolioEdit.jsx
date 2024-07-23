@@ -69,6 +69,7 @@ const ResumePortfolioEdit = ({ setPortfolio }) => {
                         key={id}
                         id={id}
                         fileName={portfolio?.fileName || ""}
+                        file={portfolio?.file || null} // 파일 객체 전달
                         removeInput={() => removePortfolioInput(id)}
                         updatePortfolio={updatePortfolio}
                     />

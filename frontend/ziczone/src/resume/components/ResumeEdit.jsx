@@ -29,7 +29,7 @@ const ResumeEdit = () => {
     const [introduction, setIntroduction] = useState({ fileName: '', file: null });
     const [portfolio, setPortfolio] = useState([]);
 
-    console.log("값 확인: " + JSON.stringify(job))
+    console.log("privacy: " + JSON.stringify(privacy))
 
     const EditSave = () => {
         const resumeDTO = {
@@ -38,53 +38,57 @@ const ResumeEdit = () => {
             resumeDate: privacy.resumeDate,
             phoneNum: privacy.phoneNum,
             resumePhotoUrl: privacy.resumePhotoUrl,
-            resumePhotoUuid: privacy.resumePhotoUuid,
+            // resumePhotoUuid: privacy.resumePhotoUuid,
             resumePhotoFileName: privacy.resumePhotoFileName,
             resumeEmail: privacy.resumeEmail,
-            // resumeUpdate: dayjs().format('YYYY-MM-DDTHH:mm:ss'),
             personalStateUrl: introduction.fileName,
-            personalStateUuid: introduction.fileUuid,
+            // personalStateUuid: introduction.fileUuid,
             personalStateFileName: introduction.fileName,
             personalId: userId,
-            archive: archive,
+            archive: {
+                archId: archive.archId,
+                archGit: archive.git,
+                archNotion: archive.notion,
+                archBlog: archive.blog
+            },
             etcs: etc.map((item, index) => ({
-                etcId: item.id, // 인덱스를 ID로 사용하거나 실제 ID를 사용
+                etcId: item.id,
                 etcContent: item.description,
                 etcDate: item.startDate
             })),
             curriculums: curriculum.map((item, index) => ({
-                curriId: item.id, // 인덱스를 ID로 사용하거나 실제 ID를 사용
+                curriId: item.id,
                 curriContent: item.course,
                 curriCompany: item.institution,
                 curriDate: `${item.startDate}~${item.endDate}`
             })),
             careers: career.map((item, index) => ({
-                careerId: item.id, // 인덱스를 ID로 사용하거나 실제 ID를 사용
+                careerId: item.id,
                 careerName: item.companyName,
                 careerJob: item.job,
                 careerPosition: item.position,
                 careerDate: `${item.startDate}~${item.endDate}`
             })),
             educations: education.map((item, index) => ({
-                eduId: item.id, // 인덱스를 ID로 사용하거나 실제 ID를 사용
+                eduId: item.id,
                 edu: item.history,
                 credit: `${item.scorePoint}/${item.scoreStandard}`,
                 eduDate: item.date
             })),
             certificates: certificate.map((item, index) => ({
-                certId: item.id, // 인덱스를 ID로 사용하거나 실제 ID를 사용
+                certId: item.id,
                 cert: item.name,
                 certDate: item.date
             })),
             jobPositions: job.map((item, index) => ({
-                userJobId: index, // 인덱스를 ID로 사용하거나 실제 ID를 사용
+                userJobId: index,
                 job: {
                     jobId: item.jobId,
                     jobName: item.jobName
                 }
             })),
             techStacks: tech.map((item, index) => ({
-                userTechId: index, // 인덱스를 ID로 사용하거나 실제 ID를 사용
+                userTechId: index,
                 tech: {
                     techId: item.techId,
                     techName: item.techName,
@@ -92,12 +96,12 @@ const ResumeEdit = () => {
                 }
             })),
             portfolios: portfolio.length > 0 ? portfolio.map((item, index) => ({
-                portId: index, // 인덱스를 ID로 사용하거나 실제 ID를 사용
+                portId: index,
                 portFileUrl: item.fileUrl,
                 portFileUuid: item.fileUuid,
                 portFileName: item.fileName,
                 resumeId: userId
-            })) : [] // 빈 배열을 전달
+            })) : []
         };
 
         const formData = new FormData();
@@ -125,7 +129,7 @@ const ResumeEdit = () => {
 
         axios.put(`/api/personal/resumes/${userId}/update`, formData)
             .then(response => {
-                console.log("지원서 수정 성공: " + response);
+                console.log(JSON.stringify(formData));
                 alert("저장되었습니다.");
             })
             .catch(error => {

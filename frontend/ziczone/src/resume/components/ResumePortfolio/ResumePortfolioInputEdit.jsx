@@ -3,7 +3,7 @@ import useFileUpload from './../../hooks/useFileUpload';
 import file_delete from "./../../assets/Delete.png";
 import resume_delete from "./../../assets/Minus.png";
 
-const ResumePortfolioInputEdit = ({ id, fileName, removeInput, updatePortfolio }) => {
+const ResumePortfolioInputEdit = ({ id, fileName, file, removeInput, updatePortfolio }) => {
     const setFile = (file) => {
         const newFileName = file ? file.name : '';
         updatePortfolio(id, { fileName: newFileName, file });

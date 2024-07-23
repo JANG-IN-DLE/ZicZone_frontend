@@ -22,12 +22,12 @@ const ResumePrivacyEdit = ({ setPrivacy }) => {
     useEffect(() => {
         axios.get(`/api/personal/resumes/user/${userId}`)
             .then(response => {
-                const { resumeId, resumeName, resumeDate, phoneNum, resumePhoto, resumeEmail } = response.data;
+                const { resumeId, resumeName, resumeDate, phoneNum, resumePhotoUrl, resumeEmail } = response.data;
                 setResumeId(resumeId);
                 setResumeName(resumeName);
                 setResumeBirth(resumeDate);
                 setResumePhone(phoneNum);
-                setResumePhoto(resumePhoto);
+                setResumePhoto(resumePhotoUrl);
                 setResumeEmail(resumeEmail);
             })
             .catch(error => {
@@ -84,7 +84,7 @@ const ResumePrivacyEdit = ({ setPrivacy }) => {
             </div>
             <div className="resume_privacy_right">
                 <div className="resume_image" onClick={handleImageClick}>
-                    <img src={isImageUploaded ? imageSrc : resumePhoto} alt="증명사진" />
+                    <img src={isImageUploaded ? imageSrc : resumePhoto + "?type=f&w=60&h=60&faceopt=true&ttype=png"} alt="증명사진" />
                 </div>
                 <input
                     type="file"
