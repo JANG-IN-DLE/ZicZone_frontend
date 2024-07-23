@@ -6,7 +6,8 @@ import useDropdown from './../../hooks/useDropdown';
 import dropdown from "./../../assets/Dropdown.png";
 
 const ResumeJobEdit = ({ setJob }) => {
-    const [dropdownVisible, toggleDropdown, selectedItems, updateSelectedItems] = useDropdown(false);
+    const [dropdownVisible, toggleDropdown] = useDropdown(false);
+    const [selectedItems, setSelectedItems] = useState([]);
     const [jobPositions, setJobPositions] = useState([]);
     const userId = localStorage.getItem("userId");
     const dropdownRef = useRef(null);
@@ -19,7 +20,7 @@ const ResumeJobEdit = ({ setJob }) => {
                     jobName: position.job.jobName
                 }));
                 setJobPositions(positions);
-                updateSelectedItems(positions); // API에서 가져온 값을 selectedItems에 반영
+                setSelectedItems(positions);
             })
             .catch(error => {
                 console.error("Error fetching job positions", error);
@@ -49,8 +50,8 @@ const ResumeJobEdit = ({ setJob }) => {
                 <p className="job_title">개발 직무</p>
                 {selectedItems && selectedItems.length > 0 && (
                     <div className="selected_job_container">
-                        {selectedItems.map((job, index) => (
-                            <div key={index} className="selected_job">
+                        {selectedItems.map((job) => (
+                            <div key={job.jobId} className="selected_job">
                                 {job.jobName}
                             </div>
                         ))}
@@ -64,9 +65,8 @@ const ResumeJobEdit = ({ setJob }) => {
                 </div>
                 {dropdownVisible && (
                     <JobDropdown 
-                        jobPositions={jobPositions}
                         selectedItems={selectedItems} 
-                        updateSelectedItems={updateSelectedItems} 
+                        setSelectedItems={setSelectedItems}
                     />
                 )}
             </div>
