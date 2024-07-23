@@ -50,7 +50,8 @@ function App() {
         {/* <Header/> */}
         <Routes>
           <Route path='/' element={<MainComponent />} />
-          <Route path='/pickzone' element={userType === 'COMPANY' ? <CompanyPickzone /> : <UserPickzone />} />
+          <Route path='/companypick' element={<CompanyPickzone />} />
+          <Route path='/personalpick' element={<UserPickzone />} />
           <Route path='/pickzone/:loggedInUserId/:personalId' element={userType === 'COMPANY' ? <PickzoneCompanyDetail /> : <PickZoneUserDetail />} />
           <Route path="/helpzone" element={<ListBoard />} />
           <Route path="/cuboard" element={<CUBoard />} />
