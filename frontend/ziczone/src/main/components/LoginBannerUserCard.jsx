@@ -18,6 +18,9 @@ const LoginBannerSlide = () => {
   const [userImg, setUserImg] = useState([]);
   const [companyLogo, setCompanyLogo] = useState([]);
   const [userRole, setUserRole] = useState();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [personalCareer, setPersonalCareer] = useState([]);
+  const [userIntro, setUserIntro] = useState([]);
 
   const slideItems = [
     { id: 1, src: slidImage1, alt: "배너1" },
@@ -104,6 +107,7 @@ const LoginBannerSlide = () => {
           setCompanyLogo(res.data.companyLogo);
           setUserRole(userType);
           console.log(("컴퍼니입니다", res));
+          setUserIntro(res.data.userIntro);
         })
         .catch((error) => {
           console.error("Error fetching company user data: ", error);
@@ -115,14 +119,56 @@ const LoginBannerSlide = () => {
           setUserName(res.data.userName);
           setUserEmail(res.data.email);
           setUserImg(
-            res.data.gender === "male" ? personalMImage : personalFImage
+            res.data.gender === "MALE" ? personalMImage : personalFImage
           );
+          console.log(res.data);
           setUserRole(userType);
+          setPersonalCareer(res.data.personalCareer);
+          setUserIntro(res.data.userIntro);
         })
         .catch((error) => {
           console.error("Error fetching personal user data: ", error);
         });
     }
+  };
+
+  const clearUserData = () => {
+    setUserName("");
+    setUserRole(null);
+    setCompanyLogo("");
+  };
+
+  const handleLogout = async () => {
+    const token = localStorage.getItem("token");
+    const userId = localStorage.getItem("userId");
+    const userRole = localStorage.getItem("userRole");
+
+    if (userId && token && userRole === "PERSONAL") {
+      try {
+        await axios.post(
+          `/sse/logout/${userId}`,
+          {},
+          {
+            headers: {
+              Authorization: token,
+            },
+          }
+        );
+        localStorage.removeItem("token");
+        localStorage.removeItem("userId");
+        localStorage.removeItem("userRole");
+      } catch (error) {
+        console.error("Logout failed:", error);
+      }
+    } else {
+      localStorage.removeItem("token");
+      localStorage.removeItem("userId");
+      localStorage.removeItem("userRole");
+    }
+
+    window.location.reload("/");
+    setIsLoggedIn(false);
+    clearUserData();
   };
 
   return (
@@ -189,9 +235,18 @@ const LoginBannerSlide = () => {
             )}
           </div>
           <div className="login_user_name">
-            <p>{userName}</p>
+            <p>
+              {userRole === "COMPANY" ? (
+                userName
+              ) : (
+                <>
+                  {userName} | {personalCareer}
+                </>
+              )}
+            </p>
           </div>
           <div className="login_user_email">{userEmail}</div>
+          <div className="login_user_intro">{userIntro}</div>
           <div className="main_mypage">
             <Link
               to={
@@ -199,8 +254,11 @@ const LoginBannerSlide = () => {
               }
               style={{ textDecoration: "none" }}
             >
-              <p> 마이페이지</p>
+              <p>마이페이지</p>
             </Link>
+          </div>
+          <div className="main_logout" onClick={handleLogout}>
+            <p>로그아웃</p>
           </div>
         </div>
       </div>
