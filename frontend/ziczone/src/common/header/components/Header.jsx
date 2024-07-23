@@ -34,11 +34,13 @@ const Header = () => {
           console.error("Invalid token", error);
           setIsLoggedIn(false);
         }
+
       } else {
         setIsLoggedIn(false);
       }
     };
     checkToken();
+
   }, []);
 
   const fetchUserData = (decodedToken) => {
@@ -107,6 +109,7 @@ const Header = () => {
     setIsLoggedIn(false);
     clearUserData();
   };
+  
 
   return (
     <div className="header">
@@ -119,9 +122,20 @@ const Header = () => {
         <div className="header_nav_list">
           <div className="header_pick_zone">
             <div>
-              <NavLink to="/pickzone" activeClassName="active">
-                PICK존
-              </NavLink>
+            {localStorage.getItem('userRole') === "COMPANY" ? (
+                <NavLink to="/companypick" activeClassName="active">
+                  PICK존
+                </NavLink>
+              ) : localStorage.getItem('userRole') === "PERSONAL" ? (
+                <NavLink to="/personalpick" activeClassName="active">
+                  PICK존
+                </NavLink>
+              ) : (
+                <NavLink to="/#" activeClassName="">
+                  PICK존
+                </NavLink>
+              )}
+
             </div>
           </div>
           <div className="header_help_zone">
