@@ -20,7 +20,7 @@ const Modal = ({
   // handleOpen을 실행하면 openCardData를 보낸다.
   const handleOpen = () => {
     if (berryPoint < 50) {
-      navigate("/ChargeMain");
+      navigate("/charge");
       return;
     }
 
@@ -37,14 +37,12 @@ const Modal = ({
         if (response.status === 200) {
           onOpen();
         }
-        // pay_history에 buyerId와 sellerId가 존재하면 리다이렉트
-        // else if(response.status === 303) {
-
-        // }
       })
       .catch((error) => {
         console.error("Error opening card:", error);
-        if (error.response && error.response.data) {
+        if (error.response && error.response.data === 400) {
+          navigate("/charge");
+        }else if(error.response && error.response.data) {
           alert(error.response.data);
         }
       });
