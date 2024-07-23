@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "../styles/MainMain.css";
-import HelpZone from "./HelpZone";
 import CompanySilde from "./CompanySilde";
 import NoLoginBannerSlide from "./NoLoginBannerSlide";
 import LoginBannerUserCard from "./LoginBannerUserCard";
@@ -9,10 +8,8 @@ import personalMImage from "../../common/card/assets/personal_m_image.png";
 import personalFImage from "../../common/card/assets/personal_f_image.png";
 import { Link, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
-
 import Layout from "../../common/layout/layout";
 import BoardItem from "../../helpzone/components/BoardItem";
-
 import CompanyMain from "../components/CompanyMain";
 import NonLoginMain from "../components/NonLoginMain";
 import PersonalMain from "../components/PersonalMain";
@@ -76,15 +73,6 @@ const MainComponent = ({ board }) => {
 
   const userRole = localStorage.getItem("userRole");
   const tokenUserId = localStorage.getItem("userId");
-
-  // 날짜 형식 바꾸기
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
-    return `${year}/${month}/${day}`;
-  };
 
   const handleCardClick = (tokenUserId) => {
     navigate(`/pickzone/${isLoggedIn ? "loggedInPersonalId" : "personalId"}`);

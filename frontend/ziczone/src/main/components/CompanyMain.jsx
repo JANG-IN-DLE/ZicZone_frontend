@@ -47,7 +47,6 @@ const CompanyMain = () => {
           userName: maskName(card.userName),
         }));
         setPickCards(maskedData);
-
         // Jobs 데이터를 가져옴
         const jobsResponse = await axios.get("/api/jobs");
         setJobs([{ jobId: "all", jobName: "전체" }, ...jobsResponse.data]);

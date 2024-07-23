@@ -12,6 +12,7 @@ import PickMeTitle from "../assets/pickZoneTitle.png";
 import PickZoneTitlestyle from "../styles/PickZoneTitle.module.css";
 import NonCardstyle from "../styles/NonCard.module.css";
 import Layout from "../../common/layout/layout";
+import ScrollToTop from "../../common/ScrollToTop/ScrollToTop";
 
 // 이름 마스킹 함수
 const maskName = (name) => {
@@ -121,6 +122,7 @@ function UserPickzone() {
   return (
     <div>
       <Layout>
+        <ScrollToTop />
         <div className={PickZoneTitlestyle.pick_zone_intro}>
           <div className={PickZoneTitlestyle.pzi_title}>
             <p>PICK ME</p>
