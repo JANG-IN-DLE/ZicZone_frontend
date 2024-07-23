@@ -5,6 +5,7 @@ import CompanyzoneModal from "./CompanyzoneModal";
 import "../styles/CompanyMain.css";
 import axios from "axios";
 import Layout from "../../common/layout/layout";
+import ScrollToTop from "../../common/ScrollToTop/ScrollToTop";
 
 const CompanyzoneMain = () => {
   const [openModalInfo, setOpenModalInfo] = useState(null);
@@ -34,6 +35,7 @@ const CompanyzoneMain = () => {
   return (
     <Layout>
       <div className="main_container">
+        <ScrollToTop />
         <CompanyHeader />
         <div className="company_container">
           {companyData.slice(2).map((company, index) => (

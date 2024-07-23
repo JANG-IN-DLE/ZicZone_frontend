@@ -14,14 +14,17 @@ const NonLoginMain = () => {
   const [pickCards, setPickCards] = useState([]);
   const navigate = useNavigate(); // useNavigate 훅 사용
 
-  axios
-    .get("/api/pickcards")
-    .then((response) => {
-      setPickCards(response.data);
-    })
-    .catch((error) => {
-      console.error("Error fetching pick cards: ", error);
-    });
+  useEffect(() => {
+    axios
+      .get("/api/pickcards")
+      .then((response) => {
+        setPickCards(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching pick cards: ", error);
+      });
+  }, []);
+
   const handleCardClick = () => {
     navigate("/login"); // 로그인 페이지로 이동
   };
@@ -36,7 +39,6 @@ const NonLoginMain = () => {
     const end = name[name.length - 1];
     return `${start}${"*".repeat(maskedLength)}${end}`;
   };
-
   return (
     <>
       <div>
