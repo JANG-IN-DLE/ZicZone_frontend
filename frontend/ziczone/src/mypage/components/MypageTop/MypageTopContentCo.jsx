@@ -12,7 +12,7 @@ const MypageTopContentCo = () => {
         axios.get(`/api/company/${userId}`)
             .then(response => {
                 setTopData({
-                    companyLogo: response.data.companyLogo
+                    companyLogo: response.data.companyLogoUrl
                 });
             })
             .catch(error => {

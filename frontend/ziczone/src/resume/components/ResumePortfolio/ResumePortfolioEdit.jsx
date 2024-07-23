@@ -15,6 +15,8 @@ const ResumePortfolioEdit = ({ setPortfolio }) => {
                 const data = response.data.portfolios.map(port => ({
                     id: port.portId,
                     fileName: port.portFileName,
+                    fileUrl: port.portFileUrl,
+                    fileUuid: port.portFileUuid,
                     file: null // 파일 객체를 초기화
                 }));
                 setPortfolioList(data);

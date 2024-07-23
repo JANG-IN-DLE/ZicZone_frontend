@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../styles/main.css";
 import chargeimg from "../../payment/chargeimg.png";
+import { Link } from "react-router-dom";
 
 const ChargeMain = () => {
   const [selectedAmount, setSelectedAmount] = useState(0);
@@ -19,6 +20,14 @@ const ChargeMain = () => {
   const handleBatteryClick = (price) => {
     setSelectedAmount(price);
   };
+
+  const openTossPage = (url) => {
+    window.open(
+      url,
+      "_blank",
+      "scrollbars=yes, resizable=yes, width=600, height=800"
+    )
+  }
 
   return (
     <div className="main_container">
@@ -108,9 +117,13 @@ const ChargeMain = () => {
                 </div>
               </div>
             </div>
-            <div className="payment_btn_container">
+            {/* <Link to={"/toss"}> */}
+            <div className="payment_btn_container"
+            onClick={() => openTossPage("/toss")}
+            >
               <button className="payment_btn">결제하기</button>
             </div>
+            {/* </Link> */}
           </div>
         </div>
       </div>
