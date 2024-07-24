@@ -13,11 +13,7 @@ const ResumePrivacyEdit = ({ setPrivacy }) => {
     const [resumeEmail, setResumeEmail] = useState('');
     const [resumePhone, setResumePhone] = useState('');
     const [resumeBirth, setResumeBirth] = useState('');
-    const [resumePhoto, setResumePhoto] = useState('');
-
-    const { imageSrc, isImageUploaded, handleImageChange, handleDeleteImage } = useUploadImage((newImageSrc) => {
-        setResumePhoto(newImageSrc);
-    });
+    const { imageSrc, isImageUploaded, handleImageChange, handleDeleteImage, imageFile, setImageSrc, setIsImageUploaded } = useUploadImage();
 
     useEffect(() => {
         axios.get(`/api/personal/resumes/user/${userId}`)
@@ -27,17 +23,20 @@ const ResumePrivacyEdit = ({ setPrivacy }) => {
                 setResumeName(resumeName);
                 setResumeBirth(resumeDate);
                 setResumePhone(phoneNum);
-                setResumePhoto(resumePhotoUrl);
                 setResumeEmail(resumeEmail);
+                if (resumePhotoUrl) {
+                    setImageSrc(resumePhotoUrl);
+                    setIsImageUploaded(true);
+                }
             })
             .catch(error => {
                 console.error('Error fetching privacy data', error);
             });
-    }, []);
+    }, [userId, setImageSrc, setIsImageUploaded]);
 
     useEffect(() => {
-        setPrivacy({ resumeId, resumeName, resumeEmail, resumePhone, resumeBirth, resumePhoto: imageSrc });
-    }, [resumeId, resumeName, resumeEmail, resumePhone, resumeBirth, imageSrc, setPrivacy]);
+        setPrivacy({ resumeId, resumeName, resumeEmail, resumePhone, resumeBirth, resumePhoto: imageFile });
+    }, [resumeId, resumeName, resumeEmail, resumePhone, resumeBirth, imageFile, setPrivacy]);
 
     const handleImageClick = () => {
         document.getElementById('imageInput').click();
@@ -84,7 +83,7 @@ const ResumePrivacyEdit = ({ setPrivacy }) => {
             </div>
             <div className="resume_privacy_right">
                 <div className="resume_image" onClick={handleImageClick}>
-                    <img src={isImageUploaded ? imageSrc : resumePhoto + "?type=f&w=60&h=60&faceopt=true&ttype=png"} alt="증명사진" />
+                    <img src={imageSrc} alt="증명사진" />
                 </div>
                 <input
                     type="file"
