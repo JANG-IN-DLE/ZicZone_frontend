@@ -28,7 +28,7 @@ const ResumePrivacyView = () => {
                     resumeDate: data.resumeDate,
                     phoneNum: data.phoneNum,
                     resumeEmail: data.resumeEmail,
-                    resumePhoto: data.resumePhoto
+                    resumePhoto: data.resumePhotoUrl
                 });
             })
             .catch(error => {

@@ -33,7 +33,7 @@ const ResumeJob = ({ setJob }) => {
                     <div className="selected_job_container">
                         {selectedItems.map((item, index) => (
                             <div key={index} className="selected_job">
-                                {item}
+                                {item.jobName}
                             </div>
                         ))}
                     </div>
@@ -47,7 +47,7 @@ const ResumeJob = ({ setJob }) => {
                 {dropdownVisible && (
                     <JobDropdown 
                         selectedItems={selectedItems} 
-                        updateSelectedItems={updateSelectedItems} 
+                        setSelectedItems={updateSelectedItems} 
                     />
                 )}
             </div>

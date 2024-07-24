@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./../styles/Resume.css";
 import Header from "../../common/header/components/Header";
@@ -27,37 +27,90 @@ const Resume = () => {
     const [etc, setEtc] = useState([]);
     const [archive, setArchive] = useState({});
     const [introduction, setIntroduction] = useState(null);
-    const [portfolios, setPortfolio] = useState([]);
+    const [portfolio, setPortfolio] = useState([]);
+
+    useEffect(() => {
+        console.log("Introduction updated:", portfolio);
+    }, [portfolio]);
 
     const handleSave = async () => {
         const resumeDTO = {
-            privacy,
-            job,
-            tech,
-            education,
-            career,
-            curriculum,
-            certificate,
-            etc,
-            archive,
+            resumeName: privacy.resumeName,
+            resumeDate: privacy.resumeDate,
+            phoneNum: privacy.resumePhone,
+            resumePhotoUrl: privacy.resumePhotoUrl,
+            resumePhotoFileName: privacy.resumePhotoFileName,
+            resumeEmail: privacy.resumeEmail,
+            personalStateUrl: introduction.file,
+            personalStateFileName: introduction.file,
+            userId: userId,
+            archive: {
+                archGit: archive.github,
+                archNotion: archive.notion,
+                archBlog: archive.blog
+            },
+            etcs: etc.map((item) => ({
+                etcContent: item.description,
+                etcDate: item.startDate
+            })),
+            curriculums: curriculum.map((item) => ({
+                curriContent: item.course,
+                curriCompany: item.institution,
+                curriDate: `${item.startDate}~${item.endDate}`
+            })),
+            careers: career.map((item) => ({
+                careerName: item.companyName,
+                careerJob: item.job,
+                careerPosition: item.position,
+                careerDate: `${item.startDate}~${item.endDate}`
+            })),
+            educations: education.map((item) => ({
+                edu: item.history,
+                credit: `${item.scorePoint}/${item.scoreStandard}`,
+                eduDate: item.date
+            })),
+            certificates: certificate.map((item) => ({
+                cert: item.name,
+                certDate: item.date
+            })),
+            jobPositions: job.map((item, index) => ({
+                userJobId: index,
+                job: {
+                    jobId: item.jobId,
+                    jobName: item.jobName
+                }
+            })),
+            techStacks: tech.map((item, index) => ({
+                userTechId: index,
+                tech: {
+                    techId: item.techId,
+                    techName: item.techName,
+                    techUrl: item.techUrl
+                }
+            })),
+            portfolios: portfolio.length > 0 ? portfolio.map((item, index) => ({
+                portFileUrl: item.fileUrl,
+                portFileUuid: item.fileUuid,
+                portFileName: item.fileName,
+            })) : []
         };
 
         const formData = new FormData();
         formData.append("resumeDTO", JSON.stringify(resumeDTO));
 
         // Add portfolio files to FormData
-        portfolios.forEach((item, index) => {
+        portfolio.forEach((item) => {
             if (item.file) {
-                formData.append("portfolios", item.file);  // 수정된 부분
+                formData.append("portfolios", item.file);
             }
         });
 
-        if (privacy.resumePhotoUrl) {
-            formData.append("resumePhoto", privacy.resumePhotoUrl);
+        if (privacy.resumePhoto) {
+            formData.append("resumePhoto", privacy.resumePhoto);
         }
 
         if (introduction) {
-            formData.append("personalState", introduction);  // 수정된 부분
+            formData.append("personalState", introduction);
         }
 
         // formData 내용을 출력
