@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import axios from 'axios';
 import '../../styles/MypageEdit.css';
-import company_edit from "./../../assets/Logo_Edit.png";
+import company_edit from './../../assets/Logo_Edit.png';
 import { FormProvider } from './../../../join/components/FormContext';
 import AddressInput from './AddressInput';
 
@@ -10,14 +10,14 @@ const MypageCompanyModal = ({ setIsModalOpen }) => {
         setIsModalOpen(false);
     };
 
-    const userId = localStorage.getItem('userId')
-    const [logo, setLogo] = useState('');
+    const userId = localStorage.getItem('userId');
+    const [logo, setLogo] = useState(null);  // 변경: 초기값을 null로 설정
     const [userName, setUserName] = useState('');
-    const [intro, setIntro] = useState("");
+    const [intro, setIntro] = useState('');
     const [addr, setAddr] = useState('');
-    const [currentPassword, setCurrentPassword] = useState("");
-    const [changePassword, setChangePassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
+    const [currentPassword, setCurrentPassword] = useState('');
+    const [changePassword, setChangePassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
 
     useEffect(() => {
         const fetchData = async () => {
@@ -42,17 +42,23 @@ const MypageCompanyModal = ({ setIsModalOpen }) => {
 
     const handleSaveClick = async () => {
         const payload = {
-            userName: userName,
+            userName,
             userIntro: intro,
             companyAddr: addr,
-            logo,
             currentPassword,
             ...(changePassword && { changePassword })
         };
 
         const formData = new FormData();
         formData.append('payload', JSON.stringify(payload));
-        formData.append('logoFile', logo);
+        if (logo) {
+            formData.append('logoFile', logo);  // 파일 객체를 추가
+        }
+
+        // FormData의 내용을 콘솔에 출력
+        for (let [key, value] of formData.entries()) {
+            console.log(key, value);
+        }
 
         try {
             const response = await axios.put(`/api/company/${userId}`, formData, {
@@ -61,8 +67,8 @@ const MypageCompanyModal = ({ setIsModalOpen }) => {
                 },
             });
             console.log('response: ', response.data);
-            alert("수정사항 저장되었습니다.")
-            setIsModalOpen(false)
+            alert("수정사항 저장되었습니다.");
+            setIsModalOpen(false);
         } catch (error) {
             console.error("업데이트 오류: ", error);
         }
@@ -73,11 +79,7 @@ const MypageCompanyModal = ({ setIsModalOpen }) => {
     const handleLogoUpload = (event) => {
         const file = event.target.files[0];
         if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setLogo(reader.result);
-            };
-            reader.readAsDataURL(file);
+            setLogo(file);  // 변경: 파일 객체를 상태에 저장
         }
     };
 
@@ -94,7 +96,8 @@ const MypageCompanyModal = ({ setIsModalOpen }) => {
                 <div className="company_edit_container">
                     <div className="company_edit_logo">
                         <div className="edit_logo_circle">
-                            <img src={logo} alt="" />
+                            {logo && typeof logo === 'string' && <img src={logo} alt="" />}
+                            {logo && logo instanceof File && <img src={URL.createObjectURL(logo)} alt="" />} {/* 파일 객체를 미리보기 */}
                             <div className="edit_logo_button" onClick={handleEditButtonClick}>
                                 <img src={company_edit} alt="" />
                             </div>
