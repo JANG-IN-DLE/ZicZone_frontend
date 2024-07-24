@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import "./../styles/Resume.css";
 import ResumePrivacyEdit from "./ResumePrivacy/ResumePrivacyEdit";
@@ -14,7 +13,6 @@ import ResumeArchiveEdit from "./ResumeArchive/ResumeArchiveEdit";
 import ResumeIntroductionEdit from "./ResumeIntroduction/ResumeIntroductionEdit";
 import ResumePortfolioEdit from "./ResumePortfolio/ResumePortfolioEdit";
 import Layout from "../../common/layout/layout";
-
 // import dayjs from 'dayjs';
 
 const ResumeEdit = () => {
@@ -30,24 +28,8 @@ const ResumeEdit = () => {
     const [archive, setArchive] = useState({});
     const [introduction, setIntroduction] = useState({ fileName: '', file: null });
     const [portfolio, setPortfolio] = useState([]);
-    
-    const navigate = useNavigate();
 
     console.log("privacy: " + JSON.stringify(privacy))
-
-    // 삭제 버튼 추가 (삭제 시 관련 엔티티먼저 삭제하고 지원서 테이블을 삭제합니다. 리뷰시 이 주석 삭제바람☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★)
-    const handleDelete = () => {
-        axios.delete(`/api/personal/resumes/${userId}`)
-            .then(response => {
-                alert("삭제되었습니다.");
-                // 삭제 후 원하는 페이지로 이동할 수 있습니다.
-                navigate(`/personal/${userId}`);
-            })
-            .catch(error => {
-                console.error("지원서 삭제 실패: " + error);
-                alert("삭제 중 오류가 발생했습니다.");
-            });
-    };
 
     const EditSave = () => {
         const resumeDTO = {
@@ -177,7 +159,6 @@ const ResumeEdit = () => {
                             <ResumePortfolioEdit setPortfolio={setPortfolio} />
                         </div>
                         <div className="resume_save">
-                            <button className="resume_delete_btn" onClick={handleDelete}>삭제하기</button>
                             <button className="resume_save_btn" onClick={EditSave}>저장하기</button>
                         </div>
                     </div>
