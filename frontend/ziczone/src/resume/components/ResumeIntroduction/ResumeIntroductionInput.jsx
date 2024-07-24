@@ -10,7 +10,10 @@ const ResumeIntroductionInput = ({ setFile }) => {
         handleButtonClick,
         handleFileChange,
         handleClearFile,
-    } = useFileUpload(setFile);
+    } = useFileUpload((file) => {
+        console.log("ResumeIntroductionInput - setFile called with:", file); // 파일 객체 확인
+        setFile(file);
+    });
 
     return (
         <div className="resume_introduction_upload">

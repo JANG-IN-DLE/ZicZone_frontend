@@ -32,6 +32,14 @@ const ResumeTech = ({ setTech }) => {
         toggleDropdown(true);
     };
 
+    const handleTechSelect = (tech) => {
+        const isSelected = selectedItems.some(item => item.techId === tech.techId);
+        const newSelectedItems = isSelected
+            ? selectedItems.filter(item => item.techId !== tech.techId)
+            : [...selectedItems, tech];
+        updateSelectedItems(newSelectedItems);
+    };
+
     return (
         <div className="resume_tech">
             <div className="resume_tech_title">
@@ -60,7 +68,7 @@ const ResumeTech = ({ setTech }) => {
                 {dropdownVisible && (
                     <TechDropdown
                         selectedItems={selectedItems}
-                        updateSelectedItems={updateSelectedItems}
+                        handleTechSelect={handleTechSelect}
                         filter={filter}
                     />
                 )}

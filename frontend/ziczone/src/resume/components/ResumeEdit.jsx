@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import "./../styles/Resume.css";
@@ -30,6 +30,10 @@ const ResumeEdit = () => {
     const [archive, setArchive] = useState({});
     const [introduction, setIntroduction] = useState({ fileName: '', file: null });
     const [portfolio, setPortfolio] = useState([]);
+
+    useEffect(() => {
+        console.log("Introduction updated:", privacy);
+    }, [privacy]);
     
     const navigate = useNavigate();
 

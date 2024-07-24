@@ -4,26 +4,22 @@ import email from "./../../assets/Email.png";
 import phone from "./../../assets/Phone.png";
 import birthdate from "./../../assets/Birthdate.png";
 import useUploadImage from "../../hooks/useUploadImage";
-import axios from "axios";
 
 const ResumePrivacy = ({ setPrivacy }) => {
-    const { imageSrc, isImageUploaded, handleImageChange, handleDeleteImage, imageFile } = useUploadImage();
+    const { imageSrc, isImageUploaded, handleImageChange, handleDeleteImage,imageFile } = useUploadImage();
 
     const [resumeName, setResumeName] = useState('');
     const [resumeEmail, setResumeEmail] = useState('');
-    const [phone_num, setResumePhone] = useState('');
+    const [resumePhone, setResumePhone] = useState('');
     const [resumeDate, setResumeBirth] = useState('');
 
     useEffect(() => {
-        setPrivacy({ resumeName, resumeEmail, phone_num, resumeDate, resumePhotoUrl: imageFile });
-    }, [resumeName, resumeEmail, phone_num, resumeDate, imageFile, setPrivacy]);
+        setPrivacy({ resumeName, resumeEmail, resumePhone, resumeDate, resumePhoto: imageFile });
+    }, [resumeName, resumeEmail, resumePhone, resumeDate, imageFile, setPrivacy]);
 
     const handleImageClick = () => {
         document.getElementById('imageInput').click();
     };
-
-    // axios.get(`/api/resumes/${userId}`)
-    // .then(response.data)
 
     return (
         <div className="resume_privacy">
@@ -37,7 +33,7 @@ const ResumePrivacy = ({ setPrivacy }) => {
                 </div>
                 <div className="resume_phone">
                     <img src={phone} alt="Phone" />
-                    <input type="text" placeholder="010-0000-0000" value={phone_num} maxLength={13} onChange={(e) => setResumePhone(e.target.value)} />
+                    <input type="text" placeholder="010-0000-0000" value={resumePhone} maxLength={13} onChange={(e) => setResumePhone(e.target.value)} />
                 </div>
                 <div className="resume_birthdate">
                     <img src={birthdate} alt="Birthdate" />
