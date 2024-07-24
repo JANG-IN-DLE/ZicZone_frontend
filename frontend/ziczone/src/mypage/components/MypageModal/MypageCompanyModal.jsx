@@ -23,11 +23,11 @@ const MypageCompanyModal = ({ setIsModalOpen }) => {
         const fetchData = async () => {
             try {
                 const response = await axios.get(`/api/company/${userId}`);
-                const { user, companyAddr, companyLogo } = response.data;
+                const { user, companyAddr, companyLogoUrl } = response.data;
                 setUserName(user.userName);
                 setIntro(user.userIntro);
                 setAddr(companyAddr);
-                setLogo(companyLogo);
+                setLogo(companyLogoUrl);
             } catch (error) {
                 console.error("fetchData 오류: ", error);
             }

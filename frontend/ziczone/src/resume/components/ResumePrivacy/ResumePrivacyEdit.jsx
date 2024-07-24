@@ -8,34 +8,35 @@ import useUploadImage from "../../hooks/useUploadImage";
 
 const ResumePrivacyEdit = ({ setPrivacy }) => {
     const userId = localStorage.getItem("userId")
+    const [resumeId, setResumeId] = useState(0)
     const [resumeName, setResumeName] = useState('');
     const [resumeEmail, setResumeEmail] = useState('');
     const [resumePhone, setResumePhone] = useState('');
     const [resumeBirth, setResumeBirth] = useState('');
-    const [resumePhoto, setResumePhoto] = useState('');
-
-    const { imageSrc, isImageUploaded, handleImageChange, handleDeleteImage } = useUploadImage((newImageSrc) => {
-        setResumePhoto(newImageSrc);
-    });
+    const { imageSrc, isImageUploaded, handleImageChange, handleDeleteImage, imageFile, setImageSrc, setIsImageUploaded } = useUploadImage();
 
     useEffect(() => {
         axios.get(`/api/personal/resumes/user/${userId}`)
             .then(response => {
-                const { resumeName, resumeDate, phoneNum, resumePhoto, resumeEmail } = response.data;
+                const { resumeId, resumeName, resumeDate, phoneNum, resumePhotoUrl, resumeEmail } = response.data;
+                setResumeId(resumeId);
                 setResumeName(resumeName);
                 setResumeBirth(resumeDate);
                 setResumePhone(phoneNum);
-                setResumePhoto(resumePhoto);
                 setResumeEmail(resumeEmail);
+                if (resumePhotoUrl) {
+                    setImageSrc(resumePhotoUrl);
+                    setIsImageUploaded(true);
+                }
             })
             .catch(error => {
                 console.error('Error fetching privacy data', error);
             });
-    }, []);
+    }, [userId, setImageSrc, setIsImageUploaded]);
 
     useEffect(() => {
-        setPrivacy({ resumeName, resumeEmail, resumePhone, resumeBirth, resumePhoto: imageSrc });
-    }, [resumeName, resumeEmail, resumePhone, resumeBirth, imageSrc, setPrivacy]);
+        setPrivacy({ resumeId, resumeName, resumeEmail, resumePhone, resumeBirth, resumePhoto: imageFile });
+    }, [resumeId, resumeName, resumeEmail, resumePhone, resumeBirth, imageFile, setPrivacy]);
 
     const handleImageClick = () => {
         document.getElementById('imageInput').click();
@@ -45,44 +46,44 @@ const ResumePrivacyEdit = ({ setPrivacy }) => {
         <div className="resume_privacy">
             <div className="resume_privacy_left">
                 <div className="resume_name">
-                    <input 
-                        type="text" 
-                        placeholder="이름" 
-                        value={resumeName} 
-                        onChange={(e) => setResumeName(e.target.value)} 
+                    <input
+                        type="text"
+                        placeholder="이름"
+                        value={resumeName}
+                        onChange={(e) => setResumeName(e.target.value)}
                     />
                 </div>
                 <div className="resume_email">
                     <img src={emailIcon} alt="Email" />
-                    <input 
-                        type="text" 
-                        placeholder="ziczone@email.com" 
-                        value={resumeEmail} 
-                        onChange={(e) => setResumeEmail(e.target.value)} 
+                    <input
+                        type="text"
+                        placeholder="ziczone@email.com"
+                        value={resumeEmail}
+                        onChange={(e) => setResumeEmail(e.target.value)}
                     />
                 </div>
                 <div className="resume_phone">
                     <img src={phoneIcon} alt="Phone" />
-                    <input 
-                        type="text" 
-                        placeholder="010-0000-0000" 
-                        value={resumePhone} 
-                        onChange={(e) => setResumePhone(e.target.value)} 
+                    <input
+                        type="text"
+                        placeholder="010-0000-0000"
+                        value={resumePhone}
+                        onChange={(e) => setResumePhone(e.target.value)}
                     />
                 </div>
                 <div className="resume_birthdate">
                     <img src={birthdateIcon} alt="Birthdate" />
-                    <input 
-                        type="text" 
-                        placeholder="YYYY년 MM월 DD일" 
-                        value={resumeBirth} 
-                        onChange={(e) => setResumeBirth(e.target.value)} 
+                    <input
+                        type="date"
+                        placeholder="YYYY년 MM월 DD일"
+                        value={resumeBirth}
+                        onChange={(e) => setResumeBirth(e.target.value)}
                     />
                 </div>
             </div>
             <div className="resume_privacy_right">
                 <div className="resume_image" onClick={handleImageClick}>
-                    <img src={isImageUploaded ? imageSrc : resumePhoto} alt="증명사진" />
+                    <img src={imageSrc} alt="증명사진" />
                 </div>
                 <input
                     type="file"

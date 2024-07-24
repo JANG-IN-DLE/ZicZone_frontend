@@ -11,10 +11,10 @@ const ResumeEducationEdit = ({ setEducation }) => {
 
     useEffect(() => {
         // 서버로부터 데이터 가져오기
-        axios.get(`/api/personal/resumes/${userId}`)
+        axios.get(`/api/personal/resumes/user/${userId}`)
             .then(response => {
                 const data = response.data.educations.map(edu => ({
-                    id: edu.edu_id,
+                    id: edu.eduId,
                     date: edu.eduDate,
                     history: edu.edu,
                     scorePoint: edu.credit.split('/')[0],

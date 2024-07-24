@@ -48,25 +48,24 @@
 .history_bar_item {
     display: flex;
     align-items: center;
-    /* justify-content: space-between; */
     font-size: 18px;
 }
 
 .history_bar_date {
     text-align: left;
-    width: 48px;
+    width: 52px;
     margin-right: 12px;
 }
 
 .history_bar_record {
-    width: 118px;
+    width: 132px;
     text-align: left;
     margin-right: 12px;
 }
 
 .history_bar_bucket {
     text-align: right;
-    width: 80px;
+    width: 88px;
 }
 
 .berry_history_close {

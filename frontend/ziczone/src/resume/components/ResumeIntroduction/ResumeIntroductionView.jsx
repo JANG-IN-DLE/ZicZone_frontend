@@ -1,3 +1,4 @@
+// ResumeIntroductionView.js
 import React, { useEffect, useState } from "react";
 import "./../../styles/ResumeIntroduction.css";
 import ResumeIntroductionInputView from "./ResumeIntroductionInputView";
@@ -5,12 +6,12 @@ import axios from "axios";
 
 const ResumeIntroductionView = () => {
     const userId = localStorage.getItem("userId")
-    const [personalState, setPersonalState] = useState('');
+    const [personalStateFileName, setPersonalStateFileName] = useState('');
 
     useEffect(() => {
         axios.get(`/api/personal/resumes/user/${userId}`)
             .then(response => {
-                setPersonalState(response.data.personalState);
+                setPersonalStateFileName(response.data.personalStateFileName);
             })
             .catch(error => {
                 console.log("personalState 호출 실패", error);
@@ -24,7 +25,7 @@ const ResumeIntroductionView = () => {
                 <p className="introduction_warning">* 자기소개서는 하나의 파일만 첨부 가능합니다. </p>
             </div>
             <div className="resume_bar"></div>
-            <ResumeIntroductionInputView personalState={personalState} />
+            <ResumeIntroductionInputView personalStateFileName={personalStateFileName} />
         </div>
     );
 }

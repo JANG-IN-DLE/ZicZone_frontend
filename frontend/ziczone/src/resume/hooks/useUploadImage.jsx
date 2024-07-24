@@ -11,7 +11,7 @@ const useUploadImage = () => {
         if (file) {
             const reader = new FileReader();
             reader.onload = (e) => {
-                setImageSrc(e.target.result);
+                    setImageSrc(e.target.result);
                 setIsImageUploaded(true); // 이미지 업로드 상태 변경
                 setImageFile(file); // 이미지 파일 저장
             };
@@ -31,7 +31,9 @@ const useUploadImage = () => {
         isImageUploaded,
         handleImageChange,
         handleDeleteImage,
-        imageFile
+        imageFile,
+        setImageSrc,
+        setIsImageUploaded
     };
 };
 

@@ -11,6 +11,7 @@ import left from "../../main/left.png";
 import right from "../../main/right.png";
 
 const LoginBannerSlide = () => {
+  const userId = localStorage.getItem("userId")
   const [userData, setUserData] = useState([]);
   const [userName, setUserName] = useState([]);
   const [userEmail, setUserEmail] = useState([]);
@@ -249,7 +250,7 @@ const LoginBannerSlide = () => {
           <div className="main_mypage">
             <Link
               to={
-                userRole === "COMPANY" ? `/company/userId` : `/personal/userId`
+                userRole === "COMPANY" ? `/company/${userId}` : `/personal/${userId}`
               }
               style={{ textDecoration: "none" }}
             >

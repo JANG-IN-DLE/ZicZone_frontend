@@ -4,8 +4,9 @@ import "./../../styles/ResumeArchive.css";
 import ResumeArchiveInputEdit from "./ResumeArchiveInputEdit";
 
 const ResumeArchiveEdit = ({ setArchive }) => {
-    const userId = localStorage.getItem("userId")
+    const userId = localStorage.getItem("userId");
     const [archiveData, setArchiveData] = useState({
+        archId: null,
         git: '',
         notion: '',
         blog: ''
@@ -13,19 +14,17 @@ const ResumeArchiveEdit = ({ setArchive }) => {
 
     useEffect(() => {
         // 서버로부터 데이터 가져오기
-        axios.get(`/api/personal/resumes/${userId}`)
+        axios.get(`/api/personal/resumes/user/${userId}`)
             .then(response => {
                 const data = response.data.archive;
-                setArchiveData({
+                const updatedData = {
+                    archId: data.archId,
                     git: data.archGit,
                     notion: data.archNotion,
                     blog: data.archBlog
-                });
-                setArchive({
-                    git: data.archGit,
-                    notion: data.archNotion,
-                    blog: data.archBlog
-                });
+                };
+                setArchiveData(updatedData);
+                setArchive(updatedData); // 초기 상태 설정
             })
             .catch(error => {
                 console.error("Error fetching archive data", error);
