@@ -72,3 +72,12 @@
     font-size: 12px;
     color: #fff;
 }
+.resume_delete_btn {
+    width: 100px;
+    height: 32px;
+    border: none;
+    border-radius: 8px;
+    background-color: #ba0016;
+    font-size: 12px;
+    color: #fff;
+}
