@@ -32,6 +32,7 @@ import ResumeEdit from "./resume/components/ResumeEdit"
 import CheckoutPage from './mypage/components/Toss/CheckoutPage';
 import { SuccessPage } from './mypage/components/Toss/SuccessPage';
 import { FailPage } from './mypage/components/Toss/FailPage';
+import ResumeRedirect from './resume/components/ResumeRedirect';
 
 
 
@@ -65,7 +66,11 @@ function App() {
           <Route path="/pickzone/:companyId/:personalId" element={<PickZoneUserDetail/>} />
           <Route path="/personal/:userId" element={<Mypage />} />
           <Route path="/company/:userId" element={<MypageCompany />} />
-          <Route path="/personal/resumes/:userId" element={<ResumeView />} />
+          {/* <Route path="/personal/resumes/:userId" element={<ResumeEdit />} /> */}
+          <Route path="/personal/resumes/:userId" element={<ResumeRedirect />} /> {/* 중간 페이지 라우트 */}
+        <Route path="/personal/resumes/create/:userId" element={<Resume />} /> {/* 생성 페이지 */}
+        <Route path="/personal/resumes/view/:userId" element={<ResumeView />} /> {/* 조회 페이지 */}
+        <Route path="/personal/resumes/edit/:userId" element={<ResumeEdit />} /> {/* 수정 페이지 */}
           <Route path="/charge" element={<ChargeMain/>} />
           <Route path='/toss' element={<CheckoutPage/>}/>
           <Route path='/success' element={<SuccessPage/>}/>
@@ -76,4 +81,5 @@ function App() {
     </div>
   );
 }
+
 export default App;
