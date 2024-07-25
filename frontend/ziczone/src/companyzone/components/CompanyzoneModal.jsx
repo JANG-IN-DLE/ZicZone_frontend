@@ -45,7 +45,7 @@ const Modal = ({
   return (
     <div className="background" onClick={backClick}>
       <div className="company_modal">
-        <div className="company_modal_body">
+        <div className="company_modal_body" style={{zIndex : 5}}>
           <div className="company_modal_header">
             <div className="circles">
               <div className="header_circle red"></div>

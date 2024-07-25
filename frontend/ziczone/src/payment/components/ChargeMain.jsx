@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import "../styles/main.css";
 import chargeimg from "../../payment/chargeimg.png";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const ChargeMain = () => {
   const [selectedAmount, setSelectedAmount] = useState(0);
+  const navigate = useNavigate();
 
   const batteries = [
     { id: 1, amount: 100, price: 1000 },
@@ -22,11 +24,11 @@ const ChargeMain = () => {
   };
 
   const openTossPage = (url) => {
-    window.open(
-      url,
-      "_blank",
-      "scrollbars=yes, resizable=yes, width=600, height=800"
-    )
+    if (selectedAmount > 0) {
+      navigate(`/toss?amount=${selectedAmount}`);
+    } else {
+      alert("충전할 금액을 선택해주세요.");
+    }
   }
 
   return (
@@ -61,9 +63,8 @@ const ChargeMain = () => {
                   key={battery.id}
                   // 조건문 사용으로 selectedAmount === battery.price(선택된 충전 금액과 현재 배터리의 가격이 일치할 때)
                   // 셀렉티드 클래스 추가
-                  className={`battery ${
-                    selectedAmount === battery.price ? "selected" : ""
-                  }`}
+                  className={`battery ${selectedAmount === battery.price ? "selected" : ""
+                    }`}
                   // 클릭 이벤트, 배터리 클릭시 handleBatteryClick 호출
                   // battery.price로 인자 전달, 선택된 충전 금액으로 설정
                   onClick={() => handleBatteryClick(battery.price)}
@@ -119,7 +120,8 @@ const ChargeMain = () => {
             </div>
             {/* <Link to={"/toss"}> */}
             <div className="payment_btn_container"
-            onClick={() => openTossPage("/toss")}
+              onClick={() => openTossPage("/toss")}
+              disabled={selectedAmount === 0}
             >
               <button className="payment_btn">결제하기</button>
             </div>

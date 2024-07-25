@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import "./../styles/Resume.css";
 import Header from "../../common/header/components/Header";
 import ResumePrivacy from "./ResumePrivacy/ResumePrivacy";
@@ -16,6 +17,7 @@ import ResumePortfolio from "./ResumePortfolio/ResumePortfolio";
 import Layout from "../../common/layout/layout";
 
 const Resume = () => {
+    const navigate = useNavigate();
     const userId = localStorage.getItem("userId");
     const [privacy, setPrivacy] = useState({});
     const [job, setJob] = useState([]);
@@ -126,6 +128,7 @@ const Resume = () => {
             });
             console.log('응답 데이터:', response.data);
             alert("저장되었습니다.");
+            navigate(`/personal/resumes/view/${userId}`);
         } catch (error) {
             console.error('저장 중 오류 발생:', error);
             alert("저장 중 오류가 발생했습니다.");

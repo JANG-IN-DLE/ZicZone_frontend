@@ -33,6 +33,7 @@ import CheckoutPage from './mypage/components/Toss/CheckoutPage';
 import { SuccessPage } from './mypage/components/Toss/SuccessPage';
 import { FailPage } from './mypage/components/Toss/FailPage';
 import ResumeRedirect from './resume/components/ResumeRedirect';
+import ServicePolicy from './common/footer/components/ServicePolicy';
 
 
 
@@ -75,6 +76,7 @@ function App() {
           <Route path='/toss' element={<CheckoutPage />} />
           <Route path='/success' element={<SuccessPage />} />
           <Route path='/fail' element={<FailPage />} />
+          <Route path='/servicepolicy' element={<ServicePolicy />} />
         </Routes>
         {/* <Footer /> */}
       </Router>
