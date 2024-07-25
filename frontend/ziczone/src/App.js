@@ -34,6 +34,9 @@ import { SuccessPage } from './mypage/components/Toss/SuccessPage';
 import { FailPage } from './mypage/components/Toss/FailPage';
 import ResumeRedirect from './resume/components/ResumeRedirect';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { subscribeToSSE, initAlarm } from './store/actions/alarmActions';
+
 
 
 function App() {
@@ -43,6 +46,17 @@ function App() {
     setUserType(localStorage.getItem("userRole"));
   }, []);
 
+  //알림
+  const dispatch = useDispatch();
+  const userId = localStorage.getItem("userId");
+  const token = localStorage.getItem("token");
+
+  useEffect(() => {
+    if (userId && token) {
+      dispatch(initAlarm(userId, token));
+      dispatch(subscribeToSSE(userId, token));
+    }
+  }, [dispatch, userId, token]);
 
   return (
     <div>
