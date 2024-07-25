@@ -13,7 +13,7 @@
     .company_modal {
       display: flex;
       justify-content: center;
-      margin-top: -50px;
+      margin-top: -120px;
     }
 
     .company_modal_body {
@@ -126,7 +126,7 @@
     }
 
     .com_info {
-      margin-top: 25px;
+      margin-top: 0px;
       width: 420px;
       height: 400px;
       font-weight: 500;
@@ -174,3 +174,191 @@
     .modal_close_btn:active{
     transform: scale(0.97);
     }
+
+@media (max-width:767px) {
+  
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 250px;
+}
+
+    .company_modal {
+      display: flex;
+      justify-content: center;
+      margin-top: -120px;
+    }
+
+    .company_modal_body {
+    position: fixed;
+      width: 320px;
+      height: 420px;
+      text-align: center;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+
+      background-color: rgb(255, 255, 255);
+      border-radius: 28px;
+      box-shadow: 4px 4px 16px #d4d4d4,
+      -8px -8px 16px #ffffff;
+    }
+
+    .company_modal_header {
+      width: 320px;
+      height: 30px;
+    }
+
+    .circles {
+      height: 10px;
+      display: flex;
+      align-items: center;
+      margin-left: 15px;
+    }
+
+    .header_circle {
+      width: 10px;
+      height: 10px;
+      border-radius: 32px;
+      margin-left: 12px;
+      display: flex;
+      align-content: center;
+      margin-top: 20px;
+
+    }
+
+    .red {
+      background-color: #DE2E2E;
+    }
+
+    .yellow {
+      background-color: #FBB63D;
+    }
+
+    .green {
+      background-color: #1FBF42;
+    }
+
+    .header_backcolor {
+      width: 320px;
+      height: 60px;
+      background-color: #CCDCF1;
+    }
+
+    .modal_body {
+      width: 280px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: -35px;
+    }
+
+    .com_logo_img {
+      /* border: 0.5px solid #0051BA; */
+      border-radius: 45px;
+      background-color: white;
+      width: 60px;
+      height: 60px;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+    }
+    .com_logo_img img{
+      width: auto;
+      height: auto;
+      max-width: 60px;
+      max-height: 60px; 
+      object-fit: contain; 
+    }
+
+    .modal_com_name {
+      width: 320px;
+      height: 30px;
+      border-bottom: 0.5px solid #b3b3b3;
+      margin-top: 0px;
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .modal_com_intro {
+      display: -webkit-box;
+      -webkit-box-orient: vertical; /* 수직 방향으로 설정 */
+      -webkit-line-clamp: 2; /* 표시할 줄 수 설정 */
+      width: 280px;
+      font-size: 12px;
+      color: #b3b3b3;
+      margin-top: 5px;
+      line-height: 1.5;
+      height: 38px;
+      overflow: hidden; /* 넘치는 텍스트 숨기기 */
+      text-overflow: ellipsis; /* 넘치는 텍스트를 '...'으로 표시 */
+    }
+
+    .com_info {
+      margin-top: 15px;
+      width: 320px;
+      height: 150px;
+      font-weight: 500;
+      
+    }
+
+    .com_ceo,
+    .com_num,
+    .com_email,
+    .com_addr,
+    .com_year {
+      width: 100%;
+      height: 20px;
+      text-align: left;
+      margin-bottom: 10px;
+      display: grid;
+      grid-template-columns: 2fr 3fr;
+      font-size: 12px;
+      line-height: 1;
+    }
+
+    .addr_content,
+    .ceo_content,
+    .num_content,
+    .email_content,
+    .year_cotent{
+      width: 170px;
+      word-break: break-all;
+    }
+
+    .ceo,
+    .num,
+    .add,
+    .addr,
+    .email,
+    .year {
+      color: #818181;
+      margin-left: 30px;
+    }
+
+    .modal_close_btn {
+      width: 200px;
+      height: 30px;
+      margin-top: 0px;
+      border: 0.5px solid #818181;
+      background-color: white;
+      border-radius: 12px;
+      font-size: 13px;
+      color: #5D5D5D;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .modal_close_btn:active{
+    transform: scale(0.97);
+    }
+}

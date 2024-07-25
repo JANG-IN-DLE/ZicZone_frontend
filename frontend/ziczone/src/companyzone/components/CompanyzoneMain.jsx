@@ -33,7 +33,7 @@ const CompanyzoneMain = () => {
 
   return (
     <Layout>
-      <div className="main_container">
+      <div className="com_main_container">
         <CompanyHeader />
         <div className="company_container">
           {companyData.slice(2).map((company, index) => (

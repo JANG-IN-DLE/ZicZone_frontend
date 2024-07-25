@@ -50,3 +50,32 @@
         .main_helpzone{
          padding-bottom: 40px;
         }
+
+@media (max-width : 767px) {
+
+        .main_container {
+            margin: auto;
+            width: 375px;
+            max-width: 767px;
+            height: 100%;
+            padding-top: 60px;  
+        }
+
+        .main_container h1 {
+            font-size: 24px;
+            margin-bottom: 30px;
+            font-family: 'Giants-Bold';
+            font-weight: 700;
+            font-style: normal;    
+            text-shadow: 2px 2px 4px rgba(61, 61, 61, 0.5);    
+        }
+
+        .pickzone,
+        .helpzone {
+            margin-top: 30px;
+        }
+
+        .main_helpzone{
+         padding-bottom: 30px;
+        }
+}
