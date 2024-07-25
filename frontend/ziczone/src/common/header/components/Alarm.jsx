@@ -59,6 +59,8 @@ const AlarmList = () => {
                 return `[${sliceSender(alarm.sender)}] 기업이 당신을 scrap했습니다.`;
             case "BUYRESUME":
                 return `[${sliceSender(alarm.sender)}]님이 당신의 이력서를 열람하셨습니다.`;
+            case "DELETEBOARD":
+                return `[${sliceSender(alarm.sender)}]게시물이 자동 삭제되었습니다.`;
             default:
                 return `알림 메시지를 불러오지 못했습니다.`;
             }
