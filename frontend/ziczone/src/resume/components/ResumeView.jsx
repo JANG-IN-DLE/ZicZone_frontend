@@ -22,6 +22,10 @@ const ResumeView = () => {
         navigate(`/personal/resumes/edit/${userId}`);
     };
 
+    const handleReturnClick = () => {
+        navigate(`/personal/${userId}`);
+    };
+
     return (
         <Layout>
             <div>
@@ -43,6 +47,7 @@ const ResumeView = () => {
                             <ResumePortfolioView />
                         </div>
                         <div className="resume_save">
+                            <button className="resume_return_btn" onClick={handleReturnClick}>뒤로가기</button>
                             <button className="resume_save_btn" onClick={handleEditClick}>수정하기</button>
                         </div>
                     </div>
