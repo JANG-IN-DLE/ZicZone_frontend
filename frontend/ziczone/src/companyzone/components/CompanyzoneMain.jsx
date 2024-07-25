@@ -25,7 +25,6 @@ const CompanyzoneMain = () => {
       .get("/api/companyzone")
       .then((res) => {
         setCompanyData(res.data);
-        console.log("컴퍼니", res);
       })
       .catch((error) => {
         console.error("컴퍼니존 에러 : ", error);

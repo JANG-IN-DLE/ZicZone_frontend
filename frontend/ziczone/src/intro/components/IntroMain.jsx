@@ -9,6 +9,7 @@ import introImg5 from "../../intro/introImg5.png";
 import CompanySilde from "../../main/components/CompanySilde";
 import { Link } from "react-router-dom";
 import Layout from "../../common/layout/layout";
+import CompanySildeLeft from "../../main/components/CompanySilde_left";
 
 const IntroMain = () => {
   // uesRef써서 DOM에 접근할 수 있는 참조 변수 만듬
@@ -176,7 +177,7 @@ const IntroMain = () => {
           <div className="company_slide">
             <div className="ziczone_sign_company">직존 등록 기업</div>
             <CompanySilde />
-            <CompanySilde />
+            <CompanySildeLeft />
             <CompanySilde />
           </div>
           <div className="ziczone_join">
