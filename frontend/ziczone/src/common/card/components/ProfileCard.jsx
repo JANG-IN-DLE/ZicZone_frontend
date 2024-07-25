@@ -29,16 +29,18 @@ const ProfileCard = ({userImage, jobNames=[], userName, userCareer, userIntro, t
 
     return (
         <div className={ProfileCardstyle.profile_card}>
-        {isCompany && (
-            <button className={ProfileCardstyle.scrap_button} onClick={handleScrapClick}>
-                <img src={scrap ? unscrapImg : scrapImg} alt="Scrap"/>
-            </button>
-        )}
-            <p className={ProfileCardstyle.pc_jobs}>
+            {isCompany && (
+                <button className={ProfileCardstyle.scrap_button} onClick={handleScrapClick}>
+                    <img src={scrap ? unscrapImg : scrapImg} alt="Scrap"/>
+                </button>
+            )}
+            <div className={ProfileCardstyle.pc_jobs_group}>
                 {jobNames.map((job, index)=> (
-                    <span key={index}>#{job}</span>
+                    <p className={ProfileCardstyle.pc_jobs}>
+                        <span key={index}>  # {job}</span>
+                    </p>
                 ))}
-            </p>
+            </div>
             <div className={ProfileCardstyle.pc_personal_image}>
                 <img className={ProfileCardstyle.pick_user_image} src={userImage} alt="User" />
             </div>
