@@ -88,7 +88,6 @@ const LoginForm = ({
       if (response.data.message === "Auth Success") {
         const token = response.headers["authorization"];
 
-        localStorage.setItem("token", token);
         const user = saveToken(token);
 
         if (user) {
