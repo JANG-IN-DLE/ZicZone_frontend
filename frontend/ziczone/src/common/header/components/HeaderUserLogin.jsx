@@ -14,8 +14,8 @@ const UserLogin = ({ userName, onLogout }) => {
   return (
     <>
       <div className="user_login" ref={dropdownRef}>
-        <AlarmList/>
-        <div className="user_login_name">
+        <AlarmList />
+        <div className="user_login_name" onClick={Dropdown}>
           {userName}
           <div className={`dropdown_list ${open ? "show" : ""}`}>
             <div className="list1">
@@ -27,9 +27,9 @@ const UserLogin = ({ userName, onLogout }) => {
               </Link>
             </div>
           </div>
-        </div>
-        <div className="dropdown" onClick={Dropdown}>
-          <img src={dropdown} alt="Dropdown" />
+          <div className="dropdown">
+            <img src={dropdown} alt="Dropdown" />
+          </div>
         </div>
       </div>
     </>

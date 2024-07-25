@@ -9,10 +9,10 @@ const ChargeMain = () => {
   const navigate = useNavigate();
 
   const batteries = [
-    { id: 1, amount: 100, price: 1000 },
-    { id: 2, amount: 300, price: 3000 },
-    { id: 3, amount: 500, price: 5000 },
-    { id: 4, amount: 1000, price: 10000 },
+    { id: 1, amount: 1000, price: 1000 },
+    { id: 2, amount: 3000, price: 3000 },
+    { id: 3, amount: 5000, price: 5000 },
+    { id: 4, amount: 10000, price: 10000 },
   ];
 
   // 'selectedAmount' 상태를 'price'로 설정
@@ -25,7 +25,7 @@ const ChargeMain = () => {
 
   const openTossPage = (url) => {
     if (selectedAmount > 0) {
-      navigate(`/toss?amount=${selectedAmount}`);
+      window.open(`/toss?amount=${selectedAmount}`, "_blank", "width=600,height=800");
     } else {
       alert("충전할 금액을 선택해주세요.");
     }
