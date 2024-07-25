@@ -52,8 +52,7 @@ const JoinButton = ({category}) => {
             }
             if(response.status === 200){
                 if(response.data === "Personal user signup successful" || response.data === "Company user signup successful"){
-                    console.log("회원가입 성공 : ", response.data);
-                    alert(response.data);
+                    alert("직존에 오신걸 환영합니다.");
                     navigate('/login');
                 }else{
                     console.log("회원가입 실패 : ", response.data);
