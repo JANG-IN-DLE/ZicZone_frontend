@@ -19,6 +19,22 @@ const TechDropdown = ({ selectedItems, handleTechSelect, filter }) => {
         tech.techName.toLowerCase().includes(filter.toLowerCase())
     );
 
+    const handleCheckboxChange = (tech) => {
+        const isSelected = selectedItems.some(item => item.techId === tech.techId);
+
+        if (isSelected) {
+            // Allow deselection if more than 1 item is selected
+            if (selectedItems.length > 1) {
+                handleTechSelect(tech);
+            }
+        } else {
+            // Allow selection if less than 7 items are selected
+            if (selectedItems.length < 7) {
+                handleTechSelect(tech);
+            }
+        }
+    };
+
     return (
         <div className="tech_dropdown_list">
             {filteredTech.map((tech, index) => (
@@ -26,7 +42,7 @@ const TechDropdown = ({ selectedItems, handleTechSelect, filter }) => {
                     <input
                         type="checkbox"
                         checked={selectedItems.some(item => item.techId === tech.techId)}
-                        onChange={() => handleTechSelect(tech)}
+                        onChange={() => handleCheckboxChange(tech)}
                     />
                     {tech.techName}
                 </div>

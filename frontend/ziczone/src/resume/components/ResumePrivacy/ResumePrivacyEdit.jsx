@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import "./../../styles/ResumePrivacy.css";
 import emailIcon from "./../../assets/Email.png";
@@ -41,6 +41,49 @@ const ResumePrivacyEdit = ({ setPrivacy }) => {
     const handleImageClick = () => {
         document.getElementById('imageInput').click();
     };
+
+    const resizeImage = useCallback((file) => {
+        return new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const img = new Image();
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    const targetWidth = 124;
+                    const targetHeight = 158;
+                    let newWidth = img.width;
+                    let newHeight = img.height;
+
+                    if (newWidth > targetWidth || newHeight > targetHeight) {
+                        const ratio = Math.min(targetWidth / newWidth, targetHeight / newHeight);
+                        newWidth *= ratio;
+                        newHeight *= ratio;
+                    }
+
+                    canvas.width = targetWidth;
+                    canvas.height = targetHeight;
+                    ctx.fillStyle = 'white';
+                    ctx.fillRect(0, 0, targetWidth, targetHeight);
+                    ctx.drawImage(img, (targetWidth - newWidth) / 2, (targetHeight - newHeight) / 2, newWidth, newHeight);
+
+                    canvas.toBlob((blob) => {
+                        resolve(new File([blob], file.name, { type: 'image/jpeg' }));
+                    }, 'image/jpeg', 0.95);
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        });
+    }, []);
+
+    const handleImageChangeWithResize = useCallback(async (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const resizedFile = await resizeImage(file);
+            handleImageChange({ target: { files: [resizedFile] } });
+        }
+    }, [handleImageChange, resizeImage]);
 
     return (
         <div className="resume_privacy">
@@ -90,7 +133,7 @@ const ResumePrivacyEdit = ({ setPrivacy }) => {
                     id="imageInput"
                     style={{ display: 'none' }}
                     accept="image/*"
-                    onChange={handleImageChange}
+                    onChange={handleImageChangeWithResize}
                 />
                 {isImageUploaded && (
                     <div className="privacy_delete_btn">

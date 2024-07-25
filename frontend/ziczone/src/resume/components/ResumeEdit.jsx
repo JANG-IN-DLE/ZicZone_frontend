@@ -151,6 +151,7 @@ const ResumeEdit = () => {
             .then(response => {
                 console.log(JSON.stringify(formData));
                 alert("저장되었습니다.");
+                navigate(`/personal/resumes/view/${userId}`);
             })
             .catch(error => {
                 console.error("지원서 수정 실패: " + error);

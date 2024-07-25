@@ -24,12 +24,14 @@ const MypageBerryHistory = () => {
                 // 충전 내역과 사용 내역을 합침
                 const combinedHistory = [
                     ...payment.map(item => ({
-                        date: formatDate(item.payDate),
+                        date: item.payDate,
+                        formattedDate: formatDate(item.payDate),
                         content: `충전(${item.amount}원)`,
                         berry: `+${item.berryPoint}🫐`
                     })),
                     ...payHistory.map(item => ({
-                        date: formatDate(item.payHistoryDate),
+                        date: item.payHistoryDate,
+                        formattedDate: formatDate(item.payHistoryDate),
                         content: item.payHistoryContent,
                         berry: `${item.berryBucket}🫐`
                     }))

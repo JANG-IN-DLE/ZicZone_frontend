@@ -4,22 +4,26 @@ import ResumeArchiveInputView from "./../ResumeArchive/ResumeArchiveInputView";
 import axios from "axios";
 
 const ResumeArchiveView = () => {
-    const userId = localStorage.getItem("userId")
-    const [archiveData, setArchiveData] = useState({
-        arch_git: '',
-        arch_notion: '',
-        arch_blog: ''
-    });
+    const userId = localStorage.getItem("userId");
+    const [archiveData, setArchiveData] = useState(null);
 
     useEffect(() => {
         axios.get(`/api/personal/resumes/user/${userId}`)
             .then(response => {
-                setArchiveData(response.data.archive);
+                setArchiveData(response.data.archive || {
+                    archGit: '',
+                    archNotion: '',
+                    archBlog: ''
+                });
             })
             .catch(error => {
                 console.log("archiveData 호출 실패", error);
             });
     }, [userId]);
+
+    if (!archiveData) {
+        return null; // 데이터가 없으면 아무것도 렌더링하지 않음
+    }
 
     return (
         <div className="resume_archive">

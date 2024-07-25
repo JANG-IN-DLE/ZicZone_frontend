@@ -43,8 +43,8 @@ const Resume = () => {
             resumePhotoUrl: privacy.resumePhotoUrl,
             resumePhotoFileName: privacy.resumePhotoFileName,
             resumeEmail: privacy.resumeEmail,
-            personalStateUrl: introduction?.file,
-            personalStateFileName: introduction?.file,
+            personalStateUrl: introduction ? introduction.file : null,
+            personalStateFileName: introduction ? introduction.file : null,
             userId: userId,
             archive: {
                 archGit: archive.github,
