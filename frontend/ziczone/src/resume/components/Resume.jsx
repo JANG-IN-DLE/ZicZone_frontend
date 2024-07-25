@@ -96,30 +96,30 @@ const Resume = () => {
                 portFileName: item.fileName,
             })) : []
         };
-
+    
         const formData = new FormData();
         formData.append("resumeDTO", JSON.stringify(resumeDTO));
-
-        // Add portfolio files to FormData
-        portfolio.forEach((item) => {
+    
+        // 포트폴리오 파일을 FormData에 추가
+        (portfolio || []).forEach((item) => {
             if (item.file) {
                 formData.append("portfolios", item.file);
             }
         });
-
-        if (privacy.resumePhoto) {
+    
+        if (privacy.resumePhoto) { // resumePhoto가 있을 때만 추가
             formData.append("resumePhoto", privacy.resumePhoto);
         }
-
-        if (introduction) {
-            formData.append("personalState", introduction);
+    
+        if (introduction && introduction.file) {  // introduction이 존재하고 file이 있을 때만 추가
+            formData.append("personalState", introduction.file);
         }
-
+    
         // formData 내용을 출력
         for (let [key, value] of formData.entries()) {
             console.log(`${key}:`, value);
         }
-
+    
         try {
             const response = await axios.post(`/api/personal/resumes/${userId}`, formData, {
                 headers: {
@@ -134,6 +134,7 @@ const Resume = () => {
             alert("저장 중 오류가 발생했습니다.");
         }
     };
+    
 
     return (
         <Layout>
