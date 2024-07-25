@@ -15,7 +15,7 @@ const NonLoginMain = () => {
   const navigate = useNavigate(); // useNavigate 훅 사용
 
   axios
-    .get("/api/pickcards")
+    .get("http://223.130.159.46:12000/api/pickcards")
     .then((response) => {
       setPickCards(response.data);
     })

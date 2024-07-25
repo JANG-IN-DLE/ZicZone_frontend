@@ -7,7 +7,7 @@ const CompanySilde = () => {
 
   useEffect(() => {
     axios
-      .get("/api/main/companylogolist")
+      .get("http://223.130.159.46:12000//api/main/companylogolist")
       .then((res) => {
         // 필터 사용해서 0, 1 인덱스 제외
         // 현재 요소가 인덱스 0이 아니고 1도 아닌경우 트루 반환
