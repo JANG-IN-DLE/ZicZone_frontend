@@ -7,7 +7,7 @@ const MypageHistoryBar = ({ historyData }) => {
             {historyData.map((item, index) => (
                 <div key={index} className="history_bar_item">
                     <div className="history_bar_date">
-                        <span>{item.date}</span>
+                        <span>{item.formattedDate}</span>
                     </div>
                     <div className="history_bar_record">
                         <span>{item.content}</span>

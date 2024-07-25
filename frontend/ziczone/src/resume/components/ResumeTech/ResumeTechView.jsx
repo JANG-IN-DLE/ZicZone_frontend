@@ -25,7 +25,9 @@ const ResumeTechView = () => {
                 {techUrls && techUrls.length > 0 && (
                     <div className="pk_resume_tech_container">
                         {techUrls.map((tech, index) => (
-                            <img key={index} className="pk_resume_tech" src={tech} alt={`Tech${index}`} />
+                            <div key={index} className="selected_tech">
+                                <img src={tech} alt={`Tech${index}`} />
+                            </div>
                         ))}
                     </div>
                 )}
