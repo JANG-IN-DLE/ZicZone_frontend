@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "../styles/MainMain.css";
-import CompanySilde from "./CompanySilde";
 import NoLoginBannerSlide from "./NoLoginBannerSlide";
 import LoginBannerUserCard from "./LoginBannerUserCard";
 import axios from "axios";
@@ -13,6 +12,7 @@ import BoardItem from "../../helpzone/components/BoardItem";
 import CompanyMain from "../components/CompanyMain";
 import NonLoginMain from "../components/NonLoginMain";
 import PersonalMain from "../components/PersonalMain";
+import CompanySildeLeft from "../../main/components/CompanySilde_left";
 
 const MainComponent = ({ board }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -109,7 +109,7 @@ const MainComponent = ({ board }) => {
         </div>
         <div className="company_slide">
           <h1>직존과 함께하는 기업</h1>
-          <CompanySilde />
+          <CompanySildeLeft />
         </div>
       </div>
     </Layout>

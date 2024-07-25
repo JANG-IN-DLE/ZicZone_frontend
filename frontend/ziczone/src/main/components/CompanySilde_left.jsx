@@ -22,7 +22,7 @@ const CompanySilde = () => {
   }, []);
 
   return (
-    <div className="company_slide_container">
+    <div className="company_slide_container_left">
       <ul className="boxes">
         {/* 상태 변수 logoImgs의 처음 6개의 이미지를 반복 */}
         {/* array.slice(startIndex, endIndex) <<로 사용됨 인덱스 필수로 기입
