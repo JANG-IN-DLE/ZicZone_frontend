@@ -7,6 +7,9 @@ import UserLogin from "./HeaderUserLogin";
 import CompLogin from "./HeaderCompLogin";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { logoutUser } from "../../../store/actions/userActions";
+import { deleteAlarm } from "../../../store/actions/alarmActions";
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -14,6 +17,7 @@ const Header = () => {
   const [userName, setUserName] = useState("");
   const [companyLogo, setCompanyLogo] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const checkToken = () => {
@@ -105,6 +109,9 @@ const Header = () => {
       localStorage.removeItem("userRole");
     }
 
+    dispatch(logoutUser());
+    dispatch(deleteAlarm());
+    
     window.location.reload("/");
     setIsLoggedIn(false);
     clearUserData();
