@@ -11,7 +11,7 @@ import left from "../../main/left.png";
 import right from "../../main/right.png";
 
 const LoginBannerSlide = () => {
-  const userId = localStorage.getItem("userId")
+  const userId = localStorage.getItem("userId");
   const [userData, setUserData] = useState([]);
   const [userName, setUserName] = useState([]);
   const [userEmail, setUserEmail] = useState([]);
@@ -23,43 +23,60 @@ const LoginBannerSlide = () => {
   const [userIntro, setUserIntro] = useState([]);
 
   const slideItems = [
-    { id: 1, src: slidImage1, alt: "배너1" },
-    { id: 2, src: slidImage2, alt: "배너2" },
-    { id: 3, src: slidImage3, alt: "배너3" },
+    {
+      id: 1,
+      src: slidImage1,
+      alt: "배너1",
+      text: "직존",
+      subText: "기업이 인재를 채용하는 서비스",
+      link: "/ziczoneintro",
+    },
+    {
+      id: 2,
+      src: slidImage2,
+      alt: "배너2",
+      text: "다큐프라임 보러가기",
+      subText: "인공지능 AI 발전으로 우리는 생존을 위해 무엇을 준비해야하나",
+      link: "https://www.youtube.com/watch?v=sTF55z2i5zI&t=9s",
+    },
+    {
+      id: 3,
+      src: slidImage3,
+      alt: "배너3",
+      text: "네이버 클라우드 바로가기",
+      subText: "",
+      link: "https://www.ncloud.com/",
+    },
   ];
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-
-    if (token) {
-      try {
-        const decodedToken = jwtDecode(token);
-        fetchUserData(decodedToken);
-        // console.log(",,,,,,,,,,", decodedToken); // 토큰으로 받는 데이터 확인
-      } catch (error) {
-        console.error("Invalid token", error);
-      }
-    }
-  }, []);
 
   useEffect(() => {
     const slide = document.querySelector(".slide");
     const slideItems = document.querySelectorAll(".login_slide_item");
     const prevButton = document.getElementById("prev");
     const nextButton = document.getElementById("next");
-
-    // slide, slideItems, prevButton, nextButton 하나라도 없으면 함수실행 종료
-    // DOM 요소나 배열에 접근하기 전에 유효성을 검사
-    if (!slide || !slideItems.length || !prevButton || !nextButton) return;
-
     const totalSlides = slideItems.length;
-    let currentIndex = 0;
+    let currentIndex = 1;
     let slideInterval;
 
-    function updateSlidePosition() {
-      const slideWidth = slideItems[0].clientWidth;
-      const newTransformValue = -currentIndex * slideWidth;
+    slide.style.width = `${794 * totalSlides}px`; // 동적으로 슬라이드 목록의 너비 설정
+    slide.style.transform = `translateX(-${currentIndex * 794}px)`;
+
+    function updateSlidePosition(instant = false) {
+      const newTransformValue = -currentIndex * 794;
+      slide.style.transition = instant ? "none" : "0.4s ease-in-out";
       slide.style.transform = `translateX(${newTransformValue}px)`;
+
+      if (currentIndex === 0) {
+        setTimeout(() => {
+          currentIndex = totalSlides - 2;
+          updateSlidePosition(true);
+        }, 400);
+      } else if (currentIndex === totalSlides - 1) {
+        setTimeout(() => {
+          currentIndex = 1;
+          updateSlidePosition(true);
+        }, 400);
+      }
     }
 
     function nextSlide() {
@@ -72,26 +89,33 @@ const LoginBannerSlide = () => {
     }
 
     function stopSlideInterval() {
-      clearInterval(slideInterval); // 자동 슬라이드 멈추는 함수
+      clearInterval(slideInterval);
     }
 
     prevButton.addEventListener("click", function () {
       currentIndex = currentIndex > 0 ? currentIndex - 1 : totalSlides - 1;
       updateSlidePosition();
-      stopSlideInterval(); // 버튼 클릭하면 자동 슬라이드 멈춤
-      startSlideInterval(); // 클릭하면 다시 실행
+      stopSlideInterval();
+      startSlideInterval();
     });
 
     nextButton.addEventListener("click", function () {
       currentIndex = currentIndex < totalSlides - 1 ? currentIndex + 1 : 0;
       updateSlidePosition();
-      stopSlideInterval(); // 버튼 클릭하면 자동 슬라이드 멈춤
-      startSlideInterval(); // 클릭하면 다시 실행
+      stopSlideInterval();
+      startSlideInterval();
     });
 
-    window.addEventListener("resize", updateSlidePosition);
+    window.addEventListener("resize", () => updateSlidePosition(true));
 
-    startSlideInterval(); // 페이지 불러오면 자동 슬라이드 시작
+    startSlideInterval();
+
+    return () => {
+      clearInterval(slideInterval);
+      prevButton.removeEventListener("click", () => {});
+      nextButton.removeEventListener("click", () => {});
+      window.removeEventListener("resize", () => {});
+    };
   }, []);
 
   const fetchUserData = (decodedToken) => {
@@ -188,38 +212,50 @@ const LoginBannerSlide = () => {
           <ul className="slide">
             <li
               className="login_slide_item"
-              style={{ background: "url(" + slidImage1 + ")" }}
-            >
-              <Link to="/ziczoneintro" style={{ textDecoration: "none" }}>
-                <div className="slide_text">
-                  <p className="slide_in_text">직존</p>
-                  <p className="slide_in_text_sub">
-                    기업이 인재를 채용하는 서비스
-                  </p>
-                </div>
-              </Link>
-            </li>
-            <li
-              className="login_slide_item"
-              style={{ background: "url(" + slidImage2 + ")" }}
-              onClick={() =>
-                window.open("https://www.youtube.com/watch?v=sTF55z2i5zI&t=9s")
-              }
+              style={{
+                background: `url(${slideItems[slideItems.length - 1].src})`,
+              }}
             >
               <div className="slide_text">
-                <p className="slide_in_text">다큐프라임 보러가기</p>
+                <p className="slide_in_text">
+                  {slideItems[slideItems.length - 1].text}
+                </p>
                 <p className="slide_in_text_sub">
-                  인공지능 AI 발전으로 우리는 생존을 위해 무엇을 준비해야하나
+                  {slideItems[slideItems.length - 1].subText}
                 </p>
               </div>
             </li>
+            {slideItems.map((item) => (
+              <li
+                key={item.id}
+                className="login_slide_item"
+                style={{ background: `url(${item.src})` }}
+              >
+                {item.link.startsWith("http") ? (
+                  <div
+                    className="slide_text"
+                    onClick={() => window.open(item.link)}
+                  >
+                    <p className="slide_in_text">{item.text}</p>
+                    <p className="slide_in_text_sub">{item.subText}</p>
+                  </div>
+                ) : (
+                  <Link to={item.link} style={{ textDecoration: "none" }}>
+                    <div className="slide_text">
+                      <p className="slide_in_text">{item.text}</p>
+                      <p className="slide_in_text_sub">{item.subText}</p>
+                    </div>
+                  </Link>
+                )}
+              </li>
+            ))}
             <li
               className="login_slide_item"
-              style={{ background: "url(" + slidImage3 + ")" }}
-              onClick={() => window.open("https://www.ncloud.com/")}
+              style={{ background: `url(${slideItems[0].src})` }}
             >
               <div className="slide_text">
-                <p className="slide_in_text">네이버 클라우드 바로가기</p>
+                <p className="slide_in_text">{slideItems[0].text}</p>
+                <p className="slide_in_text_sub">{slideItems[0].subText}</p>
               </div>
             </li>
           </ul>
@@ -250,7 +286,9 @@ const LoginBannerSlide = () => {
           <div className="main_mypage">
             <Link
               to={
-                userRole === "COMPANY" ? `/company/${userId}` : `/personal/${userId}`
+                userRole === "COMPANY"
+                  ? `/company/${userId}`
+                  : `/personal/${userId}`
               }
               style={{ textDecoration: "none" }}
             >
