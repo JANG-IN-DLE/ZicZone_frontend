@@ -82,3 +82,14 @@
     color: #fff;
     margin-right: 16px;
 }
+
+.resume_return_btn{
+    width: 100px;
+    height: 32px;
+    border: none;
+    border-radius: 8px;
+    background-color: #adadad;
+    font-size: 12px;
+    color: #fff;
+    margin-right: 16px;
+}

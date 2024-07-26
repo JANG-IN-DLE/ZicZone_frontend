@@ -35,6 +35,10 @@ const Resume = () => {
         console.log("Introduction updated:", portfolio);
     }, [portfolio]);
 
+    const handleReturnClick = () => {
+        navigate(`/personal/${userId}`);
+    };
+
     const handleSave = async () => {
         const resumeDTO = {
             resumeName: privacy.resumeName,
@@ -157,6 +161,7 @@ const Resume = () => {
                             <ResumePortfolio setPortfolio={setPortfolio} />
                         </div>
                         <div className="resume_save">
+                            <button className="resume_return_btn" onClick={handleReturnClick}>뒤로가기</button>
                             <button className="resume_save_btn" onClick={handleSave}>저장하기</button>
                         </div>
                     </div>

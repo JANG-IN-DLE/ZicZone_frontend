@@ -11,13 +11,13 @@
 }
 
 .user_login_name {
+    display: flex;
     font-size: 18px;
     position: relative;
 }
 
 .dropdown {
     margin-left: 12px;
-    cursor: pointer;
 }
 
 .dropdown_list {

@@ -15,7 +15,7 @@ const CompLogin = ({ companyLogo, userName, onLogout }) => {
         {/* 컴퍼니로고가 있다면 이미지에 로고 띄우고 없으면 공백 처리 */}
         {companyLogo ? <img src={companyLogo} alt="Company Logo" /> : null}
       </div>
-      <div className="comp_login_name">
+      <div className="comp_login_name" onClick={Dropdown}>
         {userName}
         <div className={`dropdown_list ${open ? "show" : ""}`}>
           <div className="list1">
@@ -27,10 +27,11 @@ const CompLogin = ({ companyLogo, userName, onLogout }) => {
             </Link>
           </div>
         </div>
+        <div className="dropdown">
+          <img src={dropdown} alt="Dropdown" />
+        </div>
       </div>
-      <div className="dropdown" onClick={Dropdown}>
-        <img src={dropdown} alt="Dropdown" />
-      </div>
+
     </div>
   );
 };

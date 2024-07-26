@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
+import axios from "axios";
 import "./../../styles/ResumePrivacy.css";
 import email from "./../../assets/Email.png";
 import phone from "./../../assets/Phone.png";
@@ -7,11 +8,27 @@ import useUploadImage from "../../hooks/useUploadImage";
 
 const ResumePrivacy = ({ setPrivacy }) => {
     const { imageSrc, isImageUploaded, handleImageChange, handleDeleteImage, imageFile } = useUploadImage();
-
+    const userId = localStorage.getItem("userId")
     const [resumeName, setResumeName] = useState('');
     const [resumeEmail, setResumeEmail] = useState('');
     const [resumePhone, setResumePhone] = useState('');
     const [resumeDate, setResumeBirth] = useState('');
+
+    useEffect(() => {
+        // 데이터베이스에서 값을 불러오는 비동기 함수
+        const fetchData = async () => {
+            try {
+                const response = await axios.get(`/api/personal/${userId}`); // API 엔드포인트를 여기에 입력하세요
+                const data = response.data;
+                
+                setResumeName(data.user.userName);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+
+        fetchData();
+    }, []);
 
     const resizeImage = useCallback((file) => {
         return new Promise((resolve) => {
@@ -73,7 +90,7 @@ const ResumePrivacy = ({ setPrivacy }) => {
                         placeholder="이름" 
                         value={resumeName} 
                         maxLength={3} 
-                        onChange={(e) => setResumeName(e.target.value)} 
+                        readOnly  // 읽기 전용 설정
                     />
                 </div>
                 <div className="resume_email">

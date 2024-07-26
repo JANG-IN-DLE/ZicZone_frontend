@@ -37,8 +37,8 @@ const MypageBerryHistory = () => {
                     }))
                 ];
 
-                // 날짜 순으로 정렬
-                combinedHistory.sort((a, b) => new Date(a.date) - new Date(b.date));
+                // 날짜 순으로 정렬 (최신순)
+                combinedHistory.sort((a, b) => new Date(b.date) - new Date(a.date));
 
                 setHistoryData(combinedHistory);
             } catch (error) {

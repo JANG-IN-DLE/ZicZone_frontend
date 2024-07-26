@@ -94,6 +94,7 @@ const ResumePrivacyEdit = ({ setPrivacy }) => {
                         placeholder="이름"
                         value={resumeName}
                         onChange={(e) => setResumeName(e.target.value)}
+                        readOnly
                     />
                 </div>
                 <div className="resume_email">
