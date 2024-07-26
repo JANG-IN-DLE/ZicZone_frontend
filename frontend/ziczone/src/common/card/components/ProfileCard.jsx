@@ -16,7 +16,6 @@ const ProfileCard = ({userImage, jobNames=[], userName, userCareer, userIntro, t
     const handleScrapClick = async (e) => {
         e.stopPropagation();
         try{
-            // 보낼 때 userName뿐만 아니라 지금 로그인한 회원 Id까지 보내야할 것 같아. companyId는 임시로 1
             const response = await axios.post('/api/company/scrap', { personalId, userId });
             if(response.status === 200) {
                 // const { isScrap } = response.data.scrap;
