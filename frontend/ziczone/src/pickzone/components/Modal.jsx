@@ -19,8 +19,8 @@ const Modal = ({
 
   // handleOpen을 실행하면 openCardData를 보낸다.
   const handleOpen = () => {
-    if (berryPoint < 50) {
-      navigate("/charge");
+    if (berryPoint < 500) {
+      window.open('/charge', '_blank');
       return;
     }
 
@@ -41,7 +41,7 @@ const Modal = ({
       .catch((error) => {
         console.error("Error opening card:", error);
         if (error.response && error.response.data === 400) {
-          navigate("/charge");
+          window.open('/charge', '_blank');
         }else if(error.response && error.response.data) {
           alert(error.response.data);
         }
@@ -60,7 +60,7 @@ const Modal = ({
         </p>
         <div className={Modalstyle.sm_point_info}>
           <div className={Modalstyle.sm_board_point}>
-            <img src={berry} alt="베리 아이콘" /> 50
+            <img src={berry} alt="베리 아이콘" /> 500
           </div>
           <p>{`나의 베리 : ${berryPoint}베리`} </p>
         </div>
