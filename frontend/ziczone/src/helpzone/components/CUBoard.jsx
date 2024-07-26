@@ -6,12 +6,17 @@ import ProfileCard from "./ProfileCard";
 import Description from "./Description";
 import PostForm from "./PostForm";
 import Layout from "../../common/layout/layout";
+import config from "../../config";
 
 const CUBoard = () => {
   const location = useLocation();
   const { postData: initialPostData = {}, isEditMode: initialEditMode, userId, corrId } = location.state || {};
   const navigate = useNavigate();
   const [isEditMode, setIsEditMode] = useState(initialEditMode || false);
+
+  const api = axios.create({
+    baseURL: config.baseURL
+  });
 
   const [userProfile, setUserProfile] = useState({
     berry: '',
@@ -38,7 +43,7 @@ const CUBoard = () => {
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        const profileResponse = await axios.get(`/api/personal/board/myProfile/${userId}`);
+        const profileResponse = await api.get(`/api/personal/board/myProfile/${userId}`);
         const profileData = profileResponse.data;
         setUserProfile({
           jobs: profileData.jobName.split(','),

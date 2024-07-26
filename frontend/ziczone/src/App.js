@@ -4,7 +4,6 @@ import Resume from './resume/components/Resume';
 import ResumeView from "./resume/components/ResumeView"
 
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import axios from 'axios';
 import UserPickzone from './pickzone/components/UserPickzone';
 import CompanyPickzone from './pickzone/components/CompanyPickzone';
 // import PickZoneDetail from './pickzone/components/PickzoneDetail';

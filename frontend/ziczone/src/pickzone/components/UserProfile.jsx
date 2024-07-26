@@ -1,6 +1,4 @@
 import React, {useEffect, useState} from "react";
-// import { useParams } from "react-router";
-// import axios from "axios";
 import ProfileCard from "../../common/card/components/ProfileCard";
 import PickResume from "./PickResume";
 import CoverLetter from "./CoverLetter";

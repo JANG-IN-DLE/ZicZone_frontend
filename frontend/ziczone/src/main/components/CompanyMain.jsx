@@ -4,9 +4,8 @@ import axios from "axios";
 import PickCard from "../../common/card/components/PickCard";
 import personalMImage from "../../common/card/assets/personal_m_image.png";
 import personalFImage from "../../common/card/assets/personal_f_image.png";
-import PickZoneJobstyle from "../../pickzone/styles/PickZoneJob.module.css";
-import Modal from "../../pickzone/components/Modal";
 import PickCardCommstyle from "../../common/card/styles/PickCardComm.module.css";
+import config from "../../config";
 
 const CompanyMain = () => {
   // 이름 마스킹 함수
@@ -21,6 +20,10 @@ const CompanyMain = () => {
     }
     return name;
   };
+
+  const api = axios.create({
+    baseURL: config.baseURL
+  });
 
   const [pickCards, setPickCards] = useState([]);
   const [jobs, setJobs] = useState([]);
@@ -39,7 +42,7 @@ const CompanyMain = () => {
     const fetchData = async () => {
       try {
         // PickCards 데이터 가져옴
-        const pickCardsResponse = await axios.get(
+        const pickCardsResponse = await api.get(
           `/api/company/pickcards?loggedInUserId=${loggedInUserId}`
         );
         const maskedData = pickCardsResponse.data.map((card) => ({
@@ -48,7 +51,7 @@ const CompanyMain = () => {
         }));
         setPickCards(maskedData);
         // Jobs 데이터를 가져옴
-        const jobsResponse = await axios.get("/api/jobs");
+        const jobsResponse = await api.get("/api/jobs");
         setJobs([{ jobId: "all", jobName: "전체" }, ...jobsResponse.data]);
       } catch (error) {
         console.error("Error fetching data: ", error);

@@ -7,6 +7,7 @@ import personalFImage from "../../common/card/assets/personal_f_image.png";
 import PickZoneJobstyle from "../../pickzone/styles/PickZoneJob.module.css";
 import Modal from "../../pickzone/components/Modal";
 import PickCardCommstyle from "../../common/card/styles/PickCardComm.module.css";
+import config from "../../config";
 
 const NonLoginMain = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -14,8 +15,12 @@ const NonLoginMain = () => {
   const [pickCards, setPickCards] = useState([]);
   const navigate = useNavigate(); // useNavigate 훅 사용
 
+  const api = axios.create({
+    baseURL: config.baseURL
+  });
+
   useEffect(() => {
-    axios
+    api
       .get("/api/pickcards")
       .then((response) => {
         setPickCards(response.data);

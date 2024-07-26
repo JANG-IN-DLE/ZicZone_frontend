@@ -15,6 +15,7 @@ import ResumeArchive from "./ResumeArchive/ResumeArchive";
 import ResumeIntroduction from "./ResumeIntroduction/ResumeIntroduction";
 import ResumePortfolio from "./ResumePortfolio/ResumePortfolio";
 import Layout from "../../common/layout/layout";
+import config from "../../config";
 
 const Resume = () => {
     const navigate = useNavigate();
@@ -30,6 +31,10 @@ const Resume = () => {
     const [archive, setArchive] = useState({});
     const [introduction, setIntroduction] = useState(null);
     const [portfolio, setPortfolio] = useState([]);
+
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
 
     useEffect(() => {
         console.log("Introduction updated:", portfolio);
@@ -125,7 +130,7 @@ const Resume = () => {
         }
     
         try {
-            const response = await axios.post(`/api/personal/resumes/${userId}`, formData, {
+            const response = await api.post(`/api/personal/resumes/${userId}`, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },

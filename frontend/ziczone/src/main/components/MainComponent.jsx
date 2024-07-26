@@ -3,8 +3,6 @@ import "../styles/MainMain.css";
 import NoLoginBannerSlide from "./NoLoginBannerSlide";
 import LoginBannerUserCard from "./LoginBannerUserCard";
 import axios from "axios";
-import personalMImage from "../../common/card/assets/personal_m_image.png";
-import personalFImage from "../../common/card/assets/personal_f_image.png";
 import { Link, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import Layout from "../../common/layout/layout";
@@ -13,6 +11,7 @@ import CompanyMain from "../components/CompanyMain";
 import NonLoginMain from "../components/NonLoginMain";
 import PersonalMain from "../components/PersonalMain";
 import CompanySildeLeft from "../../main/components/CompanySilde_left";
+import config from "../../config";
 
 const MainComponent = ({ board }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -25,6 +24,10 @@ const MainComponent = ({ board }) => {
   const [banner, setBanner] = useState([]);
   const navigate = useNavigate();
 
+  const api = axios.create({
+    baseURL: config.baseURL
+  });
+
   useEffect(() => {
     fetchHelpZones();
   }, [filterType, page, size]);
@@ -34,7 +37,7 @@ const MainComponent = ({ board }) => {
   }, []);
 
   const fetchHelpZones = () => {
-    axios
+    api
       .get("/api/user/board/filter", {
         params: {
           filterType,

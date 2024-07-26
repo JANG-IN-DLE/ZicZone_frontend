@@ -3,11 +3,16 @@ import axios from "axios";
 import Button from "../Button";
 import ConfirmModal from "../ConfirmModal";
 import "../../styles/comment/CommentInput.css";
+import config from '../../../config';
 
 const CommentInput = ({ corrId, userId, commId, onCommentAdded }) => {
     const [commentContent, setCommentContent] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [commCharCount, setCommCharCount] = useState(commentContent.length);
+
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
 
     const handleContentChangeWithCount = (event) => {
       const newContent = event.target.value;
@@ -29,7 +34,7 @@ const CommentInput = ({ corrId, userId, commId, onCommentAdded }) => {
         }
 
         try {
-            const response = await axios.post('/api/personal/comments', {
+            const response = await api.post('/api/personal/comments', {
                 commContent: commentContent,
                 corrId: corrId,
                 userId: userId,

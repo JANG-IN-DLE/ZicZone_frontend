@@ -4,6 +4,7 @@ import "./../../styles/ResumeJob.css";
 import JobDropdown from "../ResumeDropdown/JobDropdown";
 import useDropdown from './../../hooks/useDropdown';
 import dropdown from "./../../assets/Dropdown.png";
+import config from "../../../config";
 
 const ResumeJobEdit = ({ setJob }) => {
     const [dropdownVisible, toggleDropdown] = useDropdown(false);
@@ -12,8 +13,12 @@ const ResumeJobEdit = ({ setJob }) => {
     const userId = localStorage.getItem("userId");
     const dropdownRef = useRef(null);
 
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
+
     useEffect(() => {
-        axios.get(`/api/personal/resumes/user/${userId}`)
+        api.get(`/api/personal/resumes/user/${userId}`)
             .then(response => {
                 const positions = response.data.jobPositions.map(position => ({
                     jobId: position.job.jobId,

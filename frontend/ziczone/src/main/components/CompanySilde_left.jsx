@@ -1,12 +1,17 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "../styles/MainMain.css"; // CSS 파일 임포트
+import config from "../../config";
 
 const CompanySilde = () => {
   const [logoImgs, setLogoImgs] = useState([]);
 
+  const api = axios.create({
+    baseURL: config.baseURL
+  });
+
   useEffect(() => {
-    axios
+    api
       .get("/api/main/companylogolist")
       .then((res) => {
         // 필터 사용해서 0, 1 인덱스 제외
