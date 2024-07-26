@@ -33,7 +33,7 @@ const ResumeJob = ({ setJob }) => {
                     <div className="selected_job_container">
                         {selectedItems.map((item, index) => (
                             <div key={index} className="selected_job">
-                                {item}
+                                {item.jobName}
                             </div>
                         ))}
                     </div>
@@ -41,13 +41,13 @@ const ResumeJob = ({ setJob }) => {
             </div>
             <div className="resume_job_select" ref={dropdownRef}>
                 <div className="job_select" onClick={() => toggleDropdown(!dropdownVisible)}>
-                    <span>개발 직무를 선택해주세요.</span>
+                    <span>개발 직무를 선택해주세요. (최대 3개까지 선택 가능)</span>
                     <img src={dropdown} alt="Dropdown" />
                 </div>
                 {dropdownVisible && (
                     <JobDropdown 
                         selectedItems={selectedItems} 
-                        updateSelectedItems={updateSelectedItems} 
+                        setSelectedItems={updateSelectedItems} 
                     />
                 )}
             </div>

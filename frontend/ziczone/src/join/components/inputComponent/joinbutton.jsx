@@ -5,10 +5,15 @@ import comjoinbtn from "../../assets/comjoinbtn.png"
 import { useFormContext } from '../FormContext';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import config from '../../../config';
 
 const JoinButton = ({category}) => {
     const {formData} = useFormContext();
     const navigate = useNavigate();
+
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -31,7 +36,7 @@ const JoinButton = ({category}) => {
     
             if (category === "per") {
                 // JSON 데이터를 사용하여 요청을 보냄
-                response = await axios.post(endpoint, formData, {
+                response = await api.post(endpoint, formData, {
                     headers: {
                         'Content-Type': 'application/json'
                     }
@@ -44,7 +49,7 @@ const JoinButton = ({category}) => {
                 submitFormData.append('companyUserDTO', JSON.stringify(companyUserDTO));
                 submitFormData.append('companyLogo', formData.companyLogo, formData.companyLogo.name);
 
-                response = await axios.post(endpoint, submitFormData, {
+                response = await api.post(endpoint, submitFormData, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }
@@ -52,8 +57,7 @@ const JoinButton = ({category}) => {
             }
             if(response.status === 200){
                 if(response.data === "Personal user signup successful" || response.data === "Company user signup successful"){
-                    console.log("회원가입 성공 : ", response.data);
-                    alert(response.data);
+                    alert("직존에 오신걸 환영합니다.");
                     navigate('/login');
                 }else{
                     console.log("회원가입 실패 : ", response.data);

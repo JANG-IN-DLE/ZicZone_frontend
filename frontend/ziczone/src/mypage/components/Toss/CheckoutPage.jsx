@@ -1,20 +1,31 @@
 
 import { useEffect, useState } from "react";
 import { loadTossPayments, ANONYMOUS } from "@tosspayments/tosspayments-sdk";
+import { useLocation, useNavigate } from "react-router-dom";
 import '../../styles/Toss.css';
 
 const generateRandomString = () => window.btoa(Math.random()).slice(0, 20);
 const clientKey = "test_gck_docs_Ovk5rk1EwkEbP0W43n07xlzm";
 
 export default function CheckoutPage(money) {
-  money = 1000;
-  const amountMoney = money;
+  const location = useLocation();
+  const navigate = useNavigate();
+  const searchParams = new URLSearchParams(location.search);
+  const amountMoney = parseInt(searchParams.get('amount'));
+
   const [ready, setReady] = useState(false);
   const [widgets, setWidgets] = useState(null);
   const [amount, setAmount] = useState({
     currency: "KRW",
     value: amountMoney,
   });
+
+  useEffect(() => {
+    if (!amountMoney || amountMoney <= 0) {
+      alert("올바른 금액이 전달되지 않았습니다.");
+      navigate('/');
+    }
+  }, [amountMoney, navigate]);
 
   useEffect(() => {
     async function fetchPaymentWidgets() {
@@ -24,7 +35,7 @@ export default function CheckoutPage(money) {
     }
 
     fetchPaymentWidgets();
-  }, [clientKey]);
+  }, []);
 
   useEffect(() => {
     async function renderPaymentWidgets() {
@@ -45,7 +56,7 @@ export default function CheckoutPage(money) {
     }
 
     renderPaymentWidgets();
-  }, [widgets]);
+  }, [widgets, amount]);
 
   return (
     <div className="wrapper w-100">

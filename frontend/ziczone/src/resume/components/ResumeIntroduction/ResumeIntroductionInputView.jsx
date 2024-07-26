@@ -1,11 +1,12 @@
+// ResumeIntroductionInputView.js
 import React from 'react';
 
-const ResumeIntroductionInputView = ({ personalState }) => {
+const ResumeIntroductionInputView = ({ personalStateFileName }) => {
     return (
         <div className="resume_introduction_upload">
             <div className='introduction_file_upload'>
                 <p className="introduction_file_name">
-                    {personalState}
+                    {personalStateFileName}
                 </p>
             </div>
         </div>

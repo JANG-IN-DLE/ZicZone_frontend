@@ -7,6 +7,10 @@ import UserLogin from "./HeaderUserLogin";
 import CompLogin from "./HeaderCompLogin";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { logoutUser } from "../../../store/actions/userActions";
+import { deleteAlarm } from "../../../store/actions/alarmActions";
+import config from "../../../config";
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -14,6 +18,11 @@ const Header = () => {
   const [userName, setUserName] = useState("");
   const [companyLogo, setCompanyLogo] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const api = axios.create({
+    baseURL: config.baseURL
+  });
 
   useEffect(() => {
     const checkToken = () => {
@@ -34,11 +43,13 @@ const Header = () => {
           console.error("Invalid token", error);
           setIsLoggedIn(false);
         }
+
       } else {
         setIsLoggedIn(false);
       }
     };
     checkToken();
+
   }, []);
 
   const fetchUserData = (decodedToken) => {
@@ -46,7 +57,7 @@ const Header = () => {
     const userType = decodedToken.role;
 
     if (userType === "COMPANY") {
-      axios
+      api
         .get(`/api/main/companyUser/${userId}`)
         .then((res) => {
           setUserName(res.data.userName);
@@ -57,7 +68,7 @@ const Header = () => {
           console.error("Error fetching company user data: ", error);
         });
     } else if (userType === "PERSONAL") {
-      axios
+      api
         .get(`/api/main/personalUser/${userId}`)
         .then((res) => {
           setUserName(res.data.userName);
@@ -82,7 +93,7 @@ const Header = () => {
 
     if (userId && token && userRole === "PERSONAL") {
       try {
-        await axios.post(
+        await api.post(
           `/sse/logout/${userId}`,
           {},
           {
@@ -103,10 +114,14 @@ const Header = () => {
       localStorage.removeItem("userRole");
     }
 
+    dispatch(logoutUser());
+    dispatch(deleteAlarm());
+    
     window.location.reload("/");
     setIsLoggedIn(false);
     clearUserData();
   };
+  
 
   return (
     <div className="header">
@@ -119,9 +134,20 @@ const Header = () => {
         <div className="header_nav_list">
           <div className="header_pick_zone">
             <div>
-              <NavLink to="/pickzone" activeClassName="active">
-                PICK존
-              </NavLink>
+            {localStorage.getItem('userRole') === "COMPANY" ? (
+                <NavLink to="/companypick" activeClassName="active">
+                  PICK존
+                </NavLink>
+              ) : localStorage.getItem('userRole') === "PERSONAL" ? (
+                <NavLink to="/personalpick" activeClassName="active">
+                  PICK존
+                </NavLink>
+              ) : (
+                <NavLink to="/personalpick">
+                  PICK존
+                </NavLink>
+              )}
+
             </div>
           </div>
           <div className="header_help_zone">

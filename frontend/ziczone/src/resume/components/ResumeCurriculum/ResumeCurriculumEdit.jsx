@@ -3,15 +3,20 @@ import axios from "axios";
 import "./../../styles/ResumeCurriculum.css";
 import plus_btn from "./../../assets/Plus_btn.png";
 import ResumeCurriculumInputEdit from "./ResumeCurriculumInputEdit";
+import config from "../../../config";
 
 const ResumeCurriculum = ({ setCurriculum }) => {
     const userId = localStorage.getItem("userId")
     const [inputs, setInputs] = useState([]);
     const [curriculumList, setCurriculumList] = useState([]);
 
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
+
     useEffect(() => {
         // 서버로부터 데이터 가져오기
-        axios.get(`/api/personal/resumes/${userId}`)
+        api.get(`/api/personal/resumes/user/${userId}`)
             .then(response => {
                 const data = response.data.curriculums.map(curri => ({
                     id: curri.curriId,

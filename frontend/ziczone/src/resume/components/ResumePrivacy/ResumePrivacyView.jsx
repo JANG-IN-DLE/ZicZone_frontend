@@ -6,6 +6,9 @@ import birthdate from "./../../assets/Birthdate.png";
 import useUploadImage from "../../hooks/useUploadImage";
 import axios from "axios";
 // import Resume from "../Resume";
+import config from '../../../config';
+
+
 
 const ResumePrivacyView = () => {
     const { imageSrc } = useUploadImage();
@@ -19,8 +22,12 @@ const ResumePrivacyView = () => {
         resumePhoto: ""
     });
 
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
+
     useEffect(() => {
-        axios.get(`/api/personal/resumes/user/${userId}`)
+        api.get(`/api/personal/resumes/user/${userId}`)
             .then(response => {
                 const data = response.data;
                 setPrivacyData({
@@ -28,7 +35,7 @@ const ResumePrivacyView = () => {
                     resumeDate: data.resumeDate,
                     phoneNum: data.phoneNum,
                     resumeEmail: data.resumeEmail,
-                    resumePhoto: data.resumePhoto
+                    resumePhoto: data.resumePhotoUrl
                 });
             })
             .catch(error => {

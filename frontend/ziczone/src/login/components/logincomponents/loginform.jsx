@@ -7,6 +7,10 @@ import usePasswordValidation from "../../../join/hooks/usePasswordValidation";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
+import { useDispatch } from "react-redux"; // Redux dispatch 훅 import
+import { subscribeToSSE, initAlarm } from "../../../store/actions/alarmActions";
+import { setUser } from "../../../store/actions/userActions";
+import config from "../../../config";
 
 const LoginForm = ({
   title,
@@ -18,10 +22,16 @@ const LoginForm = ({
   setCurrentForm,
 }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch(); // Redux dispatch 훅 사용
+
   //로그인
   const [email, setUserEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginFail, setLoginFail] = useState("");
+
+  const api = axios.create({
+    baseURL: config.baseURL
+  });
 
   //비밀번호 찾기(이메일인증)
   const {
@@ -58,35 +68,41 @@ const LoginForm = ({
     value(e.target.value);
   };
 
-  const decodeTokenAndSaveRoleAndSaveId = (token) => {
+  const saveToken = (token) => {
     try {
       const decodedToken = jwtDecode(token);
       const role = decodedToken.role;
       const userId = decodedToken.userId;
       localStorage.setItem("userRole", role);
       localStorage.setItem("userId", userId);
-      return { role, userId };
+      localStorage.setItem("token", token);
+      return { userId, token, role };
     } catch (error) {
       console.error("토큰 디코딩 중 오류 발생:", error);
-      return null;
     }
   };
 
   //로그인 요청
   const Login = async () => {
     try {
-      const response = await axios.post("http://localhost:3000/api/login", {
+      const response = await api.post("/api/login", {
         email,
         password,
       });
 
       if (response.data.message === "Auth Success") {
         const token = response.headers["authorization"];
-        // console.log("Token:", token);
 
-        localStorage.setItem("token", token);
-        const decodedRole = decodeTokenAndSaveRoleAndSaveId(token);
-        // console.log("Decoded from JWT:", decodedRole);
+        const user = saveToken(token);
+
+        if (user) {
+          // 구독 및 초기화 작업 수행
+          console.log('Dispatching setUser with:', user);
+          dispatch(setUser(user));
+          dispatch(subscribeToSSE(user.userId, token));
+          dispatch(initAlarm(user.userId, token));
+        }
+        
         setLoginFail("");
         navigate("/");
 

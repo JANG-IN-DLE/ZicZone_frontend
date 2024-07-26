@@ -27,19 +27,11 @@ const MypageBottomCo = () => {
                     >
                         스크랩
                     </div>
-                    <div
-                        className={`mypage_user_nav ${activeItem === "employment" ? "active" : ""}`}
-                        onClick={() => handleClick("employment")}
-                    >
-                        채용완료
-                    </div>
                 </div>
             </div>
             <div>
                 {activeItem === "pick" && <MypagePickHistoryCo />}
                 {activeItem === "scrap" && <MypageScrapHistory />}
-                {/* {activeItem === "employment" && <MypageEmploymentHistory />} */}
-                {/* {activeItem === "employment" && <MypageCompEmployment />} */}
             </div>
         </div>
     );

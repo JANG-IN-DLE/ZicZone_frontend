@@ -50,8 +50,10 @@
 .archive_github p,
 .archive_notion p, 
 .archive_blog p {
-    width: 70px;
-    margin-right: 120px;
+    width: 260px;
+    /* margin-right: 120px; */
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .archive_github input,

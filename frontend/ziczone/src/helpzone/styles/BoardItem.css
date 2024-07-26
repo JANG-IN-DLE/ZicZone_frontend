@@ -44,5 +44,10 @@
     color: #ABABAB;
     font-size: 14px;
     position: absolute;
-    right: 10px;
+    right: 30px;
+    width: 100px;
+}
+
+.bi_container_end div {
+    width: 90px;
 }

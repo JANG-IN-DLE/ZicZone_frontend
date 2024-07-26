@@ -1,21 +1,17 @@
 import React, { useEffect, useState } from "react";
 import "../styles/MainMain.css";
-import HelpZone from "./HelpZone";
-import CompanySilde from "./CompanySilde";
 import NoLoginBannerSlide from "./NoLoginBannerSlide";
 import LoginBannerUserCard from "./LoginBannerUserCard";
 import axios from "axios";
-import personalMImage from "../../common/card/assets/personal_m_image.png";
-import personalFImage from "../../common/card/assets/personal_f_image.png";
 import { Link, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
-
 import Layout from "../../common/layout/layout";
 import BoardItem from "../../helpzone/components/BoardItem";
-
 import CompanyMain from "../components/CompanyMain";
 import NonLoginMain from "../components/NonLoginMain";
 import PersonalMain from "../components/PersonalMain";
+import CompanySildeLeft from "../../main/components/CompanySilde_left";
+import config from "../../config";
 
 const MainComponent = ({ board }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -28,6 +24,10 @@ const MainComponent = ({ board }) => {
   const [banner, setBanner] = useState([]);
   const navigate = useNavigate();
 
+  const api = axios.create({
+    baseURL: config.baseURL
+  });
+
   useEffect(() => {
     fetchHelpZones();
   }, [filterType, page, size]);
@@ -37,7 +37,7 @@ const MainComponent = ({ board }) => {
   }, []);
 
   const fetchHelpZones = () => {
-    axios
+    api
       .get("/api/user/board/filter", {
         params: {
           filterType,
@@ -77,15 +77,6 @@ const MainComponent = ({ board }) => {
   const userRole = localStorage.getItem("userRole");
   const tokenUserId = localStorage.getItem("userId");
 
-  // 날짜 형식 바꾸기
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
-    return `${year}/${month}/${day}`;
-  };
-
   const handleCardClick = (tokenUserId) => {
     navigate(`/pickzone/${isLoggedIn ? "loggedInPersonalId" : "personalId"}`);
   };
@@ -121,7 +112,7 @@ const MainComponent = ({ board }) => {
         </div>
         <div className="company_slide">
           <h1>직존과 함께하는 기업</h1>
-          <CompanySilde />
+          <CompanySildeLeft />
         </div>
       </div>
     </Layout>

@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import MypageHistoryBar from "./MypageHistoryBar";
+import config from "../../../config";
 
 const MypageBerryHistory = () => {
     const userId = localStorage.getItem("userId");
     const [historyData, setHistoryData] = useState([]);
 
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
+
     useEffect(() => {
         const fetchBerryHistory = async () => {
             try {
-                const response = await axios.post(`http://localhost:12000/api/payments/personal/points/${userId}`);
+                const response = await api.post(`/api/payments/personal/points/${userId}`);
                 const payment = response.data.payment;
                 const payHistory = response.data.payHistory;
 
@@ -24,19 +29,21 @@ const MypageBerryHistory = () => {
                 // 충전 내역과 사용 내역을 합침
                 const combinedHistory = [
                     ...payment.map(item => ({
-                        date: formatDate(item.payDate),
+                        date: item.payDate,
+                        formattedDate: formatDate(item.payDate),
                         content: `충전(${item.amount}원)`,
                         berry: `+${item.berryPoint}🫐`
                     })),
                     ...payHistory.map(item => ({
-                        date: formatDate(item.payHistoryDate),
+                        date: item.payHistoryDate,
+                        formattedDate: formatDate(item.payHistoryDate),
                         content: item.payHistoryContent,
                         berry: `${item.berryBucket}🫐`
                     }))
                 ];
 
-                // 날짜 순으로 정렬
-                combinedHistory.sort((a, b) => new Date(a.date) - new Date(b.date));
+                // 날짜 순으로 정렬 (최신순)
+                combinedHistory.sort((a, b) => new Date(b.date) - new Date(a.date));
 
                 setHistoryData(combinedHistory);
             } catch (error) {

@@ -3,15 +3,20 @@ import axios from "axios";
 import "./../../styles/ResumeCertificate.css";
 import plus_btn from "./../../assets/Plus_btn.png";
 import ResumeCertificateInputEdit from "./ResumeCertificateInputEdit";
+import config from '../../../config';
 
 const ResumeCertificateEdit = ({ setCertificate }) => {
     const userId = localStorage.getItem("userId")
     const [inputs, setInputs] = useState([]);
     const [certificateList, setCertificateList] = useState([]);
 
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
+
     useEffect(() => {
         // 서버로부터 데이터 가져오기
-        axios.get(`/api/personal/resumes/${userId}`)
+        api.get(`/api/personal/resumes/user/${userId}`)
             .then(response => {
                 const data = response.data.certificates.map(cert => ({
                     id: cert.certId,

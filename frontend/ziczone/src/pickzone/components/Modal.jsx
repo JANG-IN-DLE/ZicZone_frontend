@@ -4,6 +4,7 @@ import Modalstyle from "../styles/Modal.module.css";
 import berry from "../../common/card/assets/berry.png";
 import axios from "axios";
 import helpModal from "../../helpzone/assets/helpModal.png";
+import config from "../../config";
 
 const Modal = ({
   isOpen,
@@ -19,10 +20,14 @@ const Modal = ({
 
   // handleOpen을 실행하면 openCardData를 보낸다.
   const handleOpen = () => {
-    if (berryPoint < 50) {
-      navigate("/ChargeMain");
+    if (berryPoint < 500) {
+      window.open('/charge', '_blank');
       return;
     }
+
+    const api = axios.create({
+      baseURL: config.baseURL
+    });
 
     const openCardData = {
       sellerId: selectedCard.personalId,
@@ -31,20 +36,18 @@ const Modal = ({
       payHistoryDate: new Date().toISOString(),
     };
 
-    axios
+    api
       .post("/api/personal/open-card", openCardData)
       .then((response) => {
         if (response.status === 200) {
           onOpen();
         }
-        // pay_history에 buyerId와 sellerId가 존재하면 리다이렉트
-        // else if(response.status === 303) {
-
-        // }
       })
       .catch((error) => {
         console.error("Error opening card:", error);
-        if (error.response && error.response.data) {
+        if (error.response && error.response.data === 400) {
+          window.open('/charge', '_blank');
+        } else if (error.response && error.response.data) {
           alert(error.response.data);
         }
       });
@@ -62,7 +65,7 @@ const Modal = ({
         </p>
         <div className={Modalstyle.sm_point_info}>
           <div className={Modalstyle.sm_board_point}>
-            <img src={berry} alt="베리 아이콘" /> 50
+            <img src={berry} alt="베리 아이콘" /> 500
           </div>
           <p>{`나의 베리 : ${berryPoint}베리`} </p>
         </div>

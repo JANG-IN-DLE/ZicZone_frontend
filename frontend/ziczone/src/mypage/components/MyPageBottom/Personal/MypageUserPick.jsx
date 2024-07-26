@@ -3,7 +3,7 @@ import "./../../../styles/MypageUserPick.css"
 
 const MypageUserPick = ({ userName, companyLogo, userIntro }) => {
     return (
-        <div className="mypage_user_pick">
+        // <div className="mypage_user_pick">
             <div className="mypage_user_pick_content">
                 <img src={companyLogo} alt="" />
                 <div>
@@ -11,7 +11,7 @@ const MypageUserPick = ({ userName, companyLogo, userIntro }) => {
                     <div className="mypage_pick_company_intro"><p>{userIntro}</p></div>
                 </div>
             </div>
-        </div>
+        // </div>
     );
 }
 

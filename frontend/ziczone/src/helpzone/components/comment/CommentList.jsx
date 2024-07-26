@@ -2,12 +2,17 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import CommentInput from "./CommentInput";
 import CommentItem from "./CommentItem";
+import config from "../../../config";
 
 const CommentList = ({ corrId, userId, onCommentSelected }) => {
     const [comments, setComments] = useState([]);
     const [selectedCommentId, setSelectedCommentId] = useState(null);
     const [board, setBoard] = useState(null);
     const userRole = localStorage.getItem("userRole");
+
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
 
     useEffect(() => {
         fetchComments();
@@ -16,7 +21,7 @@ const CommentList = ({ corrId, userId, onCommentSelected }) => {
 
     const fetchComments = async () => {
         try {
-            const response = await axios.get(`/api/user/comments/${corrId}`);
+            const response = await api.get(`/api/user/comments/${corrId}`);
             if (response.status === 200) {
                 const commentsData = response.data;
                 const selectedComment = commentsData.find(comment => comment.commSelection);
@@ -38,7 +43,7 @@ const CommentList = ({ corrId, userId, onCommentSelected }) => {
 
     const fetchBoard = async () => {
         try {
-            const response = await axios.get(`/api/user/board/${corrId}`);
+            const response = await api.get(`/api/user/board/${corrId}`);
             if (response.status === 200) {
                 setBoard(response.data);
             }

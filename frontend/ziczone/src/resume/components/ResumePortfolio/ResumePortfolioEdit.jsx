@@ -3,18 +3,25 @@ import axios from 'axios';
 import "./../../styles/ResumePortfolio.css";
 import plus_btn from "./../../assets/Plus_btn.png";
 import ResumePortfolioInputEdit from "./ResumePortfolioInputEdit";
+import config from '../../../config';
 
 const ResumePortfolioEdit = ({ setPortfolio }) => {
     const userId = localStorage.getItem("userId");
     const [inputs, setInputs] = useState([]);
     const [portfolioList, setPortfolioList] = useState([]);
 
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
+
     useEffect(() => {
-        axios.get(`/api/personal/resumes/${userId}`)
+        api.get(`/api/personal/resumes/user/${userId}`)
             .then(response => {
                 const data = response.data.portfolios.map(port => ({
                     id: port.portId,
-                    fileName: port.portFileFileName,
+                    fileName: port.portFileName,
+                    fileUrl: port.portFileUrl,
+                    fileUuid: port.portFileUuid,
                     file: null // 파일 객체를 초기화
                 }));
                 setPortfolioList(data);
@@ -67,6 +74,7 @@ const ResumePortfolioEdit = ({ setPortfolio }) => {
                         key={id}
                         id={id}
                         fileName={portfolio?.fileName || ""}
+                        file={portfolio?.file || null} // 파일 객체 전달
                         removeInput={() => removePortfolioInput(id)}
                         updatePortfolio={updatePortfolio}
                     />
