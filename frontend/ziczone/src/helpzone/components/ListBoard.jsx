@@ -66,6 +66,20 @@ const ListBoard = () => {
     }
   }, [userId]);
 
+  useEffect(() => {
+    const handleMessage = (event) => {
+      if (event.data === 'paymentComplete') {
+        window.location.reload();
+      }
+    };
+
+    window.addEventListener('message', handleMessage);
+
+    return () => {
+      window.removeEventListener('message', handleMessage);
+    };
+  }, []);
+
   const handleWriteButton = () => {
     if (!userId) {
       navigate('/Login');
