@@ -6,7 +6,6 @@ const ResumeIntroduction = ({ setIntroduction }) => {
     const [file, setFile] = useState(null);
 
     useEffect(() => {
-        console.log("ResumeIntroduction - File updated:", file); // 파일 객체 확인
         setIntroduction(file);
     }, [file, setIntroduction]);
 

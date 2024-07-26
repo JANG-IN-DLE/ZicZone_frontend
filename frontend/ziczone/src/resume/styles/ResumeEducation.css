@@ -76,6 +76,8 @@
 .edu_history {
     margin-right: 20px;
     width: 250px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .edu_score {

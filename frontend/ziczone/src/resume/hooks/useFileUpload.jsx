@@ -18,7 +18,6 @@ const useFileUpload = (setFile, initialFileName = '') => {
         if (e.target.files.length > 0) {
             const file = e.target.files[0];
             setFileName(file.name);
-            console.log("useFileUpload - Selected file:", file); // 파일 객체 확인
             setFile(file); // 부모 컴포넌트로 파일을 전달합니다.
         }
     };

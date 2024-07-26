@@ -147,7 +147,7 @@ const MypageCompanyModal = ({ setIsModalOpen }) => {
                         </div>
                         <div className="edit_password_right">
                             <div className="edit_password_input">
-                                <label><input type="password" placeholder="현재 비밀번호(* 필수)" value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} /></label>
+                                <label><input type="password" className="right_password_red" placeholder="현재 비밀번호(* 필수)" value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} /></label>
                                 <label><input type="password" placeholder="변경할 비밀번호(8~16자 영문, 숫자, 특수기호 포함)" value={changePassword} onChange={(e) => setChangePassword(e.target.value)} /></label>
                                 <label><input type="password" placeholder="비밀번호 확인" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} /></label>
                             </div>

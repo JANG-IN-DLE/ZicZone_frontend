@@ -52,6 +52,8 @@
 .archive_blog p {
     width: 260px;
     /* margin-right: 120px; */
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .archive_github input,

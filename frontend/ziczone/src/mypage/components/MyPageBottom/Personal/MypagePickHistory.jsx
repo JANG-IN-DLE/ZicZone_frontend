@@ -12,8 +12,6 @@ const MypagePickHistory = () => {
         const [selectedItem, setSelectedItem] = useState(null);
         const itemsPerPage = 4; // 한 페이지당 컴포넌트 4개
 
-        console.log("asd: ", selectedItem)
-
         useEffect(() => {
                 axios.get(`/api/personal/picks/${userId}`)
                         .then(response => {
