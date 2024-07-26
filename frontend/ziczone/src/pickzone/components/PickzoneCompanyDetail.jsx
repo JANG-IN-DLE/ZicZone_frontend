@@ -29,7 +29,7 @@ export default function PickzoneCompanyDetail() {
   const [selectedSection, setSelectedSection] = useState("resume");
   // modal open hook
   const [isModalOpen, setIsModalOpen] = useState(false);
-  // Pick 상테 추적 hook
+  // Pick 상태 추적 hook
   const [isPicked, setIsPicked] = useState(false);
 
   // localStorage에서 userRole 값을 가져와 isCompany 설정
@@ -101,7 +101,6 @@ export default function PickzoneCompanyDetail() {
         personalId: personalId,
       })
       .then((response) => {
-        console.log("Pick성공:", response.data);
         setIsPicked(response.data.pick); // pick 저장
         setIsModalOpen(false);
       })
