@@ -11,7 +11,7 @@ const JobDropdown = ({ selectedItems, setSelectedItems }) => {
       });
 
     useEffect(() => {
-        api.get('http://localhost:12000/api/jobs')
+        api.get('/api/jobs')
             .then(response => {
                 setJobList(response.data);
             })
