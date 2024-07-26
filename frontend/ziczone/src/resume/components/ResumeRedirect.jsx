@@ -14,7 +14,7 @@ const ResumeRedirect = () => {
   useEffect(() => {
     const checkResume = async () => {
       try {
-        const response = await api.get(`http://localhost:12000/api/personal/resumes/check/${userId}`);
+        const response = await api.get(`/api/personal/resumes/check/${userId}`);
         const hasResume = response.data; // assuming the API returns a boolean
 
         if (hasResume) {

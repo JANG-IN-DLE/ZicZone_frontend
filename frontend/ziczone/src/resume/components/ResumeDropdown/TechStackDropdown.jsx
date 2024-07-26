@@ -11,7 +11,7 @@ const TechDropdown = ({ selectedItems, handleTechSelect, filter }) => {
       });
 
     useEffect(() => {
-        api.get('http://localhost:12000/api/signup/techs')
+        api.get('/api/signup/techs')
             .then(response => {
                 setTechList(response.data);
             })

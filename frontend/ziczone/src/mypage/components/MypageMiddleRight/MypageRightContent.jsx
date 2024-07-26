@@ -14,7 +14,7 @@ const MypageRightContent = () => {
     useEffect(() => {
         const fetchBerryPoints = async () => {
             try {
-                const response = await api.get(`http://localhost:12000/api/payments/personal/totalBerryPoints/${userId}`);
+                const response = await api.get(`/api/payments/personal/totalBerryPoints/${userId}`);
                 setBerryPoint(response.data.totalBerryPoints);
             } catch (error) {
                 console.error("Error fetching berry points:", error);
