@@ -3,14 +3,19 @@ import axios from 'axios';
 import "./../../styles/ResumePortfolio.css";
 import plus_btn from "./../../assets/Plus_btn.png";
 import ResumePortfolioInputEdit from "./ResumePortfolioInputEdit";
+import config from '../../../config';
 
 const ResumePortfolioEdit = ({ setPortfolio }) => {
     const userId = localStorage.getItem("userId");
     const [inputs, setInputs] = useState([]);
     const [portfolioList, setPortfolioList] = useState([]);
 
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
+
     useEffect(() => {
-        axios.get(`/api/personal/resumes/user/${userId}`)
+        api.get(`/api/personal/resumes/user/${userId}`)
             .then(response => {
                 const data = response.data.portfolios.map(port => ({
                     id: port.portId,

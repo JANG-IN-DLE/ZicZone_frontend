@@ -4,6 +4,7 @@ import '../../styles/MypageEdit.css';
 import company_edit from './../../assets/Logo_Edit.png';
 import { FormProvider } from './../../../join/components/FormContext';
 import AddressInput from './AddressInput';
+import config from '../../../config';
 
 const MypageCompanyModal = ({ setIsModalOpen }) => {
     const handleCloseClick = () => {
@@ -19,10 +20,14 @@ const MypageCompanyModal = ({ setIsModalOpen }) => {
     const [changePassword, setChangePassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
+
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`/api/company/${userId}`);
+                const response = await api.get(`/api/company/${userId}`);
                 const { user, companyAddr, companyLogoUrl } = response.data;
                 setUserName(user.userName);
                 setIntro(user.userIntro);
@@ -61,7 +66,7 @@ const MypageCompanyModal = ({ setIsModalOpen }) => {
         }
 
         try {
-            const response = await axios.put(`/api/company/${userId}`, formData, {
+            const response = await api.put(`/api/company/${userId}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -147,7 +152,7 @@ const MypageCompanyModal = ({ setIsModalOpen }) => {
                         </div>
                         <div className="edit_password_right">
                             <div className="edit_password_input">
-                                <label><input type="password" placeholder="현재 비밀번호(* 필수)" value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} /></label>
+                                <label><input type="password" className="right_password_red" placeholder="현재 비밀번호(* 필수)" value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} /></label>
                                 <label><input type="password" placeholder="변경할 비밀번호(8~16자 영문, 숫자, 특수기호 포함)" value={changePassword} onChange={(e) => setChangePassword(e.target.value)} /></label>
                                 <label><input type="password" placeholder="비밀번호 확인" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} /></label>
                             </div>

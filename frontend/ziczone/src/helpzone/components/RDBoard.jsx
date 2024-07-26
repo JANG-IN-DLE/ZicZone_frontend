@@ -9,6 +9,7 @@ import CommentList from "./comment/CommentList";
 import "../styles/RDBoard.css";
 import ConfirmModal from "./ConfirmModal";
 import Layout from "../../common/layout/layout";
+import config from "../../config";
 
 const RDBoard = () => {
   const { corrId } = useParams();
@@ -20,6 +21,10 @@ const RDBoard = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isCommentSelected, setIsCommentSelected] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+  const api = axios.create({
+    baseURL: config.baseURL
+  });
 
   // TODO: 이름 바꿔야대
   const [userProfile, setUserProfile] = useState({
@@ -49,7 +54,7 @@ const RDBoard = () => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`/api/personal/board/${corrId}/${userId}`);
+      await api.delete(`/api/personal/board/${corrId}/${userId}`);
       navigate('/helpzone');
     } catch (error) {
       console.error("오류 메시지: ", error);
@@ -59,8 +64,8 @@ const RDBoard = () => {
   useEffect(() => {
     const fetchProfileAndPost = async () => {
       try {
-        const profileResponse = await axios.get(`/api/user/board/profile/${corrId}`);
-        const postResponse = await axios.get(`/api/user/board/${corrId}`);
+        const profileResponse = await api.get(`/api/user/board/profile/${corrId}`);
+        const postResponse = await api.get(`/api/user/board/${corrId}`);
 
         const profileData = profileResponse.data;
         const isOwner = profileData.userId === Number(userId);

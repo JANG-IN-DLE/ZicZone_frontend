@@ -4,13 +4,18 @@ import plus_btn from "./../../assets/Plus_btn.png";
 import ResumePortfolioInputView from "./../ResumePortfolio/ResumePortfolioInputView";
 import useAddInput from "./../../hooks/useAddInput";
 import axios from "axios";
+import config from "../../../config";
 
 const ResumePortfolioView = () => {
     const userId = localStorage.getItem("userId");
     const [portfolioData, setPortfolioData] = useState([]);
 
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
+
     useEffect(() => {
-        axios.get(`/api/personal/resumes/user/${userId}`)
+        api.get(`/api/personal/resumes/user/${userId}`)
             .then(response => {
                 setPortfolioData(response.data.portfolios);
             })
@@ -20,7 +25,6 @@ const ResumePortfolioView = () => {
     }, [userId]);
 
     useEffect(() => {
-        console.log("포트: ", JSON.stringify(portfolioData));
     }, [portfolioData]);
 
     return (

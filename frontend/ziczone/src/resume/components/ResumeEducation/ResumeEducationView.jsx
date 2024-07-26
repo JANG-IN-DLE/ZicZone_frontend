@@ -2,13 +2,18 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./../../styles/ResumeEducation.css";
 import ResumeEducationInputView from "./ResumeEducationInputView";
+import config from "../../../config";
 
 const ResumeEducationView = () => {
     const userId = localStorage.getItem("userId")
     const [educationData, setEducationData] = useState([]);
 
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
+
     useEffect(() => {
-        axios.get(`/api/personal/resumes/user/${userId}`)
+        api.get(`/api/personal/resumes/user/${userId}`)
             .then(response => {
                 setEducationData(response.data.educations);
             })

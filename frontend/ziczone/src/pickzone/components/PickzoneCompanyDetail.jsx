@@ -4,6 +4,7 @@ import axios from "axios";
 import UserProfile from "./UserProfile";
 import PickModal from "./PickModal";
 import Layout from "../../common/layout/layout";
+import config from "../../config";
 
 // 이름 마스킹 함수
 const maskName = (name) => {
@@ -35,9 +36,13 @@ export default function PickzoneCompanyDetail() {
   const userRole = localStorage.getItem("userRole");
   const isCompany = userRole === "COMPANY";
 
+  const api = axios.create({
+    baseURL: config.baseURL
+  });
+
   useEffect(() => {
     // (CompanyId로 로그인되어을때) personalId가지고 해당하는 회원 정보 가져오기(pickDetail  왼쪽 회원 정보)
-    axios
+    api
       .get(`/api/company/pickcards/${loggedInUserId}/${personalId}`)
       .then((response) => {
         const maskedUserCard = {
@@ -51,7 +56,7 @@ export default function PickzoneCompanyDetail() {
         console.log("Error fetching user details: ", error);
       });
     // (CompanyId로 로그인되었을때) personalId가지고 해당하는 회원 resume 정보 가져오기(pickDetail 오른쪽 정보)
-    axios
+    api
       .get(`/api/company/pickresume/${personalId}`)
       .then((response) => {
         const maskedUserResume = {
@@ -90,7 +95,7 @@ export default function PickzoneCompanyDetail() {
   };
   // "Pick" 클릭시
   const handlePickConfirm = () => {
-    axios
+    api
       .post("/api/company/pick", {
         userId: loggedInUserId,
         personalId: personalId,

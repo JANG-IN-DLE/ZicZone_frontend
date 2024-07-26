@@ -4,6 +4,7 @@ import axios from 'axios';
 import ProfileCardstyle from '../styles/ProfileCard.module.css';
 import unscrapImg from '../../../common/card/assets/unscrap.svg';
 import scrapImg from '../../../common/card/assets/scrap.svg';
+import config from '../../../config';
 
 
 const ProfileCard = ({userImage, jobNames=[], userName, userCareer, userIntro, techUrls=[], isScrap, personalId, isCompany }) => {
@@ -13,10 +14,16 @@ const ProfileCard = ({userImage, jobNames=[], userName, userCareer, userIntro, t
     // localstorage에서 userId 가져옴
     const userId = localStorage.getItem("userId");
 
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
+
     const handleScrapClick = async (e) => {
         e.stopPropagation();
         try{
-            const response = await axios.post('/api/company/scrap', { personalId, userId });
+            // 보낼 때 userName뿐만 아니라 지금 로그인한 회원 Id까지 보내야할 것 같아. companyId는 임시로 1
+            const response = await api.post('/api/company/scrap', { personalId, userId });
+
             if(response.status === 200) {
                 // const { isScrap } = response.data.scrap;
                 setScrap(response.data.scrap);

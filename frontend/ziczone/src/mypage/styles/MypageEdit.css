@@ -142,8 +142,11 @@
 }
 
 .edit_password_right input::placeholder {
-    color: #b3b3b3;
     font-size: 12px;
+}
+
+.right_password_red::placeholder {
+    color: red;
 }
 
 .edit_password_input input:focus {

@@ -3,6 +3,7 @@ import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import Modal from "../../pickzone/components/Modal";
+import config from "../../config";
 
 const PickCard = ({
   userName,
@@ -22,6 +23,10 @@ const PickCard = ({
   const navigate = useNavigate();
   const [selectedCard, setSelectedCard] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const api = axios.create({
+    baseURL: config.baseURL
+  });
 
   // 이름 마스킹
   const maskName = (name) => {
@@ -97,7 +102,7 @@ const PickCard = ({
       payHistoryContent: "이력서조회",
       payHistoryDate: new Date().toISOString(),
     };
-    axios
+    api
       .post("/api/personal/open-card", openCardData)
       .then((response) => {
         if (response.status === 200) {

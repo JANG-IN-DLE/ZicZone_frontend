@@ -17,6 +17,7 @@ const ResumeCareerInputEdit = ({ id, startDate, endDate, companyName, position, 
                     placeholder="YYYY.MM"
                     value={startDate}
                     onChange={handleChange}
+                    maxLength={7}
                 />
                 <p>~</p>
                 <input
@@ -25,6 +26,7 @@ const ResumeCareerInputEdit = ({ id, startDate, endDate, companyName, position, 
                     placeholder="YYYY.MM"
                     value={endDate}
                     onChange={handleChange}
+                    maxLength={7}
                 />
             </div>
             <div className="career_history">

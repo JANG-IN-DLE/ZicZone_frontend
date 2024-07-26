@@ -10,6 +10,7 @@ import { jwtDecode } from "jwt-decode";
 import { useDispatch } from "react-redux"; // Redux dispatch 훅 import
 import { subscribeToSSE, initAlarm } from "../../../store/actions/alarmActions";
 import { setUser } from "../../../store/actions/userActions";
+import config from "../../../config";
 
 const LoginForm = ({
   title,
@@ -27,6 +28,10 @@ const LoginForm = ({
   const [email, setUserEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginFail, setLoginFail] = useState("");
+
+  const api = axios.create({
+    baseURL: config.baseURL
+  });
 
   //비밀번호 찾기(이메일인증)
   const {
@@ -80,7 +85,7 @@ const LoginForm = ({
   //로그인 요청
   const Login = async () => {
     try {
-      const response = await axios.post("http://localhost:3000/api/login", {
+      const response = await api.post("/api/login", {
         email,
         password,
       });

@@ -9,6 +9,7 @@ import { jwtDecode } from "jwt-decode";
 import { Link } from "react-router-dom";
 import left from "../../main/left.png";
 import right from "../../main/right.png";
+import config from '../../config';
 
 const LoginBannerSlide = () => {
   const userId = localStorage.getItem("userId")
@@ -21,6 +22,10 @@ const LoginBannerSlide = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [personalCareer, setPersonalCareer] = useState([]);
   const [userIntro, setUserIntro] = useState([]);
+
+  const api = axios.create({
+    baseURL: config.baseURL
+  });
 
   const slideItems = [
     { id: 1, src: slidImage1, alt: "배너1" },
@@ -99,7 +104,7 @@ const LoginBannerSlide = () => {
     const userType = decodedToken.role; // 'company' 또는 'personal'
 
     if (userType === "COMPANY") {
-      axios
+      api
         .get(`/api/main/companyUser/${userId}`)
         .then((res) => {
           setUserName(res.data.userName);
@@ -113,7 +118,7 @@ const LoginBannerSlide = () => {
           console.error("Error fetching company user data: ", error);
         });
     } else if (userType === "PERSONAL") {
-      axios
+      api
         .get(`/api/main/personalUser/${userId}`)
         .then((res) => {
           setUserName(res.data.userName);
@@ -145,7 +150,7 @@ const LoginBannerSlide = () => {
 
     if (userId && token && userRole === "PERSONAL") {
       try {
-        await axios.post(
+        await api.post(
           `/sse/logout/${userId}`,
           {},
           {

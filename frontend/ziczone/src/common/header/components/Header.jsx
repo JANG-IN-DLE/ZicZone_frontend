@@ -10,6 +10,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../../../store/actions/userActions";
 import { deleteAlarm } from "../../../store/actions/alarmActions";
+import config from "../../../config";
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -18,6 +19,10 @@ const Header = () => {
   const [companyLogo, setCompanyLogo] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const api = axios.create({
+    baseURL: config.baseURL
+  });
 
   useEffect(() => {
     const checkToken = () => {
@@ -52,7 +57,7 @@ const Header = () => {
     const userType = decodedToken.role;
 
     if (userType === "COMPANY") {
-      axios
+      api
         .get(`/api/main/companyUser/${userId}`)
         .then((res) => {
           setUserName(res.data.userName);
@@ -63,7 +68,7 @@ const Header = () => {
           console.error("Error fetching company user data: ", error);
         });
     } else if (userType === "PERSONAL") {
-      axios
+      api
         .get(`/api/main/personalUser/${userId}`)
         .then((res) => {
           setUserName(res.data.userName);
@@ -88,7 +93,7 @@ const Header = () => {
 
     if (userId && token && userRole === "PERSONAL") {
       try {
-        await axios.post(
+        await api.post(
           `/sse/logout/${userId}`,
           {},
           {

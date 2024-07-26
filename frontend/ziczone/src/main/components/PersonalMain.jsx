@@ -7,6 +7,7 @@ import personalFImage from "../../common/card/assets/personal_f_image.png";
 import PickZoneJobstyle from "../../pickzone/styles/PickZoneJob.module.css";
 import Modal from "../../pickzone/components/Modal";
 import PickCardCommstyle from "../../common/card/styles/PickCardComm.module.css";
+import config from "../../config";
 
 // 이름 마스킹 함수
 const maskName = (name) => {
@@ -40,11 +41,15 @@ function UserPickzone() {
   const [userEmail, setUserEmail] = useState([]);
   const [userImg, setUserImg] = useState([]);
 
+  const api = axios.create({
+    baseURL: config.baseURL
+  });
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         // PickCards 데이터 가져옴
-        const pickCardsResponse = await axios.get(
+        const pickCardsResponse = await api.get(
           `/api/personal/pickcards?loggedInUserId=${loggedInUserId}`
         );
         const maskedData = pickCardsResponse.data.map((card) => ({
@@ -54,7 +59,7 @@ function UserPickzone() {
         setPickCards(maskedData);
 
         // Jobs 데이터를 가져옴
-        const jobsResponse = await axios.get("/api/jobs");
+        const jobsResponse = await api.get("/api/jobs");
         setJobs([{ jobId: "all", jobName: "전체" }, ...jobsResponse.data]);
       } catch (error) {
         console.error("Error fetching data: ", error);
@@ -103,7 +108,7 @@ function UserPickzone() {
           return bMatches - aMatches;
         });
 
-  axios
+  api
     .get(`/api/main/personalUser/${loggedInUserId}`)
     .then((res) => {
       setUserName(res.data.userName);

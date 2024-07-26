@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import "../../styles/Toss.css";
 import axios from "axios";
+import config from "../../../config";
 
 export function SuccessPage() {
   const navigate = useNavigate();
@@ -10,8 +11,12 @@ export function SuccessPage() {
   const [role, setRole] = useState(localStorage.getItem("userRole") || "null");
   const [token, setToken] = useState(localStorage.getItem("token") || "null");
   const [userId, setUserId] = useState(localStorage.getItem("userId") || 0);
+  
   const [counter, setCounter] = useState(5);
 
+  const api = axios.create({
+    baseURL: config.baseURL
+  });
 
   useEffect(() => {
     console.log("useEffect triggered");
@@ -44,7 +49,7 @@ export function SuccessPage() {
 
       try {
         // 서버에 결제 확인 요청 전송
-        const response = await axios.post("api/payments/confirm", requestData, {
+        const response = await api.post("api/payments/confirm", requestData, {
           headers: {
             "Content-Type": "application/json",
             "Authorization": `${token}`
@@ -59,6 +64,8 @@ export function SuccessPage() {
         }
 
         setResponseData(response.data);
+        // 결제가 완료되면 부모 창에 메시지 전송
+        window.opener.postMessage('paymentComplete', '*');
       } catch (error) {
         console.error("Payment confirmation failed", error);
         navigate(`/fail?code=${error.response?.status || 500}&message=${error.message}`);

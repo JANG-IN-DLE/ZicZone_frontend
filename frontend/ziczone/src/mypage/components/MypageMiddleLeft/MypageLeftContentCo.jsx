@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import MypageLeftCo from "./MypageLeftCo";
+import config from '../../../config';
 
 function MypageLeftContentCo() {
     const userId = localStorage.getItem('userId')
@@ -12,8 +13,12 @@ function MypageLeftContentCo() {
         email: "",
     });
 
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
+
     useEffect(() => {
-        axios.get(`/api/company/${userId}`)
+        api.get(`/api/company/${userId}`)
             .then(response => {
                 setLeftData({
                     userName: response.data.user.userName,

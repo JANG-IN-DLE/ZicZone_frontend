@@ -2,15 +2,20 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import MypageCompScrap from './MypageCompScrap';
 import PageButton from './../PageButton';
+import config from '../../../../config';
 
 const MypageScrapHistory = () => {
     const userId = localStorage.getItem('userId')
     const [scrapData, setScrapData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 4; // 한 페이지당 컴포넌트 4개
+    
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
 
     useEffect(() => {
-        axios.get(`/api/company/scraps/${userId}`)
+        api.get(`/api/company/scraps/${userId}`)
             .then(response => {
                 setScrapData(response.data);
             })

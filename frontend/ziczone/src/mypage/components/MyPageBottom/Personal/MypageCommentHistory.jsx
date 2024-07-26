@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import BoardItem from './MypageUserComment';
 import PageButton from '../PageButton';
+import config from '../../../../config';
 
 const MypageCommentHistory = () => {
     const userId = localStorage.getItem('userId')
@@ -9,8 +10,12 @@ const MypageCommentHistory = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 8; // 한 페이지당 컴포넌트 4개
 
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
+
     useEffect(() => {
-        axios.get(`/api/personal/mycomm/${userId}`)
+        api.get(`/api/personal/mycomm/${userId}`)
             .then(response => {
                 setCommentData(response.data);
             })

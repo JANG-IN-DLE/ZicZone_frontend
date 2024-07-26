@@ -14,6 +14,7 @@ import ResumeArchiveEdit from "./ResumeArchive/ResumeArchiveEdit";
 import ResumeIntroductionEdit from "./ResumeIntroduction/ResumeIntroductionEdit";
 import ResumePortfolioEdit from "./ResumePortfolio/ResumePortfolioEdit";
 import Layout from "../../common/layout/layout";
+import config from "../../config";
 
 // import dayjs from 'dayjs';
 
@@ -31,17 +32,16 @@ const ResumeEdit = () => {
     const [introduction, setIntroduction] = useState({ fileName: '', file: null });
     const [portfolio, setPortfolio] = useState([]);
 
-    useEffect(() => {
-        console.log("Introduction updated:", privacy);
-    }, [privacy]);
-    
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
+  
     const navigate = useNavigate();
 
     // console.log("privacy: " + JSON.stringify(privacy));
 
-    // 삭제 버튼 추가 (삭제 시 관련 엔티티먼저 삭제하고 지원서 테이블을 삭제합니다. 리뷰시 이 주석 삭제바람☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★)
     const handleDelete = () => {
-        axios.delete(`/api/personal/resumes/${userId}`)
+        api.delete(`/api/personal/resumes/${userId}`)
             .then(response => {
                 alert("삭제되었습니다.");
                 // 삭제 후 원하는 페이지로 이동할 수 있습니다.
@@ -142,14 +142,8 @@ const ResumeEdit = () => {
             formData.append("personalState", introduction.file);
         }
 
-        // formData 내용을 출력
-        for (let [key, value] of formData.entries()) {
-            console.log(`${key}:`, value);
-        }
-
-        axios.put(`/api/personal/resumes/${userId}/update`, formData)
+        api.put(`/api/personal/resumes/${userId}/update`, formData)
             .then(response => {
-                console.log(JSON.stringify(formData));
                 alert("저장되었습니다.");
                 navigate(`/personal/resumes/view/${userId}`);
             })

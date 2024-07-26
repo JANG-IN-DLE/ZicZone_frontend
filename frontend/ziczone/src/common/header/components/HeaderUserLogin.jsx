@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import "./../styles/UserLogin.css";
 import dropdown from "../assets/Dropdown.png";
-import alarm from "../assets/Alarm.png";
 import useDropdown from "../hooks/useDropdown";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import AlarmList from "./Alarm";
 
 const UserLogin = ({ userName, onLogout }) => {

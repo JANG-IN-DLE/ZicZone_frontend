@@ -3,6 +3,7 @@ import axios from 'axios';
 import MypageCompPick from './MypageCompPick';
 import PageButton from './../../../../helpzone/components/PageButton';
 import "./../../../../helpzone/styles/PageButton.css"
+import config from '../../../../config';
 
 const MypagePickHistoryCo = () => {
     const userId = localStorage.getItem('userId')
@@ -10,8 +11,12 @@ const MypagePickHistoryCo = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 4; // 한 페이지당 컴포넌트 4개
 
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
+
     useEffect(() => {
-        axios.get(`/api/company/picks/${userId}`)
+        api.get(`/api/company/picks/${userId}`)
             .then(response => {
                 setScrapData(response.data);
             })

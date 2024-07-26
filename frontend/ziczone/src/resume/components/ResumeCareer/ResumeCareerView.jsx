@@ -3,14 +3,19 @@ import axios from "axios";
 import "./../../styles/ResumeCareer.css";
 import ResumeCareerInputView from "./../ResumeCareer/ResumeCareerInputView";
 import useViewInput from "./../../hooks/useViewInput";
+import config from '../../../config';
 
 const ResumeCareerView = () => {
     const userId = localStorage.getItem("userId")
 
     const [careerData, setCareerData] = useState([]);
 
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
+
     useEffect(() => {
-        axios.get(`/api/personal/resumes/user/${userId}`)
+        api.get(`/api/personal/resumes/user/${userId}`)
             .then(response => {
                 setCareerData(response.data.careers)
             })
