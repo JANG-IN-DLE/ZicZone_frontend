@@ -99,9 +99,12 @@ const AlarmList = () => {
                 <div 
                     key={index} 
                     className="alarm_content" 
-                    style={{ backgroundColor: !alarm.readOrNot ? 'white' : '#f0f0f0' }}
                 >
-                    <p className="alarm_content_detail">{AlarmMessage(alarm)}</p>
+                    <p 
+                        className="alarm_content_detail"
+                        style={{ color: !alarm.readOrNot ? 'black' : '#bababa' }}>
+                            {AlarmMessage(alarm)}
+                    </p>
                     <div className="alarm_content_right">
                         <p className="alarm_content_berry">{alarm.getBerry === undefined ? '' : `+${alarm.getBerry}🫐`}</p>
                         <p className="alarm_content_time">{formatDate(alarm.alarmCreate)}</p>
