@@ -9,22 +9,22 @@ import { jwtDecode } from "jwt-decode";
 import { Link } from "react-router-dom";
 import left from "../../main/left.png";
 import right from "../../main/right.png";
-import config from '../../config';
+import config from "../../config";
 
 const LoginBannerSlide = () => {
   const userId = localStorage.getItem("userId");
-  const [userData, setUserData] = useState([]);
-  const [userName, setUserName] = useState([]);
-  const [userEmail, setUserEmail] = useState([]);
-  const [userImg, setUserImg] = useState([]);
-  const [companyLogo, setCompanyLogo] = useState([]);
-  const [userRole, setUserRole] = useState();
+  const [userData, setUserData] = useState("");
+  const [userName, setUserName] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+  const [userImg, setUserImg] = useState("");
+  const [companyLogo, setCompanyLogo] = useState("");
+  const [userRole, setUserRole] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [personalCareer, setPersonalCareer] = useState([]);
-  const [userIntro, setUserIntro] = useState([]);
+  const [personalCareer, setPersonalCareer] = useState("");
+  const [userIntro, setUserIntro] = useState("");
 
   const api = axios.create({
-    baseURL: config.baseURL
+    baseURL: config.baseURL,
   });
 
   const slideItems = [
@@ -53,6 +53,19 @@ const LoginBannerSlide = () => {
       link: "https://www.ncloud.com/",
     },
   ];
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      try {
+        const decodedToken = jwtDecode(token);
+        fetchUserData(decodedToken);
+      } catch (error) {
+        console.error("Invalid token", error);
+      }
+    }
+  }, []);
 
   useEffect(() => {
     const slide = document.querySelector(".slide");
@@ -135,7 +148,6 @@ const LoginBannerSlide = () => {
           setUserEmail(res.data.email);
           setCompanyLogo(res.data.companyLogo);
           setUserRole(userType);
-          console.log(("컴퍼니입니다", res));
           setUserIntro(res.data.userIntro);
         })
         .catch((error) => {
@@ -150,7 +162,6 @@ const LoginBannerSlide = () => {
           setUserImg(
             res.data.gender === "MALE" ? personalMImage : personalFImage
           );
-          console.log(res.data);
           setUserRole(userType);
           setPersonalCareer(res.data.personalCareer);
           setUserIntro(res.data.userIntro);
