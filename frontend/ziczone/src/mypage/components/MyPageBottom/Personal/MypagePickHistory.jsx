@@ -16,9 +16,7 @@ const MypagePickHistory = () => {
         const api = axios.create({
                 baseURL: config.baseURL
               });
-
-        console.log("asd: ", selectedItem)
-
+  
         useEffect(() => {
                 api.get(`/api/personal/picks/${userId}`)
                         .then(response => {

@@ -105,6 +105,21 @@ function UserPickzone() {
     }
   };
 
+  useEffect(() => {
+    const handleMessage = (event) => {
+      if (event.data === 'paymentComplete') {
+        setIsOpen(false);
+        window.location.reload();
+      }
+    };
+
+    window.addEventListener('message', handleMessage);
+
+    return () => {
+      window.removeEventListener('message', handleMessage);
+    };
+  }, []);
+
   // 선택된 job이 있으면 pickcard의 job과 일치하는 것 걸러서 보여줄거야
   const filteredPickCards = selectedJobs.includes("전체")
     ? pickCards

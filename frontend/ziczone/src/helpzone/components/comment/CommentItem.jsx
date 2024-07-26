@@ -120,7 +120,7 @@ const CommentItem = ({ comment, board, userId, selectedCommentId, onCommentUpdat
                     <img src={selectIcon} alt="채택완료핀" />
                     <p>채택된 댓글</p>
                     <div>
-                        {board.corrPoint} 베리
+                        {comment.corrPoint} 베리
                     </div>
                 </div>
             )}

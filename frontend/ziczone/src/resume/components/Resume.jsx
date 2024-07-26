@@ -35,11 +35,7 @@ const Resume = () => {
     const api = axios.create({
         baseURL: config.baseURL
       });
-
-    useEffect(() => {
-        console.log("Introduction updated:", portfolio);
-    }, [portfolio]);
-
+  
     const handleReturnClick = () => {
         navigate(`/personal/${userId}`);
     };
@@ -52,8 +48,6 @@ const Resume = () => {
             resumePhotoUrl: privacy.resumePhotoUrl,
             resumePhotoFileName: privacy.resumePhotoFileName,
             resumeEmail: privacy.resumeEmail,
-            personalStateUrl: introduction ? introduction.file : null,
-            personalStateFileName: introduction ? introduction.file : null,
             userId: userId,
             archive: {
                 archGit: archive.github,
@@ -120,13 +114,10 @@ const Resume = () => {
             formData.append("resumePhoto", privacy.resumePhoto);
         }
     
-        if (introduction && introduction.file) {  // introduction이 존재하고 file이 있을 때만 추가
+        if (introduction instanceof File) {
+            formData.append("personalState", introduction);
+        } else if (introduction && introduction.file instanceof File) {
             formData.append("personalState", introduction.file);
-        }
-    
-        // formData 내용을 출력
-        for (let [key, value] of formData.entries()) {
-            console.log(`${key}:`, value);
         }
     
         try {
@@ -135,11 +126,9 @@ const Resume = () => {
                     "Content-Type": "multipart/form-data",
                 },
             });
-            console.log('응답 데이터:', response.data);
             alert("저장되었습니다.");
             navigate(`/personal/resumes/view/${userId}`);
         } catch (error) {
-            console.error('저장 중 오류 발생:', error);
             alert("저장 중 오류가 발생했습니다.");
         }
     };

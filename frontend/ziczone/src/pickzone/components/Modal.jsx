@@ -47,7 +47,7 @@ const Modal = ({
         console.error("Error opening card:", error);
         if (error.response && error.response.data === 400) {
           window.open('/charge', '_blank');
-        }else if(error.response && error.response.data) {
+        } else if (error.response && error.response.data) {
           alert(error.response.data);
         }
       });

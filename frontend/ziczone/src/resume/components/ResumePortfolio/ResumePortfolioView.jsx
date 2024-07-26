@@ -25,7 +25,6 @@ const ResumePortfolioView = () => {
     }, [userId]);
 
     useEffect(() => {
-        console.log("포트: ", JSON.stringify(portfolioData));
     }, [portfolioData]);
 
     return (

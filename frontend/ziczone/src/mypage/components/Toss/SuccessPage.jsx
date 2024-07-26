@@ -64,6 +64,8 @@ export function SuccessPage() {
         }
 
         setResponseData(response.data);
+        // 결제가 완료되면 부모 창에 메시지 전송
+        window.opener.postMessage('paymentComplete', '*');
       } catch (error) {
         console.error("Payment confirmation failed", error);
         navigate(`/fail?code=${error.response?.status || 500}&message=${error.message}`);

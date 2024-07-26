@@ -11,7 +11,6 @@ const ResumeIntroductionInput = ({ setFile }) => {
         handleFileChange,
         handleClearFile,
     } = useFileUpload((file) => {
-        console.log("ResumeIntroductionInput - setFile called with:", file); // 파일 객체 확인
         setFile(file);
     });
 

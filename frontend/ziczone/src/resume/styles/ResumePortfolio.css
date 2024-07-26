@@ -41,6 +41,8 @@
     margin-right: 12px;
     display: flex;
     align-items: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .portfolio_file_name {
