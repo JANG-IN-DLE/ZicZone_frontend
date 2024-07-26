@@ -138,7 +138,7 @@ const Header = () => {
                   PICK존
                 </NavLink>
               ) : (
-                <NavLink to="/login">
+                <NavLink to="/personalpick">
                   PICK존
                 </NavLink>
               )}

@@ -66,7 +66,9 @@ function UserPickzone() {
   }, [loggedInUserId]);
 
   const handleCardClick = (card) => {
-    if (card.payHistoryId && card.payHistoryId.length > 0) {
+    console.log(card.userId);
+    console.log(loggedInUserId);
+    if (card.userId === parseInt(loggedInUserId) || (card.payHistoryId && card.payHistoryId.length > 0)) {
       navigate(`/pickzone/${loggedInUserId}/${card.personalId}`);
     } else {
       setSelectedCard(card);
