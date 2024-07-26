@@ -90,7 +90,7 @@ const ListBoard = () => {
 
   const handleChargeRedirect = (path) => {
     setIsModalOpen(false);
-    navigate(path);
+    window.open(path, '_blank');
   };
 
   return (
