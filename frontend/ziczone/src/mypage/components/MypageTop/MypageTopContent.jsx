@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import MypageTop from "./MypageTop";
 import axios from "axios";
+import config from "../../../config";
 
 const MypageTopContent = () => {
     const userId = localStorage.getItem('userId')
@@ -10,8 +11,12 @@ const MypageTopContent = () => {
     });
     const [isLoading, setIsLoading] = useState(true); // 로딩 상태 추가
 
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
+
     useEffect(() => {
-        axios.get(`/api/personal/${userId}`)
+        api.get(`/api/personal/${userId}`)
             .then(response => {
                 setTopData({
                     gender: response.data.gender

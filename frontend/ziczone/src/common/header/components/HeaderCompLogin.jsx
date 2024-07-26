@@ -3,7 +3,6 @@ import "./../styles/CompLogin.css";
 import dropdown from "../assets/Dropdown.png";
 import useDropdown from "../hooks/useDropdown";
 import { Link } from "react-router-dom";
-import axios from "axios";
 
 const CompLogin = ({ companyLogo, userName, onLogout }) => {
   const { open, Dropdown, dropdownRef } = useDropdown();

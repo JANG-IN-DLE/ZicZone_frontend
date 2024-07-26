@@ -2,13 +2,18 @@ import React, { useEffect, useState } from "react";
 import "./../../styles/ResumeArchive.css";
 import ResumeArchiveInputView from "./../ResumeArchive/ResumeArchiveInputView";
 import axios from "axios";
+import config from '../../../config';
 
 const ResumeArchiveView = () => {
     const userId = localStorage.getItem("userId");
     const [archiveData, setArchiveData] = useState(null);
 
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
+
     useEffect(() => {
-        axios.get(`/api/personal/resumes/user/${userId}`)
+        api.get(`/api/personal/resumes/user/${userId}`)
             .then(response => {
                 setArchiveData(response.data.archive || {
                     archGit: '',

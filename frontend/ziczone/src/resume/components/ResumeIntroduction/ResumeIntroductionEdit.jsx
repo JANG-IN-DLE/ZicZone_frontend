@@ -2,14 +2,19 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./../../styles/ResumeIntroduction.css"
 import ResumeIntroductionInputEdit from "./ResumeIntroductionInputEdit";
+import config from '../../../config';
 
 const ResumeIntroductionEdit = ({ setIntroduction }) => {
     const userId = localStorage.getItem("userId");
     const [initialFileName, setInitialFileName] = useState('');
 
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
+
     useEffect(() => {
         // 서버로부터 데이터 가져오기
-        axios.get(`/api/personal/resumes/user/${userId}`)
+        api.get(`/api/personal/resumes/user/${userId}`)
             .then(response => {
                 const fileName = response.data.personalStateFileName; // 서버에서 가져온 파일 이름
                 setInitialFileName(fileName);

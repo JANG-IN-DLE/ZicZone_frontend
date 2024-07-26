@@ -3,6 +3,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import './../../styles/MypageEdit.css'
 import edit_modal from './../../assets/Personal_Edit.png'
+import config from '../../../config';
 
 const MypageUserModal = ({ setIsModalOpen }) => {
     const handleCloseClick = () => {
@@ -18,10 +19,14 @@ const MypageUserModal = ({ setIsModalOpen }) => {
     const [personalVisible, setPersonalVisible] = useState(false);
     const [companyVisible, setCompanyVisible] = useState(false);
 
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
+
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`/api/personal/${userId}`);
+                const response = await api.get(`/api/personal/${userId}`);
                 const { personalVisible, companyVisible, personalCareer, user } = response.data;
                 setPersonalVisible(personalVisible);
                 setCompanyVisible(companyVisible);
@@ -48,7 +53,7 @@ const MypageUserModal = ({ setIsModalOpen }) => {
 
             console.log("Update data:", updateData); // 콘솔 로그 추가
 
-            await axios.put(`/api/personal/${userId}`, updateData);
+            await api.put(`/api/personal/${userId}`, updateData);
             setIsModalOpen(false);
             alert("수정사항이 저장되었습니다.")
         } catch (error) {

@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import axios from "axios";
 import UserProfile from "./UserProfile";
 import Layout from "../../common/layout/layout";
+import config from "../../config";
 
 // 이름 마스킹 함수
 const maskName = (name) => {
@@ -16,6 +17,10 @@ const maskName = (name) => {
   }
   return name;
 };
+
+const api = axios.create({
+  baseURL: config.baseURL
+});
 
 export default function PickZoneUserDetail() {
   const { loggedInUserId, personalId } = useParams();
@@ -34,7 +39,7 @@ export default function PickZoneUserDetail() {
     setIsCompany(userType === "COMPANY");
 
     // pickDetail에서 왼쪽에 회원정보 가져오는 axios
-    axios
+    api
       .get(`/api/personal/pickcards/${loggedInUserId}/${personalId}`)
       .then((response) => {
         const maskedUserCard = {
@@ -47,7 +52,7 @@ export default function PickZoneUserDetail() {
         console.log("Error fetching user details: ", error);
       });
     // pickDetail에서 resume 데이터 가져오는 axios
-    axios
+    api
       .get(`/api/personal/pickresume/${personalId}`)
       .then((response) => {
         const maskedUserResume = {

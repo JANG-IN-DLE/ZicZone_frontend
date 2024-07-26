@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './../../styles/TechDropdown.css';
+import config from '../../../config';
 
 const TechDropdown = ({ selectedItems, handleTechSelect, filter }) => {
     const [techList, setTechList] = useState([]);
 
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
+
     useEffect(() => {
-        axios.get('http://localhost:12000/api/signup/techs')
+        api.get('http://localhost:12000/api/signup/techs')
             .then(response => {
                 setTechList(response.data);
             })

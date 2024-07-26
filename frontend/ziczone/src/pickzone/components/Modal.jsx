@@ -4,6 +4,7 @@ import Modalstyle from "../styles/Modal.module.css";
 import berry from "../../common/card/assets/berry.png";
 import axios from "axios";
 import helpModal from "../../helpzone/assets/helpModal.png";
+import config from "../../config";
 
 const Modal = ({
   isOpen,
@@ -24,6 +25,10 @@ const Modal = ({
       return;
     }
 
+    const api = axios.create({
+      baseURL: config.baseURL
+    });
+
     const openCardData = {
       sellerId: selectedCard.personalId,
       buyerId: loggedInUserId,
@@ -31,7 +36,7 @@ const Modal = ({
       payHistoryDate: new Date().toISOString(),
     };
 
-    axios
+    api
       .post("/api/personal/open-card", openCardData)
       .then((response) => {
         if (response.status === 200) {

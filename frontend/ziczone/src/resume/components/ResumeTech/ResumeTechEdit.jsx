@@ -5,6 +5,7 @@ import TechDropdown from "./../ResumeDropdown/TechStackDropdown";
 import useDropdown from './../../hooks/useDropdown';
 import useFilter from "../../hooks/useFilter";
 import dropdown from "./../../assets/Dropdown.png";
+import config from "../../../config";
 
 const ResumeTechEdit = ({ setTech }) => {
     const [dropdownVisible, toggleDropdown] = useDropdown(false);
@@ -14,8 +15,12 @@ const ResumeTechEdit = ({ setTech }) => {
     const userId = localStorage.getItem("userId");
     const dropdownRef = useRef(null);
 
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
+
     useEffect(() => {
-        axios.get(`/api/personal/resumes/user/${userId}`)
+        api.get(`/api/personal/resumes/user/${userId}`)
             .then(response => {
                 const techs = response.data.techStacks.map(stack => ({
                     techId: stack.tech.techId,

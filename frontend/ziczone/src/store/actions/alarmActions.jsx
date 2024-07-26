@@ -1,4 +1,6 @@
 import axios from 'axios';
+import config from '../../config';
+
 
 export const setAlarms = (alarms) => ({
   type: 'SET_ALARMS',
@@ -21,13 +23,17 @@ export const setUnread = (unread) => ({
 
 export const readAlarm = () => ({
   type: 'READ_ALARM'
-})
+});
+
+const api = axios.create({
+  baseURL: config.baseURL
+});
 
 //읽음처리
 export const readAllAlarms = (userId, token, unread) => async (dispatch) => {
   if(unread){
     try {
-      await axios.post(`/sse/readAlarm/${userId}`, {}, {
+      await api.post(`/sse/readAlarm/${userId}`, {}, {
         headers: {
           Authorization: token,
         },
@@ -43,7 +49,7 @@ export const readAllAlarms = (userId, token, unread) => async (dispatch) => {
 
 export const initAlarm = (userId, token) => async (dispatch, getState) => {
   try {
-    const response = await axios.get(`/sse/initAlarm/${userId}`, {
+    const response = await api.get(`/sse/initAlarm/${userId}`, {
       headers: {
         Authorization: token,
       },
@@ -62,7 +68,7 @@ export const initAlarm = (userId, token) => async (dispatch, getState) => {
 
 export const subscribeToSSE = (userId, token) => (dispatch) => {
     //localhost안적어주면 알림안옴이슈
-  const eventSource = new EventSource(`http://localhost:12000/sse/subscribe/${userId}?token=${token}`);
+  const eventSource = new EventSource(`http://223.130.159.46:12000/sse/subscribe/${userId}?token=${token}`);
 
   eventSource.addEventListener("alarm", function (e) {
     const alarm = JSON.parse(e.data);

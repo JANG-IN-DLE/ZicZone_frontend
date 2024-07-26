@@ -4,6 +4,7 @@ import '../../styles/MypageEdit.css';
 import company_edit from './../../assets/Logo_Edit.png';
 import { FormProvider } from './../../../join/components/FormContext';
 import AddressInput from './AddressInput';
+import config from '../../../config';
 
 const MypageCompanyModal = ({ setIsModalOpen }) => {
     const handleCloseClick = () => {
@@ -19,10 +20,14 @@ const MypageCompanyModal = ({ setIsModalOpen }) => {
     const [changePassword, setChangePassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
+
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`/api/company/${userId}`);
+                const response = await api.get(`/api/company/${userId}`);
                 const { user, companyAddr, companyLogoUrl } = response.data;
                 setUserName(user.userName);
                 setIntro(user.userIntro);
@@ -61,7 +66,7 @@ const MypageCompanyModal = ({ setIsModalOpen }) => {
         }
 
         try {
-            const response = await axios.put(`/api/company/${userId}`, formData, {
+            const response = await api.put(`/api/company/${userId}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },

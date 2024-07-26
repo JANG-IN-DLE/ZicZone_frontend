@@ -13,6 +13,7 @@ import PickZoneTitlestyle from "../styles/PickZoneTitle.module.css";
 import NonCardstyle from "../styles/NonCard.module.css";
 import Layout from "../../common/layout/layout";
 import ScrollToTop from "../../common/ScrollToTop/ScrollToTop";
+import config from "../../config";
 
 // 이름 마스킹 함수
 const maskName = (name) => {
@@ -42,11 +43,15 @@ function UserPickzone() {
   const loggedInUserId = localStorage.getItem("userId");
   const userRole = localStorage.getItem("userRole");
 
+  const api = axios.create({
+    baseURL: config.baseURL
+  });
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         // PickCards 데이터 가져옴
-        const pickCardsResponse = await axios.get(
+        const pickCardsResponse = await api.get(
           `/api/personal/pickcards?loggedInUserId=${loggedInUserId}`
         );
         const maskedData = pickCardsResponse.data.map((card) => ({
@@ -56,7 +61,7 @@ function UserPickzone() {
         setPickCards(maskedData);
 
         // Jobs 데이터를 가져옴
-        const jobsResponse = await axios.get("/api/jobs");
+        const jobsResponse = await api.get("/api/jobs");
         setJobs([{ jobId: "all", jobName: "전체" }, ...jobsResponse.data]);
       } catch (error) {
         console.error("Error fetching data: ", error);

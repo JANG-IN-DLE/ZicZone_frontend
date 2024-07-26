@@ -14,6 +14,7 @@ import ResumeArchiveEdit from "./ResumeArchive/ResumeArchiveEdit";
 import ResumeIntroductionEdit from "./ResumeIntroduction/ResumeIntroductionEdit";
 import ResumePortfolioEdit from "./ResumePortfolio/ResumePortfolioEdit";
 import Layout from "../../common/layout/layout";
+import config from "../../config";
 
 // import dayjs from 'dayjs';
 
@@ -31,12 +32,16 @@ const ResumeEdit = () => {
     const [introduction, setIntroduction] = useState({ fileName: '', file: null });
     const [portfolio, setPortfolio] = useState([]);
 
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
+  
     const navigate = useNavigate();
 
     // console.log("privacy: " + JSON.stringify(privacy));
 
     const handleDelete = () => {
-        axios.delete(`/api/personal/resumes/${userId}`)
+        api.delete(`/api/personal/resumes/${userId}`)
             .then(response => {
                 alert("삭제되었습니다.");
                 // 삭제 후 원하는 페이지로 이동할 수 있습니다.
@@ -137,7 +142,7 @@ const ResumeEdit = () => {
             formData.append("personalState", introduction.file);
         }
 
-        axios.put(`/api/personal/resumes/${userId}/update`, formData)
+        api.put(`/api/personal/resumes/${userId}/update`, formData)
             .then(response => {
                 alert("저장되었습니다.");
                 navigate(`/personal/resumes/view/${userId}`);

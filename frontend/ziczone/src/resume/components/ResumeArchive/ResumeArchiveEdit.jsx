@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./../../styles/ResumeArchive.css";
 import ResumeArchiveInputEdit from "./ResumeArchiveInputEdit";
+import config from '../../../config';
 
 const ResumeArchiveEdit = ({ setArchive }) => {
     const userId = localStorage.getItem("userId");
@@ -12,9 +13,13 @@ const ResumeArchiveEdit = ({ setArchive }) => {
         blog: ''
     });
 
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
+
     useEffect(() => {
         // 서버로부터 데이터 가져오기
-        axios.get(`/api/personal/resumes/user/${userId}`)
+        api.get(`/api/personal/resumes/user/${userId}`)
             .then(response => {
                 const data = response.data.archive;
                 const updatedData = {

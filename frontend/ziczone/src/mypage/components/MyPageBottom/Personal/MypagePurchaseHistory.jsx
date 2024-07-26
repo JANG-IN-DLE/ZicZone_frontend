@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import MypageUserPurchase from './MypageUserPurchase';
 import PageButton from '../PageButton';
+import config from '../../../../config';
 
 const MypagePurchaseHistory = () => {
     const userId = localStorage.getItem('userId');
@@ -9,8 +10,12 @@ const MypagePurchaseHistory = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 4; // 한 페이지당 컴포넌트 4개
 
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
+
     useEffect(() => {
-        axios.get(`/api/personal/purchased/${userId}`)
+        api.get(`/api/personal/purchased/${userId}`)
             .then(response => {
                 setPurchaseData(response.data.personalUsers);
             })

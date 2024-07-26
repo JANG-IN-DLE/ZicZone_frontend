@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import MypageHistoryBar from "./MypageHistoryBar";
+import config from "../../../config";
 
 const MypageBerryHistory = () => {
     const userId = localStorage.getItem("userId");
     const [historyData, setHistoryData] = useState([]);
 
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
+
     useEffect(() => {
         const fetchBerryHistory = async () => {
             try {
-                const response = await axios.post(`http://localhost:12000/api/payments/personal/points/${userId}`);
+                const response = await api.post(`/api/payments/personal/points/${userId}`);
                 const payment = response.data.payment;
                 const payHistory = response.data.payHistory;
 

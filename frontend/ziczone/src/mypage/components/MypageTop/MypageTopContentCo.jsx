@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import MypageTopCo from "./MypageTopCo";
 import axios from "axios";
+import config from "../../../config";
 
 const MypageTopContentCo = () => {
     const userId = localStorage.getItem('userId')
@@ -8,8 +9,12 @@ const MypageTopContentCo = () => {
         companyLogo: ""
     })
 
+    const api = axios.create({
+        baseURL: config.baseURL
+    });
+
     useEffect(() => {
-        axios.get(`/api/company/${userId}`)
+        api.get(`/api/company/${userId}`)
             .then(response => {
                 setTopData({
                     companyLogo: response.data.companyLogoUrl

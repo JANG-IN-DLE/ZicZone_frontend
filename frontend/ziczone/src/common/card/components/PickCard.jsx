@@ -4,18 +4,23 @@ import {useNavigate} from "react-router-dom";
 import PickCardCommstyle from '../styles/PickCardComm.module.css';
 import scrapImg from "../assets/scrap.svg";
 import unscrapImg from "../assets/unscrap.svg";
+import config from '../../../config';
 
 
 const PickCard = ({onClick, userImage, jobNames=[], userName, userCareer, userIntro, techUrls=[], personalId, isScrap, isCompany}) => {
     // scrap 여부를 확인하는 hook
     const [scrap, setScrap] = useState(isScrap);
 
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
+
     const handleScrapClick = async (e) => {
         e.stopPropagation();
         try{
             const userId = localStorage.getItem("userId");
             // 보낼 때 userName뿐만 아니라 지금 로그인한 회원 Id까지 보내야할 것 같아. companyId는 임시로 1
-            const response = await axios.post('/api/company/scrap', { personalId, userId });
+            const response = await api.post('/api/company/scrap', { personalId, userId });
             if(response.status === 200) {
                 setScrap(!scrap);
             }

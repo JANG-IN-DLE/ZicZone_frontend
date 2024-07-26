@@ -4,6 +4,7 @@ import MypageUserPick from './MypageUserPick'
 import PageButton from '../PageButton'
 import Modal from '../../../../companyzone/components/CompanyzoneModal'
 import "./../../../../helpzone/styles/PageButton.css"
+import config from '../../../../config';
 
 const MypagePickHistory = () => {
         const userId = localStorage.getItem('userId')
@@ -12,8 +13,12 @@ const MypagePickHistory = () => {
         const [selectedItem, setSelectedItem] = useState(null);
         const itemsPerPage = 4; // 한 페이지당 컴포넌트 4개
 
+        const api = axios.create({
+                baseURL: config.baseURL
+              });
+  
         useEffect(() => {
-                axios.get(`/api/personal/picks/${userId}`)
+                api.get(`/api/personal/picks/${userId}`)
                         .then(response => {
                                 setPickData(response.data);
                         })

@@ -10,6 +10,7 @@ import PageButton from "./PageButton";
 import BerryCheck from "./BerryCheck";
 import ConfirmModal from "./ConfirmModal";
 import Layout from "../../common/layout/layout";
+import config from "../../config";
 
 const ListBoard = () => {
   const [boards, setBoards] = useState([]);
@@ -24,10 +25,14 @@ const ListBoard = () => {
   const [userPoint, setUserPoint] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const api = axios.create({
+    baseURL: config.baseURL
+  });
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("/api/user/board/filter", {
+        const response = await api.get("/api/user/board/filter", {
           params: {
             filterType,
             page,
@@ -56,7 +61,7 @@ const ListBoard = () => {
     if (userId) {
       const fetchUserPoint = async () => {
         try {
-          const response = await axios.get(`/api/personal/board/myProfile/${userId}`);
+          const response = await api.get(`/api/personal/board/myProfile/${userId}`);
           setUserPoint(response.data.berryPoint);
         } catch (error) {
           console.error("포인트 정보를 가져오는 중 오류 발생: ", error);
