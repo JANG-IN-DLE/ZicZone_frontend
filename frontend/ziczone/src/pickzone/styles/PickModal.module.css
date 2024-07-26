@@ -21,7 +21,7 @@
   
   .sm_modal_content {
     position: absolute;
-    top: 50%;
+    top: 51%;
     left: 50%;
     transform: translate(-50%, -50%);
     display: flex;
@@ -38,7 +38,7 @@
     text-align: center;
   }
   .sm_modal_content_2 {
-    margin-top: 5px;
+    margin-top: 2px;
     font-size: 12px;
     font-family: 'Pretendard-Regular';
     color: #989898;
