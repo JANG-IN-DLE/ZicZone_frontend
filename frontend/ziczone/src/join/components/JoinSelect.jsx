@@ -14,7 +14,7 @@ const JoinSelect = () => {
 
   const personaltag = {
     title: "개인 회원",
-    explain: "직존에서 취뽀 어쩌궁,,",
+    explain: "취업 준비 중이신가요?",
     onClick: () => navigate("/signup-per"),
   };
 
