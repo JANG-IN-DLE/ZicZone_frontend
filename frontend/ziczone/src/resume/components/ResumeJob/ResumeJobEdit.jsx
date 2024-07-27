@@ -4,20 +4,28 @@ import "./../../styles/ResumeJob.css";
 import JobDropdown from "../ResumeDropdown/JobDropdown";
 import useDropdown from './../../hooks/useDropdown';
 import dropdown from "./../../assets/Dropdown.png";
+import config from "../../../config";
 
 const ResumeJobEdit = ({ setJob }) => {
-    const [dropdownVisible, toggleDropdown, selectedItems, updateSelectedItems] = useDropdown(false);
+    const [dropdownVisible, toggleDropdown] = useDropdown(false);
+    const [selectedItems, setSelectedItems] = useState([]);
     const [jobPositions, setJobPositions] = useState([]);
     const userId = localStorage.getItem("userId");
     const dropdownRef = useRef(null);
 
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
+
     useEffect(() => {
-        axios.get(`/api/personal/resumes/${userId}`)
+        api.get(`/api/personal/resumes/user/${userId}`)
             .then(response => {
-                const positions = response.data.jobPositions.map(position => position.job.jobName);
+                const positions = response.data.jobPositions.map(position => ({
+                    jobId: position.job.jobId,
+                    jobName: position.job.jobName
+                }));
                 setJobPositions(positions);
-                // API에서 가져온 값을 selectedItems에 반영
-                updateSelectedItems(positions);
+                setSelectedItems(positions);
             })
             .catch(error => {
                 console.error("Error fetching job positions", error);
@@ -47,9 +55,9 @@ const ResumeJobEdit = ({ setJob }) => {
                 <p className="job_title">개발 직무</p>
                 {selectedItems && selectedItems.length > 0 && (
                     <div className="selected_job_container">
-                        {selectedItems.map((job, index) => (
-                            <div key={index} className="selected_job">
-                                {job}
+                        {selectedItems.map((job) => (
+                            <div key={job.jobId} className="selected_job">
+                                {job.jobName}
                             </div>
                         ))}
                     </div>
@@ -62,9 +70,8 @@ const ResumeJobEdit = ({ setJob }) => {
                 </div>
                 {dropdownVisible && (
                     <JobDropdown 
-                        jobPositions={jobPositions}
                         selectedItems={selectedItems} 
-                        updateSelectedItems={updateSelectedItems} 
+                        setSelectedItems={setSelectedItems}
                     />
                 )}
             </div>

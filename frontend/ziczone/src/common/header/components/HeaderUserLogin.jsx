@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import "./../styles/UserLogin.css";
 import dropdown from "../assets/Dropdown.png";
-import alarm from "../assets/Alarm.png";
 import useDropdown from "../hooks/useDropdown";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import AlarmList from "./Alarm";
 
 const UserLogin = ({ userName, onLogout }) => {
@@ -14,8 +12,8 @@ const UserLogin = ({ userName, onLogout }) => {
   return (
     <>
       <div className="user_login" ref={dropdownRef}>
-        <AlarmList/>
-        <div className="user_login_name">
+        <AlarmList />
+        <div className="user_login_name" onClick={Dropdown}>
           {userName}
           <div className={`dropdown_list ${open ? "show" : ""}`}>
             <div className="list1">
@@ -27,9 +25,9 @@ const UserLogin = ({ userName, onLogout }) => {
               </Link>
             </div>
           </div>
-        </div>
-        <div className="dropdown" onClick={Dropdown}>
-          <img src={dropdown} alt="Dropdown" />
+          <div className="dropdown">
+            <img src={dropdown} alt="Dropdown" />
+          </div>
         </div>
       </div>
     </>

@@ -6,6 +6,7 @@ import maleImg from "./../../../../common/card/assets/personal_m_image.png";
 import femaleImg from "./../../../../common/card/assets/personal_f_image.png";
 import axios from 'axios';
 import { Link } from "react-router-dom";
+import config from "../../../../config";
 
 const MypageCompScrap = ({ gender, jobPositions, userName, personalCareer, userIntro, techStacks, isScrap, personalId, companyId }) => {
     const [isScrapped, setIsScrapped] = useState(true); // 초기 스크랩 상태를 true로 설정
@@ -18,10 +19,14 @@ const MypageCompScrap = ({ gender, jobPositions, userName, personalCareer, userI
 
     const jobNames = jobPositions.split(", ").map(job => job.trim());
 
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
+
     const handleScrapClick = async (e) => {
         e.stopPropagation(); // 이벤트 전파를 막아 Link 동작을 막음
         try {
-            const response = await axios.post('/api/company/scrap', { personalId, userId });
+            const response = await api.post('/api/company/scrap', { personalId, userId });
 
             if (response.status === 200) {
                 setScrapStatus(!scrapStatus);

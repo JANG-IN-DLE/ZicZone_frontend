@@ -20,25 +20,19 @@
 
 .profile_card {
     width: 290px;
-    height: 432px;
-    border: 1px solid #ccc;
     border-radius: 32px;
     text-align: center;
-    border-image-source: linear-gradient(123.89deg,
-  rgba(170, 170, 170, 0.3) 9.82%,
-  rgba(170, 170, 170, 0.05) 32.32%,
-  rgba(170, 170, 170, 0.2) 61.65%,
-  rgba(170, 170, 170, 0.05) 90.18%);
-    box-shadow: 5px 5px 20px 0px rgba(0, 0, 0, 0.15),
-    4px 4px 4px 0px rgba(255, 255, 255, 0.1) inset;
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
+    box-shadow: 5px 5px 20px 0px rgba(0, 0, 0, 0.15);
     margin-top: 120px;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    position: relative;
 }
 .scrap_button{
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 136px;
+    right: 26px;
     background: none;
     border: none;
     cursor: pointer;
@@ -49,10 +43,18 @@
     margin-bottom: 10px;
 }
 
+.pc_jobs_group{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 244px;
+    margin-top: 32px;
+    gap: 4px;
+}
+
 .pc_jobs {
-    font-size: 11px;
+    font-size: 12px;
     color: #0051BA;
-    margin-top: 40px;
     font-weight: bold;
 }
 
@@ -102,7 +104,7 @@
     width: 244px;
     font-size: 13px;
     margin: 0 auto;
-    margin-top: 20px;
+    margin-top: 8px;
     color: #989898;
 }
 
@@ -111,14 +113,14 @@
     flex-flow: row;
     flex-wrap: wrap;
     align-items: flex-start;
-    justify-content: flex-start;
+    justify-content: center;
     width: 244px;
-    height: auto;
     margin: 0 auto;
-    margin-top: 15px;
+    gap: 4px;
+    margin-top: 16px;
+    margin-bottom: 32px;
 }
 .tech_icon{
-    height: 32px;
+    height: 28px;
     width: auto;
-    margin: 1px;
 }

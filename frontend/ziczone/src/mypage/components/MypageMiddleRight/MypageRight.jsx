@@ -27,7 +27,7 @@ const MypageRight = ({ berry_point }) => {
                             <div>나의 베리🫐</div>
                             <div className="mypage_user_point">{berry_point}</div>
                         </div>
-                        <Link to="/charge" style={{textDecoration: "none"}}>
+                        <Link to="/charge" target="_blank" style={{textDecoration: "none"}}>
                         <div className="mypage_user_charge">
                             <div>베리 충전하기 🫐</div>
                         </div>

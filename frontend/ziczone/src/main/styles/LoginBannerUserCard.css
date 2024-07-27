@@ -101,7 +101,7 @@
       width: 70px;
       /* border: 0.5px solid #0051BA; */
       border-radius: 40px;
-      margin-top: 50px;
+      margin-top: 20px;
       background-color: white;
       display: flex;
       align-items: center;
@@ -114,19 +114,54 @@
     }
 
     .login_user_name{
-      margin-top: 25px;
+      margin-top: 10px;
       font-size: 18px;
     }
-    .login_user_email{
+    .login_user_email,
+    .login_user_intro{
       color: #B3B3B3;
       font-size: 14px;
+      margin-top: 5px;
     }
-    .main_mypage{
-    margin-top: 40px;
+
+    .login_user_intro{ 
+      width: 200px;
+      height: 50px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+      text-align: center;
+    }
+
+    .main_mypage,
+    .main_logout{
     font-size: 18px;
+    font-size: 16px;
+    width: 150px;
+    height: 30px;
+    border-radius: 12px;
+    margin-top: 15px;
+    display: flex; /* Flexbox 컨테이너로 설정 */
+    justify-content: center; /* 가로 중앙 정렬 */
+    align-items: center; /* 세로 중앙 정렬 */
+    cursor: pointer;
+    }
+
+    .main_mypage{
+      background-color: #0051BA;
+    }
+
+    .main_logout{
+      border: solid 0.5px #0051BA;
     }
     
     .main_mypage p {
+      color: white;
+    }
+
+    .main_logout p{
       color: black;
     }
 
@@ -220,3 +255,10 @@
   }
 
 }
+    .main_mypage:active{
+    transform: scale(0.97);
+    }
+
+    .main_logout:active{
+    transform: scale(0.97);
+    }

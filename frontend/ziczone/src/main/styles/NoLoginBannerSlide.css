@@ -10,6 +10,7 @@
       padding: 0;
       margin: 0;
       display: flex;
+      width: 9999px; /* 매우 큰 값으로 설정하여 JS에서 제어 */
       transition: 0.4s ease-in-out;
       border-radius: 8px;
     }

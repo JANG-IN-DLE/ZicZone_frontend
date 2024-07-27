@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 import "./../../styles/CheckPassword.css"
 import axios from "axios";
+import config from '../../../config';
 
 const CheckPassword = ({ setIsModalOpen, onSuccess }) => {
     const [currentPassword, setCurrentPassword] = useState("");
     const userId = localStorage.getItem("userId");
     const userRole = localStorage.getItem("userRole");
+
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
 
     const handleCloseClick = () => {
         setIsModalOpen(false);
@@ -13,7 +18,7 @@ const CheckPassword = ({ setIsModalOpen, onSuccess }) => {
     
     const confirmPassword = () => {
 
-        axios.post(`/api/user/pw/${userId}`, {
+        api.post(`/api/user/pw/${userId}`, {
                 password: currentPassword,
                 role: userRole
         })

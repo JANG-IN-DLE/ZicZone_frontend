@@ -5,6 +5,7 @@ import personal_m_image from "../../../common/card/assets/personal_m_image.png";
 import "../../styles/comment/CommentItem.css";
 import selectIcon from "../../assets/selectIcon.png";
 import ConfirmModal from "../ConfirmModal";
+import config from '../../../config';
 
 // 특정 날짜와 현재 시간의 차이 계산 -> 상대적인 시간 반환
 export const getRelativeTime = (dateString) => {
@@ -36,6 +37,10 @@ const CommentItem = ({ comment, board, userId, selectedCommentId, onCommentUpdat
 
     const personal_image = comment.gender === 'MALE' ? personal_m_image : personal_f_image;
 
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
+
     const maskName = (name) => {
         if (name.length < 2) return name;
         if (name.length === 2) {
@@ -58,7 +63,7 @@ const CommentItem = ({ comment, board, userId, selectedCommentId, onCommentUpdat
 
     const handleSaveClick = async () => {
         try {
-            const response = await axios.put(`/api/personal/comments/${comment.commId}/${userId}`, {
+            const response = await api.put(`/api/personal/comments/${comment.commId}/${userId}`, {
                 commContent: editComment,
                 corrId: comment.corrId
             });
@@ -73,7 +78,7 @@ const CommentItem = ({ comment, board, userId, selectedCommentId, onCommentUpdat
 
     const handleDeleteClick = async () => {
         try {
-            await axios.delete(`/api/personal/comments/${comment.commId}/${userId}`);
+            await api.delete(`/api/personal/comments/${comment.commId}/${userId}`);
             onCommentDeleted(comment.commId);
         } catch (error) {
             console.error("댓글 삭제 실패:", error.response ? error.response.data : error.message);
@@ -82,7 +87,7 @@ const CommentItem = ({ comment, board, userId, selectedCommentId, onCommentUpdat
 
     const handleSelectClick = async () => {
         try {
-            const response = await axios.post(`/api/personal/comments/${comment.commId}/select`, {}, {
+            const response = await api.post(`/api/personal/comments/${comment.commId}/select`, {}, {
                 params: { userId: userId }
             });
             if (response.status === 200) {
@@ -115,7 +120,7 @@ const CommentItem = ({ comment, board, userId, selectedCommentId, onCommentUpdat
                     <img src={selectIcon} alt="채택완료핀" />
                     <p>채택된 댓글</p>
                     <div>
-                        {board.corrPoint} 베리
+                        {comment.corrPoint} 베리
                     </div>
                 </div>
             )}

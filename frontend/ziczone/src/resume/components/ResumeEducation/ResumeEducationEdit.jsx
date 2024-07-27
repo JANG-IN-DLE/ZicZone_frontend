@@ -3,18 +3,23 @@ import axios from "axios";
 import "./../../styles/ResumeEducation.css";
 import plus_btn from "./../../assets/Plus_btn.png";
 import ResumeEducationInputEdit from "./ResumeEducationInputEdit";
+import config from '../../../config';
 
 const ResumeEducationEdit = ({ setEducation }) => {
     const userId = localStorage.getItem("userId")
     const [inputs, setInputs] = useState([]);
     const [educationList, setEducationList] = useState([]);
 
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
+      
     useEffect(() => {
         // 서버로부터 데이터 가져오기
-        axios.get(`/api/personal/resumes/${userId}`)
+        api.get(`/api/personal/resumes/user/${userId}`)
             .then(response => {
                 const data = response.data.educations.map(edu => ({
-                    id: edu.edu_id,
+                    id: edu.eduId,
                     date: edu.eduDate,
                     history: edu.edu,
                     scorePoint: edu.credit.split('/')[0],

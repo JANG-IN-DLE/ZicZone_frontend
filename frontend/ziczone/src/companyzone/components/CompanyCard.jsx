@@ -1,6 +1,4 @@
-import { useState, useEffect } from "react";
-import com_logo1 from "../../main/company_logo/img_1.svg";
-import axios from "axios";
+
 const CompanyCard = ({ onCardClick, companyLogo, userName, userIntro }) => {
   return (
     <>

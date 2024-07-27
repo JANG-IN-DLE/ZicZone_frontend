@@ -16,6 +16,7 @@
 .comp_login_name {
     font-size: 18px;
     position: relative;
+    display: flex;
 }
 
 .dropdown {

@@ -2,6 +2,9 @@ import React from "react";
 import { BrowserRouter, Router, Routes, Link } from "react-router-dom";
 import footer from "../assets/Footer.png";
 import github from "../assets/GitHub.png";
+import notion from "../assets/Notion.png";
+import figma from "../assets/Figma.png";
+import slack from "../assets/Slack.png";
 import award from "../assets/Award.png";
 import "./../styles/Footer.css";
 
@@ -28,26 +31,26 @@ const Footer = () => {
             <li>Copyright ⓒ 장인들. All rights reserved.</li>
           </div>
           <div className="footer_link">
+              <Link to="https://github.com/JANG-IN-DLE">
             <li>
-              {/* <Link to="/"></Link> */}
               <img src={github} alt="Github" />
             </li>
+            </Link>
+              <Link to="https://www.notion.so/b493265bc4a34d48b4cf09b194a5ce85?v=68cfec235bf14faa9deb0887b9182cab&pvs=4">
             <li>
-              {/* <Link to="/"></Link> */}
-              <img src={github} alt="Github" />
+              <img src={notion} alt="Github" />
             </li>
+            </Link>
+              <Link to="https://www.figma.com/design/vlG01D5qQTAgKAG8A2xN7O/%EC%A7%81%EC%A1%B4?node-id=874-6999&t=cdlUOiFDi7RrTerb-1">
             <li>
-              {/* <Link to="/"></Link> */}
-              <img src={github} alt="Github" />
+              <img src={figma} alt="Github" />
             </li>
+            </Link>
+            <Link to="https://app.slack.com/client/T0774D3L2QG/C07612QT1LP">
             <li>
-              {/* <Link to="/"></Link> */}
-              <img src={github} alt="Github" />
+              <img src={slack} alt="Github" />
             </li>
-            <li>
-              {/* <Link to="/"></Link> */}
-              <img src={github} alt="Github" />
-            </li>
+            </Link>
           </div>
           <div className="footer_award">
             <li>
@@ -56,18 +59,20 @@ const Footer = () => {
           </div>
         </div>
         <div className="footer_center">
+            <Link to="/ziczoneIntro">
           <li>
-            {/* <Link to="/"></Link> */}
             서비스 소개
           </li>
+          </Link>
           <li>
             {/* <Link to="/"></Link> */}
             장인들Team
           </li>
+            <Link to="/servicepolicy">
           <li>
-            {/* <Link to="/"></Link> */}
             서비스 정책
           </li>
+          </Link>
         </div>
         <div className="footer_right">
           <li>

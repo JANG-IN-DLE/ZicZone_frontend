@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import MypageLeft from "./MypageLeft";
+import config from '../../../config';
 
 function MypageLeftContent() {
     const userId = localStorage.getItem('userId')
@@ -13,8 +14,12 @@ function MypageLeftContent() {
         techStacks: [],
     });
 
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
+
     useEffect(() => {
-        axios.get(`/api/personal/${userId}`)
+        api.get(`/api/personal/${userId}`)
             .then(response => {
                 const jobPositions = response.data.jobPositions.map(position => position.job.jobName).join(", ");
                 const techStacks = response.data.techStacks.map(stack => ({

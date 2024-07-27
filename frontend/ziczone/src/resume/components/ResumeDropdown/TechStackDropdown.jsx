@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './../../styles/TechDropdown.css';
+import config from '../../../config';
 
-const TechDropdown = ({ selectedItems, updateSelectedItems, filter }) => {
+const TechDropdown = ({ selectedItems, handleTechSelect, filter }) => {
     const [techList, setTechList] = useState([]);
 
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
+
     useEffect(() => {
-        axios.get('http://localhost:12000/api/signup/techs')
+        api.get('/api/signup/techs')
             .then(response => {
                 setTechList(response.data);
             })
@@ -15,22 +20,25 @@ const TechDropdown = ({ selectedItems, updateSelectedItems, filter }) => {
             });
     }, []);
 
-    const handleCheckboxChange = (tech) => {
-        if (selectedItems.some(item => item.techId === tech.techId)) {
-            // 최소 하나 이상 선택하도록 막음
-            if (selectedItems.length > 1) {
-                updateSelectedItems(selectedItems.filter(item => item.techId !== tech.techId));
-            } else {
-                alert("최소 한 개 이상의 기술 스택을 선택하셔야 합니다.");
-            }
-        } else if (selectedItems.length < 7) {
-            updateSelectedItems([...selectedItems, tech]);
-        }
-    };
-
     const filteredTech = techList.filter(tech =>
         tech.techName.toLowerCase().includes(filter.toLowerCase())
     );
+
+    const handleCheckboxChange = (tech) => {
+        const isSelected = selectedItems.some(item => item.techId === tech.techId);
+
+        if (isSelected) {
+            // Allow deselection if more than 1 item is selected
+            if (selectedItems.length > 1) {
+                handleTechSelect(tech);
+            }
+        } else {
+            // Allow selection if less than 7 items are selected
+            if (selectedItems.length < 7) {
+                handleTechSelect(tech);
+            }
+        }
+    };
 
     return (
         <div className="tech_dropdown_list">

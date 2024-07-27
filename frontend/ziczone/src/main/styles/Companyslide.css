@@ -12,13 +12,10 @@
         object-fit: contain; /* 이미지가 박스에 딱 맞게 들어갈 수 있도록 */
         }
 
-
         .company_slide_container {
         position: relative;
         display: flex;
         align-items: center;
-        /* justify-content: center; */
-        /* margin: 80px auto; */
         width: 1080px;
         height: 100px;
         overflow: hidden;
@@ -83,3 +80,54 @@
         }
     }
 }
+        /* 0에서 100 */
+        
+        @keyframes aniScrollReverse {
+        0% {
+            transform: translateX(-100%)
+        }
+
+        100% {
+            transform: translateX(0%)
+        }
+        }
+
+        @keyframes aniScrollReverse-2 {
+        0% {
+            transform: translateX(0%)
+        }
+
+        100% {
+            transform: translateX(100%)
+        }
+        }
+
+        .company_slide_container_left {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 1080px;
+        height: 100px;
+        overflow: hidden;
+
+        
+        ul {
+            position: absolute;
+            display: flex;
+            gap: 0 40px;
+            width: max-content;
+            animation: aniScrollReverse 25s linear infinite;
+
+            /* 2번째 <ul> 태그에 애니메이션 넣기 */
+            &.list2 {
+            animation: aniScrollReverse-2 25s linear infinite;
+            }
+
+            li {
+            list-style: none;
+            width: 180px;
+            height: 90px;
+            
+            }
+        }
+        }

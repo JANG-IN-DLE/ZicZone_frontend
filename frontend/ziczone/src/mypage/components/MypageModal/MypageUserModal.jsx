@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
+import styled from 'styled-components';
 import './../../styles/MypageEdit.css'
 import edit_modal from './../../assets/Personal_Edit.png'
+import config from '../../../config';
 
 const MypageUserModal = ({ setIsModalOpen }) => {
     const handleCloseClick = () => {
@@ -17,10 +19,14 @@ const MypageUserModal = ({ setIsModalOpen }) => {
     const [personalVisible, setPersonalVisible] = useState(false);
     const [companyVisible, setCompanyVisible] = useState(false);
 
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
+
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`/api/personal/${userId}`);
+                const response = await api.get(`/api/personal/${userId}`);
                 const { personalVisible, companyVisible, personalCareer, user } = response.data;
                 setPersonalVisible(personalVisible);
                 setCompanyVisible(companyVisible);
@@ -47,7 +53,7 @@ const MypageUserModal = ({ setIsModalOpen }) => {
 
             console.log("Update data:", updateData); // 콘솔 로그 추가
 
-            await axios.put(`/api/personal/${userId}`, updateData);
+            await api.put(`/api/personal/${userId}`, updateData);
             setIsModalOpen(false);
             alert("수정사항이 저장되었습니다.")
         } catch (error) {
@@ -97,7 +103,7 @@ const MypageUserModal = ({ setIsModalOpen }) => {
                     </div>
                     <div className="edit_password_right">
                         <div className="edit_password_input">
-                            <label><input type="password" placeholder="현재 비밀번호" value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} /></label>
+                            <label><input type="password" className="right_password_red" placeholder="현재 비밀번호(* 필수)" value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} /></label>
                             <label><input type="password" placeholder="변경할 비밀번호(8~16자 영문, 숫자, 특수기호 포함)" value={changePassword} onChange={(e) => setChangePassword(e.target.value)} /></label>
                             <label><input type="password" placeholder="비밀번호 확인" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} /></label>
                         </div>

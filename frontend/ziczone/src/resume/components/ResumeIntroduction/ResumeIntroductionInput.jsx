@@ -10,7 +10,9 @@ const ResumeIntroductionInput = ({ setFile }) => {
         handleButtonClick,
         handleFileChange,
         handleClearFile,
-    } = useFileUpload(setFile);
+    } = useFileUpload((file) => {
+        setFile(file);
+    });
 
     return (
         <div className="resume_introduction_upload">

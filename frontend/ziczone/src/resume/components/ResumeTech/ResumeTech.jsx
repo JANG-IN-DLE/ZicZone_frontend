@@ -32,6 +32,14 @@ const ResumeTech = ({ setTech }) => {
         toggleDropdown(true);
     };
 
+    const handleTechSelect = (tech) => {
+        const isSelected = selectedItems.some(item => item.techId === tech.techId);
+        const newSelectedItems = isSelected
+            ? selectedItems.filter(item => item.techId !== tech.techId)
+            : [...selectedItems, tech];
+        updateSelectedItems(newSelectedItems);
+    };
+
     return (
         <div className="resume_tech">
             <div className="resume_tech_title">
@@ -50,7 +58,7 @@ const ResumeTech = ({ setTech }) => {
                 <div className="tech_select" onClick={() => toggleDropdown(!dropdownVisible)}>
                     <input 
                         type="text" 
-                        placeholder="기술 스택을 선택해주세요."
+                        placeholder="기술 스택을 선택해주세요. (최대 7개까지 선택 가능)"
                         value={filter}
                         onChange={(e) => setFilter(e.target.value)}
                         onClick={handleInputClick}
@@ -60,7 +68,7 @@ const ResumeTech = ({ setTech }) => {
                 {dropdownVisible && (
                     <TechDropdown
                         selectedItems={selectedItems}
-                        updateSelectedItems={updateSelectedItems}
+                        handleTechSelect={handleTechSelect}
                         filter={filter}
                     />
                 )}

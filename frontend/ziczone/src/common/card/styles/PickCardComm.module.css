@@ -7,23 +7,33 @@
     line-height: 25px;
     margin: 40px auto;
 }
+@media (max-width: 767px) {
+    .user_card_container {
+        grid-template-columns: repeat(1, 1fr);
+        column-gap: 20px;
+        row-gap: 20px;
+        padding: 0 10px;
+        justify-content: center;
+    }
+}
 .user_card {
     width: 510px;
     height: 210px;
     border-radius: 32px;
-    border-image-source: linear-gradient(123.89deg,
-  rgba(170, 170, 170, 0.3) 9.82%,
-  rgba(170, 170, 170, 0.05) 32.32%,
-  rgba(170, 170, 170, 0.2) 61.65%,
-  rgba(170, 170, 170, 0.05) 90.18%);
-    box-shadow: 5px 5px 20px 0px rgba(0, 0, 0, 0.15),
-    4px 4px 4px 0px rgba(255, 255, 255, 0.1) inset;
+    box-shadow: 5px 5px 20px 0px rgba(0, 0, 0, 0.15);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     display: flex;
     /* scrap 붙이기 위해서 */
     position: relative;
     cursor: pointer;
+}
+@media (max-width: 767px) {
+    .user_card {
+        width: 490px;
+        height: 160px;
+        margin: 0 auto;
+    }
 }
 
 .scrap_button{
@@ -34,11 +44,20 @@
     border: none;
     cursor: pointer;
 }
+
 .scrap_button img {
     width: 24px;
     height: 24px;
     margin-right: 20px;
     margin-top: 10px;
+}
+@media (max-width: 767px) {
+    .scrap_button img{
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+        margin-top: 5px;
+    }
 }
 
 .pick_user_image_container {
@@ -47,34 +66,68 @@
     margin-top: 40px;
     margin-left: 30px;
 }
+@media (max-width: 767px) {
+    .pick_user_image_container {
+        margin-top: 0;
+        margin-top: 10px;
+    }
+}
 .pick_user_image{
-    width: 100%;
-    height: auto;
+    height: 100%;
 }
 .pick_user_info{
-    margin-top: 20px;
+    margin-top: 24px;
     margin-left: 25px;
+}
+@media (max-width: 767px) {
+    .pick_user_info {
+        margin-top: 10px;
+    }
 }
 .pick_user_job{
     font-size: 13px;
     color: #0051BA;
+    display: flex;
+    gap: 5px;
 }
 .pick_user_name,
 .pick_user_career{
-    font-size: 18px;
+    font-size: 20px;
 }
+
 .pick_user_intro{
-    font-size: 13px;
+    font-size: 14px;
     color: #B3B3B3;
-    width: 300px;
-    height: 50px;
+    margin-top: 4px;
+    width: 352px;
+    height:44px;
+    line-height: 18px;
+}
+@media(max-width: 767px) {
+    .pick_user_intro {
+        font-size: 12px;
+        height: auto;
+    }
 }
 .pick_user_tech{
     display: flex;
     flex-wrap: wrap;
+    width: 352px;
     gap: 6px;
+    margin-top: 4px;
+}
+@media (max-width: 767px) {
+    .pick_user_tech{
+        width: 100%;
+    }
 }
 .tech_icon{
     height: 21px;
     object-fit: cover;
+}
+
+@media(max-width: 767px) {
+    .tech_icon {
+        height: 18px;
+    }
 }

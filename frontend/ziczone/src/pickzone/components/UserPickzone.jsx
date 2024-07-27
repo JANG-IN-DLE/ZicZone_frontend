@@ -12,6 +12,8 @@ import PickMeTitle from "../assets/pickZoneTitle.png";
 import PickZoneTitlestyle from "../styles/PickZoneTitle.module.css";
 import NonCardstyle from "../styles/NonCard.module.css";
 import Layout from "../../common/layout/layout";
+import ScrollToTop from "../../common/ScrollToTop/ScrollToTop";
+import config from "../../config";
 
 // 이름 마스킹 함수
 const maskName = (name) => {
@@ -41,11 +43,15 @@ function UserPickzone() {
   const loggedInUserId = localStorage.getItem("userId");
   const userRole = localStorage.getItem("userRole");
 
+  const api = axios.create({
+    baseURL: config.baseURL
+  });
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         // PickCards 데이터 가져옴
-        const pickCardsResponse = await axios.get(
+        const pickCardsResponse = await api.get(
           `/api/personal/pickcards?loggedInUserId=${loggedInUserId}`
         );
         const maskedData = pickCardsResponse.data.map((card) => ({
@@ -55,7 +61,7 @@ function UserPickzone() {
         setPickCards(maskedData);
 
         // Jobs 데이터를 가져옴
-        const jobsResponse = await axios.get("/api/jobs");
+        const jobsResponse = await api.get("/api/jobs");
         setJobs([{ jobId: "all", jobName: "전체" }, ...jobsResponse.data]);
       } catch (error) {
         console.error("Error fetching data: ", error);
@@ -65,7 +71,7 @@ function UserPickzone() {
   }, [loggedInUserId]);
 
   const handleCardClick = (card) => {
-    if (card.payHistoryId && card.payHistoryId.length > 0) {
+    if (card.userId === parseInt(loggedInUserId) || (card.payHistoryId && card.payHistoryId.length > 0)) {
       navigate(`/pickzone/${loggedInUserId}/${card.personalId}`);
     } else {
       setSelectedCard(card);
@@ -97,6 +103,21 @@ function UserPickzone() {
     }
   };
 
+  useEffect(() => {
+    const handleMessage = (event) => {
+      if (event.data === 'paymentComplete') {
+        setIsOpen(false);
+        window.location.reload();
+      }
+    };
+
+    window.addEventListener('message', handleMessage);
+
+    return () => {
+      window.removeEventListener('message', handleMessage);
+    };
+  }, []);
+
   // 선택된 job이 있으면 pickcard의 job과 일치하는 것 걸러서 보여줄거야
   const filteredPickCards = selectedJobs.includes("전체")
     ? pickCards
@@ -121,6 +142,7 @@ function UserPickzone() {
   return (
     <div>
       <Layout>
+        <ScrollToTop />
         <div className={PickZoneTitlestyle.pick_zone_intro}>
           <div className={PickZoneTitlestyle.pzi_title}>
             <p>PICK ME</p>

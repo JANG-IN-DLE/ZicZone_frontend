@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import config from "../../config";
 
 const usePostForm = (initialBerry = 100, initialData = {}, userId, corrId, isEditMode, onSubmitSuccess) => {
     const [selectedBerry, setSelectedBerry] = useState(initialBerry);
@@ -10,6 +11,10 @@ const usePostForm = (initialBerry = 100, initialData = {}, userId, corrId, isEdi
     const [userPoint, setUserPoint] = useState(0);
     const [existingFile, setExistingFile] = useState(initialData.file || null);
 
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
+
     useEffect(() => {
         setSelectedBerry(initialData.berry || initialBerry);
         setTitle(initialData.title || '');
@@ -18,7 +23,7 @@ const usePostForm = (initialBerry = 100, initialData = {}, userId, corrId, isEdi
 
         const fetchUserPoint = async () => {
             try {
-                const response = await axios.get(`/api/personal/board/myProfile/${userId}`);
+                const response = await api.get(`/api/personal/board/myProfile/${userId}`);
                 setUserPoint(response.data.point);
             } catch (error) {
                 console.error('사용자 포인트를 가져오는 중 오류 발생:', error);
@@ -74,12 +79,12 @@ const usePostForm = (initialBerry = 100, initialData = {}, userId, corrId, isEdi
         try {
             setIsSubmitting(true);
             const response = isEditMode
-                ? await axios.put(`/api/personal/board/${corrId}/${userId}`, formData, {
+                ? await api.put(`/api/personal/board/${corrId}/${userId}`, formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }
                 })
-                : await axios.post('/api/personal/board/post', formData, {
+                : await api.post('/api/personal/board/post', formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }

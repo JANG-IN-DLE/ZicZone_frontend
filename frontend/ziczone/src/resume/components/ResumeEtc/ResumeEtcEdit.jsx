@@ -3,15 +3,20 @@ import axios from "axios";
 import "./../../styles/ResumeEtc.css";
 import plus_btn from "./../../assets/Plus_btn.png";
 import ResumeEtcInputEdit from "./ResumeEtcInputEdit";
+import config from '../../../config';
 
 const ResumeEtcEdit = ({ setEtc }) => {
     const userId = localStorage.getItem("userId")
     const [inputs, setInputs] = useState([]);
     const [etcList, setEtcList] = useState([]);
 
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
+
     useEffect(() => {
         // 서버로부터 데이터 가져오기
-        axios.get(`/api/personal/resumes/${userId}`)
+        api.get(`/api/personal/resumes/user/${userId}`)
             .then(response => {
                 const data = response.data.etcs.map(etc => ({
                     id: etc.etcId,

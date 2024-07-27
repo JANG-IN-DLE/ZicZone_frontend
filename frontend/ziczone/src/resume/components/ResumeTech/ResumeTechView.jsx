@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./../../styles/ResumeTech.css";
+import config from "../../../config";
 
 const ResumeTechView = () => {
     const userId = localStorage.getItem('userId');
     const [techUrls, setTechUrls] = useState([]);
 
+    const api = axios.create({
+        baseURL: config.baseURL
+    });
+
     useEffect(() => {
-        axios.get(`/api/personal/resumes/user/${userId}`)
+        api.get(`/api/personal/resumes/user/${userId}`)
             .then(response => {
                 const techStacks = response.data.techStacks || [];
                 const urls = techStacks.map(stack => stack.tech.techUrl);
@@ -25,7 +30,9 @@ const ResumeTechView = () => {
                 {techUrls && techUrls.length > 0 && (
                     <div className="pk_resume_tech_container">
                         {techUrls.map((tech, index) => (
-                            <img key={index} className="pk_resume_tech" src={tech} alt={`Tech${index}`} />
+                            <div key={index} className="selected_tech">
+                                <img src={tech} alt={`Tech${index}`} />
+                            </div>
                         ))}
                     </div>
                 )}

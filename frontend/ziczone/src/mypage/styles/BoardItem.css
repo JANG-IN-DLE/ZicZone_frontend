@@ -28,6 +28,9 @@
 .item_title {
     font-size: 18px;
     display: flex;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .bi_selected_comment {

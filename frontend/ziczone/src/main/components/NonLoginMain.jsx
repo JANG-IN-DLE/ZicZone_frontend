@@ -7,6 +7,7 @@ import personalFImage from "../../common/card/assets/personal_f_image.png";
 import PickZoneJobstyle from "../../pickzone/styles/PickZoneJob.module.css";
 import Modal from "../../pickzone/components/Modal";
 import PickCardCommstyle from "../../common/card/styles/PickCardComm.module.css";
+import config from "../../config";
 
 const NonLoginMain = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -14,14 +15,21 @@ const NonLoginMain = () => {
   const [pickCards, setPickCards] = useState([]);
   const navigate = useNavigate(); // useNavigate 훅 사용
 
-  axios
-    .get("/api/pickcards")
-    .then((response) => {
-      setPickCards(response.data);
-    })
-    .catch((error) => {
-      console.error("Error fetching pick cards: ", error);
-    });
+  const api = axios.create({
+    baseURL: config.baseURL
+  });
+
+  useEffect(() => {
+    api
+      .get("/api/pickcards")
+      .then((response) => {
+        setPickCards(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching pick cards: ", error);
+      });
+  }, []);
+
   const handleCardClick = () => {
     navigate("/login"); // 로그인 페이지로 이동
   };
@@ -36,7 +44,6 @@ const NonLoginMain = () => {
     const end = name[name.length - 1];
     return `${start}${"*".repeat(maskedLength)}${end}`;
   };
-
   return (
     <>
       <div>

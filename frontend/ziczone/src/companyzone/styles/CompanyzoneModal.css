@@ -79,7 +79,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin: -35px;
+      margin: -40px;
     }
 
     .com_logo_img {
@@ -114,12 +114,12 @@
     .modal_com_intro {
       display: -webkit-box;
       -webkit-box-orient: vertical; /* 수직 방향으로 설정 */
-      -webkit-line-clamp: 2; /* 표시할 줄 수 설정 */
+      -webkit-line-clamp: 3; /* 표시할 줄 수 설정 */
       width: 420px;
-      font-size: 14px;
+      font-size: 13px;
       color: #b3b3b3;
       margin-top: 5px;
-      line-height: 1.5;
+      line-height: 1;
       height: 40px;
       overflow: hidden; /* 넘치는 텍스트 숨기기 */
       text-overflow: ellipsis; /* 넘치는 텍스트를 '...'으로 표시 */
@@ -128,7 +128,7 @@
     .com_info {
       margin-top: 0px;
       width: 420px;
-      height: 400px;
+      height: 330px;
       font-weight: 500;
       
     }
