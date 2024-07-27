@@ -23,3 +23,17 @@
 .non_login_btn:active {
     transform: scale(0.97);
 }
+
+@media (max-width:767px) {
+    .non_login_btn {
+    width: 60px;
+    height: 25px;
+    border: 0.5px solid #ababab;
+    border-radius: 32px;
+    font-size: 14px;
+    cursor: pointer;
+    background-color: #fff;
+    margin-left: 0px;
+    margin-right: -25px;
+}
+}

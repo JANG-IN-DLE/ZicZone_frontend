@@ -24,9 +24,18 @@
             font-family: 'Pretendard-Regular';
         }
 
-        .main_container {
+        .com_main_container {
             margin: auto;
             padding-top: 140px;
             width: 1080px;
             padding-bottom: 140px;
         }
+
+@media (max-width:767px) {
+            .com_main_container {
+            margin: auto;
+            padding-top: 70px;
+            width: 375px;
+            padding-bottom: 70px;
+        }
+}

@@ -56,3 +56,46 @@
 .list2{
     border-radius: 0 0 8px 8px ;
 }
+
+@media (max-width: 767px) {
+    .user_login {
+    display: flex;
+    align-items: center;
+    flex: none;
+}
+
+.user_login_alarm {
+    display: flex;
+    align-items: center;
+    margin-right: 5px;
+}
+
+.user_login_name {
+    font-size: 12px;
+    position: relative;
+}
+
+.dropdown {
+    margin-left: 0px;
+    cursor: pointer;
+}
+
+.user_login_alarm_bellimg{
+    width: 10px;
+    height: 25px;
+}
+
+.dropdown_list {
+    display: none;
+    position: absolute;
+    top: 20px;
+    left: -20px;
+    margin-left: -5px;
+}
+
+
+.list1,
+.list2{
+    font-size: 12px;
+}
+}

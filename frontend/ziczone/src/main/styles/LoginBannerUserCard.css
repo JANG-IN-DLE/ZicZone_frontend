@@ -129,3 +129,94 @@
     .main_mypage p {
       color: black;
     }
+
+@media(max-width: 767px) {
+        .login_wrap {
+      position: relative;
+      width: 100%;
+      max-width: 400px;
+      height: 320px;
+      text-align: left;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+    }
+
+    .login_wrap ul {
+      padding: 0;
+      margin: 0;
+      display: flex;
+      transition: 0.4s ease-in-out;
+      border-radius: 0px;
+      width: 100%;
+    }
+
+    .login_wrap li {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      cursor: pointer;
+      border-radius: 8px;     
+    }
+
+  .login_slide_item {
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 400px;
+    height: 250px;
+    box-sizing: border-box;
+    background-size: cover;
+  }
+
+    .slide_text {
+      height: 200px;
+      width: 320px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding-left: 70px;
+      margin-top: 30px;
+      align-items: flex-start;
+      left: 120px;
+      color: white;
+    }
+
+    .slide_in_text {
+      left: 120px;
+      color: white;
+      font-size: 24px;
+      font-weight: 900;
+      margin: 0;
+    }
+
+    .slide_in_text_sub{
+      color: white;
+      font-size: 20px;
+      font-weight: 900;
+      margin: 0;
+    }
+
+
+    .arrow {
+      display: inline-block;
+      width: 35px;
+      height: 35px;
+      position: absolute;
+      top: 35%;
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    .arrow.left {
+      left: 30px;
+
+    }
+    .arrow.right {
+      right: 30px;
+    }
+
+  .login_user_card {
+    display: none;
+  }
+
+}

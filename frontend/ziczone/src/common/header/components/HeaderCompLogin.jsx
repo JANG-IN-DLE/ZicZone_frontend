@@ -7,7 +7,7 @@ import axios from "axios";
 
 const CompLogin = ({ companyLogo, userName, onLogout }) => {
   const { open, Dropdown, dropdownRef } = useDropdown();
-  const userId = localStorage.getItem("userId")
+  const userId = localStorage.getItem("userId");
 
   return (
     <div className="comp_login" ref={dropdownRef}>
