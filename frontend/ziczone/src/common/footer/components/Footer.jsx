@@ -12,7 +12,7 @@ const Footer = () => {
   return (
     <div className="footer">
       <ul className="footer_list">
-        <div>
+        <div className="footer_zz_img">
           <img src={footer} alt="footer_logo" />
         </div>
         <div className="footer_left">
@@ -77,11 +77,9 @@ const Footer = () => {
         <div className="footer_right">
           <li>
             {/* <Link to="/"></Link> */}
-              <b>개인정보처리방침</b>
+            <b>개인정보처리방침</b>
           </li>
-          <li>
-            {/* <Link to="/">자주받는 질문 FAQ</Link> */}
-          </li>
+          <li>{/* <Link to="/">자주받는 질문 FAQ</Link> */}</li>
         </div>
       </ul>
     </div>

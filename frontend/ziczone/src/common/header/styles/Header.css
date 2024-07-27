@@ -53,4 +53,65 @@
     font-weight: bold;
     color: #0051ba;
   }
-  
+
+@media (max-width: 767px){
+
+    .header {
+    height: 60px;
+    border-bottom: none;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    z-index: 999;
+    background-color: #fff;
+}
+
+
+.header_nav {
+    position: static;
+    width: 375px;
+    display: flex;
+    background-color: #ffffff;
+    margin: 0 100px;
+    justify-content: center;
+}
+
+.header_logo {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    margin-left: -20px;
+}
+.header_logo img {
+    width: 40px;
+    height: 30px;
+    }
+
+.header_nav a {
+    text-decoration: none;
+    color: #000;
+}
+
+.header_nav_list {
+    list-style: none;
+}
+
+.header_nav_list div {
+    margin-right: 12px;
+    font-size: 13px;
+}
+
+.login_component_div{
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+.header_nav .active {
+    font-weight: bold;
+    color: #0051ba;
+  }
+  .mobile_hide{
+    display: none;
+  }
+}

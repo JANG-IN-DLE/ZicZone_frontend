@@ -73,3 +73,16 @@
 .list2{
     border-radius: 0 0 8px 8px ;
 }
+
+@media (max-width: 767px){
+    .list1,
+    .list2{
+    font-size: 12px;
+}
+.comp_login_name {
+    font-size: 14px;
+}
+.dropdown {
+    margin-left: 5px;
+}
+}

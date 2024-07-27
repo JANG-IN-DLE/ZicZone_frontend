@@ -36,7 +36,7 @@ const NoLoginBannerSlide = () => {
 
   useEffect(() => {
     const slide = document.querySelector(".slide");
-    const slideItems = document.querySelectorAll(".slide_item");
+    const slideItems = document.querySelectorAll(".no_slide_item");
     const prevButton = document.getElementById("prev");
     const nextButton = document.getElementById("next");
     const totalSlides = slideItems.length;
@@ -107,28 +107,40 @@ const NoLoginBannerSlide = () => {
     <>
       <div className="wrap">
         <div
-          className="arrow left"
+          className="no_arrow left"
           id="prev"
           style={{ background: "url(" + left + ")" }}
         ></div>
         <div
-          className="arrow right"
+          className="no_arrow right"
           id="next"
           style={{ background: "url(" + right + ")" }}
         ></div>
         <ul className="slide">
           <li
-            className="slide_item"
-            style={{
-              background: `url(${slideItems[slideItems.length - 1].src})`,
-            }}
+            className="no_slide_item"
+            style={{ background: "url(" + slidImage1 + ")" }}
           >
-            <div className="slide_text">
-              <p className="slide_in_text">
-                {slideItems[slideItems.length - 1].text}
-              </p>
-              <p className="slide_in_text_sub">
-                {slideItems[slideItems.length - 1].subText}
+            <Link to="/ziczoneintro" style={{ textDecoration: "none" }}>
+              <div className="no_slide_text">
+                <p className="no_slide_in_text">직존</p>
+                <p className="no_slide_in_text_sub">
+                  기업이 인재를 채용하는 서비스
+                </p>
+              </div>
+            </Link>
+          </li>
+          <li
+            className="no_slide_item"
+            style={{ background: "url(" + slidImage2 + ")" }}
+            onClick={() =>
+              window.open("https://www.youtube.com/watch?v=sTF55z2i5zI&t=9s")
+            }
+          >
+            <div className="no_slide_text">
+              <p className="no_slide_in_text">다큐프라임 보러가기</p>
+              <p className="no_slide_in_text_sub">
+                인공지능 AI 발전으로 우리는 생존을 위해 무엇을 준비해야하나
               </p>
             </div>
           </li>
@@ -157,12 +169,12 @@ const NoLoginBannerSlide = () => {
             </li>
           ))}
           <li
-            className="slide_item"
-            style={{ background: `url(${slideItems[0].src})` }}
+            className="no_slide_item"
+            style={{ background: "url(" + slidImage3 + ")" }}
+            onClick={() => window.open("https://www.ncloud.com/")}
           >
-            <div className="slide_text">
-              <p className="slide_in_text">{slideItems[0].text}</p>
-              <p className="slide_in_text_sub">{slideItems[0].subText}</p>
+            <div className="no_slide_text">
+              <p className="no_slide_in_text">네이버 클라우드 바로가기</p>
             </div>
           </li>
         </ul>

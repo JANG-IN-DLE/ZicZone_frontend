@@ -11,6 +11,7 @@
         height: 70px;
         object-fit: contain; /* 이미지가 박스에 딱 맞게 들어갈 수 있도록 */
         }
+
         .company_slide_container {
         position: relative;
         display: flex;
@@ -63,6 +64,22 @@
         }
         }
 
+@media (max-width : 767px) {
+        .company_slide_container {
+        position: relative;
+        display: flex;
+        align-items: center;
+        /* justify-content: center; */
+        /* margin: 80px auto; */
+        width: 375px;
+        height: 100px;
+        overflow: hidden;
+
+        ul {
+            gap: 0 10px;
+        }
+    }
+}
         /* 0에서 100 */
         
         @keyframes aniScrollReverse {

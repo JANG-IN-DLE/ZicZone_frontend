@@ -134,17 +134,18 @@ const Header = () => {
         <div className="header_nav_list">
           <div className="header_pick_zone">
             <div>
+
             {localStorage.getItem('userRole') === "COMPANY" ? (
                 <NavLink to="/companypick" activeClassName="active">
-                  PICK존
+                  PICK<span className="mobile_hide">존</span>
                 </NavLink>
               ) : localStorage.getItem('userRole') === "PERSONAL" ? (
                 <NavLink to="/personalpick" activeClassName="active">
-                  PICK존
+                  PICK<span className="mobile_hide">존</span>
                 </NavLink>
               ) : (
                 <NavLink to="/personalpick">
-                  PICK존
+                  PICK<span className="mobile_hide">존</span>
                 </NavLink>
               )}
 
@@ -153,14 +154,14 @@ const Header = () => {
           <div className="header_help_zone">
             <div>
               <NavLink to="/helpzone" activeClassName="active">
-                HELP존
+                HELP<span className="mobile_hide">존</span>
               </NavLink>
             </div>
           </div>
           <div className="header_company_zone">
             <div>
               <NavLink to="/companyzone" activeClassName="active">
-                COMPANY존
+                COMPANY<span className="mobile_hide">존</span>
               </NavLink>
             </div>
           </div>

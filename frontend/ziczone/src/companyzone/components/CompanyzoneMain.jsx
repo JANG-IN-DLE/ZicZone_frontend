@@ -38,7 +38,7 @@ const CompanyzoneMain = () => {
 
   return (
     <Layout>
-      <div className="main_container">
+      <div className="com_main_container">
         <ScrollToTop />
         <CompanyHeader />
         <div className="company_container">
