@@ -15,6 +15,11 @@
     margin-bottom: 10px;
     padding-top: 140px;
 }
+@media(max-width: 767px){
+    .pick_zone_intro {
+        margin: 0 auto;
+    }
+}
 
 .pzi_title {
    display: flex;
@@ -28,6 +33,11 @@
     margin-bottom: 0px;
     text-shadow: 2px 2px 4px rgba(61, 61, 61, 0.5);
 }
+@media(max-width: 767px){
+    .pzi_title > p{
+        font-size: 24px;
+    }
+}
 
 .pzi_title > img {
     width: 40px;
@@ -36,10 +46,23 @@
     margin-left: 10px;
 }
 
+@media(max-width: 767px){
+    .pzi_title > img {
+        width: 24px;
+        height: 24px;
+        margin-left: 5px;
+    }
+}
+
 .pzi_sub {
     font-family: 'Pretendard-Regular';
     font-size: 16px;
     color: #5D5D5D;
     text-align: center;
     margin-top: 5px;
+}
+@media(max-width: 767px){
+    .pzi_sub{
+        font-size: 12px;
+    }
 }
