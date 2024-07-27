@@ -7,6 +7,13 @@
     width: 920px;
     margin: 30px auto;
 }
+@media(max-width: 767px) {
+    .jobs{
+        width: 100%;
+        margin: 20px auto;
+        padding: 0 10px;
+    }
+}
 
 .jobs>.jobcom{
     background-color: #E6EEF9;
@@ -17,6 +24,13 @@
     border-radius: 52px;
     margin-right: 20px;
     margin-bottom: 10px;
+}
+@media (max-width: 767px){
+    .jobs > .jobcom {
+        font-size: 12px;
+        margin-right: 10px;
+        padding: 6px 12px;
+    }
 }
 
 .jobs>.jobcom:hover{

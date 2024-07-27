@@ -7,6 +7,15 @@
     line-height: 25px;
     margin: 40px auto;
 }
+@media (max-width: 767px) {
+    .user_card_container {
+        grid-template-columns: repeat(1, 1fr);
+        column-gap: 20px;
+        row-gap: 20px;
+        padding: 0 10px;
+        justify-content: center;
+    }
+}
 .user_card {
     width: 510px;
     height: 210px;
@@ -19,6 +28,13 @@
     position: relative;
     cursor: pointer;
 }
+@media (max-width: 767px) {
+    .user_card {
+        width: 490px;
+        height: 160px;
+        margin: 0 auto;
+    }
+}
 
 .scrap_button{
     position: absolute;
@@ -28,11 +44,20 @@
     border: none;
     cursor: pointer;
 }
+
 .scrap_button img {
     width: 24px;
     height: 24px;
     margin-right: 20px;
     margin-top: 10px;
+}
+@media (max-width: 767px) {
+    .scrap_button img{
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+        margin-top: 5px;
+    }
 }
 
 .pick_user_image_container {
@@ -41,12 +66,23 @@
     margin-top: 40px;
     margin-left: 30px;
 }
+@media (max-width: 767px) {
+    .pick_user_image_container {
+        margin-top: 0;
+        margin-top: 10px;
+    }
+}
 .pick_user_image{
     height: 100%;
 }
 .pick_user_info{
     margin-top: 24px;
     margin-left: 25px;
+}
+@media (max-width: 767px) {
+    .pick_user_info {
+        margin-top: 10px;
+    }
 }
 .pick_user_job{
     font-size: 13px;
@@ -58,6 +94,7 @@
 .pick_user_career{
     font-size: 20px;
 }
+
 .pick_user_intro{
     font-size: 14px;
     color: #B3B3B3;
@@ -66,6 +103,12 @@
     height:44px;
     line-height: 18px;
 }
+@media(max-width: 767px) {
+    .pick_user_intro {
+        font-size: 12px;
+        height: auto;
+    }
+}
 .pick_user_tech{
     display: flex;
     flex-wrap: wrap;
@@ -73,7 +116,18 @@
     gap: 6px;
     margin-top: 4px;
 }
+@media (max-width: 767px) {
+    .pick_user_tech{
+        width: 100%;
+    }
+}
 .tech_icon{
     height: 21px;
     object-fit: cover;
+}
+
+@media(max-width: 767px) {
+    .tech_icon {
+        height: 18px;
+    }
 }
