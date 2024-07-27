@@ -16,7 +16,6 @@ const useProfileImage = () => {
             const imageUrl = URL.createObjectURL(file);
             setProfile(imageUrl);
             updateFormData('companyLogo', file); // 파일 자체를 저장
-            console.log(formData);
         }
     };
 

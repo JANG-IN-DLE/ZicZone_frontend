@@ -15,7 +15,6 @@ const useActiveJobs = (maxActiveJobs = 0, type) => {
     });  
 
     useEffect(() => {
-    // console.log(process);
         api.get('/api/jobs')
             .then(response => {
                 setJobs(response.data);

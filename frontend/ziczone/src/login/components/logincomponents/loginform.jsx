@@ -97,7 +97,6 @@ const LoginForm = ({
 
         if (user) {
           // 구독 및 초기화 작업 수행
-          console.log('Dispatching setUser with:', user);
           dispatch(setUser(user));
           dispatch(subscribeToSSE(user.userId, token));
           dispatch(initAlarm(user.userId, token));
@@ -112,7 +111,6 @@ const LoginForm = ({
       }
     } catch (error) {
       if (error.response && error.response.status === 401) {
-        console.log("로그인 실패: 이메일이나 비밀번호가 일치하지 않습니다.");
         setLoginFail("loginworng");
       } else {
         console.error("로그인 오류:", error);
