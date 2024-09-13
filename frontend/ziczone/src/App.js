@@ -53,7 +53,7 @@ function App() {
 
   useEffect(() => {
     if (userId && token) {
-      dispatch(initAlarm(userId, token));
+      // dispatch(initAlarm(userId, token));
       dispatch(subscribeToSSE(userId, token));
     }
   }, [dispatch, userId, token]);

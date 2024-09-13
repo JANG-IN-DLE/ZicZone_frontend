@@ -68,7 +68,7 @@ export const initAlarm = (userId, token) => async (dispatch, getState) => {
 
 export const subscribeToSSE = (userId, token) => (dispatch) => {
     //localhost안적어주면 알림안옴이슈
-  const eventSource = new EventSource(`http://223.130.159.46:12000/sse/subscribe/${userId}?token=${token}`);
+  const eventSource = new EventSource(`http://localhost:12000/sse/subscribe/${userId}?token=${token}`);
 
   eventSource.addEventListener("alarm", function (e) {
     const alarm = JSON.parse(e.data);
