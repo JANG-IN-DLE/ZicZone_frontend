@@ -93,6 +93,9 @@ const Header = () => {
 
     if (userId && token && userRole === "PERSONAL") {
       try {
+        localStorage.removeItem("token");
+        localStorage.removeItem("userId");
+        localStorage.removeItem("userRole");
         await api.post(
           `/sse/logout/${userId}`,
           {},
@@ -102,9 +105,6 @@ const Header = () => {
             },
           }
         );
-        localStorage.removeItem("token");
-        localStorage.removeItem("userId");
-        localStorage.removeItem("userRole");
       } catch (error) {
         console.error("Logout failed:", error);
       }
