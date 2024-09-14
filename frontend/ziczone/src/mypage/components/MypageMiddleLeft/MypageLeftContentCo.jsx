@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
+import axios from 'axios';
 import MypageLeftCo from "./MypageLeftCo";
-import api from '../../../common/config/axiosInstance';
+import config from '../../../config';
 
 function MypageLeftContentCo() {
     const userId = localStorage.getItem('userId')
@@ -11,6 +12,10 @@ function MypageLeftContentCo() {
         companyAddr: "",
         email: "",
     });
+
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
 
     useEffect(() => {
         api.get(`/api/company/${userId}`)

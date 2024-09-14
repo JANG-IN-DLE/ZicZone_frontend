@@ -5,7 +5,7 @@ import emailIcon from "./../../assets/Email.png";
 import phoneIcon from "./../../assets/Phone.png";
 import birthdateIcon from "./../../assets/Birthdate.png";
 import useUploadImage from "../../hooks/useUploadImage";
-import api from '../../../common/config/axiosInstance';
+import config from '../../../config';
 
 const ResumePrivacyEdit = ({ setPrivacy }) => {
     const userId = localStorage.getItem("userId")
@@ -15,6 +15,10 @@ const ResumePrivacyEdit = ({ setPrivacy }) => {
     const [resumePhone, setResumePhone] = useState('');
     const [resumeBirth, setResumeBirth] = useState('');
     const { imageSrc, isImageUploaded, handleImageChange, handleDeleteImage, imageFile, setImageSrc, setIsImageUploaded } = useUploadImage();
+
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
 
     useEffect(() => {
         api.get(`/api/personal/resumes/user/${userId}`)

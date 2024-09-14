@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import PickCard from "../../common/card/components/PickCard";
 import personalMImage from "../../common/card/assets/personal_m_image.png";
 import personalFImage from "../../common/card/assets/personal_f_image.png";
 import PickZoneJobstyle from "../../pickzone/styles/PickZoneJob.module.css";
 import Modal from "../../pickzone/components/Modal";
 import PickCardCommstyle from "../../common/card/styles/PickCardComm.module.css";
-import api from "../../common/config/axiosInstance";
-
+import config from "../../config";
 
 // 이름 마스킹 함수
 const maskName = (name) => {
@@ -40,6 +40,10 @@ function UserPickzone() {
   const [userName, setUserName] = useState([]);
   const [userEmail, setUserEmail] = useState([]);
   const [userImg, setUserImg] = useState([]);
+
+  const api = axios.create({
+    baseURL: config.baseURL
+  });
 
   useEffect(() => {
     const fetchData = async () => {

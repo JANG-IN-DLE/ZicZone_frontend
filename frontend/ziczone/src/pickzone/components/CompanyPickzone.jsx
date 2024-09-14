@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import Job from "./Job";
 import PickCard from "../../common/card/components/PickCard";
 import personalMImage from "../../common/card/assets/personal_m_image.png";
@@ -11,7 +12,7 @@ import PickCardCommstyle from "../../common/card/styles/PickCardComm.module.css"
 import NonCardstyle from "../styles/NonCard.module.css";
 import Layout from "../../common/layout/layout";
 import ScrollToTop from "../../common/ScrollToTop/ScrollToTop";
-import api from "../../common/config/axiosInstance";
+import config from "../../config";
 
 // 이름 마스킹 함수
 const maskName = (name) => {
@@ -40,6 +41,9 @@ function CompanyPickzone() {
   const loggedInUserId = localStorage.getItem("userId");
   const userRole = localStorage.getItem("userRole");
 
+  const api = axios.create({
+    baseURL: config.baseURL
+  });
 
   useEffect(() => {
     const fetchData = async () => {

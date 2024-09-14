@@ -5,7 +5,7 @@ import email from "./../../assets/Email.png";
 import phone from "./../../assets/Phone.png";
 import birthdate from "./../../assets/Birthdate.png";
 import useUploadImage from "../../hooks/useUploadImage";
-import api from '../../../common/config/axiosInstance';
+import config from '../../../config';
 
 const ResumePrivacy = ({ setPrivacy }) => {
     const { imageSrc, isImageUploaded, handleImageChange, handleDeleteImage, imageFile } = useUploadImage();
@@ -14,6 +14,10 @@ const ResumePrivacy = ({ setPrivacy }) => {
     const [resumeEmail, setResumeEmail] = useState('');
     const [resumePhone, setResumePhone] = useState('');
     const [resumeDate, setResumeBirth] = useState('');
+
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
 
     useEffect(() => {
         // 데이터베이스에서 값을 불러오는 비동기 함수

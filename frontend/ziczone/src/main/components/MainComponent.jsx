@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../styles/MainMain.css";
 import NoLoginBannerSlide from "./NoLoginBannerSlide";
 import LoginBannerUserCard from "./LoginBannerUserCard";
+import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import Layout from "../../common/layout/layout";
@@ -10,8 +11,7 @@ import CompanyMain from "../components/CompanyMain";
 import NonLoginMain from "../components/NonLoginMain";
 import PersonalMain from "../components/PersonalMain";
 import CompanySildeLeft from "../../main/components/CompanySilde_left";
-import api from "../../common/config/axiosInstance";
-
+import config from "../../config";
 
 const MainComponent = ({ board }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -23,6 +23,10 @@ const MainComponent = ({ board }) => {
   const [size, setSize] = useState(8);
   const [banner, setBanner] = useState([]);
   const navigate = useNavigate();
+
+  const api = axios.create({
+    baseURL: config.baseURL
+  });
 
   useEffect(() => {
     fetchHelpZones();

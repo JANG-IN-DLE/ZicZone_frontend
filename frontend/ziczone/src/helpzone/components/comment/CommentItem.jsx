@@ -1,10 +1,11 @@
 import React, { useState } from "react";
+import axios from "axios";
 import personal_f_image from "../../../common/card/assets/personal_f_image.png";
 import personal_m_image from "../../../common/card/assets/personal_m_image.png";
 import "../../styles/comment/CommentItem.css";
 import selectIcon from "../../assets/selectIcon.png";
 import ConfirmModal from "../ConfirmModal";
-import api from '../../../common/config/axiosInstance';
+import config from '../../../config';
 
 // 특정 날짜와 현재 시간의 차이 계산 -> 상대적인 시간 반환
 export const getRelativeTime = (dateString) => {
@@ -35,6 +36,10 @@ const CommentItem = ({ comment, board, userId, selectedCommentId, onCommentUpdat
     const [isSelected, setIsSelected] = useState(comment.commSelection);
 
     const personal_image = comment.gender === 'MALE' ? personal_m_image : personal_f_image;
+
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
 
     const maskName = (name) => {
         if (name.length < 2) return name;

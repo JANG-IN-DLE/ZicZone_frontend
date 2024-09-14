@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "./../../styles/ResumeEducation.css";
 import plus_btn from "./../../assets/Plus_btn.png";
 import ResumeEducationInputEdit from "./ResumeEducationInputEdit";
-import api from '../../../common/config/axiosInstance';
+import config from '../../../config';
 
 const ResumeEducationEdit = ({ setEducation }) => {
     const userId = localStorage.getItem("userId")
     const [inputs, setInputs] = useState([]);
     const [educationList, setEducationList] = useState([]);
+
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
       
     useEffect(() => {
         // 서버로부터 데이터 가져오기

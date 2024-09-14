@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
+import axios from "axios";
 import ProfileCard from "./ProfileCard";
 import RDescription from "./RDescription";
 import PostView from "./PostView";
@@ -8,7 +9,7 @@ import CommentList from "./comment/CommentList";
 import "../styles/RDBoard.css";
 import ConfirmModal from "./ConfirmModal";
 import Layout from "../../common/layout/layout";
-import api from "../../common/config/axiosInstance";
+import config from "../../config";
 
 const RDBoard = () => {
   const { corrId } = useParams();
@@ -20,6 +21,10 @@ const RDBoard = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isCommentSelected, setIsCommentSelected] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+  const api = axios.create({
+    baseURL: config.baseURL
+  });
 
   // TODO: 이름 바꿔야대
   const [userProfile, setUserProfile] = useState({

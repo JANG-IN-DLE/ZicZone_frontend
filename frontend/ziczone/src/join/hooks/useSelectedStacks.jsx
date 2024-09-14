@@ -1,9 +1,14 @@
+import axios from 'axios';
 import { useState, useEffect, useCallback } from 'react';
-import api from '../../common/config/axiosInstance';
+import config from '../../config';
 
 const useSelectedStacks = (maxSelectedStacks = 0, initialStacks = [], updateFormData) => { //최대 스택
     const [selectedStacks, setSelectedStacks] = useState(initialStacks.map(tech => ({ value: tech, label: tech }))); //선택된 스택 관리
     const [techs, setTechs] = useState([]);
+
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
 
     const handleSelect = useCallback((selectedOption) => {
         setSelectedStacks(prevStacks => {

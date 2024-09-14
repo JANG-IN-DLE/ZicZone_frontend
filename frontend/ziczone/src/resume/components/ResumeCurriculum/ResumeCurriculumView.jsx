@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from "react";
 import "./../../styles/ResumeCurriculum.css";
 import ResumeCurriculumInputView from "./../ResumeCurriculum/ResumeCurriculumInputView";
-import api from '../../../common/config/axiosInstance';
+import axios from "axios";
+import config from '../../../config';
 
 const ResumeCurriculumView = () => {
     const userId = localStorage.getItem("userId")
     const [curriculumData, setCurriculumData] = useState([]);
+
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
 
     useEffect(() => {
         api.get(`/api/personal/resumes/user/${userId}`)

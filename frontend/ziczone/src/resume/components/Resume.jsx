@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./../styles/Resume.css";
 import Header from "../../common/header/components/Header";
@@ -14,7 +15,7 @@ import ResumeArchive from "./ResumeArchive/ResumeArchive";
 import ResumeIntroduction from "./ResumeIntroduction/ResumeIntroduction";
 import ResumePortfolio from "./ResumePortfolio/ResumePortfolio";
 import Layout from "../../common/layout/layout";
-import api from "../../common/config/axiosInstance";
+import config from "../../config";
 
 const Resume = () => {
     const navigate = useNavigate();
@@ -30,6 +31,10 @@ const Resume = () => {
     const [archive, setArchive] = useState({});
     const [introduction, setIntroduction] = useState(null);
     const [portfolio, setPortfolio] = useState([]);
+
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
   
     const handleReturnClick = () => {
         navigate(`/personal/${userId}`);

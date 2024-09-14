@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useRef } from "react";
+import axios from "axios";
 import "./../../styles/ResumeJob.css";
 import JobDropdown from "../ResumeDropdown/JobDropdown";
 import useDropdown from './../../hooks/useDropdown';
 import dropdown from "./../../assets/Dropdown.png";
-import api from "../../../common/config/axiosInstance";
+import config from "../../../config";
 
 const ResumeJobEdit = ({ setJob }) => {
     const [dropdownVisible, toggleDropdown] = useDropdown(false);
@@ -11,6 +12,10 @@ const ResumeJobEdit = ({ setJob }) => {
     const [jobPositions, setJobPositions] = useState([]);
     const userId = localStorage.getItem("userId");
     const dropdownRef = useRef(null);
+
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
 
     useEffect(() => {
         api.get(`/api/personal/resumes/user/${userId}`)
