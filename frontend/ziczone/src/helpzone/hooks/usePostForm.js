@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
-import config from "../../config";
+import api from '../../common/config/axiosInstance';
 
 const usePostForm = (initialBerry = 100, initialData = {}, userId, corrId, isEditMode, onSubmitSuccess) => {
     const [selectedBerry, setSelectedBerry] = useState(initialBerry);
@@ -10,10 +9,6 @@ const usePostForm = (initialBerry = 100, initialData = {}, userId, corrId, isEdi
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [userPoint, setUserPoint] = useState(0);
     const [existingFile, setExistingFile] = useState(initialData.file || null);
-
-    const api = axios.create({
-        baseURL: config.baseURL
-      });
 
     useEffect(() => {
         setSelectedBerry(initialData.berry || initialBerry);

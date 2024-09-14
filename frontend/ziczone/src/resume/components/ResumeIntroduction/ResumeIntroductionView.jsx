@@ -2,16 +2,12 @@
 import React, { useEffect, useState } from "react";
 import "./../../styles/ResumeIntroduction.css";
 import ResumeIntroductionInputView from "./ResumeIntroductionInputView";
-import axios from "axios";
-import config from "../../../config";
+import api from '../../../common/config/axiosInstance';
 
 const ResumeIntroductionView = () => {
     const userId = localStorage.getItem("userId")
     const [personalStateFileName, setPersonalStateFileName] = useState('');
 
-    const api = axios.create({
-        baseURL: config.baseURL
-      });
 
     useEffect(() => {
         api.get(`/api/personal/resumes/user/${userId}`)

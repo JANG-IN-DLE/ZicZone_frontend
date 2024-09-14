@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useRef } from "react";
-import axios from "axios";
 import "./../../styles/ResumeTech.css";
 import TechDropdown from "./../ResumeDropdown/TechStackDropdown";
 import useDropdown from './../../hooks/useDropdown';
 import useFilter from "../../hooks/useFilter";
 import dropdown from "./../../assets/Dropdown.png";
-import config from "../../../config";
+import api from "../../../common/config/axiosInstance";
+
 
 const ResumeTechEdit = ({ setTech }) => {
     const [dropdownVisible, toggleDropdown] = useDropdown(false);
@@ -14,10 +14,6 @@ const ResumeTechEdit = ({ setTech }) => {
     const [techStacks, setTechStacks] = useState([]);
     const userId = localStorage.getItem("userId");
     const dropdownRef = useRef(null);
-
-    const api = axios.create({
-        baseURL: config.baseURL
-      });
 
     useEffect(() => {
         api.get(`/api/personal/resumes/user/${userId}`)

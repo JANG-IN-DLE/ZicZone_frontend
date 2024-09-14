@@ -1,18 +1,13 @@
 import React, { useState } from "react";
-import axios from "axios";
 import Button from "../Button";
 import ConfirmModal from "../ConfirmModal";
 import "../../styles/comment/CommentInput.css";
-import config from '../../../config';
+import api from '../../../common/config/axiosInstance';
 
 const CommentInput = ({ corrId, userId, commId, onCommentAdded }) => {
     const [commentContent, setCommentContent] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [commCharCount, setCommCharCount] = useState(commentContent.length);
-
-    const api = axios.create({
-        baseURL: config.baseURL
-      });
 
     const handleContentChangeWithCount = (event) => {
       const newContent = event.target.value;

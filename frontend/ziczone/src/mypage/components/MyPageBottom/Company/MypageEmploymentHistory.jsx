@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import config from '../../../../config';
+import api from '../../../../common/config/axiosInstance';
 
 const MypageEmploymentHistory = () => {
     const userId = 7;
     const [postData, setPostData] = useState([]);
 
-    const api = axios.create({
-        baseURL: config.baseURL
-      });
 
     useEffect(() => {
         api.get(`/api/myboard/${userId}`)

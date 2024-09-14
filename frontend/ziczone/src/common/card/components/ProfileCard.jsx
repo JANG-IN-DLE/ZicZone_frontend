@@ -1,10 +1,9 @@
 import React from 'react';
 import { useState } from 'react';
-import axios from 'axios';
 import ProfileCardstyle from '../styles/ProfileCard.module.css';
 import unscrapImg from '../../../common/card/assets/unscrap.svg';
 import scrapImg from '../../../common/card/assets/scrap.svg';
-import config from '../../../config';
+import api from '../../config/axiosInstance';
 
 
 const ProfileCard = ({userImage, jobNames=[], userName, userCareer, userIntro, techUrls=[], isScrap, personalId, isCompany }) => {
@@ -14,9 +13,6 @@ const ProfileCard = ({userImage, jobNames=[], userName, userCareer, userIntro, t
     // localstorage에서 userId 가져옴
     const userId = localStorage.getItem("userId");
 
-    const api = axios.create({
-        baseURL: config.baseURL
-      });
 
     const handleScrapClick = async (e) => {
         e.stopPropagation();

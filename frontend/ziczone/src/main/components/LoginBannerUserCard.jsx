@@ -4,12 +4,12 @@ import slidImage2 from "../../main/bannerimg/slide_image2.png";
 import slidImage3 from "../../main/bannerimg/slide_image3.png";
 import personalMImage from "../../common/card/assets/personal_m_image.png";
 import personalFImage from "../../common/card/assets/personal_f_image.png";
-import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import { Link } from "react-router-dom";
 import left from "../../main/left.png";
 import right from "../../main/right.png";
-import config from '../../config';
+import api from '../../common/config/axiosInstance';
+
 
 const LoginBannerSlide = () => {
   const userId = localStorage.getItem("userId");
@@ -23,9 +23,6 @@ const LoginBannerSlide = () => {
   const [personalCareer, setPersonalCareer] = useState([]);
   const [userIntro, setUserIntro] = useState([]);
 
-  const api = axios.create({
-    baseURL: config.baseURL
-  });
 
   const slideItems = [
     {

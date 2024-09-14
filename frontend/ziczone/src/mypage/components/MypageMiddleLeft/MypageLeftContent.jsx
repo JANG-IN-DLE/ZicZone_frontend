@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import axios from 'axios';
 import MypageLeft from "./MypageLeft";
-import config from '../../../config';
+import api from '../../../common/config/axiosInstance';
 
 function MypageLeftContent() {
     const userId = localStorage.getItem('userId')
@@ -14,9 +13,6 @@ function MypageLeftContent() {
         techStacks: [],
     });
 
-    const api = axios.create({
-        baseURL: config.baseURL
-      });
 
     useEffect(() => {
         api.get(`/api/personal/${userId}`)
