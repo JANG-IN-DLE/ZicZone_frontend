@@ -4,9 +4,9 @@ import email from "./../../assets/Email.png";
 import phone from "./../../assets/Phone.png";
 import birthdate from "./../../assets/Birthdate.png";
 import useUploadImage from "../../hooks/useUploadImage";
-import axios from "axios";
 // import Resume from "../Resume";
-import config from '../../../config';
+import api from '../../../common/config/axiosInstance';
+
 
 
 
@@ -21,10 +21,6 @@ const ResumePrivacyView = () => {
         resumeDate: "",
         resumePhoto: ""
     });
-
-    const api = axios.create({
-        baseURL: config.baseURL
-      });
 
     useEffect(() => {
         api.get(`/api/personal/resumes/user/${userId}`)

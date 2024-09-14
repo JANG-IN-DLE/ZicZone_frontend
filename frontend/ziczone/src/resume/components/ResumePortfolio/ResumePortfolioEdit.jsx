@@ -1,18 +1,13 @@
 import React, { useEffect, useState } from "react";
-import axios from 'axios';
 import "./../../styles/ResumePortfolio.css";
 import plus_btn from "./../../assets/Plus_btn.png";
 import ResumePortfolioInputEdit from "./ResumePortfolioInputEdit";
-import config from '../../../config';
+import api from '../../../common/config/axiosInstance';
 
 const ResumePortfolioEdit = ({ setPortfolio }) => {
     const userId = localStorage.getItem("userId");
     const [inputs, setInputs] = useState([]);
     const [portfolioList, setPortfolioList] = useState([]);
-
-    const api = axios.create({
-        baseURL: config.baseURL
-      });
 
     useEffect(() => {
         api.get(`/api/personal/resumes/user/${userId}`)

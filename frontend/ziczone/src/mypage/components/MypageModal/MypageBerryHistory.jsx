@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import MypageHistoryBar from "./MypageHistoryBar";
-import config from "../../../config";
+import api from '../../../common/config/axiosInstance';
 
 const MypageBerryHistory = () => {
     const userId = localStorage.getItem("userId");
     const [historyData, setHistoryData] = useState([]);
 
-    const api = axios.create({
-        baseURL: config.baseURL
-      });
 
     useEffect(() => {
         const fetchBerryHistory = async () => {

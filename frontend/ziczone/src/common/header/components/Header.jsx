@@ -6,11 +6,10 @@ import NonLogin from "./HeaderNonLogin";
 import UserLogin from "./HeaderUserLogin";
 import CompLogin from "./HeaderCompLogin";
 import { jwtDecode } from "jwt-decode";
-import axios from "axios";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../../../store/actions/userActions";
 import { deleteAlarm } from "../../../store/actions/alarmActions";
-import config from "../../../config";
+import api from '../../config/axiosInstance';
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -20,9 +19,6 @@ const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const api = axios.create({
-    baseURL: config.baseURL
-  });
 
   useEffect(() => {
     const checkToken = () => {

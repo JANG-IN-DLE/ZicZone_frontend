@@ -1,18 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import BoardItem from './MypageUserPost';
 import PageButton from '../PageButton';
-import config from '../../../../config';
+import api from '../../../../common/config/axiosInstance';
 
 const MypagePostHistory = () => {
     const userId = localStorage.getItem('userId')
     const [postData, setPostData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 8; // 한 페이지당 컴포넌트 4개
-
-    const api = axios.create({
-        baseURL: config.baseURL
-      });
 
     useEffect(() => {
         api.get(`/api/personal/myboard/${userId}`)

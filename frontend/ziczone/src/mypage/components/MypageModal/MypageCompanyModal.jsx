@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import axios from 'axios';
 import '../../styles/MypageEdit.css';
 import company_edit from './../../assets/Logo_Edit.png';
 import { FormProvider } from './../../../join/components/FormContext';
 import AddressInput from './AddressInput';
-import config from '../../../config';
+import api from '../../../common/config/axiosInstance';
 
 const MypageCompanyModal = ({ setIsModalOpen }) => {
     const handleCloseClick = () => {
@@ -19,10 +18,6 @@ const MypageCompanyModal = ({ setIsModalOpen }) => {
     const [currentPassword, setCurrentPassword] = useState('');
     const [changePassword, setChangePassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-
-    const api = axios.create({
-        baseURL: config.baseURL
-      });
 
     useEffect(() => {
         const fetchData = async () => {

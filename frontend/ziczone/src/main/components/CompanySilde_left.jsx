@@ -1,14 +1,9 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "../styles/MainMain.css"; // CSS 파일 임포트
-import config from "../../config";
+import api from "../../common/config/axiosInstance";
 
 const CompanySilde = () => {
   const [logoImgs, setLogoImgs] = useState([]);
-
-  const api = axios.create({
-    baseURL: config.baseURL
-  });
 
   useEffect(() => {
     api

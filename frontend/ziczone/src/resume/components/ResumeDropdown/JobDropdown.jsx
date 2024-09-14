@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './../../styles/JobDropdown.css';
-import config from '../../../config';
+import api from '../../../common/config/axiosInstance';
 
 const JobDropdown = ({ selectedItems, setSelectedItems }) => {
     const [jobList, setJobList] = useState([]);
-
-    const api = axios.create({
-        baseURL: config.baseURL
-      });
 
     useEffect(() => {
         api.get('http://localhost:12000/api/jobs')

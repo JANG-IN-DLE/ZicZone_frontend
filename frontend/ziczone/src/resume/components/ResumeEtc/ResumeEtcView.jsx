@@ -1,16 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./../../styles/ResumeEtc.css";
 import ResumeEtcInputView from "./../ResumeEtc/ResumeEtcInputView";
-import axios from "axios";
-import config from '../../../config';
+import api from "../../../common/config/axiosInstance";
 
 const ResumeEtcView = () => {
     const userId = localStorage.getItem("userId")
     const [etcData, setEtcData] = useState([]);
-
-    const api = axios.create({
-        baseURL: config.baseURL
-      });
 
     useEffect(() => {
         api.get(`/api/personal/resumes/user/${userId}`)

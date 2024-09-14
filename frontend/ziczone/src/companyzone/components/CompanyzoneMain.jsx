@@ -3,18 +3,13 @@ import CompanyHeader from "./CompanyHeader";
 import CompanyCard from "./CompanyCard";
 import CompanyzoneModal from "./CompanyzoneModal";
 import "../styles/CompanyMain.css";
-import axios from "axios";
 import Layout from "../../common/layout/layout";
 import ScrollToTop from "../../common/ScrollToTop/ScrollToTop";
-import config from "../../config";
+import api from "../../common/config/axiosInstance";
 
 const CompanyzoneMain = () => {
   const [openModalInfo, setOpenModalInfo] = useState(null);
   const [companyData, setCompanyData] = useState([]);
-
-  const api = axios.create({
-    baseURL: config.baseURL
-  });
 
   // 클릭했을때 인덱스 변수 받아서 클릭된 카드 인덱스를 받음
   const handleCardClick = (index) => {

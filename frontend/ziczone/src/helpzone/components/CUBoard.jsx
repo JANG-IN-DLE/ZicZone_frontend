@@ -1,22 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import axios from "axios";
 import "../styles/CUBoard.css";
 import ProfileCard from "./ProfileCard";
 import Description from "./Description";
 import PostForm from "./PostForm";
 import Layout from "../../common/layout/layout";
-import config from "../../config";
+import api from "../../common/config/axiosInstance";
 
 const CUBoard = () => {
   const location = useLocation();
   const { postData: initialPostData = {}, isEditMode: initialEditMode, userId, corrId } = location.state || {};
   const navigate = useNavigate();
   const [isEditMode, setIsEditMode] = useState(initialEditMode || false);
-
-  const api = axios.create({
-    baseURL: config.baseURL
-  });
 
   const [userProfile, setUserProfile] = useState({
     berry: '',
