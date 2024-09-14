@@ -92,7 +92,6 @@ const LoginForm = ({
 
         if (user) {
           // 구독 및 초기화 작업 수행
-          console.log('Dispatching setUser with:', user);
           dispatch(setUser(user));
           dispatch(subscribeToSSE(user.userId, token));
           dispatch(initAlarm(user.userId, token));
