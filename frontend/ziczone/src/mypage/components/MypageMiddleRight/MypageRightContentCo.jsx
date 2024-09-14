@@ -1,15 +1,10 @@
 import React, { useEffect, useState } from "react";
 import MypageRightCo from "./MypageRightCo";
-import axios from "axios";
-import config from "../../../config";
+import api from '../../../common/config/axiosInstance';
 
 const MypageRightContentCo = () => {
     const userId = localStorage.getItem('userId')
     const [rightData, setRightData] = useState('');
-
-    const api = axios.create({
-        baseURL: config.baseURL
-      });
 
     useEffect(() => {
         api.get(`/api/company/${userId}`)

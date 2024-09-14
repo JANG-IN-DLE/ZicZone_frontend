@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
-import axios from 'axios';
 import { useFormContext } from '../components/FormContext';
-import config from '../../config';
+import api from '../../common/config/axiosInstance';
 
 const useEmailVerification = ( type ) => {
     const formContext = useFormContext();
@@ -11,11 +10,6 @@ const useEmailVerification = ( type ) => {
     const [isAuth, setIsAuth] = useState(""); //인증성공여부
     const [timeLeft, setTimeLeft] = useState(60); // 3분 타이머 (180초)
     const timerRef = useRef(null); // 타이머 ID 저장
-
-    const api = axios.create({
-        baseURL: config.baseURL
-      });
-
 
     //이메일 입력 값이 변경될 때 호출
     const handleEmailChange = (e) => {

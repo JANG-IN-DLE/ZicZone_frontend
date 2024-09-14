@@ -1,19 +1,14 @@
 import React, { useEffect, useState } from "react";
-import axios from 'axios';
-import {useNavigate} from "react-router-dom";
 import PickCardCommstyle from '../styles/PickCardComm.module.css';
 import scrapImg from "../assets/scrap.svg";
 import unscrapImg from "../assets/unscrap.svg";
-import config from '../../../config';
+import api from '../../config/axiosInstance';
 
 
 const PickCard = ({onClick, userImage, jobNames=[], userName, userCareer, userIntro, techUrls=[], personalId, isScrap, isCompany}) => {
     // scrap 여부를 확인하는 hook
     const [scrap, setScrap] = useState(isScrap);
 
-    const api = axios.create({
-        baseURL: config.baseURL
-      });
 
     const handleScrapClick = async (e) => {
         e.stopPropagation();

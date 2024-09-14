@@ -1,9 +1,8 @@
 import React from 'react';
 import "./../../../styles/BoardItem.css";
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
-import config from '../../../../config';
+import api from '../../../../common/config/axiosInstance';
 
 // 특정 날짜와 현재 시간의 차이 계산 -> 상대적인 시간 반환
 export const getRelativeTime = (dateString) => {
@@ -60,10 +59,6 @@ const maskName = (name) => {
 const BoardItem = ({ board }) => {
   const navigate = useNavigate();
   const userId = localStorage.getItem("userId");
-
-  const api = axios.create({
-    baseURL: config.baseURL
-  });
 
   const handleItemClick = async () => {
     try {

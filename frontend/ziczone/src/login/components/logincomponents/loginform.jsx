@@ -5,12 +5,11 @@ import check from "../../assets/check.png";
 import useEmailVerification from "../../../join/hooks/useEmailAuth";
 import usePasswordValidation from "../../../join/hooks/usePasswordValidation";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import { useDispatch } from "react-redux"; // Redux dispatch 훅 import
 import { subscribeToSSE, initAlarm } from "../../../store/actions/alarmActions";
 import { setUser } from "../../../store/actions/userActions";
-import config from "../../../config";
+import api from "../../../common/config/axiosInstance";
 
 const LoginForm = ({
   title,
@@ -28,10 +27,6 @@ const LoginForm = ({
   const [email, setUserEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginFail, setLoginFail] = useState("");
-
-  const api = axios.create({
-    baseURL: config.baseURL
-  });
 
   //비밀번호 찾기(이메일인증)
   const {

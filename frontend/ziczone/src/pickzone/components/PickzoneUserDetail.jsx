@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import axios from "axios";
 import UserProfile from "./UserProfile";
 import Layout from "../../common/layout/layout";
-import config from "../../config";
+import api from "../../common/config/axiosInstance";
 
 // 이름 마스킹 함수
 const maskName = (name) => {
@@ -17,10 +16,6 @@ const maskName = (name) => {
   }
   return name;
 };
-
-const api = axios.create({
-  baseURL: config.baseURL
-});
 
 export default function PickZoneUserDetail() {
   const { loggedInUserId, personalId } = useParams();

@@ -3,16 +3,11 @@ import "./../../styles/ResumePortfolio.css";
 import plus_btn from "./../../assets/Plus_btn.png";
 import ResumePortfolioInputView from "./../ResumePortfolio/ResumePortfolioInputView";
 import useAddInput from "./../../hooks/useAddInput";
-import axios from "axios";
-import config from "../../../config";
+import api from '../../../common/config/axiosInstance';
 
 const ResumePortfolioView = () => {
     const userId = localStorage.getItem("userId");
     const [portfolioData, setPortfolioData] = useState([]);
-
-    const api = axios.create({
-        baseURL: config.baseURL
-      });
 
     useEffect(() => {
         api.get(`/api/personal/resumes/user/${userId}`)
