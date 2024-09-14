@@ -2,8 +2,9 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import Modalstyle from "../styles/Modal.module.css";
 import berry from "../../common/card/assets/berry.png";
+import axios from "axios";
 import helpModal from "../../helpzone/assets/helpModal.png";
-import api from '../../common/config/axiosInstance';
+import config from "../../config";
 
 const Modal = ({
   isOpen,
@@ -23,6 +24,10 @@ const Modal = ({
       window.open('/charge', '_blank');
       return;
     }
+
+    const api = axios.create({
+      baseURL: config.baseURL
+    });
 
     const openCardData = {
       sellerId: selectedCard.personalId,

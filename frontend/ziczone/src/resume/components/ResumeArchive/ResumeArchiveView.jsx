@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from "react";
 import "./../../styles/ResumeArchive.css";
 import ResumeArchiveInputView from "./../ResumeArchive/ResumeArchiveInputView";
-import api from '../../../common/config/axiosInstance';
+import axios from "axios";
+import config from '../../../config';
 
 const ResumeArchiveView = () => {
     const userId = localStorage.getItem("userId");
     const [archiveData, setArchiveData] = useState(null);
+
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
 
     useEffect(() => {
         api.get(`/api/personal/resumes/user/${userId}`)

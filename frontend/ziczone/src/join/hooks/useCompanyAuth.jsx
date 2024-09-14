@@ -1,6 +1,7 @@
 import { useState } from 'react';
+import axios from 'axios';
 import { useFormContext } from '../components/FormContext';
-import api from '../../common/config/axiosInstance';
+import config from '../../config';
 
 // 커스텀 훅을 정의합니다.
 const useCompanyAuth = () => {
@@ -8,6 +9,10 @@ const useCompanyAuth = () => {
     const [comNum, setComNum] = useState(''); // comNum : 사용자가 입력한 사업자등록번호를 저장
     const [isValid, setIsValid] = useState(null); // isValid : 사업자등록번호 유효성 저장
     const [isVerified, setIsVerified] = useState(false); // isCerified : 인증완료상태를 저장
+
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
 
     const handleInputChange = (event) => {
         setComNum(event.target.value); // 입력 값 변경마다 업데이트

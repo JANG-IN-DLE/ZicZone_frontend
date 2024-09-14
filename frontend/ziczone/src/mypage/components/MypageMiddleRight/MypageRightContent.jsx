@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from "react";
 import MypageRight from "./MypageRight";
-import api from '../../../common/config/axiosInstance';
+import axios from "axios";
+import config from '../../../config';
 
 const MypageRightContent = () => {
     const userId = localStorage.getItem("userId");
     const [berryPoint, setBerryPoint] = useState(0);
+
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
 
     useEffect(() => {
         const fetchBerryPoints = async () => {

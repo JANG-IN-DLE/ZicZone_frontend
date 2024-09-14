@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "./../../styles/ResumeArchive.css";
 import ResumeArchiveInputEdit from "./ResumeArchiveInputEdit";
-import api from "../../../common/config/axiosInstance";
+import config from '../../../config';
 
 const ResumeArchiveEdit = ({ setArchive }) => {
     const userId = localStorage.getItem("userId");
@@ -11,6 +12,10 @@ const ResumeArchiveEdit = ({ setArchive }) => {
         notion: '',
         blog: ''
     });
+
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
 
     useEffect(() => {
         // 서버로부터 데이터 가져오기

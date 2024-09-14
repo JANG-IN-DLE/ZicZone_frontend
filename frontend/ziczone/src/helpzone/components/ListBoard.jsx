@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/ListBoard.css";
+import axios from "axios";
 import HelpZoneIntro from "./HelpZoneIntro";
 import FilterButtons from "./FilterButtons";
 import Button from "./Button";
@@ -9,7 +10,7 @@ import PageButton from "./PageButton";
 import BerryCheck from "./BerryCheck";
 import ConfirmModal from "./ConfirmModal";
 import Layout from "../../common/layout/layout";
-import api from "../../common/config/axiosInstance";
+import config from "../../config";
 
 const ListBoard = () => {
   const [boards, setBoards] = useState([]);
@@ -23,6 +24,10 @@ const ListBoard = () => {
   const [userRole, setUserRole] = useState(null);
   const [userPoint, setUserPoint] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const api = axios.create({
+    baseURL: config.baseURL
+  });
 
   useEffect(() => {
     const fetchData = async () => {

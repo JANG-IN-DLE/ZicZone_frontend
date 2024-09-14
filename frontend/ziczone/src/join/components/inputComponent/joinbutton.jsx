@@ -4,11 +4,16 @@ import perjoinbtn from "../../assets/perjoinbtn.png"
 import comjoinbtn from "../../assets/comjoinbtn.png"
 import { useFormContext } from '../FormContext';
 import { useNavigate } from "react-router-dom";
-import api from '../../../common/config/axiosInstance';
+import axios from 'axios';
+import config from '../../../config';
 
 const JoinButton = ({category}) => {
     const {formData} = useFormContext();
     const navigate = useNavigate();
+
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
 
     const handleSubmit = async (e) => {
         e.preventDefault();

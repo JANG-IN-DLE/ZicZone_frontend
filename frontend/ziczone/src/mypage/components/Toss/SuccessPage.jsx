@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import "../../styles/Toss.css";
-import api from '../../../common/config/axiosInstance';
+import axios from "axios";
+import config from "../../../config";
 
 export function SuccessPage() {
   const navigate = useNavigate();
@@ -13,6 +14,9 @@ export function SuccessPage() {
   
   const [counter, setCounter] = useState(5);
 
+  const api = axios.create({
+    baseURL: config.baseURL
+  });
 
   useEffect(() => {
     console.log("useEffect triggered");

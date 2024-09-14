@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "./../../styles/ResumeJob.css";
-import api from '../../../common/config/axiosInstance';
+import config from '../../../config';
 
 const ResumeJobView = () => {
     const userId = localStorage.getItem('userId');
     const [jobNames, setJobNames] = useState([]);
+
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
 
     useEffect(() => {
         api.get(`/api/personal/resumes/user/${userId}`)

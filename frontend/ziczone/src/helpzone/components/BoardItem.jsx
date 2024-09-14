@@ -1,7 +1,8 @@
 import React from 'react';
 import "../styles/BoardItem.css";
 import { useNavigate } from 'react-router-dom';
-import api from '../../common/config/axiosInstance';
+import axios from 'axios';
+import config from '../../config';
 
 // 특정 날짜와 현재 시간의 차이 계산 -> 상대적인 시간 반환
 export const getRelativeTime = (dateString) => {
@@ -24,6 +25,10 @@ export const getRelativeTime = (dateString) => {
     return `${days}일 전`;
   }
 };
+
+const api = axios.create({
+  baseURL: config.baseURL
+});
 
 // 포인트 스타일을 설정하는 함수
 const getPointStyle = (point) => {

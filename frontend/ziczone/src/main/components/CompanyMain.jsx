@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import PickCard from "../../common/card/components/PickCard";
 import personalMImage from "../../common/card/assets/personal_m_image.png";
 import personalFImage from "../../common/card/assets/personal_f_image.png";
 import PickCardCommstyle from "../../common/card/styles/PickCardComm.module.css";
-import api from "../../common/config/axiosInstance";
+import config from "../../config";
 
 const CompanyMain = () => {
   // 이름 마스킹 함수
@@ -19,6 +20,10 @@ const CompanyMain = () => {
     }
     return name;
   };
+
+  const api = axios.create({
+    baseURL: config.baseURL
+  });
 
   const [pickCards, setPickCards] = useState([]);
   const [jobs, setJobs] = useState([]);

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 import "./../styles/Resume.css";
 import ResumePrivacyEdit from "./ResumePrivacy/ResumePrivacyEdit";
 import ResumeJobEdit from "./ResumeJob/ResumeJobEdit";
@@ -13,7 +14,7 @@ import ResumeArchiveEdit from "./ResumeArchive/ResumeArchiveEdit";
 import ResumeIntroductionEdit from "./ResumeIntroduction/ResumeIntroductionEdit";
 import ResumePortfolioEdit from "./ResumePortfolio/ResumePortfolioEdit";
 import Layout from "../../common/layout/layout";
-import api from "../../common/config/axiosInstance";
+import config from "../../config";
 
 // import dayjs from 'dayjs';
 
@@ -30,6 +31,10 @@ const ResumeEdit = () => {
     const [archive, setArchive] = useState({});
     const [introduction, setIntroduction] = useState({ fileName: '', file: null });
     const [portfolio, setPortfolio] = useState([]);
+
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
   
     const navigate = useNavigate();
 

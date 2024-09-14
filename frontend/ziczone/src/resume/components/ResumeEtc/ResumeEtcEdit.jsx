@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "./../../styles/ResumeEtc.css";
 import plus_btn from "./../../assets/Plus_btn.png";
 import ResumeEtcInputEdit from "./ResumeEtcInputEdit";
-import api from '../../../common/config/axiosInstance';
+import config from '../../../config';
 
 const ResumeEtcEdit = ({ setEtc }) => {
     const userId = localStorage.getItem("userId")
     const [inputs, setInputs] = useState([]);
     const [etcList, setEtcList] = useState([]);
+
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
 
     useEffect(() => {
         // 서버로부터 데이터 가져오기

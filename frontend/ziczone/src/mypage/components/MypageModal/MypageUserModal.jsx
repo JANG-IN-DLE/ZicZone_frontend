@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-
+import axios from 'axios';
 import styled from 'styled-components';
 import './../../styles/MypageEdit.css'
 import edit_modal from './../../assets/Personal_Edit.png'
-import api from '../../../common/config/axiosInstance';
-
+import config from '../../../config';
 
 const MypageUserModal = ({ setIsModalOpen }) => {
     const handleCloseClick = () => {
@@ -19,6 +18,10 @@ const MypageUserModal = ({ setIsModalOpen }) => {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [personalVisible, setPersonalVisible] = useState(false);
     const [companyVisible, setCompanyVisible] = useState(false);
+
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
 
     useEffect(() => {
         const fetchData = async () => {

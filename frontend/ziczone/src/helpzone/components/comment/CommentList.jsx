@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import CommentInput from "./CommentInput";
 import CommentItem from "./CommentItem";
-import api from "../../../common/config/axiosInstance";
+import config from "../../../config";
 
 const CommentList = ({ corrId, userId, onCommentSelected }) => {
     const [comments, setComments] = useState([]);
     const [selectedCommentId, setSelectedCommentId] = useState(null);
     const [board, setBoard] = useState(null);
     const userRole = localStorage.getItem("userRole");
+
+    const api = axios.create({
+        baseURL: config.baseURL
+      });
 
     useEffect(() => {
         fetchComments();
