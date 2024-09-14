@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useFormContext } from '../components/FormContext';
-import axios from 'axios';
-import config from '../../config';
+import api from '../../common/config/axiosInstance';
 
 const usePasswordValidation = (type, email) => {
     const [password, setPassword] = useState(''); //비밀번호
@@ -10,10 +9,6 @@ const usePasswordValidation = (type, email) => {
     const [isConfirmValid, setIsConfirmValid] = useState(false); //비밀번호 확인 검증
     const [isChangePassword, setIsChangePassword] = useState(""); //비밀번호 변경 검증
     const formContext = useFormContext();
-
-    const api = axios.create({
-        baseURL: config.baseURL
-      });
 
     //비밀번호 유효성 검증
     const validatePassword = (pwd) => {

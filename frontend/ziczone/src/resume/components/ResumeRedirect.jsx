@@ -1,15 +1,10 @@
 import React, { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
-import config from '../../config';
+import api from '../../common/config/axiosInstance';
 
 const ResumeRedirect = () => {
   const navigate = useNavigate();
   const { userId } = useParams();
-
-  const api = axios.create({
-    baseURL: config.baseURL
-  });
 
   useEffect(() => {
     const checkResume = async () => {

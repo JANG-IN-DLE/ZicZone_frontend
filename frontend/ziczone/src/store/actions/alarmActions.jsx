@@ -1,6 +1,4 @@
-import axios from 'axios';
-import config from '../../config';
-
+import api from "../../common/config/axiosInstance";
 
 export const setAlarms = (alarms) => ({
   type: 'SET_ALARMS',
@@ -25,9 +23,6 @@ export const readAlarm = () => ({
   type: 'READ_ALARM'
 });
 
-const api = axios.create({
-  baseURL: config.baseURL
-});
 
 //읽음처리
 export const readAllAlarms = (userId, token, unread) => async (dispatch) => {
