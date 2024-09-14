@@ -5,14 +5,21 @@ import alarmReducer from './reducers/alarmReducer';
 import userReducer from './reducers/userReducer';
 
 // persist 설정
-const persistConfig = {
-  key: 'root',
+const persistAlarmConfig = {
+  key: 'alarm',
   storage,
 };
 
+// persist 설정
+const persistUserConfig = {
+  key: 'user',
+  storage,
+};
+
+
 // persistReducer로 감싸기
-const persistedAlarmReducer = persistReducer(persistConfig, alarmReducer);
-const persistedUserReducer = persistReducer(persistConfig, userReducer);
+const persistedAlarmReducer = persistReducer(persistAlarmConfig, alarmReducer);
+const persistedUserReducer = persistReducer(persistUserConfig, userReducer);
 
 const store = configureStore({
   reducer: {
