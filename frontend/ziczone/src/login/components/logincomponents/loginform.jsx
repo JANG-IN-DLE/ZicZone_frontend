@@ -90,8 +90,8 @@ const LoginForm = ({
 
         if(access_token&&refresh_token){
           const user = saveToken(access_token); // accessToken은 localStorage에 저장
-          // document.cookie = `refresh_token=${refresh_token}; HttpOnly`;
-          document.cookie = `refresh_token=${refresh_token};`;
+          document.cookie = `refresh_token=${refresh_token}; HttpOnly`;
+          // document.cookie = `refresh_token=${refresh_token};`;
 
           if (user) {
             // 구독 및 초기화 작업 수행
